@@ -3,27 +3,55 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021058A83D2DED5A53886DAA /* Pods_MultiTranslate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */; };
+		0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
-		8052A1BC23C2A24400883123 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1BB23C2A24400883123 /* ViewController.swift */; };
 		8052A1BF23C2A24400883123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1BD23C2A24400883123 /* Main.storyboard */; };
 		8052A1C123C2A24500883123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1C023C2A24500883123 /* Assets.xcassets */; };
 		8052A1C423C2A24500883123 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1C223C2A24500883123 /* LaunchScreen.storyboard */; };
+		8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */; };
+		8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1CD23C2DFC000883123 /* Extensions.swift */; };
+		8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1CF23C2E03800883123 /* IconPagingCell.swift */; };
+		8052A1D623C2F65F00883123 /* IconItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1D523C2F65F00883123 /* IconItem.swift */; };
+		8052A1D823C2FD9600883123 /* TextTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1D723C2FD9600883123 /* TextTranslateViewController.swift */; };
+		8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1D923C2FDA800883123 /* CameraTranslateViewController.swift */; };
+		8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DB23C2FDBF00883123 /* VoiceTranslateViewController.swift */; };
+		8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */; };
+		8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */; };
+		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
+		CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A32ED9C279B46E2913F1257 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyconfiguration.json; path = ./amplifyconfiguration.json; sourceTree = "<group>"; };
+		1F63226C5F2648CDBB6CE5C9 /* Pods-MultiTranslate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.debug.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.debug.xcconfig"; sourceTree = "<group>"; };
+		7A32ED9C279B46E2913F1257 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = awsconfiguration.json; path = ./awsconfiguration.json; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8052A1B923C2A24400883123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8052A1BB23C2A24400883123 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8052A1BE23C2A24400883123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8052A1C023C2A24500883123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8052A1C323C2A24500883123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8052A1C523C2A24500883123 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewController.swift; sourceTree = "<group>"; };
+		8052A1CD23C2DFC000883123 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8052A1CF23C2E03800883123 /* IconPagingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPagingCell.swift; sourceTree = "<group>"; };
+		8052A1D523C2F65F00883123 /* IconItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconItem.swift; sourceTree = "<group>"; };
+		8052A1D723C2FD9600883123 /* TextTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTranslateViewController.swift; sourceTree = "<group>"; };
+		8052A1D923C2FDA800883123 /* CameraTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTranslateViewController.swift; sourceTree = "<group>"; };
+		8052A1DB23C2FDBF00883123 /* VoiceTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTranslateViewController.swift; sourceTree = "<group>"; };
+		8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTranslateViewController.swift; sourceTree = "<group>"; };
+		8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTranslateViewController.swift; sourceTree = "<group>"; };
+		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
+		C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyxc.config; path = ./amplifyxc.config; sourceTree = "<group>"; };
+		CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.release.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.release.xcconfig"; sourceTree = "<group>"; };
+		EE9BFFEA60324C8A8DEE20CA /* amplify */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplify; path = ./amplify; sourceTree = "<group>"; };
+		FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultiTranslate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +59,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				021058A83D2DED5A53886DAA /* Pods_MultiTranslate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		66B09DD0287145E07C68CE29 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1F63226C5F2648CDBB6CE5C9 /* Pods-MultiTranslate.debug.xcconfig */,
+				CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8052A1AB23C2A24400883123 = {
 			isa = PBXGroup;
 			children = (
 				8052A1B623C2A24400883123 /* MultiTranslate */,
 				8052A1B523C2A24400883123 /* Products */,
+				66B09DD0287145E07C68CE29 /* Pods */,
+				E41E6BBBF80C6EC88FE805E7 /* Frameworks */,
+				C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */,
+				7A32ED9C279B46E2913F1257 /* awsconfiguration.json */,
+				09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */,
+				EE9BFFEA60324C8A8DEE20CA /* amplify */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +102,70 @@
 			children = (
 				8052A1B723C2A24400883123 /* AppDelegate.swift */,
 				8052A1B923C2A24400883123 /* SceneDelegate.swift */,
-				8052A1BB23C2A24400883123 /* ViewController.swift */,
-				8052A1BD23C2A24400883123 /* Main.storyboard */,
+				8052A1E623C305FE00883123 /* Controller */,
+				8052A1E523C305EB00883123 /* Model */,
+				8052A1E423C305C100883123 /* View */,
+				8052A1E723C3061600883123 /* Extension */,
 				8052A1C023C2A24500883123 /* Assets.xcassets */,
 				8052A1C223C2A24500883123 /* LaunchScreen.storyboard */,
 				8052A1C523C2A24500883123 /* Info.plist */,
 			);
 			path = MultiTranslate;
+			sourceTree = "<group>";
+		};
+		8052A1E323C3059100883123 /* TranslationViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8052A1D723C2FD9600883123 /* TextTranslateViewController.swift */,
+				8052A1D923C2FDA800883123 /* CameraTranslateViewController.swift */,
+				8052A1DB23C2FDBF00883123 /* VoiceTranslateViewController.swift */,
+				8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */,
+				8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */,
+				8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */,
+			);
+			path = TranslationViewControllers;
+			sourceTree = "<group>";
+		};
+		8052A1E423C305C100883123 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8052A1CF23C2E03800883123 /* IconPagingCell.swift */,
+				8052A1BD23C2A24400883123 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8052A1E523C305EB00883123 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8052A1D523C2F65F00883123 /* IconItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8052A1E623C305FE00883123 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */,
+				8052A1E323C3059100883123 /* TranslationViewControllers */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8052A1E723C3061600883123 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8052A1CD23C2DFC000883123 /* Extensions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E41E6BBBF80C6EC88FE805E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +175,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8052A1C823C2A24500883123 /* Build configuration list for PBXNativeTarget "MultiTranslate" */;
 			buildPhases = (
+				862D3B0053F6A947D012FF11 /* [CP] Check Pods Manifest.lock */,
 				8052A1B023C2A24400883123 /* Sources */,
 				8052A1B123C2A24400883123 /* Frameworks */,
 				8052A1B223C2A24400883123 /* Resources */,
+				5A42BF262F1EF444C8F78B6D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,19 +231,72 @@
 				8052A1C423C2A24500883123 /* LaunchScreen.storyboard in Resources */,
 				8052A1C123C2A24500883123 /* Assets.xcassets in Resources */,
 				8052A1BF23C2A24400883123 /* Main.storyboard in Resources */,
+				CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */,
+				0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5A42BF262F1EF444C8F78B6D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		862D3B0053F6A947D012FF11 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MultiTranslate-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8052A1B023C2A24400883123 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8052A1BC23C2A24400883123 /* ViewController.swift in Sources */,
+				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
+				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
+				8052A1D823C2FD9600883123 /* TextTranslateViewController.swift in Sources */,
 				8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */,
+				8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */,
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
+				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
+				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
+				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,
+				8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */,
+				8052A1D623C2F65F00883123 /* IconItem.swift in Sources */,
+				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +438,7 @@
 		};
 		8052A1C923C2A24500883123 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F63226C5F2648CDBB6CE5C9 /* Pods-MultiTranslate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +457,7 @@
 		};
 		8052A1CA23C2A24500883123 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

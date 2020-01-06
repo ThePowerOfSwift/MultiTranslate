@@ -68,7 +68,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="l82-84-8IV"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Saved" image="star" catalog="system" selectedImage="star" id="gLT-YK-ifz" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
+                    <tabBarItem key="tabBarItem" title="Saved" image="folder" catalog="system" selectedImage="folder" id="gLT-YK-ifz" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
                     <navigationItem key="navigationItem" id="RNk-zv-8GU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Et0-3Z-7rb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -114,9 +114,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="folder" catalog="system" width="64" height="46"/>
         <image name="gear" catalog="system" width="64" height="58"/>
         <image name="person" catalog="system" width="64" height="58"/>
-        <image name="star" catalog="system" width="64" height="58"/>
         <image name="translation_icon" width="25" height="25"/>
     </resources>
 </document>

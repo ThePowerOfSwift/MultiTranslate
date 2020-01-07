@@ -8,6 +8,8 @@
 
 import UIKit
 
+import PMSuperButton
+
 //import RAMAnimatedTabBarController
 import KMPlaceholderTextView
 
@@ -19,6 +21,47 @@ class TextTranslateViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
+        return button
+    }()
+    
+    let clearButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Clear", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.backgroundColor = .blue
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = UIColor.purple.cgColor
+        button.layer.cornerRadius = 10.0
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.green, for: .highlighted)
+        button.backgroundColor = .gray
+        return button
+    }()
+    
+    let translateButton: PMSuperButton = {
+        let button = PMSuperButton()
+        button.borderColor = .white
+        button.borderWidth = 2
+        button.cornerRadius = 25
+        button.shadowColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.shadowOpacity = 1
+        button.shadowOffset.width = 1
+        button.shadowOffset.height = 1
+        button.shadowRadius = 5
+        
+        button.gradientEnabled = true
+        button.gradientStartColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
+        button.gradientEndColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        button.gradientHorizontal = true
+        button.ripple = true
+        button.rippleColor = #colorLiteral(red: 0.9880490899, green: 0.7656863332, blue: 0.9337566495, alpha: 0.5442262414)
+        
+        button.setTitle("Translate", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.gray, for: .highlighted)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -68,6 +111,18 @@ class TextTranslateViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         
         return textView
+    }()
+    
+    let sourceInputLabelView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        return view
+    }()
+    
+    let sourceInputTextView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        return view
     }()
     
     override func loadView() {
@@ -145,11 +200,7 @@ class TextTranslateViewController: UIViewController {
         targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
         targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
 
-        let sourceInputLabelView = UIView()
-        sourceInputLabelView.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        
-        let sourceInputTextView = UIView()
-        sourceInputTextView.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+
         
         sourceInputView.VStack(sourceInputLabelView.setHeight(30),
                                sourceInputTextView,
@@ -159,15 +210,21 @@ class TextTranslateViewController: UIViewController {
         
         sourceInputLabelView.addSubview(sourceInputLabel)
         sourceInputLabel.leadingAnchor.constraint(equalTo: sourceInputLabelView.leadingAnchor, constant: 20).isActive = true
-        sourceInputLabel.trailingAnchor.constraint(equalTo: sourceInputLabelView.trailingAnchor).isActive = true
         sourceInputLabel.topAnchor.constraint(equalTo: sourceInputLabelView.topAnchor).isActive = true
         sourceInputLabel.bottomAnchor.constraint(equalTo: sourceInputLabelView.bottomAnchor).isActive = true
+        sourceInputLabel.widthAnchor.constraint(equalTo: sourceInputLabelView.widthAnchor, multiplier: 0.5).isActive = true
         
         sourceInputTextView.addSubview(sourceInputText)
         sourceInputText.leadingAnchor.constraint(equalTo: sourceInputTextView.leadingAnchor, constant: 10).isActive = true
         sourceInputText.trailingAnchor.constraint(equalTo: sourceInputTextView.trailingAnchor, constant: -10).isActive = true
         sourceInputText.topAnchor.constraint(equalTo: sourceInputTextView.topAnchor, constant: 10).isActive = true
         sourceInputText.bottomAnchor.constraint(equalTo: sourceInputTextView.bottomAnchor, constant: -10).isActive = true
+        
+        translateButtonView.addSubview(translateButton)
+        translateButton.topAnchor.constraint(equalTo: translateButtonView.topAnchor).isActive = true
+        translateButton.leadingAnchor.constraint(equalTo: translateButtonView.leadingAnchor, constant: 50).isActive = true
+        translateButton.trailingAnchor.constraint(equalTo: translateButtonView.trailingAnchor, constant: -50).isActive = true
+        translateButton.bottomAnchor.constraint(equalTo: translateButtonView.bottomAnchor).isActive = true
         
     }
 
@@ -180,6 +237,10 @@ class TextTranslateViewController: UIViewController {
         targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
         
         exchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
+        translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
+        
+        sourceInputText.delegate = self
 
     }
     
@@ -204,5 +265,34 @@ class TextTranslateViewController: UIViewController {
         
         print("exchange button pressed.")
     }
+    
+    @objc func clearText() {
+        sourceInputText.text = ""
+    }
+    
+    @objc func doTranslate() {
+        print("do translate")
+    }
 
 }
+
+extension TextTranslateViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        sourceInputLabelView.addSubview(clearButton)
+        clearButton.topAnchor.constraint(equalTo: sourceInputLabelView.topAnchor).isActive = true
+        clearButton.bottomAnchor.constraint(equalTo: sourceInputLabelView.bottomAnchor).isActive = true
+        clearButton.trailingAnchor.constraint(equalTo: sourceInputLabelView.trailingAnchor, constant: -10).isActive = true
+        clearButton.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        
+        clearButton.isHidden = false
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if sourceInputText.text == "" {
+            clearButton.isHidden = true
+        }
+    }
+    
+    
+}
+

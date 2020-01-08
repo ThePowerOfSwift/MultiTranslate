@@ -28,6 +28,8 @@
 		808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E923C43718009A0EB4 /* UIView+.swift */; };
 		808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EA23C43718009A0EB4 /* UIStackView+.swift */; };
 		808E75EF23C45F90009A0EB4 /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EE23C45F90009A0EB4 /* ChangeLanguageViewController.swift */; };
+		80C535C923C56A530044D6F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535C823C56A530044D6F0 /* Constants.swift */; };
+		80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */; };
 		CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A32ED9C279B46E2913F1257 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 		808E75E923C43718009A0EB4 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		808E75EA23C43718009A0EB4 /* UIStackView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		808E75EE23C45F90009A0EB4 /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
+		80C535C823C56A530044D6F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerDelegate.swift; sourceTree = "<group>"; };
 		C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyxc.config; path = ./amplifyxc.config; sourceTree = "<group>"; };
 		CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.release.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.release.xcconfig"; sourceTree = "<group>"; };
 		EE9BFFEA60324C8A8DEE20CA /* amplify */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplify; path = ./amplify; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			children = (
 				8052A1B723C2A24400883123 /* AppDelegate.swift */,
 				8052A1B923C2A24400883123 /* SceneDelegate.swift */,
+				80C535C823C56A530044D6F0 /* Constants.swift */,
+				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
 				8052A1E623C305FE00883123 /* Controller */,
 				8052A1E523C305EB00883123 /* Model */,
 				8052A1E423C305C100883123 /* View */,
@@ -298,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
+				80C535C923C56A530044D6F0 /* Constants.swift in Sources */,
 				808E75EB23C43718009A0EB4 /* Stack.swift in Sources */,
 				808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */,
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
@@ -306,6 +313,7 @@
 				8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */,
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
 				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
+				80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,

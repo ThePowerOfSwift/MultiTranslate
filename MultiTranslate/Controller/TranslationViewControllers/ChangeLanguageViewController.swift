@@ -10,8 +10,14 @@ import UIKit
 
 class ChangeLanguageViewController: UIViewController {
     
+    var sourceLanguageRow: Int?
+    var targetLanguageRow: Int?
+    var sourceLanguage = ""
+    var targetLanguage = ""
+    
     var pickerView: UIPickerView = UIPickerView()
-    let languageList: [String] = ["English", "Chinese", "Japanese", "French", "Spanish"]
+    
+    var delegate: LanguagePickerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +43,22 @@ class ChangeLanguageViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelChange))
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+//        if let sourceLanguageIndex = sourceLanguageIndex, let targetLanguageIndex = targetLanguageIndex {
+            pickerView.selectRow(sourceLanguageRow ?? 0, inComponent: 0, animated: true)
+            pickerView.selectRow(targetLanguageRow ?? 0, inComponent: 1, animated: true)
+//        }
+        print(pickerView.selectedRow(inComponent: 0))
+        print(pickerView.selectedRow(inComponent: 1))
+        sourceLanguage = languageList[sourceLanguageRow ?? 0]
+        targetLanguage = languageList[targetLanguageRow ?? 0]
+    }
+    
     @objc func doneChange() {
         self.dismiss(animated: true, completion: nil)
+        delegate?.didSelectedLanguagePicker(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage)
     }
     
     @objc func cancelChange() {
@@ -80,9 +100,11 @@ extension ChangeLanguageViewController : UIPickerViewDelegate, UIPickerViewDataS
         if component == 0 {
 //            self.textField2.text = list[0][row]
             print("picker 1 is \(languageList[row])")
+            sourceLanguage = languageList[row]
         } else {
 //            self.textField4.text = list[1][row]
             print("picker 2 is \(languageList[row])")
+            targetLanguage = languageList[row]
         }
     }
 

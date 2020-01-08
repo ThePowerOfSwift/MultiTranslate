@@ -15,6 +15,11 @@ import KMPlaceholderTextView
 
 class TextTranslateViewController: UIViewController {
     
+    //MARK: - Variables and Constants
+    private var sourceLanguageIndex = 0
+    private var targetLanguageIndex = 0
+    
+    //MARK: - UI Parts Declaration
     let exchangeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "exchange"), for: .normal)
@@ -74,7 +79,7 @@ class TextTranslateViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.frame = .zero
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Source Language Source"
+//        label.text = languageList[1]
         return label
     }()
     
@@ -87,7 +92,7 @@ class TextTranslateViewController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.frame = .zero
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Target Language"
+//        label.text = languageList[2]
         return label
     }()
     
@@ -125,6 +130,8 @@ class TextTranslateViewController: UIViewController {
         return view
     }()
     
+    
+    // MARK: - ViewController Life Cirecle
     override func loadView() {
         super.loadView()
         
@@ -231,6 +238,9 @@ class TextTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sourceLanguageLabel.text = languageList[0]
+        targetLanguageLabel.text = languageList[2]
+        
         let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
         sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
         let targetLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
@@ -241,14 +251,37 @@ class TextTranslateViewController: UIViewController {
         translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
         
         sourceInputText.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
 
     }
     
+    
+    // MARK: - UIButton Implementation
     @objc func selectLanguage() {
+        
+        if let sourceLanguage = sourceLanguageLabel.text {
+            sourceLanguageIndex = languageList.firstIndex(of: sourceLanguage) ?? 0
+            print(sourceLanguageIndex)
+            print(sourceLanguage)
+        }
+        
+        if let targetLanguage = targetLanguageLabel.text {
+            targetLanguageIndex = languageList.firstIndex(of: targetLanguage) ?? 0
+            print(targetLanguageIndex)
+            print(targetLanguage)
+        }
+        
         //present picker view modal
         let viewController = ChangeLanguageViewController()
+        viewController.sourceLanguageRow = sourceLanguageIndex
+        viewController.targetLanguageRow = targetLanguageIndex
+        viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
-
+        
         self.navigationController?.present(navController, animated: true, completion: nil)
     }
     
@@ -276,6 +309,8 @@ class TextTranslateViewController: UIViewController {
 
 }
 
+
+// MARK: - Extensions
 extension TextTranslateViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         sourceInputLabelView.addSubview(clearButton)
@@ -291,6 +326,13 @@ extension TextTranslateViewController: UITextViewDelegate {
         if sourceInputText.text == "" {
             clearButton.isHidden = true
         }
+    }
+}
+
+extension TextTranslateViewController: LanguagePickerDelegate {
+    func didSelectedLanguagePicker(sourceLanguage: String, targetLanguage: String) {
+        sourceLanguageLabel.text = sourceLanguage
+        targetLanguageLabel.text = targetLanguage
     }
     
     

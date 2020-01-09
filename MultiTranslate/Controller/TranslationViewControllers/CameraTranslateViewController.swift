@@ -109,22 +109,26 @@ class CameraTranslateViewController: UIViewController {
     
     func handleDetectedText(request: VNRequest?, error: Error?) {
         if error == nil {
-            guard let observations = request?.results as? [VNRecognizedTextObservation] else { return }
-            for observation in observations {
-                let bestObservation = observation.topCandidates(1).first
-                print(bestObservation?.string ?? "")
-                print(bestObservation?.confidence ?? 0)
-                guard let string = bestObservation?.string else { return }
-
-//                print(bestObservation?.boundingBox(for: Range<String.Index>))
-                detectedResultString += (string + " ")
+            guard let observations = request?.results as? [VNRecognizedTextObservation] else {
+                print("Detecting error.")
+                return
             }
             
-//            let newViewController = ResultTableViewController()
-//            newViewController.observations = observations
-//            newViewController.modalPresentationStyle = .fullScreen
-//            self.navigationController?.pushViewController(newViewController, animated: true)
+            if observations.count == 0 {
+                print("Cannot detect text in the image.")
+                detectedResultString = ""
+            } else {
+                for observation in observations {
+                    let bestObservation = observation.topCandidates(1).first
+                    print(bestObservation?.string ?? "No text")
+                    print(bestObservation?.confidence ?? 0)
+                    guard let string = bestObservation?.string else { return }
+                    detectedResultString += (string + " ")
+                }
+            }
             
+        } else {
+            print(error!.localizedDescription)
         }
     }
 
@@ -142,14 +146,15 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
         }
     }
     
-    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-        
+    func cropViewController(_ cropViewController: CropViewController, didCropImageToRect rect: CGRect, angle: Int) {
         KRProgressHUD.show()
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         
         guard let cgImage = image.cgImage else { return }
         let requests = [textDetectionRequest]
         let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-//        DispatchQueue.global(qos: .userInitiated).async {
         
         do {
             try imageRequestHandler.perform(requests)
@@ -157,18 +162,17 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
             print("Process image error: \(error.localizedDescription)")
         }
         
-//        }
-        
-//        DispatchQueue.global(qos: .default).async(execute: { // time-consuming task
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-            KRProgressHUD.dismiss()
-        }
+        KRProgressHUD.dismiss()
         
         dismiss(animated: true) {
-            let viewController = TextTranslateViewController()
-            viewController.sourceInputText.text = self.detectedResultString
-            self.present(viewController, animated: true, completion: nil)
-            
+            if self.detectedResultString.isEmpty {
+                print("Result is empty.") // UIAlertViewController
+            } else {
+                let viewController = TextTranslateViewController()
+                viewController.sourceInputText.text = self.detectedResultString
+                self.present(viewController, animated: true, completion: nil)
+                self.detectedResultString = ""
+            }
         }
     }
     

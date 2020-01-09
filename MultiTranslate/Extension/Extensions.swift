@@ -102,7 +102,7 @@ extension UIView {
             item: subview,
             attribute: .bottom,
             relatedBy: .equal,
-            toItem: self,
+            toItem: self.safeAreaLayoutGuide,
             attribute: .bottom,
             multiplier: 1.0,
             constant: 0)

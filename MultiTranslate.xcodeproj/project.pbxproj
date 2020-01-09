@@ -115,7 +115,6 @@
 				8052A1B723C2A24400883123 /* AppDelegate.swift */,
 				8052A1B923C2A24400883123 /* SceneDelegate.swift */,
 				80C535C823C56A530044D6F0 /* Constants.swift */,
-				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
 				8052A1E623C305FE00883123 /* Controller */,
 				8052A1E523C305EB00883123 /* Model */,
 				8052A1E423C305C100883123 /* View */,
@@ -162,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */,
+				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
 			);
 			path = Controller;

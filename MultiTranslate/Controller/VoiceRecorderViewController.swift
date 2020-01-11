@@ -10,6 +10,10 @@ import UIKit
 
 class VoiceRecorderViewController: UIViewController {
     
+    // MARK: - Variables and constants
+    
+    private var isRecording: Bool = false
+    
     private lazy var container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -50,9 +54,25 @@ class VoiceRecorderViewController: UIViewController {
         button.widthAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
         button.layer.masksToBounds = true
+        
+//        button.layer.borderColor = UIColor.white.cgColor
+//        button.layer.borderWidth = 2
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
+    }()
+    
+    private lazy var recorderButtonBorder: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.white.cgColor
+        view.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        view.layer.cornerRadius = 30
+        
+        return view
     }()
     
     override func loadView() {
@@ -75,6 +95,10 @@ class VoiceRecorderViewController: UIViewController {
         recorderButtonContainer.addSubview(recorderButtonBackground)
         recorderButtonBackground.frame = recorderButtonContainer.frame
         
+        recorderButtonContainer.addSubview(recorderButtonBorder)
+        recorderButtonBorder.centerXAnchor.constraint(equalTo: recorderButtonContainer.centerXAnchor).isActive = true
+        recorderButtonBorder.centerYAnchor.constraint(equalTo: recorderButtonContainer.centerYAnchor).isActive = true
+        
         recorderButtonContainer.addSubview(recorderButton)
         recorderButton.centerXAnchor.constraint(equalTo: recorderButtonContainer.centerXAnchor).isActive = true
         recorderButton.centerYAnchor.constraint(equalTo: recorderButtonContainer.centerYAnchor).isActive = true
@@ -88,9 +112,25 @@ class VoiceRecorderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recorderButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
 
     }
 
+    @objc func recordButtonTapped() {
+        if isRecording {
+            UIView.animate(withDuration: 0.2) {
+                self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.recorderButton.layer.cornerRadius = 25
+            }
+        } else {
+            UIView.animate(withDuration: 0.2) {
+                self.recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                self.recorderButton.layer.cornerRadius = 3.0
+            }
+        }
+        isRecording = !isRecording
+    }
 
 
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		021058A83D2DED5A53886DAA /* Pods_MultiTranslate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */; };
 		0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */; };
+		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
 		8052A1BF23C2A24400883123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1BD23C2A24400883123 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyconfiguration.json; path = ./amplifyconfiguration.json; sourceTree = "<group>"; };
 		1F63226C5F2648CDBB6CE5C9 /* Pods-MultiTranslate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.debug.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.debug.xcconfig"; sourceTree = "<group>"; };
 		7A32ED9C279B46E2913F1257 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = awsconfiguration.json; path = ./awsconfiguration.json; sourceTree = "<group>"; };
+		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8052A1B923C2A24400883123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */,
 				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
+				80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */,
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
 				80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
@@ -342,6 +345,7 @@
 				8052A1D623C2F65F00883123 /* IconItem.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* ChangeLanguageViewController.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
+				80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

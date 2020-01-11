@@ -21,6 +21,8 @@ class VoiceRecorderViewController: UIViewController {
     private var audioFileURL: URL?
     private var extractedText = ""
     
+    var delegate: SourceTextInputDelegate?
+    
     
     // MARK: - View declarations
     private lazy var container: UIView = {
@@ -148,6 +150,18 @@ class VoiceRecorderViewController: UIViewController {
             print("Failed to record!")
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        audioRecorder?.stop()
+        isRecording = false
+        recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        recorderButton.layer.cornerRadius = 25
+        
+        extractedText = ""
+        delegate?.didSetSourceText(sourceText: self.extractedText)
+    }
 
     
     // MARK: - Button function implementations
@@ -268,6 +282,7 @@ class VoiceRecorderViewController: UIViewController {
             if result.isFinal {
                 self.extractedText = result.bestTranscription.formattedString
                 print(self.extractedText)
+                self.delegate?.didSetSourceText(sourceText: self.extractedText)
 
                 KRProgressHUD.dismiss()
                 self.dismiss(animated: true, completion: nil)
@@ -290,5 +305,15 @@ extension VoiceRecorderViewController: AVAudioRecorderDelegate {
         if !flag {
             finishRecording(success: false)
         }
+    }
+}
+
+extension VoiceRecorderViewController {
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        guard let presentationController = presentationController else {
+            return
+        }
+        presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
     }
 }

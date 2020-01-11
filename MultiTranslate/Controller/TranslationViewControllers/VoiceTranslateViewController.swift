@@ -11,6 +11,8 @@ import UIKit
 import PMSuperButton
 
 class VoiceTranslateViewController: UIViewController {
+    
+    var sourceText: String = ""
 
     let container = UIView()
     
@@ -77,19 +79,27 @@ class VoiceTranslateViewController: UIViewController {
         print("Use microphone tapped.")
         let viewController = VoiceRecorderViewController()
         viewController.modalPresentationStyle = .automatic
+        viewController.presentationController?.delegate = self
+        viewController.delegate = self
         present(viewController, animated: true, completion: nil)
     }
 
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+// MARK: - Extensions
+extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("PresentationControllerDidDismiss called.")
+        if !sourceText.isEmpty {
+            let viewController = TextTranslateViewController()
+            viewController.sourceInputText.text = sourceText
+            present(viewController, animated: true, completion: nil)
+        }
     }
-    */
+}
 
+extension VoiceTranslateViewController: SourceTextInputDelegate {
+    func didSetSourceText(sourceText: String) {
+        self.sourceText = sourceText
+    }
 }

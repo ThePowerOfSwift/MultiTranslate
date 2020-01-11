@@ -43,7 +43,13 @@ class CameraTranslateViewController: UIViewController {
     let imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+        } else {
+            // FIXME: Only on simylator
+            imagePicker.sourceType = .photoLibrary
+        }
         
         return imagePicker
     }()
@@ -99,7 +105,7 @@ class CameraTranslateViewController: UIViewController {
     @objc func useCamera() {
         print("Use camera tapped.")
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             present(imagePicker, animated: true, completion: nil)
         } else {
             print("Camera is not available.")

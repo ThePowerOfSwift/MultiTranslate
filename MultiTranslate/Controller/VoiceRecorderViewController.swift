@@ -10,12 +10,16 @@ import AVFoundation
 import Speech
 import UIKit
 
+import KRProgressHUD
+
 class VoiceRecorderViewController: UIViewController {
     
     // MARK: - Variables and constants
     private var isRecording: Bool = true
     private var recordingSession: AVAudioSession!
     private var audioRecorder: AVAudioRecorder?
+    private var audioFileURL: URL?
+    private var extractedText = ""
     
     
     // MARK: - View declarations
@@ -154,6 +158,8 @@ class VoiceRecorderViewController: UIViewController {
                 self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.recorderButton.layer.cornerRadius = 25
             }
+            KRProgressHUD.show()
+
         } else {
             startRecording()
             UIView.animate(withDuration: 0.2) {
@@ -192,7 +198,8 @@ class VoiceRecorderViewController: UIViewController {
     }
     
     func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        audioFileURL = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        guard let url = audioFileURL else { return }
 
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -202,7 +209,7 @@ class VoiceRecorderViewController: UIViewController {
             ]
 
         do {
-            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder = try AVAudioRecorder(url: url, settings: settings)
             audioRecorder?.delegate = self
             audioRecorder?.prepareToRecord()
             audioRecorder?.isMeteringEnabled = true
@@ -219,10 +226,47 @@ class VoiceRecorderViewController: UIViewController {
 
         if success {
             print("Recording successed.")
-            //Extract text from the audio and pass to the translation vc
+            
+            requestTranscribePermissions()
+            
         } else {
             print("Recording failed.")
             //Show alert
+        }
+    }
+    
+    func requestTranscribePermissions() {
+        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+            DispatchQueue.main.async {
+                if authStatus == .authorized {
+                    print("Good to go!")
+                    self.transcribeAudio(url: self.audioFileURL!)
+                } else {
+                    print("Transcription permission was declined.")
+                }
+            }
+        }
+    }
+    
+    func transcribeAudio(url: URL) {
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
+        let request = SFSpeechURLRecognitionRequest(url: url)
+
+        recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
+            guard let result = result else {
+                print("There was an error: \(error!)")
+                print("Cannot extract any text from the audio")
+                // show alert
+                return
+            }
+
+            if result.isFinal {
+                self.extractedText = result.bestTranscription.formattedString
+                print(self.extractedText)
+
+                KRProgressHUD.dismiss()
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 

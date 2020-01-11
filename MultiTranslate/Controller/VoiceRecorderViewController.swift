@@ -17,7 +17,7 @@ class VoiceRecorderViewController: UIViewController {
     private lazy var container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .gray
+        view.backgroundColor = .black
         return view
     }()
     
@@ -34,6 +34,9 @@ class VoiceRecorderViewController: UIViewController {
     private lazy var recorderButtonContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 10
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.masksToBounds = true
         
         return view
     }()

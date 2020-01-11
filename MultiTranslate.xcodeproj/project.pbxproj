@@ -24,10 +24,12 @@
 		8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */; };
 		8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */; };
 		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
+		807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 807B489123C95C5200A588F3 /* SCSiriWaveformView.m */; };
 		808E75EB23C43718009A0EB4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E823C43718009A0EB4 /* Stack.swift */; };
 		808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E923C43718009A0EB4 /* UIView+.swift */; };
 		808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EA23C43718009A0EB4 /* UIStackView+.swift */; };
 		808E75EF23C45F90009A0EB4 /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EE23C45F90009A0EB4 /* ChangeLanguageViewController.swift */; };
+		80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */; };
 		80C535C923C56A530044D6F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535C823C56A530044D6F0 /* Constants.swift */; };
 		80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */; };
 		CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A32ED9C279B46E2913F1257 /* awsconfiguration.json */; };
@@ -54,10 +56,14 @@
 		8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
+		807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiTranslate-Bridging-Header.h"; sourceTree = "<group>"; };
+		807B489123C95C5200A588F3 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
+		807B489223C95C5200A588F3 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
 		808E75E823C43718009A0EB4 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		808E75E923C43718009A0EB4 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		808E75EA23C43718009A0EB4 /* UIStackView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		808E75EE23C45F90009A0EB4 /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
+		80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
 		80C535C823C56A530044D6F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerDelegate.swift; sourceTree = "<group>"; };
 		C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyxc.config; path = ./amplifyxc.config; sourceTree = "<group>"; };
@@ -163,6 +169,9 @@
 				8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */,
 				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
+				80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */,
+				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
+				807B489523C95C7900A588F3 /* SCSiriWaveformView */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,6 +185,15 @@
 				808E75E923C43718009A0EB4 /* UIView+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		807B489523C95C7900A588F3 /* SCSiriWaveformView */ = {
+			isa = PBXGroup;
+			children = (
+				807B489223C95C5200A588F3 /* SCSiriWaveformView.h */,
+				807B489123C95C5200A588F3 /* SCSiriWaveformView.m */,
+			);
+			path = SCSiriWaveformView;
 			sourceTree = "<group>";
 		};
 		E41E6BBBF80C6EC88FE805E7 /* Frameworks */ = {
@@ -220,6 +238,7 @@
 				TargetAttributes = {
 					8052A1B323C2A24400883123 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -317,7 +336,9 @@
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,
+				807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */,
 				8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */,
+				80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */,
 				8052A1D623C2F65F00883123 /* IconItem.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* ChangeLanguageViewController.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
@@ -465,6 +486,7 @@
 			baseConfigurationReference = 1F63226C5F2648CDBB6CE5C9 /* Pods-MultiTranslate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR8K5GN7PS;
 				INFOPLIST_FILE = MultiTranslate/Info.plist;
@@ -474,6 +496,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftProject.Keishin.MultiTranslate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MultiTranslate/Controller/MultiTranslate-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -484,6 +508,7 @@
 			baseConfigurationReference = CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR8K5GN7PS;
 				INFOPLIST_FILE = MultiTranslate/Info.plist;
@@ -493,6 +518,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftProject.Keishin.MultiTranslate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MultiTranslate/Controller/MultiTranslate-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

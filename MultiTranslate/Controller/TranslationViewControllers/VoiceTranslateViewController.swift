@@ -75,6 +75,9 @@ class VoiceTranslateViewController: UIViewController {
         
     @objc func useMicrophone() {
         print("Use microphone tapped.")
+        let viewController = VoiceRecorderViewController()
+        viewController.modalPresentationStyle = .automatic
+        present(viewController, animated: true, completion: nil)
     }
 
     

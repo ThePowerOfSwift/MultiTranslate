@@ -257,6 +257,11 @@ class VoiceRecorderViewController: UIViewController {
                 print("There was an error: \(error!)")
                 print("Cannot extract any text from the audio")
                 // show alert
+                
+                KRProgressHUD.dismiss()
+                self.dismiss(animated: true, completion: nil)
+                // Transcription failed.
+                
                 return
             }
 

@@ -6,14 +6,19 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
+import AVFoundation
+import Speech
 import UIKit
 
 class VoiceRecorderViewController: UIViewController {
     
     // MARK: - Variables and constants
+    private var isRecording: Bool = true
+    private var recordingSession: AVAudioSession!
+    private var audioRecorder: AVAudioRecorder?
     
-    private var isRecording: Bool = false
     
+    // MARK: - View declarations
     private lazy var container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +83,8 @@ class VoiceRecorderViewController: UIViewController {
         return view
     }()
     
+    
+    // MARK: - View life circle
     override func loadView() {
         super.loadView()
         
@@ -118,15 +125,37 @@ class VoiceRecorderViewController: UIViewController {
         
         recorderButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
 
+        recordingSession = AVAudioSession.sharedInstance()
+
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        self.loadRecorderButton()
+                        self.loadWaveform()
+                    } else {
+                        print("Failed to record!")
+                    }
+                }
+            }
+        } catch {
+            print("Failed to record!")
+        }
     }
 
+    
+    // MARK: - Button function implementations
     @objc func recordButtonTapped() {
         if isRecording {
+            finishRecording(success: true)
             UIView.animate(withDuration: 0.2) {
                 self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.recorderButton.layer.cornerRadius = 25
             }
         } else {
+            startRecording()
             UIView.animate(withDuration: 0.2) {
                 self.recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 self.recorderButton.layer.cornerRadius = 3.0
@@ -134,6 +163,83 @@ class VoiceRecorderViewController: UIViewController {
         }
         isRecording = !isRecording
     }
+    
+    
+    // MARK: - Other function implementations
+    func loadRecorderButton() {
+        if isRecording {
+            startRecording()
+            recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            recorderButton.layer.cornerRadius = 3.0
+        } else {
+            finishRecording(success: true)
+            recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            recorderButton.layer.cornerRadius = 25
+        }
+    }
+    
+    func loadWaveform() {
+        let displayLink: CADisplayLink = CADisplayLink(target: self, selector: #selector(updateMeters))
+        displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
+    }
+
+    @objc func updateMeters() {
+        if let recorder = audioRecorder {
+            recorder.updateMeters()
+            let normalizedValue: CGFloat = pow(10, CGFloat((recorder.averagePower(forChannel: 0))) / 50)
+            waveformView.update(withLevel: normalizedValue)
+        }
+    }
+    
+    func startRecording() {
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+
+        do {
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder?.delegate = self
+            audioRecorder?.prepareToRecord()
+            audioRecorder?.isMeteringEnabled = true
+            audioRecorder?.record()
+
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+
+    func finishRecording(success: Bool) {
+        audioRecorder!.stop()
+        audioRecorder = nil
+
+        if success {
+            print("Recording successed.")
+            //Extract text from the audio and pass to the translation vc
+        } else {
+            print("Recording failed.")
+            //Show alert
+        }
+    }
 
 
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(paths[0])
+        return paths[0]
+    }
+
+}
+
+// MARK: - Extensions
+extension VoiceRecorderViewController: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
 }

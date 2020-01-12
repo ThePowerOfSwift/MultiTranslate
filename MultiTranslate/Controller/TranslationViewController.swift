@@ -17,6 +17,7 @@ class TranslationViewController: UIViewController {
         "text",
         "camera",
         "microphone",
+        "conversation",
         "AR",
         "pdf",
         "image",
@@ -34,6 +35,12 @@ class TranslationViewController: UIViewController {
     
     private lazy var voiceTranslateViewController = { () -> VoiceTranslateViewController in
         let viewController = VoiceTranslateViewController()
+        return viewController
+    }()
+    
+    
+    private lazy var conversationTranslateViewController = { () -> ConversationTranslateViewController in
+        let viewController = ConversationTranslateViewController()
         return viewController
     }()
     
@@ -63,6 +70,7 @@ class TranslationViewController: UIViewController {
             textTranslateViewController,
             cameraTranslateViewController,
             voiceTranslateViewController,
+            conversationTranslateViewController,
             arTranslateViewController,
             pdfTranslateViewController,
             imageTranslateViewController

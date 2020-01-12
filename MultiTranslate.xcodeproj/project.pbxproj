@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		021058A83D2DED5A53886DAA /* Pods_MultiTranslate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */; };
 		0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */; };
+		8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */; };
 		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 		09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyconfiguration.json; path = ./amplifyconfiguration.json; sourceTree = "<group>"; };
 		1F63226C5F2648CDBB6CE5C9 /* Pods-MultiTranslate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.debug.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.debug.xcconfig"; sourceTree = "<group>"; };
 		7A32ED9C279B46E2913F1257 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = awsconfiguration.json; path = ./awsconfiguration.json; sourceTree = "<group>"; };
+		8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTranslateViewController.swift; sourceTree = "<group>"; };
 		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				8052A1D723C2FD9600883123 /* TextTranslateViewController.swift */,
 				8052A1D923C2FDA800883123 /* CameraTranslateViewController.swift */,
 				8052A1DB23C2FDBF00883123 /* VoiceTranslateViewController.swift */,
+				8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */,
 				8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */,
 				8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */,
 				8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */,
@@ -339,6 +342,7 @@
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,
+				8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */,
 				807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */,
 				8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */,
 				80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */,

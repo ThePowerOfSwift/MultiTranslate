@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Conversation {
+class Conversation: Object {
 
-    let sourceMessage: String
-    let targetMessage: String
-    let sender: sentBy
+    @objc dynamic var sourceMessage: String = ""
+    @objc dynamic var targetMessage: String = ""
+    @objc dynamic var isSource: Bool = true
     
 }

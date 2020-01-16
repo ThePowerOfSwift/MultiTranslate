@@ -12,7 +12,6 @@
 		8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */; };
 		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
 		803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */; };
-		803A5DFA23CFFBC800AC4D12 /* SentBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF923CFFBC800AC4D12 /* SentBy.swift */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
 		8052A1BF23C2A24400883123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1BD23C2A24400883123 /* Main.storyboard */; };
@@ -47,7 +46,6 @@
 		8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTranslateViewController.swift; sourceTree = "<group>"; };
 		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
 		803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
-		803A5DF923CFFBC800AC4D12 /* SentBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentBy.swift; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8052A1B923C2A24400883123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			children = (
 				8052A1D523C2F65F00883123 /* IconItem.swift */,
 				80BDB6A723CF3EDA00F81D40 /* Conversation.swift */,
-				803A5DF923CFFBC800AC4D12 /* SentBy.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,7 +346,6 @@
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
 				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
 				80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */,
-				803A5DFA23CFFBC800AC4D12 /* SentBy.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,

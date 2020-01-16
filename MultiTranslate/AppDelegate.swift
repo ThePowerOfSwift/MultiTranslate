@@ -9,6 +9,7 @@
 import UIKit
 
 import IQKeyboardManager
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         IQKeyboardManager.shared().isEnabled = true
+        
+        if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+            print(fileURL)
+        }
+        
+//        let config = Realm.Configuration(
+//          // 新しいスキーマバージョンを設定します。以前のバージョンより大きくなければなりません。
+//          // （スキーマバージョンを設定したことがなければ、最初は0が設定されています）
+//          schemaVersion: 1,
+//
+//          // マイグレーション処理を記述します。古いスキーマバージョンのRealmを開こうとすると
+//          // 自動的にマイグレーションが実行されます。
+//          migrationBlock: { migration, oldSchemaVersion in
+//            // 最初のマイグレーションの場合、`oldSchemaVersion`は0です
+//            if (oldSchemaVersion < 1) {
+//              // 何もする必要はありません！1
+//              // Realmは自動的に新しく追加されたプロパティと、削除されたプロパティを認識します。
+//              // そしてディスク上のスキーマを自動的にアップデートします。
+//            }
+//          })
+//
+//        // デフォルトRealmに新しい設定を適用します
+//        Realm.Configuration.defaultConfiguration = config
+        
+        do {
+            _ = try Realm()
+        } catch {
+            print("Error initialising Realm, \(error.localizedDescription)")
+        }
         
         return true
     }

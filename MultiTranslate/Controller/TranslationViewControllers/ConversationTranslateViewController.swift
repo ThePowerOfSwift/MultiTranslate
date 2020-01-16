@@ -10,17 +10,9 @@ import Speech
 import UIKit
 
 import LBTATools
+import RealmSwift
 
 class ConversationTranslateViewController: UIViewController {
-    
-    private var conversations: [Conversation] = [
-        Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .source),
-        Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .target),
-        Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .source),
-        Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .source),
-        Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .target),
-        Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .source)
-    ]
     
     private var sourceLanguageIndex = 0
     private var targetLanguageIndex = 0
@@ -30,7 +22,9 @@ class ConversationTranslateViewController: UIViewController {
     private var audioFileURL: URL?
     private var extractedText = ""
     
-    private var sender: sentBy?
+    private let realm = try! Realm()
+    private var conversations: Results<Conversation>!
+    private var isSource: Bool = true
     
     private let container: UIView = {
         let view = UIView()
@@ -198,6 +192,8 @@ class ConversationTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        conversations = realm.objects(Conversation.self)
+        
         conversationTableView.delegate = self
         conversationTableView.dataSource = self
         
@@ -284,7 +280,7 @@ class ConversationTranslateViewController: UIViewController {
             self.sourceRecorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             self.sourceRecorderButton.layer.cornerRadius = 3.0
         }
-        sender = .source
+        isSource = true
     }
     
     @objc func sourceLanguageEndRecording() {
@@ -305,7 +301,7 @@ class ConversationTranslateViewController: UIViewController {
             self.targetRecorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             self.targetRecorderButton.layer.cornerRadius = 3.0
         }
-        sender = .target
+        isSource = false
     }
     
     @objc func targetLanguageEndRecording() {
@@ -355,7 +351,7 @@ class ConversationTranslateViewController: UIViewController {
             print("Recording failed.")
             //Show alert
         }
-        print(sender!)
+        print(isSource)
     }
     
     func requestTranscribePermissions() {
@@ -393,8 +389,14 @@ class ConversationTranslateViewController: UIViewController {
     }
     
     func createNewConversation() {
-        let conversation = Conversation(sourceMessage: extractedText, targetMessage: "translated text", sender: sender!)
-        conversations.append(conversation)
+        let conversation = Conversation()
+        conversation.sourceMessage = extractedText
+        conversation.targetMessage = "test target message"
+        conversation.isSource = isSource
+        
+        try! realm.write {
+            realm.add(conversation)
+        }
         
         conversationTableView.reloadData()
         conversationTableView.showLastRow()
@@ -414,9 +416,10 @@ class ConversationTranslateViewController: UIViewController {
 extension UITableView {
     func showLastRow() {
         guard self.numberOfRows(inSection: 0) > 0 else { return }
-        
-        let indexPath = IndexPath(row: numberOfRows(inSection: 0) - 1, section: 0)
-        scrollToRow(at: indexPath, at: .bottom, animated: true)
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: self.numberOfRows(inSection: 0) - 1, section: 0)
+            self.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
     }
 }
 

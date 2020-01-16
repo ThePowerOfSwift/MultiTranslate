@@ -18,7 +18,7 @@ class ConversationCell: UITableViewCell {
             sourceLabel.text = conversation?.sourceMessage
             targetLabel.text = conversation?.targetMessage
             
-            if conversation?.sender == .source {
+            if conversation?.isSource == true {
                 bubbleBackgroundView.backgroundColor = .systemPink
                 leadingConstraint.isActive = true
                 trailingConstraint.isActive = false

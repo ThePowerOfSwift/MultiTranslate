@@ -11,6 +11,8 @@
 		0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */; };
 		8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */; };
 		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
+		803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */; };
+		803A5DFA23CFFBC800AC4D12 /* SentBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF923CFFBC800AC4D12 /* SentBy.swift */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
 		8052A1BF23C2A24400883123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1BD23C2A24400883123 /* Main.storyboard */; };
@@ -32,6 +34,7 @@
 		808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EA23C43718009A0EB4 /* UIStackView+.swift */; };
 		808E75EF23C45F90009A0EB4 /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EE23C45F90009A0EB4 /* ChangeLanguageViewController.swift */; };
 		80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */; };
+		80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB6A723CF3EDA00F81D40 /* Conversation.swift */; };
 		80C535C923C56A530044D6F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535C823C56A530044D6F0 /* Constants.swift */; };
 		80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */; };
 		CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A32ED9C279B46E2913F1257 /* awsconfiguration.json */; };
@@ -43,6 +46,8 @@
 		7A32ED9C279B46E2913F1257 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = awsconfiguration.json; path = ./awsconfiguration.json; sourceTree = "<group>"; };
 		8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTranslateViewController.swift; sourceTree = "<group>"; };
 		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
+		803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		803A5DF923CFFBC800AC4D12 /* SentBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentBy.swift; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8052A1B923C2A24400883123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +73,7 @@
 		808E75EA23C43718009A0EB4 /* UIStackView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		808E75EE23C45F90009A0EB4 /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
 		80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
+		80BDB6A723CF3EDA00F81D40 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		80C535C823C56A530044D6F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerDelegate.swift; sourceTree = "<group>"; };
 		C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyxc.config; path = ./amplifyxc.config; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 			children = (
 				8052A1CF23C2E03800883123 /* IconPagingCell.swift */,
 				8052A1BD23C2A24400883123 /* Main.storyboard */,
+				803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				8052A1D523C2F65F00883123 /* IconItem.swift */,
+				80BDB6A723CF3EDA00F81D40 /* Conversation.swift */,
+				803A5DF923CFFBC800AC4D12 /* SentBy.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */,
 				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
 				80C535C923C56A530044D6F0 /* Constants.swift in Sources */,
 				808E75EB23C43718009A0EB4 /* Stack.swift in Sources */,
@@ -339,6 +349,7 @@
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
 				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
 				80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */,
+				803A5DFA23CFFBC800AC4D12 /* SentBy.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,
@@ -347,6 +358,7 @@
 				8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */,
 				80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */,
 				8052A1D623C2F65F00883123 /* IconItem.swift in Sources */,
+				803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* ChangeLanguageViewController.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
 				80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */,

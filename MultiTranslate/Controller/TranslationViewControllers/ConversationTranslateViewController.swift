@@ -12,6 +12,15 @@ import LBTATools
 
 class ConversationTranslateViewController: UIViewController {
     
+    var conversations: [Conversation] = [
+        Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .source),
+        Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .target),
+        Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .source),
+        Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .source),
+        Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .target),
+        Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .source)
+    ]
+    
     let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -20,6 +29,7 @@ class ConversationTranslateViewController: UIViewController {
     
     let conversationTableView: UITableView = {
         let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
@@ -155,11 +165,11 @@ class ConversationTranslateViewController: UIViewController {
         targetRecorderButtonView.addSubview(targetRecorderButton)
         targetRecorderButton.centerInSuperview()
         
-//        container.addSubview(conversationTableView)
-//        conversationTableView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-//        conversationTableView.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-//        conversationTableView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-//        conversationTableView.bottomAnchor.constraint(equalTo: buttonsContainer.topAnchor).isActive = true
+        container.addSubview(conversationTableView)
+        conversationTableView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        conversationTableView.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        conversationTableView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        conversationTableView.bottomAnchor.constraint(equalTo: buttonsContainer.topAnchor).isActive = true
 
     }
     
@@ -167,7 +177,31 @@ class ConversationTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        conversationTableView.delegate = self
+        conversationTableView.dataSource = self
         
+        conversationTableView.register(ConversationCell.self, forCellReuseIdentifier: Constants.conversationTableViewCellIdentifier)
+        conversationTableView.separatorStyle = .none
     }
 
+}
+
+extension ConversationTranslateViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension ConversationTranslateViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return conversations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.conversationTableViewCellIdentifier, for: indexPath) as! ConversationCell
+        cell.conversation = conversations[indexPath.row]
+        return cell
+    }
+    
+    
 }

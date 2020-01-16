@@ -6,6 +6,7 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
+import Speech
 import UIKit
 
 import LBTATools
@@ -23,6 +24,13 @@ class ConversationTranslateViewController: UIViewController {
     
     private var sourceLanguageIndex = 0
     private var targetLanguageIndex = 0
+    
+    private var recordingSession: AVAudioSession!
+    private var audioRecorder: AVAudioRecorder?
+    private var audioFileURL: URL?
+    private var extractedText = ""
+    
+    private var sender: sentBy?
     
     private let container: UIView = {
         let view = UIView()
@@ -195,10 +203,41 @@ class ConversationTranslateViewController: UIViewController {
         
         conversationTableView.register(ConversationCell.self, forCellReuseIdentifier: Constants.conversationTableViewCellIdentifier)
         conversationTableView.separatorStyle = .none
+        conversationTableView.allowsSelection = false
+//        conversationTableView.showLastRow()
         
         languageExchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
         sourceLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
+        
+        sourceRecorderButton.addTarget(self, action: #selector(sourceLanguageRecording), for: .touchDown)
+        sourceRecorderButton.addTarget(self, action: #selector(sourceLanguageEndRecording), for: .touchUpInside)
+        targetRecorderButton.addTarget(self, action: #selector(targetLanguageRecording), for: .touchDown)
+        targetRecorderButton.addTarget(self, action: #selector(targetLanguageEndRecording), for: .touchUpInside)
+        
+        recordingSession = AVAudioSession.sharedInstance()
+
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if !allowed {
+                        print("Failed to record!")
+                    }
+                }
+            }
+        } catch {
+            print("Failed to record!")
+        }
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        conversationTableView.showLastRow()
     }
     
     @objc func exchangeLanguage() {
@@ -237,12 +276,154 @@ class ConversationTranslateViewController: UIViewController {
         self.navigationController?.present(navController, animated: true, completion: nil)
     }
 
+    @objc func sourceLanguageRecording() {
+        print("sourceLanguage button tapped down")
+
+        startRecording()
+        UIView.animate(withDuration: 0.2) {
+            self.sourceRecorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            self.sourceRecorderButton.layer.cornerRadius = 3.0
+        }
+        sender = .source
+    }
+    
+    @objc func sourceLanguageEndRecording() {
+        print("sourceLanguage button tap canceled")
+        
+        finishRecording(success: true)
+        UIView.animate(withDuration: 0.2) {
+            self.sourceRecorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.sourceRecorderButton.layer.cornerRadius = 25
+        }
+    }
+    
+    @objc func targetLanguageRecording() {
+        print("targetLanguage button tapped down")
+
+        startRecording()
+        UIView.animate(withDuration: 0.2) {
+            self.targetRecorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            self.targetRecorderButton.layer.cornerRadius = 3.0
+        }
+        sender = .target
+    }
+    
+    @objc func targetLanguageEndRecording() {
+        print("targetLanguage button tap canceled")
+
+        finishRecording(success: true)
+        UIView.animate(withDuration: 0.2) {
+            self.targetRecorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.targetRecorderButton.layer.cornerRadius = 25
+        }
+    }
+    
+    
+    func startRecording() {
+        audioFileURL = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        guard let url = audioFileURL else { return }
+
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+
+        do {
+            audioRecorder = try AVAudioRecorder(url: url, settings: settings)
+            audioRecorder?.delegate = self
+            audioRecorder?.prepareToRecord()
+            audioRecorder?.isMeteringEnabled = true
+            audioRecorder?.record()
+
+        } catch {
+            finishRecording(success: false)
+        }
+    }
+
+    func finishRecording(success: Bool) {
+        audioRecorder!.stop()
+        audioRecorder = nil
+
+        if success {
+            print("Recording successed.")
+            
+            requestTranscribePermissions()
+            
+        } else {
+            print("Recording failed.")
+            //Show alert
+        }
+        print(sender!)
+    }
+    
+    func requestTranscribePermissions() {
+        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+            DispatchQueue.main.async {
+                if authStatus == .authorized {
+                    print("Good to go!")
+                    self.transcribeAudio(url: self.audioFileURL!)
+                } else {
+                    print("Transcription permission was declined.")
+                }
+            }
+        }
+    }
+    
+    func transcribeAudio(url: URL) {
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
+        let request = SFSpeechURLRecognitionRequest(url: url)
+
+        recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
+            guard let result = result else {
+                print("There was an error: \(error!)")
+                print("Cannot extract any text from the audio")
+                // show alert
+                return
+            }
+
+            if result.isFinal {
+                self.extractedText = result.bestTranscription.formattedString
+                print(self.extractedText)
+
+                self.createNewConversation()
+            }
+        }
+    }
+    
+    func createNewConversation() {
+        let conversation = Conversation(sourceMessage: extractedText, targetMessage: "translated text", sender: sender!)
+        conversations.append(conversation)
+        
+        conversationTableView.reloadData()
+        conversationTableView.showLastRow()
+    }
+
+
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(paths[0])
+        return paths[0]
+    }
+
+}
+
+
+// MARK: - Extensions
+extension UITableView {
+    func showLastRow() {
+        guard self.numberOfRows(inSection: 0) > 0 else { return }
+        
+        let indexPath = IndexPath(row: numberOfRows(inSection: 0) - 1, section: 0)
+        scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
 }
 
 extension ConversationTranslateViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
 }
 
 extension ConversationTranslateViewController: UITableViewDataSource {
@@ -262,6 +443,12 @@ extension ConversationTranslateViewController: LanguagePickerDelegate {
         sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
         targetLanguageButton.setTitle(targetLanguage, for: .normal)
     }
-    
-    
+}
+
+extension ConversationTranslateViewController: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
 }

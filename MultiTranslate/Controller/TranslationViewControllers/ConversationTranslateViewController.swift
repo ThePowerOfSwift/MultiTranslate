@@ -12,7 +12,7 @@ import LBTATools
 
 class ConversationTranslateViewController: UIViewController {
     
-    var conversations: [Conversation] = [
+    private var conversations: [Conversation] = [
         Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .source),
         Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .target),
         Conversation(sourceMessage: "Hello", targetMessage: "こんにちは", sender: .source),
@@ -21,19 +21,22 @@ class ConversationTranslateViewController: UIViewController {
         Conversation(sourceMessage: "使い方は、まず以下のようにxibを使わないセルはClassRegistrable、xibを使うセルはNibRegistrableに適合させます。プロトコルエクステンションがあるので、メソッドを実装する必要はありません。", targetMessage: "こんにちは", sender: .source)
     ]
     
-    let container: UIView = {
+    private var sourceLanguageIndex = 0
+    private var targetLanguageIndex = 0
+    
+    private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let conversationTableView: UITableView = {
+    private let conversationTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
-    let buttonsContainer: UIView = {
+    private let buttonsContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
         view.layer.cornerRadius = 10
@@ -42,20 +45,20 @@ class ConversationTranslateViewController: UIViewController {
         return view
     }()
 
-    let languageButtonsView = UIView(backgroundColor: .yellow)
-    let recordButtonsView = UIView(backgroundColor: .black)
+    private let languageButtonsView = UIView(backgroundColor: .yellow)
+    private let recordButtonsView = UIView(backgroundColor: .black)
     
-    let sourceLanguageView = UIView(backgroundColor: .red)
-    let languageExchangeView = UIView(backgroundColor: .systemBackground)
-    let targetLanguageView = UIView(backgroundColor: .green)
+    private let sourceLanguageView = UIView(backgroundColor: .red)
+    private let languageExchangeView = UIView(backgroundColor: .systemBackground)
+    private let targetLanguageView = UIView(backgroundColor: .green)
 
-    let sourceLanguageButton = UIButton(title: "English", titleColor: .label)
-    let languageExchangeButton = UIButton(image: UIImage(named: "exchange")!)
-    let targetLanguageButton = UIButton(title: "Japanese", titleColor: .label)
+    private let sourceLanguageButton = UIButton(title: languageList[0], titleColor: .label)
+    private let languageExchangeButton = UIButton(image: UIImage(named: "exchange")!)
+    private let targetLanguageButton = UIButton(title: languageList[2], titleColor: .label)
     
-    let sourceRecorderButtonView = UIView()
-    let recorderButtonPaddingView = UIView()
-    let targetRecorderButtonView = UIView()
+    private let sourceRecorderButtonView = UIView()
+    private let recorderButtonPaddingView = UIView()
+    private let targetRecorderButtonView = UIView()
     
     private lazy var sourceRecorderButton: UIButton = {
         let button = UIButton()
@@ -135,6 +138,11 @@ class ConversationTranslateViewController: UIViewController {
         
         sourceLanguageView.addSubview(sourceLanguageButton)
         sourceLanguageButton.centerInSuperview()
+        sourceLanguageButton.leadingAnchor.constraint(equalTo: sourceLanguageView.leadingAnchor).isActive = true
+        sourceLanguageButton.trailingAnchor.constraint(equalTo: sourceLanguageView.trailingAnchor).isActive = true
+        sourceLanguageButton.titleLabel?.leadingAnchor.constraint(equalTo: sourceLanguageButton.leadingAnchor).isActive = true
+        sourceLanguageButton.titleLabel?.trailingAnchor.constraint(equalTo: sourceLanguageButton.trailingAnchor).isActive = true
+        sourceLanguageButton.titleLabel?.textAlignment = .center
         
         languageExchangeView.addSubview(languageExchangeButton)
         languageExchangeButton.setHeight(50)
@@ -143,6 +151,11 @@ class ConversationTranslateViewController: UIViewController {
         
         targetLanguageView.addSubview(targetLanguageButton)
         targetLanguageButton.centerInSuperview()
+        targetLanguageButton.leadingAnchor.constraint(equalTo: targetLanguageView.leadingAnchor).isActive = true
+        targetLanguageButton.trailingAnchor.constraint(equalTo: targetLanguageView.trailingAnchor).isActive = true
+        targetLanguageButton.titleLabel?.leadingAnchor.constraint(equalTo: targetLanguageButton.leadingAnchor).isActive = true
+        targetLanguageButton.titleLabel?.trailingAnchor.constraint(equalTo: targetLanguageButton.trailingAnchor).isActive = true
+        targetLanguageButton.titleLabel?.textAlignment = .center
         
         recordButtonsView.HStack(sourceRecorderButtonView,
                                  recorderButtonPaddingView.setWidth(50),
@@ -182,6 +195,46 @@ class ConversationTranslateViewController: UIViewController {
         
         conversationTableView.register(ConversationCell.self, forCellReuseIdentifier: Constants.conversationTableViewCellIdentifier)
         conversationTableView.separatorStyle = .none
+        
+        languageExchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
+        sourceLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
+        targetLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
+    }
+    
+    @objc func exchangeLanguage() {
+        let exchangeText = targetLanguageButton.titleLabel?.text
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.languageExchangeButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            self.languageExchangeButton.transform = self.languageExchangeButton.transform.rotated(by: CGFloat.pi)
+            self.targetLanguageButton.titleLabel?.text = self.sourceLanguageButton.titleLabel?.text
+            self.sourceLanguageButton.titleLabel?.text = exchangeText
+        }, completion: nil)
+        
+        print("exchange button pressed.")
+    }
+    
+    @objc func changeLanguage() {
+        if let sourceLanguage = sourceLanguageButton.titleLabel?.text {
+            sourceLanguageIndex = languageList.firstIndex(of: sourceLanguage) ?? 0
+            print(sourceLanguageIndex)
+            print(sourceLanguage)
+        }
+        
+        if let targetLanguage = targetLanguageButton.titleLabel?.text {
+            targetLanguageIndex = languageList.firstIndex(of: targetLanguage) ?? 0
+            print(targetLanguageIndex)
+            print(targetLanguage)
+        }
+        
+        //present picker view modal
+        let viewController = ChangeLanguageViewController()
+        viewController.sourceLanguageRow = sourceLanguageIndex
+        viewController.targetLanguageRow = targetLanguageIndex
+        viewController.delegate = self
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        self.navigationController?.present(navController, animated: true, completion: nil)
     }
 
 }
@@ -201,6 +254,13 @@ extension ConversationTranslateViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.conversationTableViewCellIdentifier, for: indexPath) as! ConversationCell
         cell.conversation = conversations[indexPath.row]
         return cell
+    }
+}
+
+extension ConversationTranslateViewController: LanguagePickerDelegate {
+    func didSelectedLanguagePicker(sourceLanguage: String, targetLanguage: String) {
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
     }
     
     

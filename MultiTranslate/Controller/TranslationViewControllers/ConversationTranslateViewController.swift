@@ -227,13 +227,14 @@ class ConversationTranslateViewController: UIViewController {
             print("Failed to record!")
         }
         
-        
+        perform(#selector(showBottom), with: nil, afterDelay: 0.05)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        conversationTableView.showLastRow()
+    @objc func showBottom() {
+        if !conversations.isEmpty {
+            let indexPath = IndexPath(row: conversations.count - 1, section: 0)
+            conversationTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        }
     }
     
     @objc func exchangeLanguage() {

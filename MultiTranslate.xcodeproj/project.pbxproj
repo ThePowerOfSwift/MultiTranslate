@@ -228,6 +228,7 @@
 				8052A1B123C2A24400883123 /* Frameworks */,
 				8052A1B223C2A24400883123 /* Resources */,
 				5A42BF262F1EF444C8F78B6D /* [CP] Embed Pods Frameworks */,
+				280B70A8647B994ED8BDA22B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,6 +289,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		280B70A8647B994ED8BDA22B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5A42BF262F1EF444C8F78B6D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

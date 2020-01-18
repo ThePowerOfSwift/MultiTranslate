@@ -9,8 +9,10 @@
 import Speech
 import UIKit
 
+import Alamofire
 import LBTATools
 import RealmSwift
+import SwiftyJSON
 
 class ConversationTranslateViewController: UIViewController {
     
@@ -384,15 +386,42 @@ class ConversationTranslateViewController: UIViewController {
                 self.extractedText = result.bestTranscription.formattedString
                 print(self.extractedText)
 
-                self.createNewConversation()
+                self.translateText()
             }
         }
     }
     
-    func createNewConversation() {
+    func translateText() {
+        
+        let url = "https://translation.googleapis.com/language/translate/v2"
+        let parameters: [String : String] = [
+            "key": Constants.googleTranslateAPIKey,
+            "q": extractedText,
+            "target": "en",
+            "source": "ja",
+            "format": "text",
+            "model": "base"
+        ]
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+            if response.result.isSuccess {
+                print("response is \(response.result.value!)")
+                
+                let responseJSON = JSON(response.result.value!)
+                let translatedTextJSON = JSON(responseJSON["data"]["translations"][0])
+                let translatedText = translatedTextJSON["translatedText"].stringValue
+                print(translatedText)
+                
+                self.createNewConversation(using: translatedText)
+            }
+        }
+        
+        
+    }
+    
+    func createNewConversation(using translatedText: String) {
         let conversation = Conversation()
         conversation.sourceMessage = extractedText
-        conversation.targetMessage = "test target message"
+        conversation.targetMessage = translatedText
         conversation.isSource = isSource
         
         try! realm.write {

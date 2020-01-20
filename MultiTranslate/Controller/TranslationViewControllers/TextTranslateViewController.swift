@@ -6,6 +6,7 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 import PMSuperButton
@@ -22,6 +23,31 @@ class TextTranslateViewController: UIViewController {
     private var isStarButtonTapped: Bool = false
     
     //MARK: - UI Parts Declaration
+    
+    let languageSelectView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let sourceInputView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let translateButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let targetOutputView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let exchangeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "exchange"), for: .normal)
@@ -152,6 +178,15 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
+    let speechButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "speech")?.withTintColor(.systemBlue), for: .normal)
+        button.backgroundColor = .white
+        
+        return button
+    }()
+    
     let targetOutputText: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -164,29 +199,6 @@ class TextTranslateViewController: UIViewController {
     // MARK: - ViewController Life Cirecle
     override func loadView() {
         super.loadView()
-        
-        let languageSelectView = UIView()
-        languageSelectView.backgroundColor = .red
-        
-        let sourceInputView = UIView()
-        sourceInputView.backgroundColor = .yellow
-        
-        let translateButtonView = UIView()
-        translateButtonView.backgroundColor = .green
-        
-        let targetOutputView = UIView()
-        targetOutputView.backgroundColor = .cyan
-        
-//        let textTranslateStackView = UIStackView(arrangedSubviews: [languageSelectView, sourceInputView, targetOutputView])
-//        textTranslateStackView.axis = .vertical
-//        textTranslateStackView.distribution = .fillProportionally
-//        textTranslateStackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        view.addSubview(textTranslateStackView)
-//        textTranslateStackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        textTranslateStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        textTranslateStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//        textTranslateStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         view.VStack(languageSelectView.setHeight(75),
                     sourceInputView.setHeight(200),
@@ -274,6 +286,12 @@ class TextTranslateViewController: UIViewController {
         starButton.bottomAnchor.constraint(equalTo: outputActionView.bottomAnchor).isActive = true
         starButton.trailingAnchor.constraint(equalTo: outputActionView.trailingAnchor, constant: -5).isActive = true
         starButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        outputActionView.addSubview(speechButton)
+        speechButton.topAnchor.constraint(equalTo: starButton.topAnchor).isActive = true
+        speechButton.bottomAnchor.constraint(equalTo: starButton.bottomAnchor).isActive = true
+        speechButton.trailingAnchor.constraint(equalTo: starButton.leadingAnchor, constant: -10).isActive = true
+        speechButton.widthAnchor.constraint(equalTo: starButton.widthAnchor).isActive = true
 
         outputTextView.addSubview(targetOutputText)
         targetOutputText.topAnchor.constraint(equalTo: outputTextView.topAnchor).isActive = true
@@ -298,8 +316,10 @@ class TextTranslateViewController: UIViewController {
         translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
         
         starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
-        starButton.isHidden = true
+        speechButton.addTarget(self, action: #selector(speechButtonTapped), for: .touchUpInside)
         
+        starButton.isHidden = true
+        speechButton.isHidden = true
         targetOutputText.isHidden = true
         
         sourceInputText.delegate = self
@@ -356,6 +376,7 @@ class TextTranslateViewController: UIViewController {
         
         clearButton.isHidden = true
         starButton.isHidden = true
+        speechButton.isHidden = true
         targetOutputText.isHidden = true
     }
     
@@ -372,6 +393,8 @@ class TextTranslateViewController: UIViewController {
                     self.isStarButtonTapped = false
                     self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
                     self.starButton.tintColor = .gray
+                    
+                    self.speechButton.isHidden = false
 
                     self.targetOutputText.isHidden = false
                     self.targetOutputText.text = text
@@ -394,6 +417,16 @@ class TextTranslateViewController: UIViewController {
         
         print("star button tapped.")
         
+    }
+    
+    @objc func speechButtonTapped() {
+        //Siri speech
+        let utterance = AVSpeechUtterance(string: targetOutputText.text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ja")
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
     }
 
 }

@@ -27,6 +27,7 @@
 		8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */; };
 		8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */; };
 		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
+		807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */; };
 		807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 807B489123C95C5200A588F3 /* SCSiriWaveformView.m */; };
 		808E75EB23C43718009A0EB4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E823C43718009A0EB4 /* Stack.swift */; };
 		808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E923C43718009A0EB4 /* UIView+.swift */; };
@@ -63,6 +64,7 @@
 		8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
+		807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCloudTranslate.swift; sourceTree = "<group>"; };
 		807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiTranslate-Bridging-Header.h"; sourceTree = "<group>"; };
 		807B489123C95C5200A588F3 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
 		807B489223C95C5200A588F3 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */,
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
 				80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */,
+				807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
 				807B489523C95C7900A588F3 /* SCSiriWaveformView */,
 			);
@@ -352,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */,
 				80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */,
 				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
 				80C535C923C56A530044D6F0 /* Constants.swift in Sources */,

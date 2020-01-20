@@ -268,6 +268,18 @@ class TextTranslateViewController: UIViewController {
                                 spacing: 5,
                                 alignment: .fill,
                                 distribution: .fill)
+        
+        outputActionView.addSubview(starButton)
+        starButton.topAnchor.constraint(equalTo: outputActionView.topAnchor).isActive = true
+        starButton.bottomAnchor.constraint(equalTo: outputActionView.bottomAnchor).isActive = true
+        starButton.trailingAnchor.constraint(equalTo: outputActionView.trailingAnchor, constant: -5).isActive = true
+        starButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+
+        outputTextView.addSubview(targetOutputText)
+        targetOutputText.topAnchor.constraint(equalTo: outputTextView.topAnchor).isActive = true
+        targetOutputText.leadingAnchor.constraint(equalTo: outputTextView.leadingAnchor, constant: 16).isActive = true
+        targetOutputText.trailingAnchor.constraint(equalTo: outputTextView.trailingAnchor, constant: -16).isActive = true
+        targetOutputText.bottomAnchor.constraint(equalTo: outputTextView.bottomAnchor, constant: -16).isActive = true
     }
 
     override func viewDidLoad() {
@@ -286,6 +298,9 @@ class TextTranslateViewController: UIViewController {
         translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
         
         starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
+        starButton.isHidden = true
+        
+        targetOutputText.isHidden = true
         
         sourceInputText.delegate = self
     }
@@ -340,9 +355,8 @@ class TextTranslateViewController: UIViewController {
         sourceInputText.text = ""
         
         clearButton.isHidden = true
-        
-        starButton.removeFromSuperview()
-        targetOutputText.removeFromSuperview()
+        starButton.isHidden = true
+        targetOutputText.isHidden = true
     }
     
     @objc func doTranslate() {
@@ -352,43 +366,17 @@ class TextTranslateViewController: UIViewController {
         if text.isEmpty {
             print("text is empty")
         } else {
-            let url = "https://translation.googleapis.com/language/translate/v2"
-            let parameters: [String : String] = [
-                "key": Constants.googleTranslateAPIKey,
-                "q": text,
-                "target": "ja",
-                "source": "en",
-                "format": "text",
-                "model": "base"
-            ]
-            Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
-                if response.result.isSuccess {
-                    print("response is \(response.result.value!)")
-                    
-                    let responseJSON = JSON(response.result.value!)
-                    let translatedTextJSON = JSON(responseJSON["data"]["translations"][0])
-                    let translatedText = translatedTextJSON["translatedText"].stringValue
-                    print(translatedText)
-                    
-                    self.outputActionView.addSubview(self.starButton)
-                    self.starButton.topAnchor.constraint(equalTo: self.outputActionView.topAnchor).isActive = true
-                    self.starButton.bottomAnchor.constraint(equalTo: self.outputActionView.bottomAnchor).isActive = true
-                    self.starButton.trailingAnchor.constraint(equalTo: self.outputActionView.trailingAnchor, constant: -5).isActive = true
-                    self.starButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-                    
-                    self.outputTextView.addSubview(self.targetOutputText)
-                    self.targetOutputText.topAnchor.constraint(equalTo: self.outputTextView.topAnchor).isActive = true
-                    self.targetOutputText.leadingAnchor.constraint(equalTo: self.outputTextView.leadingAnchor, constant: 16).isActive = true
-                    self.targetOutputText.trailingAnchor.constraint(equalTo: self.outputTextView.trailingAnchor, constant: -16).isActive = true
-                    self.targetOutputText.bottomAnchor.constraint(equalTo: self.outputTextView.bottomAnchor, constant: -16).isActive = true
-                    
+            GoogleCloudTranslate.textTranslate(sourceLanguage: "en", targetLanguage: "ja", textToTranslate: text) { (translatedText, error) in
+                if let text = translatedText {                    
+                    self.starButton.isHidden = false
                     self.isStarButtonTapped = false
                     self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
                     self.starButton.tintColor = .gray
-                    
-                    self.targetOutputText.text = translatedText
+
+                    self.targetOutputText.isHidden = false
+                    self.targetOutputText.text = text
                 } else {
-                    print(response.result.error!)
+                    print(error!.localizedDescription)
                 }
             }
         }

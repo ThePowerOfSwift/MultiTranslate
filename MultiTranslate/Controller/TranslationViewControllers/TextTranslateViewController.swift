@@ -9,7 +9,8 @@
 import UIKit
 
 import PMSuperButton
-
+import Alamofire
+import SwiftyJSON
 //import RAMAnimatedTabBarController
 import KMPlaceholderTextView
 
@@ -18,6 +19,7 @@ class TextTranslateViewController: UIViewController {
     //MARK: - Variables and Constants
     private var sourceLanguageIndex = 0
     private var targetLanguageIndex = 0
+    private var isStarButtonTapped: Bool = false
     
     //MARK: - UI Parts Declaration
     let exchangeButton: UIButton = {
@@ -130,6 +132,34 @@ class TextTranslateViewController: UIViewController {
         return view
     }()
     
+    let outputActionView: UIView = {
+        let view = UIView()
+//        view.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        return view
+    }()
+    
+    let outputTextView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        return view
+    }()
+    
+    let starButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "star")?.withTintColor(.systemGray), for: .normal)
+        button.backgroundColor = .white
+        return button
+    }()
+    
+    let targetOutputText: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.preferredFont(forTextStyle: .title3)
+        textView.text = "Hello Blur"
+        return textView
+    }()
+    
     
     // MARK: - ViewController Life Cirecle
     override func loadView() {
@@ -233,6 +263,11 @@ class TextTranslateViewController: UIViewController {
         translateButton.trailingAnchor.constraint(equalTo: translateButtonView.trailingAnchor, constant: -50).isActive = true
         translateButton.bottomAnchor.constraint(equalTo: translateButtonView.bottomAnchor).isActive = true
         
+        targetOutputView.VStack(outputActionView.setHeight(30),
+                                outputTextView,
+                                spacing: 5,
+                                alignment: .fill,
+                                distribution: .fill)
     }
 
     override func viewDidLoad() {
@@ -249,6 +284,8 @@ class TextTranslateViewController: UIViewController {
         exchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
         translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
+        
+        starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
         
         sourceInputText.delegate = self
     }
@@ -301,10 +338,74 @@ class TextTranslateViewController: UIViewController {
     
     @objc func clearText() {
         sourceInputText.text = ""
+        
+        clearButton.isHidden = true
+        
+        starButton.removeFromSuperview()
+        targetOutputText.removeFromSuperview()
     }
     
     @objc func doTranslate() {
         print("do translate")
+        
+        guard let text = sourceInputText.text else { return }
+        if text.isEmpty {
+            print("text is empty")
+        } else {
+            let url = "https://translation.googleapis.com/language/translate/v2"
+            let parameters: [String : String] = [
+                "key": Constants.googleTranslateAPIKey,
+                "q": text,
+                "target": "ja",
+                "source": "en",
+                "format": "text",
+                "model": "base"
+            ]
+            Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
+                if response.result.isSuccess {
+                    print("response is \(response.result.value!)")
+                    
+                    let responseJSON = JSON(response.result.value!)
+                    let translatedTextJSON = JSON(responseJSON["data"]["translations"][0])
+                    let translatedText = translatedTextJSON["translatedText"].stringValue
+                    print(translatedText)
+                    
+                    self.outputActionView.addSubview(self.starButton)
+                    self.starButton.topAnchor.constraint(equalTo: self.outputActionView.topAnchor).isActive = true
+                    self.starButton.bottomAnchor.constraint(equalTo: self.outputActionView.bottomAnchor).isActive = true
+                    self.starButton.trailingAnchor.constraint(equalTo: self.outputActionView.trailingAnchor, constant: -5).isActive = true
+                    self.starButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+                    
+                    self.outputTextView.addSubview(self.targetOutputText)
+                    self.targetOutputText.topAnchor.constraint(equalTo: self.outputTextView.topAnchor).isActive = true
+                    self.targetOutputText.leadingAnchor.constraint(equalTo: self.outputTextView.leadingAnchor, constant: 16).isActive = true
+                    self.targetOutputText.trailingAnchor.constraint(equalTo: self.outputTextView.trailingAnchor, constant: -16).isActive = true
+                    self.targetOutputText.bottomAnchor.constraint(equalTo: self.outputTextView.bottomAnchor, constant: -16).isActive = true
+                    
+                    self.isStarButtonTapped = false
+                    self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+                    self.starButton.tintColor = .gray
+                    
+                    self.targetOutputText.text = translatedText
+                } else {
+                    print(response.result.error!)
+                }
+            }
+        }
+    }
+    
+    @objc func starButtonTapped() {
+        isStarButtonTapped = !isStarButtonTapped
+        if isStarButtonTapped {
+            starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            starButton.tintColor = .systemYellow
+        } else {
+            starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            starButton.tintColor = .gray
+        }
+        
+        print("star button tapped.")
+        
     }
 
 }

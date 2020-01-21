@@ -56,24 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3d-yX-uXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="867"/>
-        </scene>
-        <!--Saved-->
-        <scene sceneID="UsG-K5-trP">
-            <objects>
-                <viewController id="mXX-nd-CwO" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8ih-sJ-5Uh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="l82-84-8IV"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Saved" image="folder" catalog="system" selectedImage="folder" id="gLT-YK-ifz" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
-                    <navigationItem key="navigationItem" id="RNk-zv-8GU"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Et0-3Z-7rb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1048" y="867"/>
+            <point key="canvasLocation" x="3776.811594202899" y="866.51785714285711"/>
         </scene>
         <!--Account-->
         <scene sceneID="KUo-3y-key">
@@ -89,7 +72,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a48-h5-1EF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="867"/>
+            <point key="canvasLocation" x="2868.115942028986" y="866.51785714285711"/>
+        </scene>
+        <!--Saved Translations Table View Controller-->
+        <scene sceneID="2sH-7c-PQ4">
+            <objects>
+                <tableViewController id="HcC-OG-c9B" customClass="SavedTranslationsTableViewController" customModule="MultiTranslate" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qF6-AB-974">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="HcC-OG-c9B" id="Fwj-2i-3Im"/>
+                            <outlet property="delegate" destination="HcC-OG-c9B" id="pW8-vI-soQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="bCU-y8-e5y"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="11r-sP-9Al" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1957.9710144927537" y="866.51785714285711"/>
         </scene>
         <!--Animated Tab Bar Controller-->
         <scene sceneID="tkO-zv-ChZ">
@@ -103,7 +105,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="rxA-6Y-5nG" kind="relationship" relationship="viewControllers" id="2aC-HK-ge7"/>
-                        <segue destination="mXX-nd-CwO" kind="relationship" relationship="viewControllers" id="wMW-Fk-kRJ"/>
+                        <segue destination="7fy-H8-xx2" kind="relationship" relationship="viewControllers" id="WRB-8S-w9q"/>
                         <segue destination="aH9-r4-5Bh" kind="relationship" relationship="viewControllers" id="6ca-Pg-Rmg"/>
                         <segue destination="7UQ-v8-xl8" kind="relationship" relationship="viewControllers" id="G0m-T0-kjA"/>
                     </connections>
@@ -111,6 +113,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xca-aE-ZoD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+        </scene>
+        <!--Saved-->
+        <scene sceneID="zK0-bY-dHr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fy-H8-xx2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Saved" image="folder" catalog="system" id="KD8-cT-Evn" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="leS-df-Bd0">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HcC-OG-c9B" kind="relationship" relationship="rootViewController" id="Np7-gE-CY9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fPt-gx-Siy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="866.51785714285711"/>
         </scene>
     </scenes>
     <resources>

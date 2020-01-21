@@ -27,6 +27,8 @@
 		8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */; };
 		8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */; };
 		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
+		8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */; };
+		8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */; };
 		807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */; };
 		807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 807B489123C95C5200A588F3 /* SCSiriWaveformView.m */; };
 		808E75EB23C43718009A0EB4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E823C43718009A0EB4 /* Stack.swift */; };
@@ -64,6 +66,8 @@
 		8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
+		8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewController.swift; sourceTree = "<group>"; };
+		8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewCell.swift; sourceTree = "<group>"; };
 		807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCloudTranslate.swift; sourceTree = "<group>"; };
 		807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiTranslate-Bridging-Header.h"; sourceTree = "<group>"; };
 		807B489123C95C5200A588F3 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				8052A1CF23C2E03800883123 /* IconPagingCell.swift */,
 				8052A1BD23C2A24400883123 /* Main.storyboard */,
 				803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */,
+				8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				8052A1CB23C2DCDC00883123 /* TranslationViewController.swift */,
+				8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */,
 				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
 				80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */,
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
@@ -373,7 +379,9 @@
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,
 				8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */,
 				807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */,
+				8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */,
 				8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */,
+				8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */,
 				80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */,
 				8052A1D623C2F65F00883123 /* IconItem.swift in Sources */,
 				803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */,

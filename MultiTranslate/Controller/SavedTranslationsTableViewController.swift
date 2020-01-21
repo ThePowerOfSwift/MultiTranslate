@@ -8,7 +8,12 @@
 
 import UIKit
 
+import RealmSwift
+
 class SavedTranslationsTableViewController: UITableViewController {
+    
+    private let realm = try! Realm()
+    private var savedTranslations: Results<SavedTranslation>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +26,24 @@ class SavedTranslationsTableViewController: UITableViewController {
         
         self.title = "Saved Translations"
         
+        savedTranslations = realm.objects(SavedTranslation.self).sorted(byKeyPath: "dateCreated", ascending: false)
+//        savedTranslations = realm.objects(SavedTranslation.self)
+        
         tableView.register(SavedTranslationsTableViewCell.self, forCellReuseIdentifier: Constants.savedTranslationsTableViewCellIdentifier)
         tableView.separatorStyle = .none
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     @objc func clearRecords() {
         print("Trash button tapped.")
-        
+        print(savedTranslations.count)
     }
 
     // MARK: - Table view data source
@@ -41,13 +55,12 @@ class SavedTranslationsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return savedTranslations.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.savedTranslationsTableViewCellIdentifier, for: indexPath) as! SavedTranslationsTableViewCell
-
-        
+        cell.savedTranslation = savedTranslations[indexPath.row]
 
         return cell
     }

@@ -29,6 +29,7 @@
 		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
 		8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */; };
 		8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */; };
+		8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */; };
 		807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */; };
 		807B489323C95C5200A588F3 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 807B489123C95C5200A588F3 /* SCSiriWaveformView.m */; };
 		808E75EB23C43718009A0EB4 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75E823C43718009A0EB4 /* Stack.swift */; };
@@ -68,6 +69,7 @@
 		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
 		8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewController.swift; sourceTree = "<group>"; };
 		8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewCell.swift; sourceTree = "<group>"; };
+		8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslation.swift; sourceTree = "<group>"; };
 		807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCloudTranslate.swift; sourceTree = "<group>"; };
 		807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiTranslate-Bridging-Header.h"; sourceTree = "<group>"; };
 		807B489123C95C5200A588F3 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
@@ -164,8 +166,8 @@
 		8052A1E423C305C100883123 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8052A1CF23C2E03800883123 /* IconPagingCell.swift */,
 				8052A1BD23C2A24400883123 /* Main.storyboard */,
+				8052A1CF23C2E03800883123 /* IconPagingCell.swift */,
 				803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */,
 				8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */,
 			);
@@ -177,6 +179,7 @@
 			children = (
 				8052A1D523C2F65F00883123 /* IconItem.swift */,
 				80BDB6A723CF3EDA00F81D40 /* Conversation.swift */,
+				8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				808E75EB23C43718009A0EB4 /* Stack.swift in Sources */,
 				808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */,
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
+				8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */,
 				8052A1D823C2FD9600883123 /* TextTranslateViewController.swift in Sources */,
 				8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */,
 				8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */,

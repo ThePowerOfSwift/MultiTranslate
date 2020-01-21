@@ -14,6 +14,7 @@ import Alamofire
 import SwiftyJSON
 //import RAMAnimatedTabBarController
 import KMPlaceholderTextView
+import RealmSwift
 
 class TextTranslateViewController: UIViewController {
     
@@ -21,6 +22,9 @@ class TextTranslateViewController: UIViewController {
     private var sourceLanguageIndex = 0
     private var targetLanguageIndex = 0
     private var isStarButtonTapped: Bool = false
+    
+    private let realm = try! Realm()
+    private var savedTranslations: Results<SavedTranslation>!
     
     //MARK: - UI Parts Declaration
     
@@ -303,6 +307,8 @@ class TextTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        savedTranslations = realm.objects(SavedTranslation.self)
+        
         sourceLanguageLabel.text = languageList[0]
         targetLanguageLabel.text = languageList[2]
         
@@ -323,12 +329,6 @@ class TextTranslateViewController: UIViewController {
         targetOutputText.isHidden = true
         
         sourceInputText.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-
     }
     
     
@@ -410,9 +410,38 @@ class TextTranslateViewController: UIViewController {
         if isStarButtonTapped {
             starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             starButton.tintColor = .systemYellow
+            
+            let savedTranslation = SavedTranslation()
+            savedTranslation.sourceLanguage = "English"
+            savedTranslation.sourceText = sourceInputText.text
+            savedTranslation.targetLanguage = "Japanese"
+            savedTranslation.targetText = targetOutputText.text
+            savedTranslation.dateCreated = Date()
+            
+            do {
+                try realm.write {
+                    realm.add(savedTranslation)
+                }
+            } catch {
+                print("Error adding item, \(error)")
+            }
+            
+            let vc = SavedTranslationsTableViewController()
+            vc.tableView.reloadData()
+            
         } else {
             starButton.setImage(UIImage(systemName: "star"), for: .normal)
             starButton.tintColor = .gray
+            
+            if let savedTranslation = savedTranslations.last {
+                do {
+                    try realm.write {
+                        realm.delete(savedTranslation)
+                    }
+                } catch {
+                    print("Error deleting item, \(error)")
+                }
+            }
         }
         
         print("star button tapped.")

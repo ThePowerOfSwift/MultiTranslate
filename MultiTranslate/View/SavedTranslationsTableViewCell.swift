@@ -9,10 +9,20 @@
 import Foundation
 
 class SavedTranslationsTableViewCell: UITableViewCell {
+    
+    var savedTranslation: SavedTranslation? {
+        didSet {
+            sourceTextLabel.text = savedTranslation?.sourceText
+            sourceLanguageLabel.text = savedTranslation?.sourceLanguage
+            targetTextLabel.text = savedTranslation?.targetText
+            targetLanguageLabel.text = savedTranslation?.targetLanguage
+        }
+    }
+    
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.init(white: 0.8, alpha: 0.8)
+        view.backgroundColor = UIColor.init(white: 0.9, alpha: 0.8)
         view.layer.cornerRadius = 8
         
         return view
@@ -21,8 +31,8 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     let sourceView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemRed
-        view.layer.cornerRadius = 15
+        view.backgroundColor = UIColor(red: 250/250, green: 227/250, blue: 217/250, alpha: 0.98)
+        view.layer.cornerRadius = 21
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.layer.masksToBounds = true
         
@@ -39,8 +49,8 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     let targetView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBlue
-        view.layer.cornerRadius = 15
+        view.backgroundColor = UIColor(red: 187/250, green: 222/250, blue: 214/250, alpha: 1.0)
+        view.layer.cornerRadius = 21
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.layer.masksToBounds = true
         
@@ -51,7 +61,6 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "NVActivityIndicatorView is a collection of awesome loading animations."
         label.textAlignment = .left
         label.sizeToFit()
         
@@ -62,7 +71,6 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "This is original a fork from DGActivityIndicatorView, inspired by Loaders.css, written in Swift with full implementation of animations, plus more."
         label.textAlignment = .right
         label.sizeToFit()
         

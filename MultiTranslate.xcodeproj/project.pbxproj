@@ -27,6 +27,8 @@
 		8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */; };
 		8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */; };
 		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
+		805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */; };
+		805AB0D723DD9B1D00215415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */; };
 		8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */; };
 		8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */; };
 		8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */; };
@@ -67,6 +69,8 @@
 		8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
+		805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseProduct.swift; sourceTree = "<group>"; };
+		805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewController.swift; sourceTree = "<group>"; };
 		8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewCell.swift; sourceTree = "<group>"; };
 		8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslation.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				8052A1C023C2A24500883123 /* Assets.xcassets */,
 				8052A1C223C2A24500883123 /* LaunchScreen.storyboard */,
 				8052A1C523C2A24500883123 /* Info.plist */,
+				805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */,
 			);
 			path = MultiTranslate;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 				8052A1D523C2F65F00883123 /* IconItem.swift */,
 				80BDB6A723CF3EDA00F81D40 /* Conversation.swift */,
 				8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */,
+				805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -295,6 +301,7 @@
 				8052A1BF23C2A24400883123 /* Main.storyboard in Resources */,
 				CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */,
 				0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */,
+				805AB0D723DD9B1D00215415 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +385,7 @@
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
 				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
 				80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */,
+				805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,

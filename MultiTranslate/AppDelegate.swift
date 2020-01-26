@@ -8,18 +8,55 @@
 
 import UIKit
 
+import Firebase
 import IQKeyboardManager
 import RealmSwift
+import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var inAppPurchaseProducts = [InAppPurchaseProduct]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         IQKeyboardManager.shared().isEnabled = true
+        
+        FirebaseApp.configure()
+        let db = Firestore.firestore()
+        db.collection("InAppPurchaseProducts").getDocuments { (querySnapshot, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    
+                    guard let productID = data["productID"] as? String,
+                        let type = data["type"] as? String,
+                        let order = data["order"] as? Int else { return }
+                    
+                    let inAppPurchaseProduct = InAppPurchaseProduct(productID: productID, type: type, order: order)
+                    print(inAppPurchaseProduct)
+                    self.inAppPurchaseProducts.append(inAppPurchaseProduct)
+                }
+            }
+        }
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                }
+            }
+        }
         
         if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
             print(fileURL)

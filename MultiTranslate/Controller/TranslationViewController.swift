@@ -84,6 +84,8 @@ class TranslationViewController: UIViewController {
         pagingViewController.indicatorColor = UIColor(red: 0.14, green: 0.77, blue: 0.85, alpha: 1)
         pagingViewController.dataSource = self
         pagingViewController.select(pagingItem: IconItem(icon: icons[0], index: 0))
+        pagingViewController.menuBackgroundColor = UIColor(rgb: 0xe1f2fb)
+        pagingViewController.borderColor = .white
         
         // Add the paging view controller as a child view controller
         // and contrain it to all edges.

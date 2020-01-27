@@ -66,12 +66,12 @@ class TextTranslateViewController: UIViewController {
         button.setTitle("Clear", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
 //        button.backgroundColor = .blue
-        button.layer.borderWidth = 2.0
-        button.layer.borderColor = UIColor.purple.cgColor
-        button.layer.cornerRadius = 10.0
+//        button.layer.borderWidth = 2.0
+//        button.layer.borderColor = UIColor.purple.cgColor
+        button.layer.cornerRadius = 15.0
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.green, for: .highlighted)
-        button.backgroundColor = .gray
+        button.setTitleColor(.darkGray, for: .highlighted)
+        button.backgroundColor = .systemBlue
         return button
     }()
     
@@ -80,7 +80,7 @@ class TextTranslateViewController: UIViewController {
         button.borderColor = .white
         button.borderWidth = 2
         button.cornerRadius = 25
-        button.shadowColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+//        button.shadowColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         button.shadowOpacity = 1
         button.shadowOffset.width = 1
         button.shadowOffset.height = 1
@@ -104,7 +104,7 @@ class TextTranslateViewController: UIViewController {
     
     let sourceLanguageLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+//        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         label.isUserInteractionEnabled = true
         label.textAlignment = .right
         label.numberOfLines = 0
@@ -117,7 +117,7 @@ class TextTranslateViewController: UIViewController {
     
     let targetLanguageLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+//        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         label.isUserInteractionEnabled = true
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -131,7 +131,7 @@ class TextTranslateViewController: UIViewController {
     let sourceInputLabel: UILabel = {
         let label = UILabel()
         label.text = "Enter text"
-        label.backgroundColor = .systemBackground
+//        label.backgroundColor = .systemBackground
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -152,13 +152,13 @@ class TextTranslateViewController: UIViewController {
     
     let sourceInputLabelView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+//        view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         return view
     }()
     
     let sourceInputTextView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+//        view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         return view
     }()
     
@@ -170,7 +170,7 @@ class TextTranslateViewController: UIViewController {
     
     let outputTextView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+//        view.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         return view
     }()
     
@@ -178,7 +178,7 @@ class TextTranslateViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "star")?.withTintColor(.systemGray), for: .normal)
-        button.backgroundColor = .white
+//        button.backgroundColor = .white
         return button
     }()
     
@@ -186,7 +186,7 @@ class TextTranslateViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "speech")?.withTintColor(.systemBlue), for: .normal)
-        button.backgroundColor = .white
+//        button.backgroundColor = .white
         
         return button
     }()
@@ -196,6 +196,7 @@ class TextTranslateViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.preferredFont(forTextStyle: .title3)
         textView.text = "Hello Blur"
+        textView.backgroundColor = .clear
         return textView
     }()
     
@@ -213,13 +214,13 @@ class TextTranslateViewController: UIViewController {
                     distribution: .fill)
         
         let sourceLanguageView = UIView()
-        sourceLanguageView.backgroundColor = .purple
+//        sourceLanguageView.backgroundColor = .purple
         
         let exchangeButtonView = UIView()
-        exchangeButtonView.backgroundColor = .orange
+//        exchangeButtonView.backgroundColor = .orange
         
         let targetLanguageView = UIView()
-        targetLanguageView.backgroundColor = .gray
+//        targetLanguageView.backgroundColor = .gray
         
 //        let languageSelectStackView = UIStackView(arrangedSubviews: [sourceLanguageView, exchangeButtonView, targetLanguageView])
 //        languageSelectStackView.axis = .horizontal
@@ -306,6 +307,8 @@ class TextTranslateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(rgb: 0xe1f2fb)
         
         savedTranslations = realm.objects(SavedTranslation.self)
         

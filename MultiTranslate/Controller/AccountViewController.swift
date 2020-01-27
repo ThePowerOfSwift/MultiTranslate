@@ -48,12 +48,18 @@ class AccountViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restorePurchase))
+        
         print(retrievedProducts)
         subscritionPlanTableView.dataSource = self
         subscritionPlanTableView.delegate = self
         
         subscritionPlanTableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.subscritionPlanTableViewCellIdentifier)
         subscritionPlanTableView.separatorStyle = .none
+    }
+    
+    @objc func restorePurchase() {
+        InAppPurchaseManager.restorePurchase()
     }
 
 }

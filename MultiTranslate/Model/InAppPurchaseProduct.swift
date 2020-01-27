@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct InAppPurchaseProduct {
-    var productID: String
-    var type: String
-    var order: Int
+class InAppPurchaseProduct: Object {
+    @objc dynamic var productID: String = ""
+    @objc dynamic var type: String = ""
+    @objc dynamic var order: Int = 0
 }
 

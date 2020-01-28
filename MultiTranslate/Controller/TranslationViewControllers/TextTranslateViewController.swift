@@ -23,6 +23,8 @@ class TextTranslateViewController: UIViewController {
     private var targetLanguageIndex = 0
     private var isStarButtonTapped: Bool = false
     
+    private var translatedCharactersCurrentMonth = 0
+    
     private let realm = try! Realm()
     private var savedTranslations: Results<SavedTranslation>!
     
@@ -332,6 +334,8 @@ class TextTranslateViewController: UIViewController {
         targetOutputText.isHidden = true
         
         sourceInputText.delegate = self
+        
+        translatedCharactersCurrentMonth = UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey)
     }
     
     
@@ -386,24 +390,61 @@ class TextTranslateViewController: UIViewController {
     @objc func doTranslate() {
         print("do translate")
         
+        guard let raw = UserDefaults.standard.string(forKey: Constants.userTypeKey) else { return }
+        let userType = UserType(rawValue: raw)!
+        print(userType)
+        
         guard let text = sourceInputText.text else { return }
         if text.isEmpty {
             print("text is empty")
         } else {
-            GoogleCloudTranslate.textTranslate(sourceLanguage: "en", targetLanguage: "ja", textToTranslate: text) { (translatedText, error) in
-                if let text = translatedText {                    
-                    self.starButton.isHidden = false
-                    self.isStarButtonTapped = false
-                    self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
-                    self.starButton.tintColor = .gray
-                    
-                    self.speechButton.isHidden = false
-
-                    self.targetOutputText.isHidden = false
-                    self.targetOutputText.text = text
-                } else {
-                    print(error!.localizedDescription)
-                }
+        
+            if isTranslatePossible(userType: userType) {
+                performTranslate()
+                translatedCharactersCurrentMonth += text.count
+                UserDefaults.standard.set(translatedCharactersCurrentMonth, forKey: Constants.translatedCharactersCountKey)
+                print(translatedCharactersCurrentMonth)
+                print(UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey))
+            } else {
+                print("Here is the limit, pay more money!")
+            }
+        }
+    }
+    
+    func isTranslatePossible(userType: UserType) -> Bool {
+        if userType == .tenKUser && translatedCharactersCurrentMonth <= 10_000 {// the limits should be fetched from Firestore
+            print("translate ok")
+            return true
+        } else if userType == .fiftyKUser && translatedCharactersCurrentMonth <= 50_000 {
+            print("translate ok")
+            return true
+        } else if userType == .noLimitUset {
+            print("translate ok")
+            return true
+        } else if userType == .guestUser && translatedCharactersCurrentMonth <= 10_000 {
+            print("translate ok")
+            return true
+        } else {
+            print("here's the limit")
+            return false
+        }
+    }
+    
+    func performTranslate() {
+        let text = sourceInputText.text!
+        GoogleCloudTranslate.textTranslate(sourceLanguage: "en", targetLanguage: "ja", textToTranslate: text) { (translatedText, error) in
+            if let text = translatedText {
+                self.starButton.isHidden = false
+                self.isStarButtonTapped = false
+                self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+                self.starButton.tintColor = .gray
+                
+                self.speechButton.isHidden = false
+                
+                self.targetOutputText.isHidden = false
+                self.targetOutputText.text = text
+            } else {
+                print(error!.localizedDescription)
             }
         }
     }

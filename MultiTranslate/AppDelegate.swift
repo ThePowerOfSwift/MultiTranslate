@@ -53,6 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("Error initialising Realm, \(error.localizedDescription)")
 //        }
         
+        userdefaultsInitialize()
+        
         FirebaseApp.configure()
         let db = Firestore.firestore()
         db.collection("InAppPurchaseProducts").getDocuments { (querySnapshot, error) in
@@ -113,5 +115,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func userdefaultsInitialize() {
+        let userDefaults = UserDefaults.standard
+        
+        userDefaults.set("GuestUser", forKey: Constants.userTypeKey)
+        
+        let lastLaunchMonth = userDefaults.integer(forKey: Constants.lastLaunchMonthKey)
+        
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LL"
+        let nameOfMonth = dateFormatter.string(from: now)
+        if let intValueOfCurrentMonth = Int(nameOfMonth) {
+            print(intValueOfCurrentMonth)
+            if lastLaunchMonth != intValueOfCurrentMonth {
+                //Month has changed since last launch.
+                userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
+                userDefaults.set(0, forKey: Constants.translatedCharactersCountKey)
+            }
+            print(userDefaults.integer(forKey: Constants.lastLaunchMonthKey))
+            print(userDefaults.integer(forKey: Constants.translatedCharactersCountKey))
+        }
+    }
 
 }

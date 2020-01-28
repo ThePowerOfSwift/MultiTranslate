@@ -12,6 +12,13 @@ import SwiftyStoreKit
 
 var retrievedProducts = [SKProduct]()
 
+enum UserType: String {
+    case guestUser = "GuestUser"
+    case tenKUser = "10KUser"
+    case fiftyKUser = "50KUser"
+    case noLimitUset = "NoLimitUser"
+}
+
 struct InAppPurchaseManager {
     
     static func retrieveProductsInfo(with productIdentifier: String) {
@@ -52,6 +59,15 @@ struct InAppPurchaseManager {
                 switch purchaseResult {
                 case .purchased(let expiryDate, let items):
                     print("\(productIdentifier) is valid until \(expiryDate)\n\(items)\n")
+                    
+                    if productIdentifier.contains("10K") {
+                        UserDefaults.standard.set("10KUser", forKey: Constants.userTypeKey)
+                    } else if productIdentifier.contains("50K") {
+                        UserDefaults.standard.set("50KUser", forKey: Constants.userTypeKey)
+                    } else if productIdentifier.contains("NoLimit") {
+                        UserDefaults.standard.set("NoLimitUser", forKey: Constants.userTypeKey)
+                    }
+                    
                 case .expired(let expiryDate, let items):
                     print("\(productIdentifier) is expired since \(expiryDate)\n\(items)\n")
                 case .notPurchased:
@@ -112,6 +128,10 @@ struct InAppPurchaseManager {
             else {
                 print("Nothing to Restore")
             }
+        }
+        
+        for product in retrievedProducts {
+            verifyPurchase(with: product.productIdentifier)
         }
     }
 

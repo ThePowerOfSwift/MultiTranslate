@@ -53,11 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("Error initialising Realm, \(error.localizedDescription)")
 //        }
         
-        userdefaultsInitialize()
+        initializeUserDefaults()
+        initializeCloudDatabase()
         
         FirebaseApp.configure()
-        let db = Firestore.firestore()
-        db.collection("InAppPurchaseProducts").getDocuments { (querySnapshot, error) in
+        let firestore = Firestore.firestore()
+        firestore.collection("InAppPurchaseProducts").getDocuments { (querySnapshot, error) in
             if error != nil {
                 print(error!.localizedDescription)
             } else {
@@ -115,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-    func userdefaultsInitialize() {
+    func initializeUserDefaults() {
         let userDefaults = UserDefaults.standard
         
         userDefaults.set("GuestUser", forKey: Constants.userTypeKey)
@@ -128,13 +129,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nameOfMonth = dateFormatter.string(from: now)
         if let intValueOfCurrentMonth = Int(nameOfMonth) {
             print(intValueOfCurrentMonth)
-            if lastLaunchMonth != intValueOfCurrentMonth {
-                //Month has changed since last launch.
+            
+            if lastLaunchMonth == 0 {
+                //First launch of the app.
                 userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
+            } else if lastLaunchMonth != intValueOfCurrentMonth {
+                //Month has changed since last launch.
                 userDefaults.set(0, forKey: Constants.translatedCharactersCountKey)
+                CloudKitManager.refreshCloudDatabaseCountData()
             }
             print(userDefaults.integer(forKey: Constants.lastLaunchMonthKey))
             print(userDefaults.integer(forKey: Constants.translatedCharactersCountKey))
+        }
+    }
+    
+    func initializeCloudDatabase() {
+        CloudKitManager.isCountRecordEmpty { (isEmpty) in
+            if isEmpty {
+                CloudKitManager.initializeCloudDatabase()
+            }
         }
     }
 

@@ -11,6 +11,9 @@
 		0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */; };
 		8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */; };
 		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
+		8037C0CD23E0FBB000DD3B09 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */; };
+		8037C0CF23E1002800DD3B09 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8037C0CE23E1002800DD3B09 /* StoreKit.framework */; };
+		8037C0D123E1295D00DD3B09 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */; };
 		803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */; };
 		803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C9CD923DE578E00FCA145 /* AccountViewController.swift */; };
 		803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */; };
@@ -53,6 +56,10 @@
 		7A32ED9C279B46E2913F1257 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = awsconfiguration.json; path = ./awsconfiguration.json; sourceTree = "<group>"; };
 		8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTranslateViewController.swift; sourceTree = "<group>"; };
 		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
+		8037C0CB23E0FBAA00DD3B09 /* MultiTranslate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiTranslate.entitlements; sourceTree = "<group>"; };
+		8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		8037C0CE23E1002800DD3B09 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		803C9CD923DE578E00FCA145 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
@@ -101,7 +108,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8037C0CF23E1002800DD3B09 /* StoreKit.framework in Frameworks */,
 				021058A83D2DED5A53886DAA /* Pods_MultiTranslate.framework in Frameworks */,
+				8037C0CD23E0FBB000DD3B09 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +151,7 @@
 		8052A1B623C2A24400883123 /* MultiTranslate */ = {
 			isa = PBXGroup;
 			children = (
+				8037C0CB23E0FBAA00DD3B09 /* MultiTranslate.entitlements */,
 				8052A1B723C2A24400883123 /* AppDelegate.swift */,
 				8052A1B923C2A24400883123 /* SceneDelegate.swift */,
 				80C535C823C56A530044D6F0 /* Constants.swift */,
@@ -206,6 +216,7 @@
 				80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */,
 				807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */,
 				803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */,
+				8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
 				807B489523C95C7900A588F3 /* SCSiriWaveformView */,
 			);
@@ -235,6 +246,8 @@
 		E41E6BBBF80C6EC88FE805E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8037C0CE23E1002800DD3B09 /* StoreKit.framework */,
+				8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */,
 				FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */,
 			);
 			name = Frameworks;
@@ -387,6 +400,7 @@
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
 				8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */,
 				8052A1D823C2FD9600883123 /* TextTranslateViewController.swift in Sources */,
+				8037C0D123E1295D00DD3B09 /* CloudKitManager.swift in Sources */,
 				8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */,
 				8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */,
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
@@ -553,6 +567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MultiTranslate/MultiTranslate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR8K5GN7PS;
 				INFOPLIST_FILE = MultiTranslate/Info.plist;
@@ -575,6 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MultiTranslate/MultiTranslate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VR8K5GN7PS;
 				INFOPLIST_FILE = MultiTranslate/Info.plist;

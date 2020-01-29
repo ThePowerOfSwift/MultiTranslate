@@ -28,6 +28,8 @@ class TextTranslateViewController: UIViewController {
     private let realm = try! Realm()
     private var savedTranslations: Results<SavedTranslation>!
     
+    private var cloudDBTranslatedCharacters = 0
+    
     //MARK: - UI Parts Declaration
     
     let languageSelectView: UIView = {
@@ -336,6 +338,21 @@ class TextTranslateViewController: UIViewController {
         sourceInputText.delegate = self
         
         translatedCharactersCurrentMonth = UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey)
+        
+        CloudKitManager.isCountRecordEmpty { (isEmpty) in
+            if isEmpty {
+                CloudKitManager.initializeCloudDatabase()
+            } else {
+                CloudKitManager.queryCloudDatabaseCountData { (result, error) in
+                    if let result = result {
+                        self.cloudDBTranslatedCharacters = result
+                        print("cloudDBTranslatedCharacters is \(result)")
+                    } else {
+                        print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
     
     
@@ -402,9 +419,15 @@ class TextTranslateViewController: UIViewController {
             if isTranslatePossible(userType: userType) {
                 performTranslate()
                 translatedCharactersCurrentMonth += text.count
-                UserDefaults.standard.set(translatedCharactersCurrentMonth, forKey: Constants.translatedCharactersCountKey)
-                print(translatedCharactersCurrentMonth)
-                print(UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey))
+                cloudDBTranslatedCharacters += text.count
+                
+                let updatedCount = translatedCharactersCurrentMonth >= cloudDBTranslatedCharacters ? translatedCharactersCurrentMonth : cloudDBTranslatedCharacters
+                print("updatedCount is \(updatedCount)")
+                
+                UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
+                
+                CloudKitManager.updateCountData(to: updatedCount)
+                
             } else {
                 print("Here is the limit, pay more money!")
             }

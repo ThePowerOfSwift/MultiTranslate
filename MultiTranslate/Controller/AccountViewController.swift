@@ -49,6 +49,7 @@ class AccountViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restorePurchase))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Purchase", style: .plain, target: self, action: #selector(purchaseTest))
         
         print(retrievedProducts)
         subscritionPlanTableView.dataSource = self
@@ -60,6 +61,11 @@ class AccountViewController: UIViewController {
     
     @objc func restorePurchase() {
         InAppPurchaseManager.restorePurchase()
+    }
+    
+    @objc func purchaseTest() {
+        present(PurchasePageViewController(), animated: true, completion: nil)
+        modalPresentationStyle = .automatic
     }
 
 }

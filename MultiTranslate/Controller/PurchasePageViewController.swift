@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import StoreKit
+import SwiftyStoreKit
 
 class PurchasePageViewController: UIViewController {
     
@@ -80,7 +82,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "then $24.99 / year"
+        label.text = "then \(retrievedProducts[0].localizedPrice!) / year"
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .label
         label.sizeToFit()
@@ -90,9 +92,15 @@ class PurchasePageViewController: UIViewController {
     
     private let promotionTitle3: UILabel = {
         let label = UILabel()
+        let monthlyPrice = Double(truncating: retrievedProducts[1].price)
+        let yearlyPrice = Double(truncating: retrievedProducts[0].price)
+        let savedPrice = monthlyPrice * 12 - yearlyPrice as NSNumber
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "save $10.89 / year"
+        label.text = "save \(formatter.string(from: savedPrice)!) / year"
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .systemPink
         label.sizeToFit()
@@ -103,9 +111,159 @@ class PurchasePageViewController: UIViewController {
     private let detailView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .blue
+//        view.backgroundColor = .blue
         
         return view
+    }()
+    
+    private let detailCameraView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let detailVioceView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let detailConversationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let detailObjectView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let detailDocumnetView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .gray
+        
+        return view
+    }()
+    
+    private let detailCameraImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "camera")
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .label
+        
+        return view
+    }()
+    
+    private let detailCameraDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.textColor = .label
+        label.text = "Detect words in photos and translate."
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    private let detailVoiceImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "microphone")
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .label
+        
+        return view
+    }()
+    
+    private let detailVoiceDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.textColor = .label
+        label.text = "Detect words in photos and translate."
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    private let detailConversationImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "conversation")
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .label
+        
+        return view
+    }()
+    
+    private let detailConversationDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.textColor = .label
+        label.text = "Detect words in photos and translate."
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    private let detailObjectImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "AR")
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .label
+        
+        return view
+    }()
+    
+    private let detailObjectDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.textColor = .label
+        label.text = "Detect words in photos and translate."
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
+    private let detailDocumentImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "pdf")
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .label
+        
+        return view
+    }()
+    
+    private let detailDocumentDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.textColor = .label
+        label.text = "Detect words in photos and translate."
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
+        
+        return label
     }()
     
     private let subscribeButton: UIButton = {
@@ -170,10 +328,10 @@ class PurchasePageViewController: UIViewController {
         titleView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         container.addSubview(detailView)
-        detailView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20).isActive = true
+        detailView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5).isActive = true
         detailView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 35).isActive = true
-        detailView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -35).isActive = true
-        detailView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        detailView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        detailView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
         container.addSubview(subscribeButton)
         subscribeButton.topAnchor.constraint(equalTo: detailView.bottomAnchor, constant: 30).isActive = true
@@ -197,12 +355,63 @@ class PurchasePageViewController: UIViewController {
         promotionTitle3.topAnchor.constraint(equalTo: promotionTitle2.bottomAnchor, constant: 8).isActive = true
         promotionTitle3.leadingAnchor.constraint(equalTo: promotionTitle2.leadingAnchor).isActive = true
         
+        detailView.VStack(detailCameraView,
+                          detailVioceView,
+                          detailConversationView,
+                          detailObjectView,
+                          detailDocumnetView,
+                          spacing: 2,
+                          alignment: .fill,
+                          distribution: .fillEqually)
+        
+        detailCameraView.hstack(detailCameraImageView.setWidth(35),
+                                detailCameraDescriptionLabel,
+                                spacing: 5,
+                                alignment: .fill,
+                                distribution: .fill)
+        
+        detailVioceView.hstack(detailVoiceImageView.setWidth(35),
+                               detailVoiceDescriptionLabel,
+                               spacing: 5,
+                               alignment: .fill,
+                               distribution: .fill)
+        
+        detailConversationView.hstack(detailConversationImageView.setWidth(35),
+                                      detailConversationDescriptionLabel,
+                                      spacing: 5,
+                                      alignment: .fill,
+                                      distribution: .fill)
+        
+        detailObjectView.hstack(detailObjectImageView.setWidth(35),
+                                detailObjectDescriptionLabel,
+                                spacing: 5,
+                                alignment: .fill,
+                                distribution: .fill)
+        
+        detailDocumnetView.hstack(detailDocumentImageView.setWidth(35),
+                                  detailDocumentDescriptionLabel,
+                                  spacing: 5,
+                                  alignment: .fill,
+                                  distribution: .fill)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        restoreButton.addTarget(self, action: #selector(restorePurchase), for: .touchUpInside)
+        subscribeButton.addTarget(self, action: #selector(subscribeButtonTapped), for: .touchUpInside)
+        subscribeMonthlyButton.addTarget(self, action: #selector(subscribeMonthlyButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func restorePurchase() {
+        InAppPurchaseManager.restorePurchase()
+    }
+    
+    @objc func subscribeButtonTapped() {
+        InAppPurchaseManager.purchaseProduct(with: retrievedProducts[0].productIdentifier)
     }
 
+    @objc func subscribeMonthlyButtonTapped() {
+        InAppPurchaseManager.purchaseProduct(with: retrievedProducts[1].productIdentifier)
+    }
 }

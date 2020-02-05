@@ -12,6 +12,13 @@ import SwiftyStoreKit
 
 class PurchasePageViewController: UIViewController {
     
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -296,18 +303,37 @@ class PurchasePageViewController: UIViewController {
         return button
     }()
     
+    private let statementView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemOrange
+        // FIXME: Add statement (Privacy Policy and Terms of Use)
+        
+        return view
+    }()
+    
     
     override func loadView() {
         super.loadView()
         
-        view.addSubview(container)
-        container.edgeTo(self.view, safeArea: .all)
+        view.addSubview(scrollView)
+        scrollView.edgeTo(self.view, safeArea: .top)
+        
+        scrollView.addSubview(container)
+        container.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        container.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        container.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        let containerHeightConstraint = container.heightAnchor.constraint(equalTo: view.heightAnchor)
+        containerHeightConstraint.isActive = true
+        containerHeightConstraint.priority = UILayoutPriority(rawValue: 250)
+        
         
         container.addSubview(backgroundImageView)
-        backgroundImageView.edgeTo(container)
+        backgroundImageView.edgeTo(view)
         
         container.addSubview(imageViewForegroudView)
-        imageViewForegroudView.edgeTo(container)
+        imageViewForegroudView.edgeTo(view)
         
         container.addSubview(restoreButton)
         restoreButton.topAnchor.constraint(equalTo: container.topAnchor, constant: 25).isActive = true
@@ -342,6 +368,14 @@ class PurchasePageViewController: UIViewController {
         container.addSubview(subscribeMonthlyButton)
         subscribeMonthlyButton.topAnchor.constraint(equalTo: subscribeButton.bottomAnchor, constant: 10).isActive = true
         subscribeMonthlyButton.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        
+        container.addSubview(statementView)
+        statementView.topAnchor.constraint(equalTo: subscribeMonthlyButton.bottomAnchor, constant: 10).isActive = true
+        statementView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 30).isActive = true
+        statementView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -30).isActive = true
+//        statementView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        statementView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        statementView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -50).isActive = true
      
         titleView.addSubview(promotionTitle1)
         promotionTitle1.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 5).isActive = true
@@ -401,6 +435,21 @@ class PurchasePageViewController: UIViewController {
         restoreButton.addTarget(self, action: #selector(restorePurchase), for: .touchUpInside)
         subscribeButton.addTarget(self, action: #selector(subscribeButtonTapped), for: .touchUpInside)
         subscribeMonthlyButton.addTarget(self, action: #selector(subscribeMonthlyButtonTapped), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+
+        super.viewDidLayoutSubviews()
+
+        DispatchQueue.main.async {
+            var contentRect = CGRect.zero
+
+            for view in self.scrollView.subviews {
+               contentRect = contentRect.union(view.frame)
+            }
+
+            self.scrollView.contentSize = contentRect.size
+        }
     }
     
     @objc func restorePurchase() {

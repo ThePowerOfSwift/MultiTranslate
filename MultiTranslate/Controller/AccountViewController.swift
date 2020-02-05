@@ -64,8 +64,9 @@ class AccountViewController: UIViewController {
     }
     
     @objc func purchaseTest() {
-        present(PurchasePageViewController(), animated: true, completion: nil)
-        modalPresentationStyle = .automatic
+        let vc = PurchasePageViewController()
+        vc.modalPresentationStyle = .pageSheet
+        present(vc, animated: true, completion: nil)
     }
 
 }

@@ -457,8 +457,13 @@ class TextTranslateViewController: UIViewController {
     }
     
     func performTranslate() {
-        let text = sourceInputText.text!
-        GoogleCloudTranslate.textTranslate(sourceLanguage: "en", targetLanguage: "ja", textToTranslate: text) { (translatedText, error) in
+        guard let text = sourceInputText.text else { return }
+        let sourceLanguageCode = SupportedLanguages.gcpLanguageCode[temporarySourceLanguageGCPIndex]
+        let targetLanguageCode = SupportedLanguages.gcpLanguageCode[temporaryTargetLanguageGCPIndex]
+        print("sourceLanguageCode is \(sourceLanguageCode)")
+        print("targetLanguageCode is \(targetLanguageCode)")
+        
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguageCode, targetLanguage: targetLanguageCode, textToTranslate: text) { (translatedText, error) in
             if let text = translatedText {
                 self.starButton.isHidden = false
                 self.isStarButtonTapped = false

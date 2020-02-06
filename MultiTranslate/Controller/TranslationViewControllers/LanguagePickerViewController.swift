@@ -13,7 +13,9 @@ class LanguagePickerViewController: UIViewController {
     var sourceLanguageRow = 0
     var targetLanguageRow = 0
     
-    var pickerView: UIPickerView = UIPickerView()
+    var isVoiceTranslate: Bool = false
+    
+    private var pickerView = UIPickerView()
     
     var delegate: LanguagePickerDelegate?
 
@@ -70,23 +72,37 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
     
     // ドラムロールの行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
-         if component == 0 {
-            return SupportedLanguages.gcpLanguageList.count
-         } else {
-            return SupportedLanguages.gcpLanguageList.count
-         }
+        if isVoiceTranslate {
+            if component == 0 {
+                return SupportedLanguages.speechRecognizerSupportedLocale.count
+            } else {
+                return SupportedLanguages.speechRecognizerSupportedLocale.count
+            }
+        } else {
+            if component == 0 {
+                return SupportedLanguages.gcpLanguageList.count
+            } else {
+                return SupportedLanguages.gcpLanguageList.count
+            }
+        }
     }
     
     // ドラムロールの各タイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-         if component == 0 {
-            return SupportedLanguages.gcpLanguageList[row]
-         } else {
-            return SupportedLanguages.gcpLanguageList[row]
-         }
-
+        if isVoiceTranslate {
+            if component == 0 {
+                return SupportedLanguages.speechRecognizerSupportedLocale[row]
+            } else {
+                return SupportedLanguages.speechRecognizerSupportedLocale[row]
+            }
+        } else {
+            if component == 0 {
+                return SupportedLanguages.gcpLanguageList[row]
+            } else {
+                return SupportedLanguages.gcpLanguageList[row]
+            }
+        }
+        
     }
     
     // ドラムロール選択時

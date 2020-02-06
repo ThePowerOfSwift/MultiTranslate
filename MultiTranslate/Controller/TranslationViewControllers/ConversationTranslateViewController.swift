@@ -16,8 +16,8 @@ import SwiftyJSON
 
 class ConversationTranslateViewController: UIViewController {
     
-    private var sourceLanguageIndex = 0
-    private var targetLanguageIndex = 0
+    private var temporarySourceLanguageSpeechIndex = 0
+    private var temporaryTargetLanguageSpeechIndex = 0
     
     private var recordingSession: AVAudioSession!
     private var audioRecorder: AVAudioRecorder?
@@ -253,6 +253,9 @@ class ConversationTranslateViewController: UIViewController {
                 self.targetLanguageButton.setTitle(sourceLanguageButtonTitle, for: .normal)
                 self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
             }
+            
+            swap(&self.temporarySourceLanguageSpeechIndex, &self.temporaryTargetLanguageSpeechIndex)
+            
         }, completion: nil)
         
         print("exchange button pressed.")
@@ -260,21 +263,22 @@ class ConversationTranslateViewController: UIViewController {
     
     @objc func changeLanguage() {
         if let sourceLanguage = sourceLanguageButton.titleLabel?.text {
-            sourceLanguageIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
-            print(sourceLanguageIndex)
+            temporarySourceLanguageSpeechIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
+            print(temporarySourceLanguageSpeechIndex)
             print(sourceLanguage)
         }
         
         if let targetLanguage = targetLanguageButton.titleLabel?.text {
-            targetLanguageIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
-            print(targetLanguageIndex)
+            temporaryTargetLanguageSpeechIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
+            print(temporaryTargetLanguageSpeechIndex)
             print(targetLanguage)
         }
         
         //present picker view modal
         let viewController = LanguagePickerViewController()
-        viewController.sourceLanguageRow = sourceLanguageIndex
-        viewController.targetLanguageRow = targetLanguageIndex
+        viewController.sourceLanguageRow = temporarySourceLanguageSpeechIndex
+        viewController.targetLanguageRow = temporaryTargetLanguageSpeechIndex
+        viewController.isVoiceTranslate = true
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
@@ -377,7 +381,9 @@ class ConversationTranslateViewController: UIViewController {
     }
     
     func transcribeAudio(url: URL) {
-        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
+        let identifier = isSource ? SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[temporarySourceLanguageSpeechIndex] : SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[temporaryTargetLanguageSpeechIndex]
+        
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: identifier))
         let request = SFSpeechURLRecognitionRequest(url: url)
 
         recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
@@ -399,29 +405,28 @@ class ConversationTranslateViewController: UIViewController {
     
     func translateText() {
         
-        let url = "https://translation.googleapis.com/language/translate/v2"
-        let parameters: [String : String] = [
-            "key": Constants.googleTranslateAPIKey,
-            "q": extractedText,
-            "target": "en",
-            "source": "ja",
-            "format": "text",
-            "model": "base"
-        ]
-        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (response) in
-            if response.result.isSuccess {
-                print("response is \(response.result.value!)")
-                
-                let responseJSON = JSON(response.result.value!)
-                let translatedTextJSON = JSON(responseJSON["data"]["translations"][0])
-                let translatedText = translatedTextJSON["translatedText"].stringValue
-                print(translatedText)
-                
-                self.createNewConversation(using: translatedText)
-            }
+        let textToTranslate = extractedText
+
+        let sourceLanguageCode: String
+        let targetLanguageCode: String
+        if isSource {
+            sourceLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporarySourceLanguageSpeechIndex]
+            targetLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporaryTargetLanguageSpeechIndex]
+        } else {
+            sourceLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporaryTargetLanguageSpeechIndex]
+            targetLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporarySourceLanguageSpeechIndex]
         }
         
+        print("sourceLanguageCode is \(sourceLanguageCode)")
+        print("targetLanguageCode is \(targetLanguageCode)")
         
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguageCode, targetLanguage: targetLanguageCode, textToTranslate: textToTranslate) { (translatedText, error) in
+            if let text = translatedText {
+                self.createNewConversation(using: text)
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
     }
     
     func createNewConversation(using translatedText: String) {
@@ -479,8 +484,10 @@ extension ConversationTranslateViewController: UITableViewDataSource {
 
 extension ConversationTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex], for: .normal)
-        targetLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex], for: .normal)
+        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageGCPIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporaryTargetLanguageGCPIndex], for: .normal)
+        self.temporarySourceLanguageSpeechIndex = temporarySourceLanguageGCPIndex
+        self.temporaryTargetLanguageSpeechIndex = temporaryTargetLanguageGCPIndex
     }
 }
 

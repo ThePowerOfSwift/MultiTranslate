@@ -122,4 +122,44 @@ struct SupportedLanguages {
         "ml","mt","mi","mr","mn","my","ne","no","ny","ps","fa","pl","pt","pa","ro","ru","sm","gd","sr","st","sn","sd","si","sk","sl","so","es","su","sw","sv",
         "tl","tg","ta","te","th","tr","uk","ur","uz","vi","cy","xh","yi","yo","zu"
     ]
+    
+    static let speechRecognizerSupportedLocaleIdentifier = [
+        "ar-SA", "ca-ES", "cs-CZ", "da-DK", "de-AT", "de-CH", "de-DE", "el-GR", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-PH",
+        "en-SA", "en-SG", "en-US", "en-ZA", "es-419", "es-CL", "es-CO", "es-ES", "es-MX", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "he-IL", "hi-IN",
+        "hr-HR", "hu-HU", "id-ID", "it-CH", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nb-NO", "nl-BE", "nl-NL", "pl-PL", "pt-BR", "pt-PT",
+        "ro-RO", "ru-RU", "sk-SK", "sv-SE", "th-TH", "tr-TR", "uk-UA", "vi-VN", "zh-CN", "zh-HK"
+//        "ar-SA", "ca-ES", "cs-CZ", "da-DK", "de-AT", "de-CH", "de-DE", "el-GR", "en-AE", "en-AU", "en-CA", "en-GB", "en-ID", "en-IE", "en-IN", "en-NZ", "en-PH",
+//        "en-SA", "en-SG", "en-US", "en-ZA", "es-419", "es-CL", "es-CO", "es-ES", "es-MX", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "he-IL", "hi-IN",
+//        "hi-IN-translit", "hi-Latn", "hr-HR", "hu-HU", "id-ID", "it-CH", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nb-NO", "nl-BE", "nl-NL", "pl-PL", "pt-BR", "pt-PT",
+//        "ro-RO", "ru-RU", "sk-SK", "sv-SE", "th-TH", "tr-TR", "uk-UA", "vi-VN", "wuu-CN", "yue-CN", "zh-CN", "zh-HK", "zh-TW"
+    ]
+    
+    static let speechRecognizerSupportedLocale = [
+        "Arabic (Saudi Arabia)", "Catalan (Spain)", "Czech (Czech)", "Danish", "German (Austria)", "German (Switzerland)", "German (Germany)", "Greek", "English (Australia)",
+        "English (Canada)", "English (United Kingdom)", "English (Ireland)", "English (India)", "English (New Zealand)", "English (Philippines)",
+        "English (Saudi Arabia)", "English (Singapore)", "English (United States)", "English (South Africa)", "Spanish (Latin America & Caribbean)", "Spanish (Chile)", "Spanish (Colombia)",
+        "Spanish (Spain)", "Spanish (Mexico)", "Spanish (United States)", "Finnish (Finland)", "French (Belgium)", "French (Canada)", "French (Switzerland)",
+        "French (France)", "Hebrew (Israel)", "Hindi (India)", "Croatian (Croatia)", "Hungarian (Hungary)", "Indonesian (Indonesia)", "Italian (Switzerland)",
+        "Italian (Italy)", "Japanese (Japan)", "Korean (Korea)", "Malay (Malaysia)", "Norwegian (Norway)", "Dutch (Belgium)", "Dutch (Netherlands)", "Polish (Poland)",
+        "Portuguese (Brazil)", "Portuguese (Portugal)", "Romanian (Romania)", "Russian (Russia)", "Slovak (Slovakia)", "Swedish (Sweden)", "Thai (Thailand)",
+        "Turkish (Turkey)", "Ukrainian (Ukraine)", "Vietnamese (Vietnam)", "Chinese (China)", "Chinese (Hongkong)"
+    ]
+    
+    static let speechRecognizerSupportedLanguage = [
+        "Arabic", "Catalan", "Czech", "Danish", "German", "German", "German", "Greek", "English",
+        "English", "English", "English", "English", "English", "English",
+        "English", "English", "English", "English", "Spanish", "Spanish", "Spanish",
+        "Spanish", "Spanish", "Spanish", "Finnish", "French", "French", "French",
+        "French", "Hebrew", "Hindi", "Croatian", "Hungarian", "Indonesian", "Italian",
+        "Italian", "Japanese", "Korean", "Malay", "Norwegian", "Dutch", "Dutch", "Polish",
+        "Portuguese", "Portuguese", "Romanian", "Russian", "Slovak", "Swedish", "Thai",
+        "Turkish", "Ukrainian", "Vietnamese", "Chinese", "Chinese"
+    ]
+    
+    static let speechRecognizerSupportedLanguageCode = [
+            "ar", "ca", "cs", "da", "de", "de", "de", "el", "en", "en", "en", "en", "en", "en", "en",
+            "en", "en", "en", "en", "es", "es", "es", "es", "es", "es", "fi", "fr", "fr", "fr", "fr", "he", "hi",
+            "hr", "hu", "id", "it", "it", "ja", "ko", "ms", "nb", "nl", "nl", "pl", "pt", "pt",
+            "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh", "zh"
+        ]
 }

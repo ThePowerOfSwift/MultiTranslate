@@ -56,9 +56,12 @@ class ConversationTranslateViewController: UIViewController {
     private let languageExchangeView = UIView(backgroundColor: .systemBackground)
     private let targetLanguageView = UIView(backgroundColor: .green)
 
-    private let sourceLanguageButton = UIButton(title: languageList[0], titleColor: .label)
+    private let sourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
+    private let targetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
+    
+    private let sourceLanguageButton = UIButton(title: "languageList[0]", titleColor: .label)
     private let languageExchangeButton = UIButton(image: UIImage(named: "exchange")!)
-    private let targetLanguageButton = UIButton(title: languageList[2], titleColor: .label)
+    private let targetLanguageButton = UIButton(title: "languageList[2]", titleColor: .label)
     
     private let sourceRecorderButtonView = UIView()
     private let recorderButtonPaddingView = UIView()
@@ -205,6 +208,8 @@ class ConversationTranslateViewController: UIViewController {
 //        conversationTableView.showLastRow()
         
         languageExchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
+        sourceLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[sourceLanguageGCPIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[targetLanguageGCPIndex], for: .normal)
         sourceLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         
@@ -240,13 +245,14 @@ class ConversationTranslateViewController: UIViewController {
     }
     
     @objc func exchangeLanguage() {
-        let exchangeText = targetLanguageButton.titleLabel?.text
-        
         UIView.animate(withDuration: 0.25, animations: {
             self.languageExchangeButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
             self.languageExchangeButton.transform = self.languageExchangeButton.transform.rotated(by: CGFloat.pi)
-            self.targetLanguageButton.titleLabel?.text = self.sourceLanguageButton.titleLabel?.text
-            self.sourceLanguageButton.titleLabel?.text = exchangeText
+            
+            if let sourceLanguageButtonTitle = self.sourceLanguageButton.titleLabel?.text, let exchangeText = self.targetLanguageButton.titleLabel?.text {
+                self.targetLanguageButton.setTitle(sourceLanguageButtonTitle, for: .normal)
+                self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
+            }
         }, completion: nil)
         
         print("exchange button pressed.")
@@ -254,19 +260,19 @@ class ConversationTranslateViewController: UIViewController {
     
     @objc func changeLanguage() {
         if let sourceLanguage = sourceLanguageButton.titleLabel?.text {
-            sourceLanguageIndex = languageList.firstIndex(of: sourceLanguage) ?? 0
+            sourceLanguageIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
             print(sourceLanguageIndex)
             print(sourceLanguage)
         }
         
         if let targetLanguage = targetLanguageButton.titleLabel?.text {
-            targetLanguageIndex = languageList.firstIndex(of: targetLanguage) ?? 0
+            targetLanguageIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
             print(targetLanguageIndex)
             print(targetLanguage)
         }
         
         //present picker view modal
-        let viewController = ChangeLanguageViewController()
+        let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = sourceLanguageIndex
         viewController.targetLanguageRow = targetLanguageIndex
         viewController.delegate = self
@@ -472,9 +478,9 @@ extension ConversationTranslateViewController: UITableViewDataSource {
 }
 
 extension ConversationTranslateViewController: LanguagePickerDelegate {
-    func didSelectedLanguagePicker(sourceLanguage: String, targetLanguage: String) {
-        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
-        targetLanguageButton.setTitle(targetLanguage, for: .normal)
+    func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
+        sourceLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex], for: .normal)
     }
 }
 

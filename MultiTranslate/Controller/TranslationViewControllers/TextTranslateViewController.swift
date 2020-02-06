@@ -19,8 +19,8 @@ import RealmSwift
 class TextTranslateViewController: UIViewController {
     
     //MARK: - Variables and Constants
-    private var sourceLanguageIndex = 0
-    private var targetLanguageIndex = 0
+    private var temporarySourceLanguageGCPIndex = 0
+    private var temporaryTargetLanguageGCPIndex = 0
     private var isStarButtonTapped: Bool = false
     
     private var translatedCharactersCurrentMonth = 0
@@ -29,6 +29,9 @@ class TextTranslateViewController: UIViewController {
     private var savedTranslations: Results<SavedTranslation>!
     
     private var cloudDBTranslatedCharacters = 0
+    
+    private let sourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
+    private let targetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
     
     //MARK: - UI Parts Declaration
     
@@ -316,8 +319,8 @@ class TextTranslateViewController: UIViewController {
         
         savedTranslations = realm.objects(SavedTranslation.self)
         
-        sourceLanguageLabel.text = languageList[0]
-        targetLanguageLabel.text = languageList[2]
+        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[sourceLanguageGCPIndex]
+        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[targetLanguageGCPIndex]
         
         let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
         sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
@@ -360,21 +363,21 @@ class TextTranslateViewController: UIViewController {
     @objc func selectLanguage() {
         
         if let sourceLanguage = sourceLanguageLabel.text {
-            sourceLanguageIndex = languageList.firstIndex(of: sourceLanguage) ?? 0
-            print(sourceLanguageIndex)
+            temporarySourceLanguageGCPIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
+            print(temporarySourceLanguageGCPIndex)
             print(sourceLanguage)
         }
         
         if let targetLanguage = targetLanguageLabel.text {
-            targetLanguageIndex = languageList.firstIndex(of: targetLanguage) ?? 0
-            print(targetLanguageIndex)
+            temporaryTargetLanguageGCPIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
+            print(temporaryTargetLanguageGCPIndex)
             print(targetLanguage)
         }
         
         //present picker view modal
-        let viewController = ChangeLanguageViewController()
-        viewController.sourceLanguageRow = sourceLanguageIndex
-        viewController.targetLanguageRow = targetLanguageIndex
+        let viewController = LanguagePickerViewController()
+        viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
+        viewController.targetLanguageRow = temporaryTargetLanguageGCPIndex
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
@@ -548,9 +551,11 @@ extension TextTranslateViewController: UITextViewDelegate {
 }
 
 extension TextTranslateViewController: LanguagePickerDelegate {
-    func didSelectedLanguagePicker(sourceLanguage: String, targetLanguage: String) {
-        sourceLanguageLabel.text = sourceLanguage
-        targetLanguageLabel.text = targetLanguage
+    func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
+        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        self.temporarySourceLanguageGCPIndex = temporarySourceLanguageGCPIndex
+        self.temporaryTargetLanguageGCPIndex = temporaryTargetLanguageGCPIndex
     }
     
     

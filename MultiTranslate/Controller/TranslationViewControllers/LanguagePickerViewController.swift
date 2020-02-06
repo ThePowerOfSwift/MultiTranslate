@@ -8,12 +8,10 @@
 
 import UIKit
 
-class ChangeLanguageViewController: UIViewController {
+class LanguagePickerViewController: UIViewController {
     
-    var sourceLanguageRow: Int?
-    var targetLanguageRow: Int?
-    var sourceLanguage = ""
-    var targetLanguage = ""
+    var sourceLanguageRow = 0
+    var targetLanguageRow = 0
     
     var pickerView: UIPickerView = UIPickerView()
     
@@ -46,19 +44,15 @@ class ChangeLanguageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-//        if let sourceLanguageIndex = sourceLanguageIndex, let targetLanguageIndex = targetLanguageIndex {
-            pickerView.selectRow(sourceLanguageRow ?? 0, inComponent: 0, animated: true)
-            pickerView.selectRow(targetLanguageRow ?? 0, inComponent: 1, animated: true)
-//        }
-        print(pickerView.selectedRow(inComponent: 0))
-        print(pickerView.selectedRow(inComponent: 1))
-        sourceLanguage = languageList[sourceLanguageRow ?? 0]
-        targetLanguage = languageList[targetLanguageRow ?? 0]
+        pickerView.selectRow(sourceLanguageRow, inComponent: 0, animated: true)
+        pickerView.selectRow(targetLanguageRow, inComponent: 1, animated: true)
+//        print(pickerView.selectedRow(inComponent: 0))
+//        print(pickerView.selectedRow(inComponent: 1))
     }
     
     @objc func doneChange() {
         self.dismiss(animated: true, completion: nil)
-        delegate?.didSelectedLanguagePicker(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage)
+        delegate?.didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: sourceLanguageRow, temporaryTargetLanguageGCPIndex: targetLanguageRow)
     }
     
     @objc func cancelChange() {
@@ -67,7 +61,7 @@ class ChangeLanguageViewController: UIViewController {
 
 }
 
-extension ChangeLanguageViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataSource {
  
     // ドラムロールの列数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -78,9 +72,9 @@ extension ChangeLanguageViewController : UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 
          if component == 0 {
-            return languageList.count
+            return SupportedLanguages.gcpLanguageList.count
          } else {
-            return languageList.count
+            return SupportedLanguages.gcpLanguageList.count
          }
     }
     
@@ -88,9 +82,9 @@ extension ChangeLanguageViewController : UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
          if component == 0 {
-            return languageList[row]
+            return SupportedLanguages.gcpLanguageList[row]
          } else {
-            return languageList[row]
+            return SupportedLanguages.gcpLanguageList[row]
          }
 
     }
@@ -99,12 +93,12 @@ extension ChangeLanguageViewController : UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
 //            self.textField2.text = list[0][row]
-            print("picker 1 is \(languageList[row])")
-            sourceLanguage = languageList[row]
+            print("picker 1 is \(SupportedLanguages.gcpLanguageList[row])")
+            sourceLanguageRow = row
         } else {
 //            self.textField4.text = list[1][row]
-            print("picker 2 is \(languageList[row])")
-            targetLanguage = languageList[row]
+            print("picker 2 is \(SupportedLanguages.gcpLanguageList[row])")
+            targetLanguageRow = row
         }
     }
 

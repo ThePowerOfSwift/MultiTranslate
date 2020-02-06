@@ -10,6 +10,6 @@ import Foundation
 
 protocol LanguagePickerDelegate {
     
-    func didSelectedLanguagePicker(sourceLanguage: String, targetLanguage: String) -> Void
+    func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) -> Void
     
 }

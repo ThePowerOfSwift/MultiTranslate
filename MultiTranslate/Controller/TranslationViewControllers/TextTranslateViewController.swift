@@ -378,6 +378,7 @@ class TextTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
         viewController.targetLanguageRow = temporaryTargetLanguageGCPIndex
+        viewController.translateType = .text
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         

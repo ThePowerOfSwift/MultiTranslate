@@ -278,7 +278,7 @@ class ConversationTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageSpeechIndex
         viewController.targetLanguageRow = temporaryTargetLanguageSpeechIndex
-        viewController.isVoiceTranslate = true
+        viewController.translateType = .conversation
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         

@@ -13,7 +13,13 @@ class LanguagePickerViewController: UIViewController {
     var sourceLanguageRow = 0
     var targetLanguageRow = 0
     
-    var isVoiceTranslate: Bool = false
+//    var isVoiceTranslate: Bool = false
+    enum TranslateType {
+        case text
+        case voice
+        case conversation
+    }
+    var translateType: TranslateType = .text
     
     private var pickerView = UIPickerView()
     
@@ -72,34 +78,50 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
     
     // ドラムロールの行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if isVoiceTranslate {
+        
+        switch translateType {
+        case .text:
             if component == 0 {
-                return SupportedLanguages.speechRecognizerSupportedLocale.count
+                return SupportedLanguages.gcpLanguageList.count
             } else {
-                return SupportedLanguages.speechRecognizerSupportedLocale.count
+                return SupportedLanguages.gcpLanguageList.count
             }
-        } else {
+        case .voice:
             if component == 0 {
-                return SupportedLanguages.gcpLanguageList.count
+                return SupportedLanguages.speechRecognizerSupportedLocale.count
             } else {
                 return SupportedLanguages.gcpLanguageList.count
+            }
+        case .conversation:
+            if component == 0 {
+                return SupportedLanguages.speechRecognizerSupportedLocale.count
+            } else {
+                return SupportedLanguages.speechRecognizerSupportedLocale.count
             }
         }
     }
     
     // ドラムロールの各タイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if isVoiceTranslate {
+        
+        switch translateType {
+        case .text:
             if component == 0 {
-                return SupportedLanguages.speechRecognizerSupportedLocale[row]
+                return SupportedLanguages.gcpLanguageList[row]
             } else {
-                return SupportedLanguages.speechRecognizerSupportedLocale[row]
+                return SupportedLanguages.gcpLanguageList[row]
             }
-        } else {
+        case .voice:
             if component == 0 {
-                return SupportedLanguages.gcpLanguageList[row]
+                return SupportedLanguages.speechRecognizerSupportedLocale[row]
             } else {
                 return SupportedLanguages.gcpLanguageList[row]
+            }
+        case .conversation:
+            if component == 0 {
+                return SupportedLanguages.speechRecognizerSupportedLocale[row]
+            } else {
+                return SupportedLanguages.speechRecognizerSupportedLocale[row]
             }
         }
         
@@ -109,11 +131,11 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
 //            self.textField2.text = list[0][row]
-            print("picker 1 is \(SupportedLanguages.gcpLanguageList[row])")
+//            print("picker 1 is \(SupportedLanguages.gcpLanguageList[row])")
             sourceLanguageRow = row
         } else {
 //            self.textField4.text = list[1][row]
-            print("picker 2 is \(SupportedLanguages.gcpLanguageList[row])")
+//            print("picker 2 is \(SupportedLanguages.gcpLanguageList[row])")
             targetLanguageRow = row
         }
     }

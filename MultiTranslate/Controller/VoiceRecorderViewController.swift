@@ -14,12 +14,24 @@ import KRProgressHUD
 
 class VoiceRecorderViewController: UIViewController {
     
+    // MARK: - Initialization
+    init(with languageCodeIndex: Int) {
+        self.speechLanguageCodeIndex = languageCodeIndex
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Variables and constants
     private var isRecording: Bool = true
     private var recordingSession: AVAudioSession!
     private var audioRecorder: AVAudioRecorder?
     private var audioFileURL: URL?
     private var extractedText = ""
+    
+    var speechLanguageCodeIndex: Int
     
     var delegate: SourceTextInputDelegate?
     
@@ -263,7 +275,9 @@ class VoiceRecorderViewController: UIViewController {
     }
     
     func transcribeAudio(url: URL) {
-        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
+        let localeIdentifier = SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[speechLanguageCodeIndex]
+        
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: localeIdentifier))
         let request = SFSpeechURLRecognitionRequest(url: url)
 
         recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in

@@ -19,8 +19,10 @@ import RealmSwift
 class TextTranslateViewController: UIViewController {
     
     //MARK: - Variables and Constants
-    private var temporarySourceLanguageGCPIndex = 0
-    private var temporaryTargetLanguageGCPIndex = 0
+    var temporarySourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
+    var temporaryTargetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
+    var translateType: TranslateType = .text
+    
     private var isStarButtonTapped: Bool = false
     
     private var translatedCharactersCurrentMonth = 0
@@ -30,36 +32,61 @@ class TextTranslateViewController: UIViewController {
     
     private var cloudDBTranslatedCharacters = 0
     
-    private let sourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
-    private let targetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
+//    private let sourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
+//    private let targetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
     
     //MARK: - UI Parts Declaration
     
-    let languageSelectView: UIView = {
+    private let container: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private let languageSelectView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let sourceLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let exchangeButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let targetLanguageView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    let sourceInputView: UIView = {
+    private let sourceInputView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let translateButtonView: UIView = {
+    private let translateButtonView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let targetOutputView: UIView = {
+    private let targetOutputView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let exchangeButton: UIButton = {
+    private let exchangeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "exchange"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +95,7 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    let clearButton: UIButton = {
+    private let clearButton: UIButton = {
         let button = UIButton()
         button.setTitle("Clear", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +109,7 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    let translateButton: PMSuperButton = {
+    private let translateButton: PMSuperButton = {
         let button = PMSuperButton()
         button.borderColor = .white
         button.borderWidth = 2
@@ -109,11 +136,11 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    let sourceLanguageLabel: UILabel = {
+    private let sourceLanguageLabel: UILabel = {
         let label = UILabel()
 //        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         label.isUserInteractionEnabled = true
-        label.textAlignment = .right
+        label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.frame = .zero
@@ -122,11 +149,11 @@ class TextTranslateViewController: UIViewController {
         return label
     }()
     
-    let targetLanguageLabel: UILabel = {
+    private let targetLanguageLabel: UILabel = {
         let label = UILabel()
 //        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         label.isUserInteractionEnabled = true
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.frame = .zero
@@ -135,7 +162,7 @@ class TextTranslateViewController: UIViewController {
         return label
     }()
     
-    let sourceInputLabel: UILabel = {
+    private let sourceInputLabel: UILabel = {
         let label = UILabel()
         label.text = "Enter text"
 //        label.backgroundColor = .systemBackground
@@ -157,31 +184,31 @@ class TextTranslateViewController: UIViewController {
         return textView
     }()
     
-    let sourceInputLabelView: UIView = {
+    private let sourceInputLabelView: UIView = {
         let view = UIView()
 //        view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         return view
     }()
     
-    let sourceInputTextView: UIView = {
+    private let sourceInputTextView: UIView = {
         let view = UIView()
 //        view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         return view
     }()
     
-    let outputActionView: UIView = {
+    private let outputActionView: UIView = {
         let view = UIView()
 //        view.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         return view
     }()
     
-    let outputTextView: UIView = {
+    private let outputTextView: UIView = {
         let view = UIView()
 //        view.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         return view
     }()
     
-    let starButton: UIButton = {
+    private let starButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "star")?.withTintColor(.systemGray), for: .normal)
@@ -189,7 +216,7 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    let speechButton: UIButton = {
+    private let speechButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "speech")?.withTintColor(.systemBlue), for: .normal)
@@ -198,7 +225,7 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    let targetOutputText: UITextView = {
+    private let targetOutputText: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -212,33 +239,16 @@ class TextTranslateViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        view.VStack(languageSelectView.setHeight(75),
-                    sourceInputView.setHeight(200),
-                    translateButtonView.setHeight(50),
-                    targetOutputView,
-                    spacing: 5,
-                    alignment: .fill,
-                    distribution: .fill)
+        view.addSubview(container)
+        container.edgeTo(view, safeArea: .top)
         
-        let sourceLanguageView = UIView()
-//        sourceLanguageView.backgroundColor = .purple
-        
-        let exchangeButtonView = UIView()
-//        exchangeButtonView.backgroundColor = .orange
-        
-        let targetLanguageView = UIView()
-//        targetLanguageView.backgroundColor = .gray
-        
-//        let languageSelectStackView = UIStackView(arrangedSubviews: [sourceLanguageView, exchangeButtonView, targetLanguageView])
-//        languageSelectStackView.axis = .horizontal
-//        languageSelectStackView.distribution = .fillEqually
-//        languageSelectStackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        languageSelectView.addSubview(languageSelectStackView)
-//        languageSelectStackView.topAnchor.constraint(equalTo: languageSelectView.topAnchor).isActive = true
-//        languageSelectStackView.leadingAnchor.constraint(equalTo: languageSelectView.leadingAnchor).isActive = true
-//        languageSelectStackView.trailingAnchor.constraint(equalTo: languageSelectView.trailingAnchor).isActive = true
-//        languageSelectStackView.bottomAnchor.constraint(equalTo: languageSelectView.bottomAnchor).isActive = true
+        container.VStack(languageSelectView.setHeight(75),
+                         sourceInputView.setHeight(200),
+                         translateButtonView.setHeight(50),
+                         targetOutputView,
+                         spacing: 5,
+                         alignment: .fill,
+                         distribution: .fill)
         
         languageSelectView.HStack(sourceLanguageView,
                                   exchangeButtonView.setWidth(65),
@@ -261,7 +271,10 @@ class TextTranslateViewController: UIViewController {
         targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
         targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
 
-
+        if translateType == .targetOnly {
+            sourceLanguageView.isHidden = true
+            exchangeButtonView.isHidden = true
+        }
         
         sourceInputView.VStack(sourceInputLabelView.setHeight(30),
                                sourceInputTextView,
@@ -319,8 +332,8 @@ class TextTranslateViewController: UIViewController {
         
         savedTranslations = realm.objects(SavedTranslation.self)
         
-        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[sourceLanguageGCPIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[targetLanguageGCPIndex]
+        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
         
         let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
         sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
@@ -356,10 +369,16 @@ class TextTranslateViewController: UIViewController {
                 }
             }
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
     }
     
     
     // MARK: - UIButton Implementation
+    @objc func doneButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @objc func selectLanguage() {
         
         if let sourceLanguage = sourceLanguageLabel.text {
@@ -378,7 +397,7 @@ class TextTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
         viewController.targetLanguageRow = temporaryTargetLanguageGCPIndex
-        viewController.translateType = .text
+        viewController.translateType = self.translateType
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         

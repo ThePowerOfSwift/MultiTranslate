@@ -124,6 +124,7 @@ struct SupportedLanguages {
     ]
     
     static let speechRecognizerSupportedLocaleIdentifier = [
+        // Use for speech recognizing
         "ar-SA", "ca-ES", "cs-CZ", "da-DK", "de-AT", "de-CH", "de-DE", "el-GR", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-PH",
         "en-SA", "en-SG", "en-US", "en-ZA", "es-419", "es-CL", "es-CO", "es-ES", "es-MX", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "he-IL", "hi-IN",
         "hr-HR", "hu-HU", "id-ID", "it-CH", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nb-NO", "nl-BE", "nl-NL", "pl-PL", "pt-BR", "pt-PT",
@@ -135,6 +136,7 @@ struct SupportedLanguages {
     ]
     
     static let speechRecognizerSupportedLocale = [
+        // Use for display in LanguagePickerViewController
         "Arabic (Saudi Arabia)", "Catalan (Spain)", "Czech (Czech)", "Danish", "German (Austria)", "German (Switzerland)", "German (Germany)", "Greek", "English (Australia)",
         "English (Canada)", "English (United Kingdom)", "English (Ireland)", "English (India)", "English (New Zealand)", "English (Philippines)",
         "English (Saudi Arabia)", "English (Singapore)", "English (United States)", "English (South Africa)", "Spanish (Latin America & Caribbean)", "Spanish (Chile)", "Spanish (Colombia)",
@@ -146,6 +148,7 @@ struct SupportedLanguages {
     ]
     
     static let speechRecognizerSupportedLanguage = [
+        // Use for display in VoiceTranslationViewController
         "Arabic", "Catalan", "Czech", "Danish", "German", "German", "German", "Greek", "English",
         "English", "English", "English", "English", "English", "English",
         "English", "English", "English", "English", "Spanish", "Spanish", "Spanish",
@@ -157,9 +160,10 @@ struct SupportedLanguages {
     ]
     
     static let speechRecognizerSupportedLanguageCode = [
-            "ar", "ca", "cs", "da", "de", "de", "de", "el", "en", "en", "en", "en", "en", "en", "en",
-            "en", "en", "en", "en", "es", "es", "es", "es", "es", "es", "fi", "fr", "fr", "fr", "fr", "he", "hi",
-            "hr", "hu", "id", "it", "it", "ja", "ko", "ms", "nb", "nl", "nl", "pl", "pt", "pt",
-            "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh", "zh"
-        ]
+        //Use for translating
+        "ar", "ca", "cs", "da", "de", "de", "de", "el", "en", "en", "en", "en", "en", "en", "en",
+        "en", "en", "en", "en", "es", "es", "es", "es", "es", "es", "fi", "fr", "fr", "fr", "fr", "he", "hi",
+        "hr", "hu", "id", "it", "it", "ja", "ko", "ms", "nb", "nl", "nl", "pl", "pt", "pt",
+        "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh", "zh"
+    ]
 }

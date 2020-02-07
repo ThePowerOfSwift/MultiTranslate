@@ -14,11 +14,6 @@ class LanguagePickerViewController: UIViewController {
     var targetLanguageRow = 0
     
 //    var isVoiceTranslate: Bool = false
-    enum TranslateType {
-        case text
-        case voice
-        case conversation
-    }
     var translateType: TranslateType = .text
     
     private var pickerView = UIPickerView()
@@ -52,8 +47,15 @@ class LanguagePickerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        pickerView.selectRow(sourceLanguageRow, inComponent: 0, animated: true)
-        pickerView.selectRow(targetLanguageRow, inComponent: 1, animated: true)
+        switch translateType {
+        case .targetOnly:
+            pickerView.selectRow(targetLanguageRow, inComponent: 0, animated: true)
+            
+        default:
+            pickerView.selectRow(sourceLanguageRow, inComponent: 0, animated: true)
+            pickerView.selectRow(targetLanguageRow, inComponent: 1, animated: true)
+        }
+        
 //        print(pickerView.selectedRow(inComponent: 0))
 //        print(pickerView.selectedRow(inComponent: 1))
     }
@@ -73,7 +75,13 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
  
     // ドラムロールの列数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        switch translateType {
+        case .targetOnly:
+            return 1
+        default:
+            return 2
+        }
+        
     }
     
     // ドラムロールの行数
@@ -98,6 +106,8 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
             } else {
                 return SupportedLanguages.speechRecognizerSupportedLocale.count
             }
+        case .targetOnly:
+            return SupportedLanguages.gcpLanguageList.count
         }
     }
     
@@ -123,20 +133,25 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
             } else {
                 return SupportedLanguages.speechRecognizerSupportedLocale[row]
             }
+        case .targetOnly:
+            return SupportedLanguages.gcpLanguageList[row]
         }
         
     }
     
     // ドラムロール選択時
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-//            self.textField2.text = list[0][row]
-//            print("picker 1 is \(SupportedLanguages.gcpLanguageList[row])")
-            sourceLanguageRow = row
-        } else {
-//            self.textField4.text = list[1][row]
-//            print("picker 2 is \(SupportedLanguages.gcpLanguageList[row])")
+        switch translateType {
+            
+        case .targetOnly:
             targetLanguageRow = row
+            
+        default:
+            if component == 0 {
+                sourceLanguageRow = row
+            } else {
+                targetLanguageRow = row
+            }
         }
     }
 

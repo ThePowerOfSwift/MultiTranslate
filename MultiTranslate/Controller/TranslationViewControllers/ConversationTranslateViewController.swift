@@ -208,8 +208,8 @@ class ConversationTranslateViewController: UIViewController {
 //        conversationTableView.showLastRow()
         
         languageExchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
-        sourceLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[sourceLanguageGCPIndex], for: .normal)
-        targetLanguageButton.setTitle(SupportedLanguages.gcpLanguageList[targetLanguageGCPIndex], for: .normal)
+        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[sourceLanguageGCPIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[targetLanguageGCPIndex], for: .normal)
         sourceLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         
@@ -263,13 +263,13 @@ class ConversationTranslateViewController: UIViewController {
     
     @objc func changeLanguage() {
         if let sourceLanguage = sourceLanguageButton.titleLabel?.text {
-            temporarySourceLanguageSpeechIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
+            temporarySourceLanguageSpeechIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: sourceLanguage) ?? 0
             print(temporarySourceLanguageSpeechIndex)
             print(sourceLanguage)
         }
         
         if let targetLanguage = targetLanguageButton.titleLabel?.text {
-            temporaryTargetLanguageSpeechIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
+            temporaryTargetLanguageSpeechIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage) ?? 0
             print(temporaryTargetLanguageSpeechIndex)
             print(targetLanguage)
         }
@@ -382,7 +382,7 @@ class ConversationTranslateViewController: UIViewController {
     
     func transcribeAudio(url: URL) {
         let identifier = isSource ? SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[temporarySourceLanguageSpeechIndex] : SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[temporaryTargetLanguageSpeechIndex]
-        
+        print("speech identifier is \(identifier)")
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: identifier))
         let request = SFSpeechURLRecognitionRequest(url: url)
 
@@ -484,8 +484,8 @@ extension ConversationTranslateViewController: UITableViewDataSource {
 
 extension ConversationTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageGCPIndex], for: .normal)
-        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporaryTargetLanguageGCPIndex], for: .normal)
+        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[temporarySourceLanguageGCPIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[temporaryTargetLanguageGCPIndex], for: .normal)
         self.temporarySourceLanguageSpeechIndex = temporarySourceLanguageGCPIndex
         self.temporaryTargetLanguageSpeechIndex = temporaryTargetLanguageGCPIndex
     }

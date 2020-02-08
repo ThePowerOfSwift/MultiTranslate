@@ -23,8 +23,8 @@ struct SupportedLanguages {
         "Bulgarian",
         "Catalan",
         "Cebuano",
-        "Chinese (Simplified)",
-        "Chinese (Traditional)",
+        "Chinese (Mandarin)",
+        "Chinese (HK)",
         "Corsican",
         "Croatian",
         "Czech",
@@ -81,7 +81,7 @@ struct SupportedLanguages {
         "Pashto",
         "Persian",
         "Polish",
-        "Portuguese (Portugal, Brazil)",
+        "Portuguese",
         "Punjabi",
         "Romanian",
         "Russian",
@@ -156,7 +156,7 @@ struct SupportedLanguages {
         "French", "Hebrew", "Hindi", "Croatian", "Hungarian", "Indonesian", "Italian",
         "Italian", "Japanese", "Korean", "Malay", "Norwegian", "Dutch", "Dutch", "Polish",
         "Portuguese", "Portuguese", "Romanian", "Russian", "Slovak", "Swedish", "Thai",
-        "Turkish", "Ukrainian", "Vietnamese", "Chinese", "Chinese"
+        "Turkish", "Ukrainian", "Vietnamese", "Chinese (Mandarin)", "Chinese (HK)"
     ]
     
     static let speechRecognizerSupportedLanguageCode = [

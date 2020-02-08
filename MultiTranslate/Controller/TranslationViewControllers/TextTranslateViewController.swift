@@ -380,19 +380,6 @@ class TextTranslateViewController: UIViewController {
     }
     
     @objc func selectLanguage() {
-        
-        if let sourceLanguage = sourceLanguageLabel.text {
-            temporarySourceLanguageGCPIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
-            print(temporarySourceLanguageGCPIndex)
-            print(sourceLanguage)
-        }
-        
-        if let targetLanguage = targetLanguageLabel.text {
-            temporaryTargetLanguageGCPIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
-            print(temporaryTargetLanguageGCPIndex)
-            print(targetLanguage)
-        }
-        
         //present picker view modal
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
@@ -414,6 +401,8 @@ class TextTranslateViewController: UIViewController {
             self.targetLanguageLabel.text = self.sourceLanguageLabel.text
             self.sourceLanguageLabel.text = exchangeText
         }, completion: nil)
+        
+        swap(&temporarySourceLanguageGCPIndex, &temporaryTargetLanguageGCPIndex)
         
         print("exchange button pressed.")
     }

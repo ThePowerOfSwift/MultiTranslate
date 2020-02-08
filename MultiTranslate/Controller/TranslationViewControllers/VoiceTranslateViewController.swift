@@ -169,7 +169,7 @@ class VoiceTranslateViewController: UIViewController {
 
         microphoneImageContainer.addTarget(self, action: #selector(useMicrophone), for: .touchUpInside)
         
-        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageIndex]
+        sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageIndex]
         targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
         
         let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
@@ -188,18 +188,6 @@ class VoiceTranslateViewController: UIViewController {
     }
     
     @objc func selectLanguage() {
-        if let sourceLanguage = sourceLanguageLabel.text {
-            temporarySourceLanguageIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: sourceLanguage) ?? 0
-            print(temporarySourceLanguageIndex)
-            print(sourceLanguage)
-        }
-        
-        if let targetLanguage = targetLanguageLabel.text {
-            temporaryTargetLanguageIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: targetLanguage) ?? 0
-            print(temporaryTargetLanguageIndex)
-            print(targetLanguage)
-        }
-        
         //present picker view modal
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageIndex

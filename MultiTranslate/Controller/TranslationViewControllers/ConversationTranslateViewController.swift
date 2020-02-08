@@ -253,27 +253,14 @@ class ConversationTranslateViewController: UIViewController {
                 self.targetLanguageButton.setTitle(sourceLanguageButtonTitle, for: .normal)
                 self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
             }
-            
-            swap(&self.temporarySourceLanguageSpeechIndex, &self.temporaryTargetLanguageSpeechIndex)
-            
         }, completion: nil)
+        
+        swap(&self.temporarySourceLanguageSpeechIndex, &self.temporaryTargetLanguageSpeechIndex)
         
         print("exchange button pressed.")
     }
     
     @objc func changeLanguage() {
-        if let sourceLanguage = sourceLanguageButton.titleLabel?.text {
-            temporarySourceLanguageSpeechIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: sourceLanguage) ?? 0
-            print(temporarySourceLanguageSpeechIndex)
-            print(sourceLanguage)
-        }
-        
-        if let targetLanguage = targetLanguageButton.titleLabel?.text {
-            temporaryTargetLanguageSpeechIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage) ?? 0
-            print(temporaryTargetLanguageSpeechIndex)
-            print(targetLanguage)
-        }
-        
         //present picker view modal
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageSpeechIndex

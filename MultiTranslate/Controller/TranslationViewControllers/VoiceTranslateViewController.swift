@@ -68,12 +68,6 @@ class VoiceTranslateViewController: UIViewController {
         return view
     }()
     
-    private let exchangeButtonView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let targetLanguageView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -102,13 +96,15 @@ class VoiceTranslateViewController: UIViewController {
         return label
     }()
     
-    private let exchangeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "exchange"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
-        return button
+    private let arrowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let config = UIImage.SymbolConfiguration(weight: .thin)
+        imageView.image = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
+        imageView.tintColor = .label
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     override func loadView() {
@@ -128,21 +124,16 @@ class VoiceTranslateViewController: UIViewController {
         languageSelectView.heightAnchor.constraint(equalTo: paddingView2.heightAnchor).isActive = true
         
         languageSelectView.HStack(sourceLanguageView,
-                            exchangeButtonView.setWidth(65),
+                            arrowImageView.setWidth(30),
                             targetLanguageView,
                             spacing: 5,
                             alignment: .fill,
                             distribution: .fill)
-        exchangeButtonView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
-
+        arrowImageView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
         
         sourceLanguageView.addSubview(sourceLanguageLabel)
         sourceLanguageLabel.centerYAnchor.constraint(equalTo: sourceLanguageView.centerYAnchor).isActive = true
         sourceLanguageLabel.widthAnchor.constraint(equalTo: sourceLanguageView.widthAnchor).isActive = true
-        
-        exchangeButtonView.addSubview(exchangeButton)
-        exchangeButton.centerXAnchor.constraint(equalTo: exchangeButtonView.centerXAnchor).isActive = true
-        exchangeButton.centerYAnchor.constraint(equalTo: exchangeButtonView.centerYAnchor).isActive = true
 
         targetLanguageView.addSubview(targetLanguageLabel)
         targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true

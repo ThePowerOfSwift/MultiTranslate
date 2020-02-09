@@ -10,6 +10,7 @@ import Foundation
 
 enum TranslateType {
     case text
+    case vision
     case voice
     case conversation
     case targetOnly

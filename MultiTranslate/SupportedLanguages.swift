@@ -166,4 +166,9 @@ struct SupportedLanguages {
         "hr", "hu", "id", "it", "it", "ja", "ko", "ms", "nb", "nl", "nl", "pl", "pt", "pt",
         "ro", "ru", "sk", "sv", "th", "tr", "uk", "vi", "zh", "zh"
     ]
+    
+    static let visionRecognizerSupportedLanguage = [
+        "German", "English", "Spanish", "Finnish", "French", "Italian"
+    ]
+    
 }

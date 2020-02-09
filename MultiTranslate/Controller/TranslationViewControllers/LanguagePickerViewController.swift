@@ -94,6 +94,12 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
             } else {
                 return SupportedLanguages.gcpLanguageList.count
             }
+        case .vision:
+            if component == 0 {
+                return SupportedLanguages.visionRecognizerSupportedLanguage.count
+            } else {
+                return SupportedLanguages.gcpLanguageList.count
+            }
         case .voice:
             if component == 0 {
                 return SupportedLanguages.speechRecognizerSupportedLocale.count
@@ -118,6 +124,12 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
         case .text:
             if component == 0 {
                 return SupportedLanguages.gcpLanguageList[row]
+            } else {
+                return SupportedLanguages.gcpLanguageList[row]
+            }
+        case .vision:
+            if component == 0 {
+                return SupportedLanguages.visionRecognizerSupportedLanguage[row]
             } else {
                 return SupportedLanguages.gcpLanguageList[row]
             }

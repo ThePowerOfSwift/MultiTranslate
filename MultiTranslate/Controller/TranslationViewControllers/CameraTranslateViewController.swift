@@ -18,10 +18,18 @@ import KRProgressHUD
 class CameraTranslateViewController: UIViewController {
     
     var detectedResultString = ""
+    private var temporarySourceLanguageIndex = 0
+    private var temporaryTargetLanguageIndex = 0
     
-    let container = UIView()
+    private let container: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xe1f2fb)
+        
+        return view
+    }()
 
-    let cameraImageContainer: PMSuperButton = {
+    private let cameraImageContainer: PMSuperButton = {
         let button = PMSuperButton()
         button.gradientEnabled = true
         button.gradientStartColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
@@ -33,14 +41,76 @@ class CameraTranslateViewController: UIViewController {
         return button
     }()
     
-    let cameraImage = UIImageView(image: UIImage(named: "color_camera"), contentMode: .scaleAspectFit)
-    let cameraLabel = UILabel(text: "Use camera", font: .systemFont(ofSize: 50, weight: .thin), textAlignment: .center, numberOfLines: 1)
+    private let cameraImage = UIImageView(image: UIImage(named: "color_camera"), contentMode: .scaleAspectFit)
+    private let cameraLabel = UILabel(text: "Use camera", font: .systemFont(ofSize: 50, weight: .thin), textAlignment: .center, numberOfLines: 1)
     
-    let paddingView1 = UIView(backgroundColor: .gray)
-    let paddingView2 = UIView(backgroundColor: .brown)
-    let buttonView = UIView(backgroundColor: .orange)
+    private let languageSelectView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+
+    private let paddingView2: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
     
-    let imagePicker: UIImagePickerController = {
+    private let buttonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private let sourceLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let targetLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let sourceLanguageLabel: UILabel = {
+        let label = UILabel()
+        label.isUserInteractionEnabled = true
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.frame = .zero
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let targetLanguageLabel: UILabel = {
+        let label = UILabel()
+        label.isUserInteractionEnabled = true
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.frame = .zero
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let arrowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let config = UIImage.SymbolConfiguration(weight: .thin)
+        imageView.image = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
+        imageView.tintColor = .label
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         
@@ -69,14 +139,30 @@ class CameraTranslateViewController: UIViewController {
         view.addSubview(container)
         container.edgeTo(view, safeArea: .all)
         
-        container.VStack(paddingView1,
+        container.VStack(languageSelectView,
                          buttonView.setHeight(300),
                          paddingView2,
                          spacing: 10,
                          alignment: .fill,
                          distribution: .fill)
         
-        paddingView1.heightAnchor.constraint(equalTo: paddingView2.heightAnchor).isActive = true
+        languageSelectView.heightAnchor.constraint(equalTo: paddingView2.heightAnchor).isActive = true
+        
+        languageSelectView.HStack(sourceLanguageView,
+                            arrowImageView.setWidth(30),
+                            targetLanguageView,
+                            spacing: 5,
+                            alignment: .fill,
+                            distribution: .fill)
+        arrowImageView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
+        
+        sourceLanguageView.addSubview(sourceLanguageLabel)
+        sourceLanguageLabel.centerYAnchor.constraint(equalTo: sourceLanguageView.centerYAnchor).isActive = true
+        sourceLanguageLabel.widthAnchor.constraint(equalTo: sourceLanguageView.widthAnchor).isActive = true
+
+        targetLanguageView.addSubview(targetLanguageLabel)
+        targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
+        targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
         
         buttonView.VStack(cameraImageContainer.setWidth(150).setHeight(150),
                           cameraLabel,
@@ -100,6 +186,13 @@ class CameraTranslateViewController: UIViewController {
         cameraImageContainer.addTarget(self, action: #selector(useCamera), for: .touchUpInside)
         imagePicker.delegate = self
         
+        sourceLanguageLabel.text = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+        
+        let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
+        sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
+        let targetLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
+        targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
     }
     
     @objc func useCamera() {
@@ -111,6 +204,18 @@ class CameraTranslateViewController: UIViewController {
             print("Camera is not available.")
         }
         
+    }
+    
+    @objc func selectLanguage() {
+        //present picker view modal
+        let viewController = LanguagePickerViewController()
+        viewController.sourceLanguageRow = temporarySourceLanguageIndex
+        viewController.targetLanguageRow = temporaryTargetLanguageIndex
+        viewController.translateType = .vision
+        viewController.delegate = self
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        self.navigationController?.present(navController, animated: true, completion: nil)
     }
     
     func handleDetectedText(request: VNRequest?, error: Error?) {
@@ -182,4 +287,13 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
         }
     }
     
+}
+
+extension CameraTranslateViewController: LanguagePickerDelegate {
+    func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
+        sourceLanguageLabel.text = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageGCPIndex]
+        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        self.temporarySourceLanguageIndex = temporarySourceLanguageGCPIndex
+        self.temporaryTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+    }
 }

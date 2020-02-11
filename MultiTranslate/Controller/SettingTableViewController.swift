@@ -10,17 +10,12 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
 
-    private let sections = ["Text translate", "Camera translate", "Voice translate"]
+    private let sections = ["Text translate language", "Camera translate language", "Voice translate language"]
     
-    private let firstSectionList = ["Source language", "Target language"]
-    private let secondSectionList = ["Source language", "Target language"]
-    private let thirdSectionList = ["Source language", "Target language"]
-    private var sectionList: Array = [Array<String>]()
-    
-    private var firstSectionFunctions = Array<Any>()
-    private var secondSectionFunctions = Array<Any>()
-    private var thirdSectionFunctions = Array<Any>()
-    private var functionList = Array<Any>()
+    private let firstSectionList = ["Source", "Target"]
+    private let secondSectionList = ["Source", "Target"]
+    private let thirdSectionList = ["Source", "Target"]
+    private var sectionList = [Array<String>]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,9 +60,33 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.settingTableViewCellIdentifier, for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.settingTableViewCellIdentifier, for: indexPath)
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: Constants.settingTableViewCellIdentifier)
         cell.textLabel?.text = sectionList[indexPath.section][indexPath.row]
         cell.accessoryType = .disclosureIndicator
+        
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = "detail00"
+            } else {
+                cell.detailTextLabel?.text = "detail01"
+            }
+        case 1:
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = "detail10"
+            } else {
+                cell.detailTextLabel?.text = "detail11"
+            }
+        case 2:
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = "detail20"
+            } else {
+                cell.detailTextLabel?.text = "detail21"
+            }
+        default:
+            return cell
+        }
         
         return cell
     }

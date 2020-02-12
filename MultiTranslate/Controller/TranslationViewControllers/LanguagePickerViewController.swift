@@ -14,7 +14,7 @@ class LanguagePickerViewController: UIViewController {
     var targetLanguageRow = 0
     
 //    var isVoiceTranslate: Bool = false
-    var translateType: TranslateType = .text
+    var languagePickerType: LanguagePickerType = .textTranslate
     
     private var pickerView = UIPickerView()
     
@@ -47,9 +47,12 @@ class LanguagePickerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        switch translateType {
-        case .targetOnly:
+        switch languagePickerType {
+        case .targetLanguage:
             pickerView.selectRow(targetLanguageRow, inComponent: 0, animated: true)
+            
+        case .textSourceSetting, .visionSourceSetting, .speechSourceSetting:
+            pickerView.selectRow(sourceLanguageRow, inComponent: 0, animated: true)
             
         default:
             pickerView.selectRow(sourceLanguageRow, inComponent: 0, animated: true)
@@ -75,8 +78,8 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
  
     // ドラムロールの列数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        switch translateType {
-        case .targetOnly:
+        switch languagePickerType {
+        case .textSourceSetting, .visionSourceSetting, .speechSourceSetting, .targetLanguage:
             return 1
         default:
             return 2
@@ -87,32 +90,38 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
     // ドラムロールの行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        switch translateType {
-        case .text:
+        switch languagePickerType {
+        case .textTranslate:
             if component == 0 {
                 return SupportedLanguages.gcpLanguageList.count
             } else {
                 return SupportedLanguages.gcpLanguageList.count
             }
-        case .vision:
+        case .visionTranslate:
             if component == 0 {
                 return SupportedLanguages.visionRecognizerSupportedLanguage.count
             } else {
                 return SupportedLanguages.gcpLanguageList.count
             }
-        case .voice:
+        case .speechTranslate:
             if component == 0 {
                 return SupportedLanguages.speechRecognizerSupportedLocale.count
             } else {
                 return SupportedLanguages.gcpLanguageList.count
             }
-        case .conversation:
+        case .conversationTranslate:
             if component == 0 {
                 return SupportedLanguages.speechRecognizerSupportedLocale.count
             } else {
                 return SupportedLanguages.speechRecognizerSupportedLocale.count
             }
-        case .targetOnly:
+        case .textSourceSetting:
+            return SupportedLanguages.gcpLanguageList.count
+        case .visionSourceSetting:
+            return SupportedLanguages.visionRecognizerSupportedLanguage.count
+        case .speechSourceSetting:
+            return SupportedLanguages.speechRecognizerSupportedLocale.count
+        case .targetLanguage:
             return SupportedLanguages.gcpLanguageList.count
         }
     }
@@ -120,32 +129,38 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
     // ドラムロールの各タイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        switch translateType {
-        case .text:
+        switch languagePickerType {
+        case .textTranslate:
             if component == 0 {
                 return SupportedLanguages.gcpLanguageList[row]
             } else {
                 return SupportedLanguages.gcpLanguageList[row]
             }
-        case .vision:
+        case .visionTranslate:
             if component == 0 {
                 return SupportedLanguages.visionRecognizerSupportedLanguage[row]
             } else {
                 return SupportedLanguages.gcpLanguageList[row]
             }
-        case .voice:
+        case .speechTranslate:
             if component == 0 {
                 return SupportedLanguages.speechRecognizerSupportedLocale[row]
             } else {
                 return SupportedLanguages.gcpLanguageList[row]
             }
-        case .conversation:
+        case .conversationTranslate:
             if component == 0 {
                 return SupportedLanguages.speechRecognizerSupportedLocale[row]
             } else {
                 return SupportedLanguages.speechRecognizerSupportedLocale[row]
             }
-        case .targetOnly:
+        case .textSourceSetting:
+            return SupportedLanguages.gcpLanguageList[row]
+        case .visionSourceSetting:
+            return SupportedLanguages.visionRecognizerSupportedLanguage[row]
+        case .speechSourceSetting:
+            return SupportedLanguages.speechRecognizerSupportedLocale[row]
+        case .targetLanguage:
             return SupportedLanguages.gcpLanguageList[row]
         }
         
@@ -153,11 +168,12 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
     
     // ドラムロール選択時
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch translateType {
+        switch languagePickerType {
             
-        case .targetOnly:
+        case .targetLanguage:
             targetLanguageRow = row
-            
+        case .textSourceSetting, .visionSourceSetting, .speechSourceSetting:
+            sourceLanguageRow = row
         default:
             if component == 0 {
                 sourceLanguageRow = row

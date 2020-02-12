@@ -183,7 +183,7 @@ class VoiceTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageIndex
         viewController.targetLanguageRow = temporaryTargetLanguageIndex
-        viewController.translateType = .voice
+        viewController.languagePickerType = .speechTranslate
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
@@ -208,7 +208,7 @@ extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate
             viewController.temporarySourceLanguageGCPIndex = index
             viewController.temporaryTargetLanguageGCPIndex = temporaryTargetLanguageIndex
             viewController.sourceInputText.text = sourceText
-            viewController.translateType = .targetOnly
+            viewController.languagePickerType = .targetLanguage
             
             let navController = UINavigationController(rootViewController: viewController)
             present(navController, animated: true, completion: nil)

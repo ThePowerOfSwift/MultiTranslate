@@ -21,7 +21,7 @@ class TextTranslateViewController: UIViewController {
     //MARK: - Variables and Constants
     var temporarySourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
     var temporaryTargetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
-    var translateType: TranslateType = .text
+    var languagePickerType: LanguagePickerType = .textTranslate
     
     private var isStarButtonTapped: Bool = false
     
@@ -271,7 +271,7 @@ class TextTranslateViewController: UIViewController {
         targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
         targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
 
-        if translateType == .targetOnly {
+        if languagePickerType == .targetLanguage {
             sourceLanguageView.isHidden = true
             exchangeButtonView.isHidden = true
         }
@@ -384,7 +384,7 @@ class TextTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
         viewController.targetLanguageRow = temporaryTargetLanguageGCPIndex
-        viewController.translateType = self.translateType
+        viewController.languagePickerType = self.languagePickerType
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         

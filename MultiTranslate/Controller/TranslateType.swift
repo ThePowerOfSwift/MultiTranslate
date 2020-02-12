@@ -8,10 +8,13 @@
 
 import Foundation
 
-enum TranslateType {
-    case text
-    case vision
-    case voice
-    case conversation
-    case targetOnly
+enum LanguagePickerType {
+    case textTranslate
+    case visionTranslate
+    case speechTranslate
+    case conversationTranslate
+    case textSourceSetting
+    case visionSourceSetting
+    case speechSourceSetting
+    case targetLanguage
 }

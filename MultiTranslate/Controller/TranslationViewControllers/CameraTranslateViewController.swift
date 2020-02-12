@@ -211,7 +211,7 @@ class CameraTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageIndex
         viewController.targetLanguageRow = temporaryTargetLanguageIndex
-        viewController.translateType = .vision
+        viewController.languagePickerType = .visionTranslate
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         

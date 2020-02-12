@@ -17,6 +17,24 @@ class SettingTableViewController: UITableViewController {
     private let thirdSectionList = ["Source", "Target"]
     private var sectionList = [Array<String>]()
     
+    private var textSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
+    private var textTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
+    private var cameraSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
+    private var cameraTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
+    private var voiceSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey)
+    private var voiceTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
+    
+    enum LanguageSettingType {
+        case textSource
+        case textTarget
+        case cameraSource
+        case cameraTarget
+        case voiceSource
+        case voiceTarget
+    }
+    
+    private var languageSettingType = LanguageSettingType.textSource
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,12 +44,13 @@ class SettingTableViewController: UITableViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.settingTableViewCellIdentifier)
         tableView.separatorStyle = .none
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
     // MARK: - Table view data source
@@ -68,21 +87,21 @@ class SettingTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                cell.detailTextLabel?.text = "detail00"
+                cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[textSourceLanguageIndex]
             } else {
-                cell.detailTextLabel?.text = "detail01"
+                cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[textTargetLanguageIndex]
             }
         case 1:
             if indexPath.row == 0 {
-                cell.detailTextLabel?.text = "detail10"
+                cell.detailTextLabel?.text = SupportedLanguages.visionRecognizerSupportedLanguage[cameraSourceLanguageIndex]
             } else {
-                cell.detailTextLabel?.text = "detail11"
+                cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[cameraTargetLanguageIndex]
             }
         case 2:
             if indexPath.row == 0 {
-                cell.detailTextLabel?.text = "detail20"
+                cell.detailTextLabel?.text = SupportedLanguages.speechRecognizerSupportedLocale[voiceSourceLanguageIndex]
             } else {
-                cell.detailTextLabel?.text = "detail21"
+                cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[voiceTargetLanguageIndex]
             }
         default:
             return cell
@@ -91,26 +110,46 @@ class SettingTableViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - Table view delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
+                languageSettingType = .textSource
                 didSelectRow(section: 0, row: 0)
+                
+                presentLanguagePicker(languagePickerType: .textSourceSetting, sourceLanguageRow: textSourceLanguageIndex, targetLanguageRow: 0)
             } else {
+                languageSettingType = .textTarget
                 didSelectRow(section: 0, row: 1)
+                
+                presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: textTargetLanguageIndex)
             }
         case 1:
             if indexPath.row == 0 {
+                languageSettingType = .cameraSource
                 didSelectRow(section: 1, row: 0)
+                
+                presentLanguagePicker(languagePickerType: .visionSourceSetting, sourceLanguageRow: cameraSourceLanguageIndex, targetLanguageRow: 0)
             } else {
+                languageSettingType = .cameraTarget
                 didSelectRow(section: 1, row: 1)
+                
+                presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: cameraTargetLanguageIndex)
             }
         case 2:
             if indexPath.row == 0 {
+                languageSettingType = .voiceSource
                 didSelectRow(section: 2, row: 0)
+                
+                presentLanguagePicker(languagePickerType: .speechSourceSetting, sourceLanguageRow: voiceSourceLanguageIndex, targetLanguageRow: 0)
             } else {
+                languageSettingType = .voiceTarget
                 didSelectRow(section: 2, row: 1)
+                
+                presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: voiceTargetLanguageIndex)
             }
         default:
             return
@@ -119,51 +158,27 @@ class SettingTableViewController: UITableViewController {
 
     func didSelectRow(section: Int, row: Int) {
         print("did select row at section: \(section), row: \(row)")
+        print("language setting type is \(languageSettingType)")
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func presentLanguagePicker(languagePickerType: LanguagePickerType, sourceLanguageRow: Int, targetLanguageRow: Int) {
+        let viewController = LanguagePickerViewController()
+        viewController.languagePickerType = languagePickerType
+        viewController.sourceLanguageRow = sourceLanguageRow
+        viewController.targetLanguageRow = targetLanguageRow
+        viewController.isSetting = true
+        viewController.delegate = self
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+// MARK: - Extensions
+
+extension SettingTableViewController: LanguagePickerDelegate {
+    func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
+        // Todo:
+    }
+}
+

@@ -15,6 +15,7 @@ class LanguagePickerViewController: UIViewController {
     
 //    var isVoiceTranslate: Bool = false
     var languagePickerType: LanguagePickerType = .textTranslate
+    var isSetting: Bool = false
     
     private var pickerView = UIPickerView()
     
@@ -40,8 +41,10 @@ class LanguagePickerViewController: UIViewController {
         
         self.view.addSubview(pickerView)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneChange))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelChange))
+        if !isSetting {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneChange))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelChange))
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

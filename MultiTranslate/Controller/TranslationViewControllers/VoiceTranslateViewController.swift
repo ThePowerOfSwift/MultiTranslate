@@ -13,8 +13,10 @@ import PMSuperButton
 class VoiceTranslateViewController: UIViewController {
     
     private var sourceText: String = ""
-    private var temporarySourceLanguageIndex = 0
-    private var temporaryTargetLanguageIndex = 0
+    private var temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey)
+    private var temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
+    private var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey)
+    private var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
 
     private let container: UIView = {
         let view = UIView()
@@ -168,6 +170,24 @@ class VoiceTranslateViewController: UIViewController {
         let targetLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
         targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey) {
+            temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
+            defaultSourceLanguageIndex = temporarySourceLanguageIndex
+            sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageIndex]
+            print("defaultSourceLanguageIndex changed")
+        }
+        
+        if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey) {
+            temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
+            defaultTargetLanguageIndex = temporaryTargetLanguageIndex
+            targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+            print("defaultTargetLanguageIndex changed")
+        }
+    }
         
     @objc func useMicrophone() {
         print("Use microphone tapped.")
@@ -224,7 +244,7 @@ extension VoiceTranslateViewController: SourceTextInputDelegate {
 
 extension VoiceTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLanguage[temporarySourceLanguageGCPIndex]
+        sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageGCPIndex]
         targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
         self.temporarySourceLanguageIndex = temporarySourceLanguageGCPIndex
         self.temporaryTargetLanguageIndex = temporaryTargetLanguageGCPIndex

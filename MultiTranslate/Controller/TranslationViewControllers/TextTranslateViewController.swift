@@ -19,8 +19,11 @@ import RealmSwift
 class TextTranslateViewController: UIViewController {
     
     //MARK: - Variables and Constants
-    var temporarySourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
-    var temporaryTargetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
+    var temporarySourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
+    var temporaryTargetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
+    var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
+    var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
+    
     var languagePickerType: LanguagePickerType = .textTranslate
     
     private var isStarButtonTapped: Bool = false
@@ -371,6 +374,24 @@ class TextTranslateViewController: UIViewController {
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey) {
+            temporarySourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
+            defaultSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+            print("defaultSourceLanguageIndex changed")
+        }
+        
+        if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey) {
+            temporaryTargetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
+            defaultTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+            targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+            print("defaultTargetLanguageIndex changed")
+        }
     }
     
     

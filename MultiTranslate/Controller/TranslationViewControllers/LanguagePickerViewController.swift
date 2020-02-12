@@ -66,6 +66,12 @@ class LanguagePickerViewController: UIViewController {
 //        print(pickerView.selectedRow(inComponent: 1))
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if isSetting {
+            delegate?.didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: sourceLanguageRow, temporaryTargetLanguageGCPIndex: targetLanguageRow)
+        }
+    }
+    
     @objc func doneChange() {
         self.dismiss(animated: true, completion: nil)
         delegate?.didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: sourceLanguageRow, temporaryTargetLanguageGCPIndex: targetLanguageRow)

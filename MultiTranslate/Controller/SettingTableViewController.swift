@@ -39,7 +39,7 @@ class SettingTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Setting"
-
+        self.clearsSelectionOnViewWillAppear = true
         sectionList = [firstSectionList, secondSectionList, thirdSectionList]
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.settingTableViewCellIdentifier)
@@ -48,9 +48,8 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -178,7 +177,33 @@ class SettingTableViewController: UITableViewController {
 
 extension SettingTableViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        // Todo:
+        let userDefaults = UserDefaults.standard
+        
+        switch languageSettingType {
+        case .textSource:
+            textSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(textSourceLanguageIndex, forKey: Constants.textSourceLanguageIndexKey)
+            
+        case .textTarget:
+            textTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+            userDefaults.set(textTargetLanguageIndex, forKey: Constants.textTargetLanguageIndexKey)
+            
+        case .cameraSource:
+            cameraSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(cameraSourceLanguageIndex, forKey: Constants.cameraSourceLanguageIndexKey)
+            
+        case .cameraTarget:
+            cameraTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+            userDefaults.set(cameraTargetLanguageIndex, forKey: Constants.cameraTargetLanguageIndexKey)
+            
+        case .voiceSource:
+            voiceSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(voiceSourceLanguageIndex, forKey: Constants.voiceSourceLanguageIndexKey)
+            
+        case .voiceTarget:
+            voiceTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+            userDefaults.set(voiceTargetLanguageIndex, forKey: Constants.voiceTargetLanguageIndexKey)
+        }
     }
 }
 

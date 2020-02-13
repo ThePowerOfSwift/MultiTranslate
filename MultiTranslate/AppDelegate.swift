@@ -99,6 +99,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         InAppPurchaseManager.completeIAPTransactions()
         
+        initializeFBTranslation()
+        
         return true
     }
 
@@ -128,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dateFormatter.dateFormat = "LL"
         let nameOfMonth = dateFormatter.string(from: now)
         if let intValueOfCurrentMonth = Int(nameOfMonth) {
-            print(intValueOfCurrentMonth)
+            print("This month is \(intValueOfCurrentMonth)")
             
             if lastLaunchMonth == 0 {
                 //First launch of the app.
@@ -149,6 +151,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 CloudKitManager.initializeCloudDatabase()
             }
         }
+    }
+    
+    func initializeFBTranslation() {
+        let allLanguages = TranslateLanguage.allLanguages().compactMap {
+            TranslateLanguage(rawValue: $0.uintValue)
+        }
+        
+        for language in allLanguages {
+            if FBOfflineTranslate.isLanguageDownloaded(language: language) {
+                FBOfflineTranslate.downloadedLanguageCodes.append(language.toLanguageCode())
+                print("\(language.toLanguageCode()) is downloaded.")
+            } else {
+                FBOfflineTranslate.unDownloadedLanguageCodes.append(language.toLanguageCode())
+                print("\(language.toLanguageCode()) is unDownloaded.")
+            }
+        }
+        
+        for code in FBOfflineTranslate.downloadedLanguageCodes {
+            if let index = SupportedLanguages.fbSupportedLanguageCode.firstIndex(of: code) {
+                let language = SupportedLanguages.fbSupportedLanguage[index]
+                FBOfflineTranslate.downloadedLanguages.append(language)
+            }
+        }
+        FBOfflineTranslate.unDownloadedLanguages = SupportedLanguages.fbSupportedLanguage.subtracting(from: FBOfflineTranslate.downloadedLanguages)
+        FBOfflineTranslate.unDownloadedLanguages.sort()
+        FBOfflineTranslate.downloadedLanguages.sort()
+        
+        print(FBOfflineTranslate.unDownloadedLanguages.count)
+        print(FBOfflineTranslate.downloadedLanguages.count)
+        print(FBOfflineTranslate.unDownloadedLanguageCodes.count)
+        print(FBOfflineTranslate.downloadedLanguageCodes.count)
+        print(SupportedLanguages.fbSupportedLanguage.count)
+        print(SupportedLanguages.fbSupportedLanguageCode.count)
     }
 
 }

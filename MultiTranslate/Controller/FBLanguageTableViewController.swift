@@ -9,7 +9,9 @@
 import UIKit
 
 class FBLanguageTableViewController: UITableViewController {
-
+    
+    private let sectionTitles = ["Downloaded languages","Undownloaded languages"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,20 +23,37 @@ class FBLanguageTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return SupportedLanguages.fbSupportedLanguage.count
+        switch section {
+        case 0:
+            return FBOfflineTranslate.downloadedLanguageCodes.count
+        case 1:
+            return FBOfflineTranslate.unDownloadedLanguageCodes.count
+        default:
+            return 0
+        }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.fbLanguageTableViewCellIdentifier, for: indexPath)
-        cell.textLabel?.text = SupportedLanguages.fbSupportedLanguage[indexPath.row]
-
+        
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = FBOfflineTranslate.downloadedLanguages[indexPath.row]
+        case 1:
+            cell.textLabel?.text = FBOfflineTranslate.unDownloadedLanguages[indexPath.row]
+        default:
+            return cell
+        }
+        
         return cell
     }
 

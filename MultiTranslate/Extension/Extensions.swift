@@ -164,3 +164,10 @@ extension UIButton {
     }
 }
 
+extension Array where Element: Hashable {
+    func subtracting(from other: [Element]) -> [Element] {
+        let thisSet = Set(self)
+        let otherSet = Set(other)
+        return Array(thisSet.subtracting(otherSet))
+    }
+}

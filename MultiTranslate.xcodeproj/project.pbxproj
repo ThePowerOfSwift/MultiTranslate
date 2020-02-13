@@ -36,6 +36,7 @@
 		805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */; };
 		805AB0D723DD9B1D00215415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */; };
 		806052EC23F5382700C58BC3 /* FBLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */; };
+		806052EE23F5550900C58BC3 /* FBOfflineTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */; };
 		8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */; };
 		8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */; };
 		8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */; };
@@ -89,6 +90,7 @@
 		805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseProduct.swift; sourceTree = "<group>"; };
 		805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLanguageTableViewController.swift; sourceTree = "<group>"; };
+		806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBOfflineTranslate.swift; sourceTree = "<group>"; };
 		8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewController.swift; sourceTree = "<group>"; };
 		8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewCell.swift; sourceTree = "<group>"; };
 		8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslation.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
 				80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */,
 				807AECB323D5665800EE2569 /* GoogleCloudTranslate.swift */,
+				806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */,
 				8014E75D23ED2C8C00793258 /* TranslateType.swift */,
 				803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */,
 				8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */,
@@ -409,6 +412,7 @@
 				80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */,
 				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
 				80C535C923C56A530044D6F0 /* Constants.swift in Sources */,
+				806052EE23F5550900C58BC3 /* FBOfflineTranslate.swift in Sources */,
 				808E75EB23C43718009A0EB4 /* Stack.swift in Sources */,
 				808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */,
 				803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */,

@@ -18,8 +18,10 @@ import KRProgressHUD
 class CameraTranslateViewController: UIViewController {
     
     var detectedResultString = ""
-    private var temporarySourceLanguageIndex = 0
-    private var temporaryTargetLanguageIndex = 0
+    private var temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
+    private var temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
+    private var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
+    private var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
     
     private let container: UIView = {
         let view = UIView()
@@ -195,6 +197,24 @@ class CameraTranslateViewController: UIViewController {
         targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey) {
+            temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
+            defaultSourceLanguageIndex = temporarySourceLanguageIndex
+            sourceLanguageLabel.text = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+            print("defaultSourceLanguageIndex changed")
+        }
+        
+        if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey) {
+            temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
+            defaultTargetLanguageIndex = temporaryTargetLanguageIndex
+            targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+            print("defaultTargetLanguageIndex changed")
+        }
+    }
+    
     @objc func useCamera() {
         print("Use camera tapped.")
         
@@ -279,9 +299,18 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
             if self.detectedResultString.isEmpty {
                 print("Result is empty.") // UIAlertViewController
             } else {
+                guard let sourceLanguage = self.sourceLanguageLabel.text,
+                    let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
+                
                 let viewController = TextTranslateViewController()
+                viewController.temporarySourceLanguageGCPIndex = index
+                viewController.temporaryTargetLanguageGCPIndex = self.temporaryTargetLanguageIndex
                 viewController.sourceInputText.text = self.detectedResultString
-                self.present(viewController, animated: true, completion: nil)
+                viewController.languagePickerType = .targetLanguage
+                
+                let navController = UINavigationController(rootViewController: viewController)
+                self.present(navController, animated: true, completion: nil)
+                
                 self.detectedResultString = ""
             }
         }

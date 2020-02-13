@@ -10,7 +10,7 @@ import Foundation
 
 import Firebase
 
-struct A {
+struct FBOfflineTranslate {
     
     static var downloadedLanguageCodes = [String]()
     static var unDownloadedLanguageCodes = [String]()

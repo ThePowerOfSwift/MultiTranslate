@@ -8,13 +8,16 @@
 
 import UIKit
 
+import Firebase
+
 class SettingTableViewController: UITableViewController {
 
-    private let sections = ["Text translate language", "Camera translate language", "Voice translate language"]
+    private let sections = ["Text translate language", "Camera translate language", "Voice translate language", "Offline translation module"]
     
     private let firstSectionList = ["Source", "Target"]
     private let secondSectionList = ["Source", "Target"]
     private let thirdSectionList = ["Source", "Target"]
+    private let forthSectionList = ["Offline languages"]
     private var sectionList = [Array<String>]()
     
     private var textSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
@@ -40,7 +43,7 @@ class SettingTableViewController: UITableViewController {
         
         self.title = "Setting"
         self.clearsSelectionOnViewWillAppear = true
-        sectionList = [firstSectionList, secondSectionList, thirdSectionList]
+        sectionList = [firstSectionList, secondSectionList, thirdSectionList, forthSectionList]
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.settingTableViewCellIdentifier)
         tableView.separatorStyle = .none
@@ -72,6 +75,8 @@ class SettingTableViewController: UITableViewController {
             return secondSectionList.count
         case 2:
             return thirdSectionList.count
+        case 3:
+            return forthSectionList.count
         default:
             return 0
         }
@@ -102,6 +107,8 @@ class SettingTableViewController: UITableViewController {
             } else {
                 cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[voiceTargetLanguageIndex]
             }
+        case 3:
+            return cell
         default:
             return cell
         }
@@ -150,6 +157,8 @@ class SettingTableViewController: UITableViewController {
                 
                 presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: voiceTargetLanguageIndex)
             }
+        case 3:
+            presentFBLanguageTable()
         default:
             return
         }
@@ -168,6 +177,11 @@ class SettingTableViewController: UITableViewController {
         viewController.isSetting = true
         viewController.delegate = self
         
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func presentFBLanguageTable() {
+        let viewController = FBLanguageTableViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
 

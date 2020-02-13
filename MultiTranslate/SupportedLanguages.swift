@@ -171,4 +171,14 @@ struct SupportedLanguages {
         "German", "English", "Spanish", "Finnish", "French", "Italian"
     ]
     
+    static let fbSupportedLanguage = ["Afrikaans", "Albanian", "Arabic", "Belarusian", "Bengali", "Bulgarian", "Catalan", "Croatian", "Czech", "Danish", "Dutch", "English",
+                                      "Esperanto", "Estonian", "Finnish", "French", "Galician", "Georgian", "German", "Greek", "Gujarati", "Haitian Creole", "Hebrew", "Hindi",
+                                      "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Kannada", "Korean", "Latvian", "Lithuanian", "Macedonian", "Malay",
+                                      "Maltese", "Marathi", "Norwegian", "Persian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Spanish", "Swahili",
+                                      "Swedish", "Tagalog (Filipino)", "Tamil", "Telugu", "Thai", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Welsh"]
+    
+    static let fbSupportedLanguageCode = ["af", "ar", "be", "bg", "bn", "ca", "cs", "cy", "da", "de", "el", "en", "eo", "es", "et", "fa", "fi", "fr", "ga", "gl", "gu", "he", "hi",
+                                          "hr", "ht", "hu", "id", "is", "it", "ja", "ka", "kn", "ko", "lt", "lv", "mk", "mr", "ms", "mt", "nl", "no", "pl", "pt", "ro", "ru", "sk",
+                                          "sl", "sq", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "vi", "zh"]
+    
 }

@@ -161,10 +161,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for language in allLanguages {
             if FBOfflineTranslate.isLanguageDownloaded(language: language) {
                 FBOfflineTranslate.downloadedLanguageCodes.append(language.toLanguageCode())
-                print("\(language.toLanguageCode()) is downloaded.")
             } else {
                 FBOfflineTranslate.unDownloadedLanguageCodes.append(language.toLanguageCode())
-                print("\(language.toLanguageCode()) is unDownloaded.")
             }
         }
         
@@ -177,13 +175,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBOfflineTranslate.unDownloadedLanguages = SupportedLanguages.fbSupportedLanguage.subtracting(from: FBOfflineTranslate.downloadedLanguages)
         FBOfflineTranslate.unDownloadedLanguages.sort()
         FBOfflineTranslate.downloadedLanguages.sort()
-        
-        print(FBOfflineTranslate.unDownloadedLanguages.count)
-        print(FBOfflineTranslate.downloadedLanguages.count)
-        print(FBOfflineTranslate.unDownloadedLanguageCodes.count)
-        print(FBOfflineTranslate.downloadedLanguageCodes.count)
-        print(SupportedLanguages.fbSupportedLanguage.count)
-        print(SupportedLanguages.fbSupportedLanguageCode.count)
     }
 
 }

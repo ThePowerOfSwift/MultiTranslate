@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         InAppPurchaseManager.completeIAPTransactions()
         
-        initializeFBTranslation()
+        FBOfflineTranslate.initializeFBTranslation()
         
         return true
     }
@@ -153,28 +153,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func initializeFBTranslation() {
-        let allLanguages = TranslateLanguage.allLanguages().compactMap {
-            TranslateLanguage(rawValue: $0.uintValue)
-        }
-        
-        for language in allLanguages {
-            if FBOfflineTranslate.isLanguageDownloaded(language: language) {
-                FBOfflineTranslate.downloadedLanguageCodes.append(language.toLanguageCode())
-            } else {
-                FBOfflineTranslate.unDownloadedLanguageCodes.append(language.toLanguageCode())
-            }
-        }
-        
-        for code in FBOfflineTranslate.downloadedLanguageCodes {
-            if let index = SupportedLanguages.fbSupportedLanguageCode.firstIndex(of: code) {
-                let language = SupportedLanguages.fbSupportedLanguage[index]
-                FBOfflineTranslate.downloadedLanguages.append(language)
-            }
-        }
-        FBOfflineTranslate.unDownloadedLanguages = SupportedLanguages.fbSupportedLanguage.subtracting(from: FBOfflineTranslate.downloadedLanguages)
-        FBOfflineTranslate.unDownloadedLanguages.sort()
-        FBOfflineTranslate.downloadedLanguages.sort()
-    }
-
 }

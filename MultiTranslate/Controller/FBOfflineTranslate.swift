@@ -18,6 +18,12 @@ struct FBOfflineTranslate {
     static var unDownloadedLanguages = [String]()
     
     static func initializeFBTranslation() {
+        
+        FBOfflineTranslate.downloadedLanguageCodes.removeAll()
+        FBOfflineTranslate.downloadedLanguages.removeAll()
+        FBOfflineTranslate.unDownloadedLanguages.removeAll()
+        FBOfflineTranslate.unDownloadedLanguageCodes.removeAll()
+        
         let allLanguages = TranslateLanguage.allLanguages().compactMap {
             TranslateLanguage(rawValue: $0.uintValue)
         }

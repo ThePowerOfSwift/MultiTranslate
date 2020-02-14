@@ -17,7 +17,16 @@ class FBLanguageTableViewController: UITableViewController {
         
         tableView.register(FBLanguageTableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
         tableView.allowsSelection = false
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadTableView))
+        
+        NotificationCenter.default.addObserver(forName: .fbDownloadedLanguagesDidUpdate, object: nil, queue: .main) { (notification) in
+            self.tableView.reloadData()
+        }
+        
+        NotificationCenter.default.addObserver(forName: .firebaseMLModelDownloadDidFail, object: nil, queue: .main) { (notification) in
+            print("Firebase language model download failded.")
+            //Show UIAlert here.
+        }
     }
 
     // MARK: - Table view data source
@@ -51,11 +60,13 @@ class FBLanguageTableViewController: UITableViewController {
             cell.languageNameLabel.text = FBOfflineTranslate.downloadedLanguages[indexPath.row]
             cell.downloadButton.isHidden = true
             cell.downloadedImageView.isHidden = false
+            cell.indicator.isHidden = true
             
         case 1:
             cell.languageNameLabel.text = FBOfflineTranslate.unDownloadedLanguages[indexPath.row]
             cell.downloadedImageView.isHidden = true
             cell.downloadButton.isHidden = false
+            cell.indicator.isHidden = true
             
         default:
             return cell
@@ -64,5 +75,8 @@ class FBLanguageTableViewController: UITableViewController {
         return cell
     }
 
+    @objc func reloadTableView() {
+        tableView.reloadData()
+    }
 }
 

@@ -8,10 +8,11 @@
 
 import UIKit
 
+import Firebase
+import KRProgressHUD
+
 class FBLanguageTableViewCell: UITableViewCell {
     
-    var isDownloaded: Bool = false
-
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +60,14 @@ class FBLanguageTableViewCell: UITableViewCell {
         return label
     }()
     
+    let indicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.style = .medium
+        
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -82,8 +91,10 @@ class FBLanguageTableViewCell: UITableViewCell {
 
         detailView.addSubview(downloadButton)
         downloadButton.edgeTo(detailView)
-        
         downloadButton.addTarget(self, action: #selector(downloadFBLanguage), for: .touchUpInside)
+        
+        detailView.addSubview(indicator)
+        indicator.edgeTo(detailView)
     }
     
     required init?(coder: NSCoder) {
@@ -91,8 +102,70 @@ class FBLanguageTableViewCell: UITableViewCell {
     }
     
     @objc func downloadFBLanguage() {
-        if let text = self.languageNameLabel.text {
-            print("\(text) is tapped.")
+        KRProgressHUD.show()
+        
+        downloadButton.isHidden = true
+        downloadedImageView.isHidden = true
+        indicator.isHidden = false
+        indicator.startAnimating()
+
+        guard let language = self.languageNameLabel.text,
+            let index = SupportedLanguages.fbSupportedLanguage.firstIndex(of: language),
+            let translateLanguage = TranslateLanguage(rawValue: UInt(index)) else { return }
+
+        let requestModel = FBOfflineTranslate.model(forLanguage: translateLanguage)
+        let condition = ModelDownloadConditions(allowsCellularAccess: false, allowsBackgroundDownloading: true)
+        ModelManager.modelManager().download(requestModel, conditions: condition)
+        
+        fbLanguageModelDownloadDidSuccessObserver(of: requestModel)
+        fbLanguageModelDownloadDidFailObserver()
+        
+    }
+    
+    func fbLanguageModelDownloadDidSuccessObserver(of requestModel: TranslateRemoteModel) {
+        NotificationCenter.default.addObserver(
+            forName: .firebaseMLModelDownloadDidSucceed,
+            object: nil,
+            queue: nil
+        ) { [weak self] notification in
+            guard let strongSelf = self,
+                let userInfo = notification.userInfo,
+                let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue]
+                    as? TranslateRemoteModel,
+                model == requestModel
+                else { return }
+            // The model was downloaded and is available on the device
+            strongSelf.indicator.stopAnimating()
+            strongSelf.indicator.isHidden = true
+            strongSelf.downloadButton.isHidden = true
+            strongSelf.downloadedImageView.isHidden = false
+            
+            FBOfflineTranslate.initializeFBTranslation()
+            
+            NotificationCenter.default.post(name: .fbDownloadedLanguagesDidUpdate, object: nil)
+            
+            KRProgressHUD.dismiss()
+            print("download completed.")
+        }
+    }
+    
+    func fbLanguageModelDownloadDidFailObserver() {
+        NotificationCenter.default.addObserver(
+            forName: .firebaseMLModelDownloadDidFail,
+            object: nil,
+            queue: nil
+        ) { [weak self] notification in
+            guard let strongSelf = self,
+                let userInfo = notification.userInfo,
+                let model = userInfo[ModelDownloadUserInfoKey.remoteModel.rawValue]
+                    as? TranslateRemoteModel
+                else { return }
+            let error = userInfo[ModelDownloadUserInfoKey.error.rawValue]
+            print("download error is occured: \(error.debugDescription)")
+            strongSelf.indicator.stopAnimating()
+            strongSelf.indicator.isHidden = true
+            strongSelf.downloadButton.isHidden = false
+            strongSelf.downloadedImageView.isHidden = true
         }
     }
 }

@@ -38,6 +38,7 @@
 		806052EC23F5382700C58BC3 /* FBLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */; };
 		806052EE23F5550900C58BC3 /* FBOfflineTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */; };
 		806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */; };
+		806482E123F6A7C5006BBDD5 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806482E023F6A7C5006BBDD5 /* NotificationNameExtension.swift */; };
 		8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */; };
 		8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */; };
 		8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */; };
@@ -93,6 +94,7 @@
 		806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLanguageTableViewController.swift; sourceTree = "<group>"; };
 		806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBOfflineTranslate.swift; sourceTree = "<group>"; };
 		806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLanguageTableViewCell.swift; sourceTree = "<group>"; };
+		806482E023F6A7C5006BBDD5 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewController.swift; sourceTree = "<group>"; };
 		8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewCell.swift; sourceTree = "<group>"; };
 		8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslation.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				8052A1CD23C2DFC000883123 /* Extensions.swift */,
+				806482E023F6A7C5006BBDD5 /* NotificationNameExtension.swift */,
 				808E75E823C43718009A0EB4 /* Stack.swift */,
 				808E75EA23C43718009A0EB4 /* UIStackView+.swift */,
 				808E75E923C43718009A0EB4 /* UIView+.swift */,
@@ -450,6 +453,7 @@
 				806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
 				80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */,
+				806482E123F6A7C5006BBDD5 /* NotificationNameExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

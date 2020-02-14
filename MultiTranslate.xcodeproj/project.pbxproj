@@ -37,6 +37,7 @@
 		805AB0D723DD9B1D00215415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */; };
 		806052EC23F5382700C58BC3 /* FBLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */; };
 		806052EE23F5550900C58BC3 /* FBOfflineTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */; };
+		806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */; };
 		8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */; };
 		8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */; };
 		8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */; };
@@ -91,6 +92,7 @@
 		805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLanguageTableViewController.swift; sourceTree = "<group>"; };
 		806052ED23F5550900C58BC3 /* FBOfflineTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBOfflineTranslate.swift; sourceTree = "<group>"; };
+		806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLanguageTableViewCell.swift; sourceTree = "<group>"; };
 		8078D1D823D6C71E007FAF85 /* SavedTranslationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewController.swift; sourceTree = "<group>"; };
 		8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsTableViewCell.swift; sourceTree = "<group>"; };
 		8078D1DC23D6EE61007FAF85 /* SavedTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslation.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				8052A1CF23C2E03800883123 /* IconPagingCell.swift */,
 				803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */,
 				8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */,
+				806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */,
 				803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* LanguagePickerViewController.swift in Sources */,
+				806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
 				80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */,
 			);

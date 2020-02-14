@@ -15,7 +15,7 @@ class FBLanguageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
+        tableView.register(FBLanguageTableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
         tableView.allowsSelection = false
 
     }
@@ -43,13 +43,20 @@ class FBLanguageTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.fbLanguageTableViewCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.fbLanguageTableViewCellIdentifier, for: indexPath) as! FBLanguageTableViewCell
+//        let cell = FBLanguageTableViewCell()
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = FBOfflineTranslate.downloadedLanguages[indexPath.row]
+            cell.languageNameLabel.text = FBOfflineTranslate.downloadedLanguages[indexPath.row]
+            cell.downloadButton.isHidden = true
+            cell.downloadedImageView.isHidden = false
+            
         case 1:
-            cell.textLabel?.text = FBOfflineTranslate.unDownloadedLanguages[indexPath.row]
+            cell.languageNameLabel.text = FBOfflineTranslate.unDownloadedLanguages[indexPath.row]
+            cell.downloadedImageView.isHidden = true
+            cell.downloadButton.isHidden = false
+            
         default:
             return cell
         }

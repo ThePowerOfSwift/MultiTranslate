@@ -48,12 +48,22 @@ struct FBOfflineTranslate {
     }
     
     static func model(forLanguage language: TranslateLanguage) -> TranslateRemoteModel {
-      return TranslateRemoteModel.translateRemoteModel(language: language)
+        return TranslateRemoteModel.translateRemoteModel(language: language)
+    }
+    
+    static func createLanguageModel(from language: String) -> TranslateRemoteModel? {
+        guard let index = SupportedLanguages.fbSupportedLanguage.firstIndex(of: language),
+            let translateLanguage = TranslateLanguage(rawValue: UInt(index)) else {
+            return nil
+        }
+        
+        let model = self.model(forLanguage: translateLanguage)
+        return model
     }
 
     static func isLanguageDownloaded(language: TranslateLanguage) -> Bool {
-      let model = self.model(forLanguage: language)
-      let modelManager = ModelManager.modelManager()
-      return modelManager.isModelDownloaded(model)
+        let model = self.model(forLanguage: language)
+        let modelManager = ModelManager.modelManager()
+        return modelManager.isModelDownloaded(model)
     }
 }

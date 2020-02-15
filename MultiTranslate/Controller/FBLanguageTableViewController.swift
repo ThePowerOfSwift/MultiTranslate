@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Firebase
+
 class FBLanguageTableViewController: UITableViewController {
     
     private let sectionTitles = ["Downloaded languages","Undownloaded languages"]
@@ -50,7 +52,6 @@ class FBLanguageTableViewController: UITableViewController {
         }
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.fbLanguageTableViewCellIdentifier, for: indexPath) as! FBLanguageTableViewCell
 //        let cell = FBLanguageTableViewCell()
@@ -74,7 +75,57 @@ class FBLanguageTableViewController: UITableViewController {
         
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        switch indexPath.section {
+        case 0:
+            return true
+        case 1:
+            return false
+        default:
+            return false
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let cell = tableView.cellForRow(at: indexPath) as! FBLanguageTableViewCell
+        guard let language = cell.languageNameLabel.text else { return nil }
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            if language == "English" {
+                print("English language cannot be deleted.")
+                //Show UIAlert
+                completion(true)
+            } else {
+                self.deleteFBLanguage(of: language)
+                print("delete \(language) language model")
+                completion(true)
+            }
+            
+        }
+        
+        let config = UIImage.SymbolConfiguration(weight: .regular)
+        deleteAction.image = UIImage(systemName: "trash", withConfiguration: config)
+        deleteAction.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    func deleteFBLanguage(of language: String) {
+        guard let requestModel = FBOfflineTranslate.createLanguageModel(from: language) else { return }
+        ModelManager.modelManager().deleteDownloadedModel(requestModel) { (error) in
+            if error == nil {
+                print("language \(language) is deleted successfully.")
+                //Show UIAlert
+                FBOfflineTranslate.initializeFBTranslation()
+                self.tableView.reloadData()
+            } else {
+                print(error!.localizedDescription)
+                //Show UIAlert
+            }
+        }
+    }
+    
     @objc func reloadTableView() {
         tableView.reloadData()
     }

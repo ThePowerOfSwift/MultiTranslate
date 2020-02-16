@@ -66,4 +66,18 @@ struct FBOfflineTranslate {
         let modelManager = ModelManager.modelManager()
         return modelManager.isModelDownloaded(model)
     }
+    
+    static func generateFBTranslator(from sourceLanguage: String, to targetLanguage: String) -> Translator? {
+        guard let sourceLanguageIndex = SupportedLanguages.fbSupportedLanguage.firstIndex(of: sourceLanguage),
+            let targetLanguageIndex = SupportedLanguages.fbSupportedLanguage.firstIndex(of: targetLanguage),
+            let sourceLanguageEnum = TranslateLanguage(rawValue: UInt(sourceLanguageIndex)),
+            let targetLanguageEnum = TranslateLanguage(rawValue: UInt(targetLanguageIndex)) else {
+                return nil
+        }
+        
+        let options = TranslatorOptions(sourceLanguage: sourceLanguageEnum, targetLanguage: targetLanguageEnum)
+        let translator = NaturalLanguage.naturalLanguage().translator(options: options)
+        
+        return translator
+    }
 }

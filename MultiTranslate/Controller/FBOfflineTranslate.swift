@@ -19,32 +19,32 @@ struct FBOfflineTranslate {
     
     static func initializeFBTranslation() {
         
-        FBOfflineTranslate.downloadedLanguageCodes.removeAll()
-        FBOfflineTranslate.downloadedLanguages.removeAll()
-        FBOfflineTranslate.unDownloadedLanguages.removeAll()
-        FBOfflineTranslate.unDownloadedLanguageCodes.removeAll()
+        self.downloadedLanguageCodes.removeAll()
+        self.downloadedLanguages.removeAll()
+        self.unDownloadedLanguages.removeAll()
+        self.unDownloadedLanguageCodes.removeAll()
         
         let allLanguages = TranslateLanguage.allLanguages().compactMap {
             TranslateLanguage(rawValue: $0.uintValue)
         }
         
         for language in allLanguages {
-            if FBOfflineTranslate.isLanguageDownloaded(language: language) {
-                FBOfflineTranslate.downloadedLanguageCodes.append(language.toLanguageCode())
+            if self.isLanguageDownloaded(language: language) {
+                self.downloadedLanguageCodes.append(language.toLanguageCode())
             } else {
-                FBOfflineTranslate.unDownloadedLanguageCodes.append(language.toLanguageCode())
+                self.unDownloadedLanguageCodes.append(language.toLanguageCode())
             }
         }
         
-        for code in FBOfflineTranslate.downloadedLanguageCodes {
+        for code in self.downloadedLanguageCodes {
             if let index = SupportedLanguages.fbSupportedLanguageCode.firstIndex(of: code) {
                 let language = SupportedLanguages.fbSupportedLanguage[index]
-                FBOfflineTranslate.downloadedLanguages.append(language)
+                self.downloadedLanguages.append(language)
             }
         }
-        FBOfflineTranslate.unDownloadedLanguages = SupportedLanguages.fbSupportedLanguage.subtracting(from: FBOfflineTranslate.downloadedLanguages)
-        FBOfflineTranslate.unDownloadedLanguages.sort()
-        FBOfflineTranslate.downloadedLanguages.sort()
+        self.unDownloadedLanguages = SupportedLanguages.fbSupportedLanguage.subtracting(from: self.downloadedLanguages)
+        self.unDownloadedLanguages.sort()
+        self.downloadedLanguages.sort()
     }
     
     static func model(forLanguage language: TranslateLanguage) -> TranslateRemoteModel {

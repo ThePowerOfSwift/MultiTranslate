@@ -110,7 +110,7 @@ class FBLanguageTableViewCell: UITableViewCell {
         indicator.startAnimating()
 
         guard let language = self.languageNameLabel.text,
-            let requestModel = FBOfflineTranslate.createLanguageModel(from: language) else { return }
+            let requestModel = FBOfflineTranslate.createTranslateRemoteModel(from: language) else { return }
         
         let condition = ModelDownloadConditions(allowsCellularAccess: false, allowsBackgroundDownloading: true)
         ModelManager.modelManager().download(requestModel, conditions: condition)

@@ -55,7 +55,7 @@ struct FBOfflineTranslate {
         return TranslateRemoteModel.translateRemoteModel(language: language)
     }
     
-    static func createLanguageModel(from language: String) -> TranslateRemoteModel? {
+    static func createTranslateRemoteModel(from language: String) -> TranslateRemoteModel? {
         guard let index = SupportedLanguages.fbSupportedLanguage.firstIndex(of: language),
             let translateLanguage = TranslateLanguage(rawValue: UInt(index)) else {
             return nil

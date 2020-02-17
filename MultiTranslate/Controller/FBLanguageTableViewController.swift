@@ -112,7 +112,7 @@ class FBLanguageTableViewController: UITableViewController {
     }
     
     func deleteFBLanguage(of language: String) {
-        guard let requestModel = FBOfflineTranslate.createLanguageModel(from: language) else { return }
+        guard let requestModel = FBOfflineTranslate.createTranslateRemoteModel(from: language) else { return }
         ModelManager.modelManager().deleteDownloadedModel(requestModel) { (error) in
             if error == nil {
                 print("language \(language) is deleted successfully.")

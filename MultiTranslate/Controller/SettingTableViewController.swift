@@ -12,12 +12,13 @@ import Firebase
 
 class SettingTableViewController: UITableViewController {
 
-    private let sections = ["Text translate language", "Camera translate language", "Voice translate language", "Offline translation module"]
+    private let sections = ["Text translate language", "Camera translate language", "Voice translate language", "Conversation translate language", "Offline translation module"]
     
-    private let firstSectionList = ["Source", "Target"]
-    private let secondSectionList = ["Source", "Target"]
-    private let thirdSectionList = ["Source", "Target"]
-    private let forthSectionList = ["Offline languages"]
+    private let textTranslateLanguageSection = ["Source", "Target"]
+    private let cameraTranslateLanguageSection = ["Source", "Target"]
+    private let voiceTranslateLanguageSection = ["Source", "Target"]
+    private let conversationLanguageSection = ["Source", "Target"]
+    private let offlineLanguagesSection = ["Offline languages"]
     private var sectionList = [Array<String>]()
     
     private var textSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
@@ -26,6 +27,8 @@ class SettingTableViewController: UITableViewController {
     private var cameraTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
     private var voiceSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey)
     private var voiceTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
+    private var conversationSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey)
+    private var conversationTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey)
     
     enum LanguageSettingType {
         case textSource
@@ -34,6 +37,8 @@ class SettingTableViewController: UITableViewController {
         case cameraTarget
         case voiceSource
         case voiceTarget
+        case conversationSource
+        case conversationTarget
     }
     
     private var languageSettingType = LanguageSettingType.textSource
@@ -43,7 +48,7 @@ class SettingTableViewController: UITableViewController {
         
         self.title = "Setting"
         self.clearsSelectionOnViewWillAppear = true
-        sectionList = [firstSectionList, secondSectionList, thirdSectionList, forthSectionList]
+        sectionList = [textTranslateLanguageSection, cameraTranslateLanguageSection, voiceTranslateLanguageSection, conversationLanguageSection, offlineLanguagesSection]
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.settingTableViewCellIdentifier)
         tableView.separatorStyle = .none
@@ -70,13 +75,15 @@ class SettingTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
-            return firstSectionList.count
+            return textTranslateLanguageSection.count
         case 1:
-            return secondSectionList.count
+            return cameraTranslateLanguageSection.count
         case 2:
-            return thirdSectionList.count
+            return voiceTranslateLanguageSection.count
         case 3:
-            return forthSectionList.count
+            return conversationLanguageSection.count
+        case 4:
+            return offlineLanguagesSection.count
         default:
             return 0
         }
@@ -108,6 +115,12 @@ class SettingTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[voiceTargetLanguageIndex]
             }
         case 3:
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = SupportedLanguages.speechRecognizerSupportedLocale[conversationSourceLanguageIndex]
+            } else {
+                cell.detailTextLabel?.text = SupportedLanguages.speechRecognizerSupportedLocale[conversationTargetLanguageIndex]
+            }
+        case 4:
             return cell
         default:
             return cell
@@ -158,6 +171,18 @@ class SettingTableViewController: UITableViewController {
                 presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: voiceTargetLanguageIndex)
             }
         case 3:
+            if indexPath.row == 0 {
+                languageSettingType = .conversationSource
+                didSelectRow(section: 2, row: 0)
+                
+                presentLanguagePicker(languagePickerType: .speechSourceSetting, sourceLanguageRow: conversationSourceLanguageIndex, targetLanguageRow: 0)
+            } else {
+                languageSettingType = .conversationTarget
+                didSelectRow(section: 2, row: 1)
+                
+                presentLanguagePicker(languagePickerType: .speechSourceSetting, sourceLanguageRow: conversationTargetLanguageIndex, targetLanguageRow: 0)
+            }
+        case 4:
             presentFBLanguageTable()
         default:
             return
@@ -217,6 +242,14 @@ extension SettingTableViewController: LanguagePickerDelegate {
         case .voiceTarget:
             voiceTargetLanguageIndex = temporaryTargetLanguageGCPIndex
             userDefaults.set(voiceTargetLanguageIndex, forKey: Constants.voiceTargetLanguageIndexKey)
+            
+        case .conversationSource:
+            conversationSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(conversationSourceLanguageIndex, forKey: Constants.conversationSourceLanguageIndexKey)
+            
+        case .conversationTarget:
+            conversationTargetLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(conversationTargetLanguageIndex, forKey: Constants.conversationTargetLanguageIndexKey)
         }
     }
 }

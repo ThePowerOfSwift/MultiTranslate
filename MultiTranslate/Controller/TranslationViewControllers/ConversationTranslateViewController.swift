@@ -16,8 +16,11 @@ import SwiftyJSON
 
 class ConversationTranslateViewController: UIViewController {
     
-    private var temporarySourceLanguageSpeechIndex = 0
-    private var temporaryTargetLanguageSpeechIndex = 0
+    //MARK: - Varities and Constants Declaration
+    private var temporarySourceLanguageSpeechIndex = UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey)
+    private var temporaryTargetLanguageSpeechIndex = UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey)
+    private var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey)
+    private var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey)
     
     private var recordingSession: AVAudioSession!
     private var audioRecorder: AVAudioRecorder?
@@ -28,6 +31,7 @@ class ConversationTranslateViewController: UIViewController {
     private var conversations: Results<Conversation>!
     private var isSource: Bool = true
     
+    //MARK: - UI Parts Declaration
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,25 +53,83 @@ class ConversationTranslateViewController: UIViewController {
         return view
     }()
 
-    private let languageButtonsView = UIView(backgroundColor: .yellow)
-    private let recordButtonsView = UIView(backgroundColor: .black)
+    private let languageButtonsView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemYellow
+        return view
+    }()
+    private let recordButtonsView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
+    }()
     
-    private let sourceLanguageView = UIView(backgroundColor: .red)
-    private let languageExchangeView = UIView(backgroundColor: .systemBackground)
-    private let targetLanguageView = UIView(backgroundColor: .green)
-
-    private let sourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
-    private let targetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
+    private let sourceLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemRed
+        return view
+    }()
     
-    private let sourceLanguageButton = UIButton(title: "languageList[0]", titleColor: .label)
-    private let languageExchangeButton = UIButton(image: UIImage(named: "exchange")!)
-    private let targetLanguageButton = UIButton(title: "languageList[2]", titleColor: .label)
+    private let languageExchangeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
-    private let sourceRecorderButtonView = UIView()
-    private let recorderButtonPaddingView = UIView()
-    private let targetRecorderButtonView = UIView()
+    private let targetLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemGreen
+        return view
+    }()
     
-    private lazy var sourceRecorderButton: UIButton = {
+    private let sourceLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[0], for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.systemGray, for: .highlighted)
+        return button
+    }()
+    
+    private let languageExchangeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "exchange")!, for: .normal)
+        return button
+    }()
+    
+    private let targetLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[0], for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.systemGray, for: .highlighted)
+        return button
+    }()
+    
+    private let sourceRecorderButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let recorderButtonPaddingView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let targetRecorderButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let sourceRecorderButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .red
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -79,7 +141,7 @@ class ConversationTranslateViewController: UIViewController {
         return button
     }()
     
-    private lazy var sourceRecorderButtonBorder: UIView = {
+    private let sourceRecorderButtonBorder: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
@@ -92,7 +154,7 @@ class ConversationTranslateViewController: UIViewController {
         return view
     }()
     
-    private lazy var targetRecorderButton: UIButton = {
+    private let targetRecorderButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .red
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -104,7 +166,7 @@ class ConversationTranslateViewController: UIViewController {
         return button
     }()
     
-    private lazy var targetRecorderButtonBorder: UIView = {
+    private let targetRecorderButtonBorder: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black
@@ -117,6 +179,8 @@ class ConversationTranslateViewController: UIViewController {
         return view
     }()
     
+    
+    //MARK: - ViewController life circle
     override func loadView() {
         super.loadView()
         
@@ -208,8 +272,8 @@ class ConversationTranslateViewController: UIViewController {
 //        conversationTableView.showLastRow()
         
         languageExchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
-        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[sourceLanguageGCPIndex], for: .normal)
-        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[targetLanguageGCPIndex], for: .normal)
+        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageSpeechIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporaryTargetLanguageSpeechIndex], for: .normal)
         sourceLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         
@@ -237,6 +301,25 @@ class ConversationTranslateViewController: UIViewController {
         perform(#selector(showBottom), with: nil, afterDelay: 0.05)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey) {
+            temporarySourceLanguageSpeechIndex = UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey)
+            defaultSourceLanguageIndex = temporarySourceLanguageSpeechIndex
+            sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageSpeechIndex], for: .normal)
+            print("defaultSourceLanguageIndex changed")
+        }
+        
+        if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey) {
+            temporaryTargetLanguageSpeechIndex = UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey)
+            defaultTargetLanguageIndex = temporaryTargetLanguageSpeechIndex
+            targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporaryTargetLanguageSpeechIndex], for: .normal)
+            print("defaultTargetLanguageIndex changed")
+        }
+    }
+    
+    //MARK: - Functions
     @objc func showBottom() {
         if !conversations.isEmpty {
             let indexPath = IndexPath(row: conversations.count - 1, section: 0)
@@ -507,8 +590,8 @@ extension ConversationTranslateViewController: UITableViewDataSource {
 
 extension ConversationTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[temporarySourceLanguageGCPIndex], for: .normal)
-        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLanguage[temporaryTargetLanguageGCPIndex], for: .normal)
+        sourceLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageGCPIndex], for: .normal)
+        targetLanguageButton.setTitle(SupportedLanguages.speechRecognizerSupportedLocale[temporaryTargetLanguageGCPIndex], for: .normal)
         self.temporarySourceLanguageSpeechIndex = temporarySourceLanguageGCPIndex
         self.temporaryTargetLanguageSpeechIndex = temporaryTargetLanguageGCPIndex
     }

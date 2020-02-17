@@ -392,24 +392,60 @@ class ConversationTranslateViewController: UIViewController {
     
     func translateText() {
         
+        guard let sourceLanguageText = sourceLanguageButton.titleLabel?.text,
+            let targetLanuageText = targetLanguageButton.titleLabel?.text else {
+                return
+        }
+        
         let textToTranslate = extractedText
 
         let sourceLanguageCode: String
         let targetLanguageCode: String
+        let sourceLanguage: String
+        let targetLanguage: String
+        
         if isSource {
             sourceLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporarySourceLanguageSpeechIndex]
             targetLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporaryTargetLanguageSpeechIndex]
+            sourceLanguage = sourceLanguageText
+            targetLanguage = targetLanuageText
         } else {
             sourceLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporaryTargetLanguageSpeechIndex]
             targetLanguageCode = SupportedLanguages.speechRecognizerSupportedLanguageCode[temporarySourceLanguageSpeechIndex]
+            sourceLanguage = targetLanuageText
+            targetLanguage = sourceLanguageText
         }
-        
-        print("sourceLanguageCode is \(sourceLanguageCode)")
-        print("targetLanguageCode is \(targetLanguageCode)")
-        
-        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguageCode, targetLanguage: targetLanguageCode, textToTranslate: textToTranslate) { (translatedText, error) in
-            if let text = translatedText {
-                self.createNewConversation(using: text)
+
+        if isOfflineTranslateAvailable(from: sourceLanguage, to: targetLanguage) {
+            performFBOfflineTranslate(from: sourceLanguage, to: targetLanguage, for: textToTranslate)
+        } else {
+            performGoogleCloudTranslate(from: sourceLanguageCode, to: targetLanguageCode, for: textToTranslate)
+        }
+    }
+    
+    func isOfflineTranslateAvailable(from sourceLanguage: String, to targetLanguage: String) -> Bool {
+        return FBOfflineTranslate.isTranslationPairSupportedByFBOfflineTranslate(from: sourceLanguage, to: targetLanguage) &&
+            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: sourceLanguage) &&
+            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: targetLanguage)
+    }
+    
+    func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
+        guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
+        fbTranslator.translate(textToTranslate) { (translatedText, error) in
+            if let result = translatedText {
+                self.createNewConversation(using: result)
+                print("the FB translation is: \(result)")
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    func performGoogleCloudTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage, textToTranslate: textToTranslate) { (translatedText, error) in
+            if let result = translatedText {
+                self.createNewConversation(using: result)
+                print("the GCP translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
             }

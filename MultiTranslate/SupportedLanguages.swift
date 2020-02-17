@@ -175,7 +175,7 @@ struct SupportedLanguages {
                                       "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian Creole",
                                       "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian",
                                       "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian",
-                                      "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog (Filipino)", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese"]
+                                      "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog (Filipino)", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese (Mandarin)"]
     
     static let fbSupportedLanguageCode = ["af", "ar", "be", "bg", "bn", "ca", "cs", "cy", "da", "de", "el", "en", "eo", "es", "et", "fa", "fi", "fr", "ga", "gl", "gu", "he", "hi",
                                           "hr", "ht", "hu", "id", "is", "it", "ja", "ka", "kn", "ko", "lt", "lv", "mk", "mr", "ms", "mt", "nl", "no", "pl", "pt", "ro", "ru", "sk",

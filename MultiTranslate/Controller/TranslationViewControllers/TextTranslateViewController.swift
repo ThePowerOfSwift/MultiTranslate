@@ -487,27 +487,58 @@ class TextTranslateViewController: UIViewController {
     }
     
     func performTranslate() {
-        guard let text = sourceInputText.text else { return }
+        guard let textToTranslate = sourceInputText.text,
+            let sourceLanguage = sourceLanguageLabel.text,
+            let targetLanguage = targetLanguageLabel.text else { return }
         let sourceLanguageCode = SupportedLanguages.gcpLanguageCode[temporarySourceLanguageGCPIndex]
         let targetLanguageCode = SupportedLanguages.gcpLanguageCode[temporaryTargetLanguageGCPIndex]
-        print("sourceLanguageCode is \(sourceLanguageCode)")
-        print("targetLanguageCode is \(targetLanguageCode)")
-        
-        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguageCode, targetLanguage: targetLanguageCode, textToTranslate: text) { (translatedText, error) in
-            if let text = translatedText {
-                self.starButton.isHidden = false
-                self.isStarButtonTapped = false
-                self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
-                self.starButton.tintColor = .gray
-                
-                self.speechButton.isHidden = false
-                
-                self.targetOutputText.isHidden = false
-                self.targetOutputText.text = text
+
+        if isOfflineTranslateAvailable(from: sourceLanguage, to: targetLanguage) {
+            performFBOfflineTranslate(from: sourceLanguage, to: targetLanguage, for: textToTranslate)
+        } else {
+            performGoogleCloudTranslate(from: sourceLanguageCode, to: targetLanguageCode, for: textToTranslate)
+        }
+    }
+    
+    func isOfflineTranslateAvailable(from sourceLanguage: String, to targetLanguage: String) -> Bool {
+        return FBOfflineTranslate.isTranslationPairSupportedByFBOfflineTranslate(from: sourceLanguage, to: targetLanguage) &&
+            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: sourceLanguage) &&
+            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: targetLanguage)
+    }
+    
+    func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
+        guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
+        fbTranslator.translate(textToTranslate) { (translatedText, error) in
+            if let result = translatedText {
+                self.showResult(result: result)
+                print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
             }
         }
+    }
+    
+    func performGoogleCloudTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage, textToTranslate: textToTranslate) { (translatedText, error) in
+            if let result = translatedText {
+                self.showResult(result: result)
+                print("the GCP translation is \(result)")
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    func showResult(result: String) {
+        starButton.isHidden = false
+        isStarButtonTapped = false
+        starButton.setImage(UIImage(systemName: "star"), for: .normal)
+        starButton.tintColor = .gray
+        
+        speechButton.isHidden = false
+        
+        targetOutputText.isHidden = false
+        targetOutputText.text = result
     }
     
     @objc func starButtonTapped() {

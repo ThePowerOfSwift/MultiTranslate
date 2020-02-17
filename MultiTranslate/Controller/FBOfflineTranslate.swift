@@ -47,6 +47,10 @@ struct FBOfflineTranslate {
         self.downloadedLanguages.sort()
     }
     
+    static func isTranslationPairSupportedByFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String) -> Bool {
+        return SupportedLanguages.fbSupportedLanguage.contains(sourceLanguage) && SupportedLanguages.fbSupportedLanguage.contains(targetLanguage)
+    }
+    
     static func model(forLanguage language: TranslateLanguage) -> TranslateRemoteModel {
         return TranslateRemoteModel.translateRemoteModel(language: language)
     }
@@ -65,6 +69,31 @@ struct FBOfflineTranslate {
         let model = self.model(forLanguage: language)
         let modelManager = ModelManager.modelManager()
         return modelManager.isModelDownloaded(model)
+    }
+    
+    static func createTranslateLanguageModel(for language: String) -> TranslateLanguage? {
+        if let languageIndex = SupportedLanguages.fbSupportedLanguage.firstIndex(of: language) {
+            return TranslateLanguage(rawValue: UInt(languageIndex))
+        } else {
+            return nil
+        }
+    }
+    
+//    static func isTranslationPairDownloaded(from sourceLanguage: String, to targetLanguage: String) -> Bool {
+//        guard let sourceLanguageModel = self.createTranslateLanguageModel(for: sourceLanguage),
+//            let targetLanguageModel = self.createTranslateLanguageModel(for: targetLanguage) else {
+//                return false
+//        }
+//
+//        return isLanguageDownloaded(language: sourceLanguageModel) && isLanguageDownloaded(language: targetLanguageModel)
+//    }
+    
+    static func isTranslateLanguageModelDownloaded(for language: String) -> Bool {
+        guard let languageModel = self.createTranslateLanguageModel(for: language) else {
+                return false
+        }
+        
+        return isLanguageDownloaded(language: languageModel)
     }
     
     static func generateFBTranslator(from sourceLanguage: String, to targetLanguage: String) -> Translator? {

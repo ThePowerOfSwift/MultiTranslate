@@ -11,6 +11,7 @@
 		0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EFDA43BB77410DA9EAFA73 /* amplifyconfiguration.json */; };
 		8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */; };
 		8014E75E23ED2C8C00793258 /* TranslateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8014E75D23ED2C8C00793258 /* TranslateType.swift */; };
+		801CA5CB23FD183F00C5285C /* SubscritionPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */; };
 		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
 		8037C0CD23E0FBB000DD3B09 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */; };
 		8037C0CF23E1002800DD3B09 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8037C0CE23E1002800DD3B09 /* StoreKit.framework */; };
@@ -64,6 +65,7 @@
 		7A32ED9C279B46E2913F1257 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = awsconfiguration.json; path = ./awsconfiguration.json; sourceTree = "<group>"; };
 		8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTranslateViewController.swift; sourceTree = "<group>"; };
 		8014E75D23ED2C8C00793258 /* TranslateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateType.swift; sourceTree = "<group>"; };
+		801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscritionPlanTableViewCell.swift; sourceTree = "<group>"; };
 		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
 		8037C0CB23E0FBAA00DD3B09 /* MultiTranslate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiTranslate.entitlements; sourceTree = "<group>"; };
 		8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -207,6 +209,7 @@
 				803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */,
 				8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */,
 				806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */,
+				801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
 				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
 				80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */,
+				801CA5CB23FD183F00C5285C /* SubscritionPlanTableViewCell.swift in Sources */,
 				805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				809455B023E7E88A0056A501 /* PurchasePageViewController.swift in Sources */,

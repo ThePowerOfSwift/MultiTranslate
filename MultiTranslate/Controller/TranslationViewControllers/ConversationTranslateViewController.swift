@@ -201,7 +201,7 @@ class ConversationTranslateViewController: UIViewController {
             print("Failed to record!")
         }
         
-        perform(#selector(showBottom), with: nil, afterDelay: 0.05)
+//        perform(#selector(showBottom), with: nil, afterDelay: 0.05)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -222,13 +222,14 @@ class ConversationTranslateViewController: UIViewController {
             languageSelector.setTitle(targetLanguage, forSegmentAt: 1)
             print("defaultTargetLanguageIndex changed")
         }
+        perform(#selector(showBottom), with: nil, afterDelay: 0.05)
     }
     
     //MARK: - Functions
     @objc func showBottom() {
         if !conversations.isEmpty {
             let indexPath = IndexPath(row: conversations.count - 1, section: 0)
-            conversationTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+            conversationTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
     

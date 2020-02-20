@@ -167,7 +167,7 @@ class AccountViewController: UIViewController {
         
         planSelector.addTarget(self, action: #selector(planSelectorValueChanged(_:)), for: .valueChanged)
         
-        print(retrievedProducts)
+        print(InAppPurchaseManager.retrievedProducts)
         subscritionPlanTableView.dataSource = self
         subscritionPlanTableView.delegate = self
         
@@ -211,10 +211,10 @@ extension AccountViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.subscritionPlanTableViewCellIdentifier, for: indexPath) as! SubscritionPlanTableViewCell
         
         if isYearlyPlan {
-            cell.priceLabel.text = retrievedProducts[indexPath.row * 2].localizedPrice!
+            cell.priceLabel.text = InAppPurchaseManager.retrievedProducts[indexPath.row * 2].localizedPrice!
             cell.priceExplanationLabel.text = "/year"
         } else {
-            cell.priceLabel.text = retrievedProducts[indexPath.row * 2 + 1].localizedPrice!
+            cell.priceLabel.text = InAppPurchaseManager.retrievedProducts[indexPath.row * 2 + 1].localizedPrice!
             cell.priceExplanationLabel.text = "/month"
         }
         
@@ -250,7 +250,7 @@ extension AccountViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        InAppPurchaseManager.purchaseProduct(with: retrievedProducts[indexPath.row].productIdentifier)
+        InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[indexPath.row].productIdentifier)
     }
 }
 

@@ -89,7 +89,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "then \(retrievedProducts[0].localizedPrice!) / year"
+        label.text = "then \(InAppPurchaseManager.retrievedProducts[0].localizedPrice!) / year"
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .label
         label.sizeToFit()
@@ -99,8 +99,8 @@ class PurchasePageViewController: UIViewController {
     
     private let promotionTitle3: UILabel = {
         let label = UILabel()
-        let monthlyPrice = Double(truncating: retrievedProducts[1].price)
-        let yearlyPrice = Double(truncating: retrievedProducts[0].price)
+        let monthlyPrice = Double(truncating: InAppPurchaseManager.retrievedProducts[1].price)
+        let yearlyPrice = Double(truncating: InAppPurchaseManager.retrievedProducts[0].price)
         let savedPrice = monthlyPrice * 12 - yearlyPrice as NSNumber
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -457,10 +457,10 @@ class PurchasePageViewController: UIViewController {
     }
     
     @objc func subscribeButtonTapped() {
-        InAppPurchaseManager.purchaseProduct(with: retrievedProducts[0].productIdentifier)
+        InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[0].productIdentifier)
     }
 
     @objc func subscribeMonthlyButtonTapped() {
-        InAppPurchaseManager.purchaseProduct(with: retrievedProducts[1].productIdentifier)
+        InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[1].productIdentifier)
     }
 }

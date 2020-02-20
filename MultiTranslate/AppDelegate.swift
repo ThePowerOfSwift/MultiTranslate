@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 import Firebase
 import IQKeyboardManager
@@ -24,80 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
             print(fileURL)
         }
-                
-//        let config = Realm.Configuration(
-//          // 新しいスキーマバージョンを設定します。以前のバージョンより大きくなければなりません。
-//          // （スキーマバージョンを設定したことがなければ、最初は0が設定されています）
-//          schemaVersion: 1,
-//
-//          // マイグレーション処理を記述します。古いスキーマバージョンのRealmを開こうとすると
-//          // 自動的にマイグレーションが実行されます。
-//          migrationBlock: { migration, oldSchemaVersion in
-//            // 最初のマイグレーションの場合、`oldSchemaVersion`は0です
-//            if (oldSchemaVersion < 1) {
-//              // 何もする必要はありません！1
-//              // Realmは自動的に新しく追加されたプロパティと、削除されたプロパティを認識します。
-//              // そしてディスク上のスキーマを自動的にアップデートします。
-//            }
-//          })
-//
-//        // デフォルトRealmに新しい設定を適用します
-//        Realm.Configuration.defaultConfiguration = config
+        
+        initializeInAppPurchase()
 
-        let realm = try! Realm()
-        let inAppPurchaseProducts = realm.objects(InAppPurchaseProduct.self)
-//        let realm: Realm
-//        do {
-//            realm = try Realm()
-//        } catch {
-//            print("Error initialising Realm, \(error.localizedDescription)")
-//        }
+        initializeRealm()
         
         initializeUserDefaults()
+        
         initializeCloudDatabase()
         
-        FirebaseApp.configure()
-        let firestore = Firestore.firestore()
-        firestore.collection("InAppPurchaseProducts").getDocuments { (querySnapshot, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-            } else {
-                
-                do {
-                    try realm.write {
-                        realm.delete(inAppPurchaseProducts)
-                    }
-                } catch {
-                    print("Error adding item, \(error)")
-                }
-                
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    
-                    guard let productID = data["productID"] as? String,
-                        let type = data["type"] as? String,
-                        let order = data["order"] as? Int else { return }
-                    
-                    let inAppPurchaseProduct = InAppPurchaseProduct()
-                    inAppPurchaseProduct.productID = productID
-                    inAppPurchaseProduct.type = type
-                    inAppPurchaseProduct.order = order
-                    do {
-                        try realm.write {
-                            realm.add(inAppPurchaseProduct)
-                        }
-                    } catch {
-                        print("Error adding item, \(error)")
-                    }
-                
-                    InAppPurchaseManager.retrieveProductsInfo(with: productID)
-                    InAppPurchaseManager.verifyPurchase(with: productID)
-                    
-                }
-            }
-        }
-        
-        InAppPurchaseManager.completeIAPTransactions()
+        initializeFirebase()
         
         FBOfflineTranslate.initializeFBTranslation()
         
@@ -145,12 +82,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func initializeRealm() {
+//        let config = Realm.Configuration(
+//          // 新しいスキーマバージョンを設定します。以前のバージョンより大きくなければなりません。
+//          // （スキーマバージョンを設定したことがなければ、最初は0が設定されています）
+//          schemaVersion: 1,
+//
+//          // マイグレーション処理を記述します。古いスキーマバージョンのRealmを開こうとすると
+//          // 自動的にマイグレーションが実行されます。
+//          migrationBlock: { migration, oldSchemaVersion in
+//            // 最初のマイグレーションの場合、`oldSchemaVersion`は0です
+//            if (oldSchemaVersion < 1) {
+//              // 何もする必要はありません！1
+//              // Realmは自動的に新しく追加されたプロパティと、削除されたプロパティを認識します。
+//              // そしてディスク上のスキーマを自動的にアップデートします。
+//            }
+//          })
+//
+//        // デフォルトRealmに新しい設定を適用します
+//        Realm.Configuration.defaultConfiguration = config
+        
+        let _ = try! Realm()
+    }
+    
     func initializeCloudDatabase() {
         CloudKitManager.isCountRecordEmpty { (isEmpty) in
             if isEmpty {
                 CloudKitManager.initializeCloudDatabase()
             }
         }
+    }
+    
+    func initializeFirebase() {
+        FirebaseApp.configure()
+    }
+    
+    func initializeInAppPurchase() {
+        let skProduct = SKProduct()
+        for _ in 0 ... 5 {
+            InAppPurchaseManager.retrievedProducts.append(skProduct)
+        }
+        
+        InAppPurchaseManager.retrieveProductsInfo(with: Constants.inAppPurchaseProductIdentifiersSet)
+        
+        for id in Constants.inAppPurchaseProductIdentifiers {
+            InAppPurchaseManager.verifyPurchase(with: id)
+        }
+        
+        InAppPurchaseManager.completeIAPTransactions()
     }
     
 }

@@ -36,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
         print("the app is going background")
-        for product in retrievedProducts {
+        for product in InAppPurchaseManager.retrievedProducts {
             InAppPurchaseManager.verifyPurchase(with: product.productIdentifier)
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 import StoreKit
 import SwiftyStoreKit
 
-var retrievedProducts = [SKProduct]()
+//var retrievedProducts = [SKProduct]()
 
 enum UserType: String {
     case guestUser = "GuestUser"
@@ -21,12 +21,19 @@ enum UserType: String {
 
 struct InAppPurchaseManager {
     
-    static func retrieveProductsInfo(with productIdentifier: String) {
-        SwiftyStoreKit.retrieveProductsInfo([productIdentifier]) { (result) in
+    static var retrievedProducts = [SKProduct]()
+    
+    static func retrieveProductsInfo(with productIdentifierSet: Set<String>) {
+        SwiftyStoreKit.retrieveProductsInfo(productIdentifierSet) { (result) in
             if result.error == nil {
                 for product in result.retrievedProducts {
-                    print("Product: \(product.localizedTitle),description: \(product.localizedDescription), price: \(product.localizedPrice!)")
-                    retrievedProducts.append(product)
+                    if let index = Constants.inAppPurchaseProductIdentifiers.firstIndex(of: product.productIdentifier) {
+                        self.retrievedProducts[index] = product
+                    }
+                }
+                
+                for product in self.retrievedProducts {
+                    print(product.productIdentifier)
                 }
                 
                 if !result.invalidProductIDs.isEmpty {
@@ -130,7 +137,7 @@ struct InAppPurchaseManager {
             }
         }
         
-        for product in retrievedProducts {
+        for product in self.retrievedProducts {
             verifyPurchase(with: product.productIdentifier)
         }
     }

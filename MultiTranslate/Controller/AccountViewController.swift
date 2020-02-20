@@ -250,7 +250,11 @@ extension AccountViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[indexPath.row].productIdentifier)
+        if isYearlyPlan {
+            InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[indexPath.row * 2].productIdentifier)
+        } else {
+            InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[indexPath.row * 2 + 1].productIdentifier)
+        }
     }
 }
 

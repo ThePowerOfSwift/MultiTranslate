@@ -101,6 +101,15 @@ class TranslationViewController: UIViewController {
                 }
             }
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "tray.and.arrow.down"), style: .plain, target: self, action: #selector(showDownloadLanguageModelPage))
+    }
+    
+    @objc func showDownloadLanguageModelPage() {
+        let viewController = FBLanguageTableViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
     }
     
 }

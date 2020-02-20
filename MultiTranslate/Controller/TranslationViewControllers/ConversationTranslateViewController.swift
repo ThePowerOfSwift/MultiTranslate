@@ -222,6 +222,10 @@ class ConversationTranslateViewController: UIViewController {
             languageSelector.setTitle(targetLanguage, forSegmentAt: 1)
             print("defaultTargetLanguageIndex changed")
         }
+        
+        let titleInfo = ["title" : "Conversation"]
+        NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
+        
         perform(#selector(showBottom), with: nil, afterDelay: 0.05)
     }
     

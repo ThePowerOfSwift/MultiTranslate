@@ -392,6 +392,9 @@ class TextTranslateViewController: UIViewController {
             targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
             print("defaultTargetLanguageIndex changed")
         }
+        
+        let titleInfo = ["title" : "Text"]
+        NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
     

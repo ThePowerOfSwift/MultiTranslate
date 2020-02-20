@@ -93,18 +93,15 @@ class TranslationViewController: UIViewController {
         view.addSubview(pagingViewController.view)
         view.constrainToEdges(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
+        
+        NotificationCenter.default.addObserver(forName: .translationViewControllerDidChange, object: nil, queue: .main) { (notification) in
+            if let titleInfo = notification.userInfo as? [String : String] {
+                for (_, newTitleName) in titleInfo {
+                    self.title = newTitleName
+                }
+            }
+        }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 

@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let fbDownloadedLanguagesDidUpdate = Notification.Name(rawValue: "fbDownloadedLanguagesDidUpdate")
+    static let translationViewControllerDidChange = Notification.Name(rawValue: "translationViewControllerDidChange")
 }

@@ -187,6 +187,9 @@ class VoiceTranslateViewController: UIViewController {
             targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
             print("defaultTargetLanguageIndex changed")
         }
+        
+        let titleInfo = ["title" : "Voice"]
+        NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
         
     @objc func useMicrophone() {

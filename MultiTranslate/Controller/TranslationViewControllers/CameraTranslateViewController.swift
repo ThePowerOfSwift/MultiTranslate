@@ -213,6 +213,9 @@ class CameraTranslateViewController: UIViewController {
             targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
             print("defaultTargetLanguageIndex changed")
         }
+        
+        let titleInfo = ["title" : "Camera"]
+        NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
     @objc func useCamera() {

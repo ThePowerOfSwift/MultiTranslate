@@ -47,7 +47,7 @@ class SubscritionPlanTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .natural
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.sizeToFit()
         return label
     }()
@@ -57,7 +57,7 @@ class SubscritionPlanTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .natural
         label.textColor = .systemGray3
-        label.font = UIFont.systemFont(ofSize: 16)
+//        label.font = UIFont.systemFont(ofSize: 16)
         label.sizeToFit()
         return label
     }()
@@ -67,7 +67,7 @@ class SubscritionPlanTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .natural
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16)
+//        label.font = UIFont.systemFont(ofSize: 16)
         label.sizeToFit()
         return label
     }()
@@ -77,7 +77,7 @@ class SubscritionPlanTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .natural
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16)
+//        label.font = UIFont.systemFont(ofSize: 16)
         label.sizeToFit()
         return label
     }()
@@ -113,7 +113,7 @@ class SubscritionPlanTableViewCell: UITableViewCell {
         
         titleView.addSubview(subTitleLabel)
         subTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        subTitleLabel.topAnchor.constraint(equalTo: titleView.centerYAnchor, constant: 8).isActive = true
+        subTitleLabel.topAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
         
         priceView.addSubview(priceLabel)
         priceLabel.leadingAnchor.constraint(equalTo: priceView.leadingAnchor, constant: 8).isActive = true
@@ -121,7 +121,7 @@ class SubscritionPlanTableViewCell: UITableViewCell {
         
         priceView.addSubview(priceExplanationLabel)
         priceExplanationLabel.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor).isActive = true
-        priceExplanationLabel.topAnchor.constraint(equalTo: priceView.centerYAnchor, constant: 8).isActive = true
+        priceExplanationLabel.topAnchor.constraint(equalTo: priceView.centerYAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {

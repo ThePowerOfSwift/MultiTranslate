@@ -50,6 +50,9 @@
 		808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EA23C43718009A0EB4 /* UIStackView+.swift */; };
 		808E75EF23C45F90009A0EB4 /* LanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E75EE23C45F90009A0EB4 /* LanguagePickerViewController.swift */; };
 		809455B023E7E88A0056A501 /* PurchasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809455AF23E7E88A0056A501 /* PurchasePageViewController.swift */; };
+		80A403D623FF650100E84231 /* AboutSubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403D523FF650100E84231 /* AboutSubscriptionViewController.swift */; };
+		80A403D823FF652E00E84231 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403D723FF652E00E84231 /* TermsOfUseViewController.swift */; };
+		80A403DA23FF655400E84231 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403D923FF655400E84231 /* PrivacyPolicyViewController.swift */; };
 		80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */; };
 		80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB6A723CF3EDA00F81D40 /* Conversation.swift */; };
 		80C535C923C56A530044D6F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535C823C56A530044D6F0 /* Constants.swift */; };
@@ -109,6 +112,9 @@
 		808E75EA23C43718009A0EB4 /* UIStackView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		808E75EE23C45F90009A0EB4 /* LanguagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerViewController.swift; sourceTree = "<group>"; };
 		809455AF23E7E88A0056A501 /* PurchasePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePageViewController.swift; sourceTree = "<group>"; };
+		80A403D523FF650100E84231 /* AboutSubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSubscriptionViewController.swift; sourceTree = "<group>"; };
+		80A403D723FF652E00E84231 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
+		80A403D923FF655400E84231 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
 		80BDB6A723CF3EDA00F81D40 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		80C535C823C56A530044D6F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -234,6 +240,9 @@
 				80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */,
 				806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */,
 				809455AF23E7E88A0056A501 /* PurchasePageViewController.swift */,
+				80A403D523FF650100E84231 /* AboutSubscriptionViewController.swift */,
+				80A403D723FF652E00E84231 /* TermsOfUseViewController.swift */,
+				80A403D923FF655400E84231 /* PrivacyPolicyViewController.swift */,
 				80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */,
 				80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */,
 				8052A1E323C3059100883123 /* TranslationViewControllers */,
@@ -424,6 +433,7 @@
 				806052EE23F5550900C58BC3 /* FBOfflineTranslate.swift in Sources */,
 				808E75EB23C43718009A0EB4 /* Stack.swift in Sources */,
 				808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */,
+				80A403D623FF650100E84231 /* AboutSubscriptionViewController.swift in Sources */,
 				803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */,
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
 				8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */,
@@ -439,6 +449,7 @@
 				805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				809455B023E7E88A0056A501 /* PurchasePageViewController.swift in Sources */,
+				80A403DA23FF655400E84231 /* PrivacyPolicyViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,
 				8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */,
@@ -447,6 +458,7 @@
 				8078D1DB23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift in Sources */,
 				80DB054423EAABD9003DE94D /* SupportedLanguages.swift in Sources */,
 				8052A1CE23C2DFC000883123 /* Extensions.swift in Sources */,
+				80A403D823FF652E00E84231 /* TermsOfUseViewController.swift in Sources */,
 				8078D1D923D6C71E007FAF85 /* SavedTranslationsTableViewController.swift in Sources */,
 				80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */,
 				8052A1D623C2F65F00883123 /* IconItem.swift in Sources */,

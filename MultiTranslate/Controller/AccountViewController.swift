@@ -21,7 +21,7 @@ class AccountViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+//        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
@@ -46,6 +46,7 @@ class AccountViewController: UIViewController {
     private let subtitleContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .systemRed
         return view
     }()
     
@@ -73,6 +74,8 @@ class AccountViewController: UIViewController {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 17)
         label.textColor = .systemGray
+        
+//        label.backgroundColor = .systemBlue
         return label
     }()
     
@@ -106,8 +109,72 @@ class AccountViewController: UIViewController {
         return tableView
     }()
     
+    private let additionalInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .label
+        return view
+    }()
+    
+    private let subscriptionInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+    
+    private let termsOfUseInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+    
+    private let privacyPolicyInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+    
+    private let subscriptionInformationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("About subscription", for: .normal)
+        button.setTitleColor(.systemGray2, for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return button
+    }()
+    
+    private let termsOfUseInformationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Terms of use", for: .normal)
+        button.setTitleColor(.systemGray2, for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return button
+    }()
+    
+    private let privacyPolicyInformationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Privacy policy", for: .normal)
+        button.setTitleColor(.systemGray2, for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return button
+    }()
+    
     override func loadView() {
         super.loadView()
+        
+        let viewHeight = self.view.frame.height
+        let viewWidth = self.view.frame.width
+        
+        print("viewHeight is \(viewHeight)")
+        print("viewWidth is \(viewWidth)")
         
         view.addSubview(container)
         container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -115,15 +182,16 @@ class AccountViewController: UIViewController {
         container.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         container.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        container.VStack(expressionContainerView.setHeight(250),
-                         selectorContainer.setHeight(45),
+        container.VStack(expressionContainerView.setHeight(viewHeight * 0.28),
+                         selectorContainer.setHeight(viewHeight * 0.065),
                          tableContainerView,
+                         additionalInformationView.setHeight(viewHeight * 0.015),
                          spacing: 0,
                          alignment: .fill,
-                         distribution: .fill).padTop(48)
+                         distribution: .fill).padTop(viewHeight * 0.03).padBottom(viewHeight * 0.03)
         
         expressionContainerView.VStack(titleContainerView,
-                                       imageContainerView.setHeight(175),
+                                       imageContainerView.setHeight(viewHeight * 0.195),
                                        subtitleContainerView,
                                        spacing: 0,
                                        alignment: .fill,
@@ -144,16 +212,34 @@ class AccountViewController: UIViewController {
         subtitleLabel.centerInSuperview()
         
         selectorContainer.addSubview(planSelector)
-        planSelector.topAnchor.constraint(equalTo: selectorContainer.topAnchor, constant: 15).isActive = true
+        planSelector.topAnchor.constraint(equalTo: selectorContainer.topAnchor, constant: viewHeight * 0.027).isActive = true
         planSelector.bottomAnchor.constraint(equalTo: selectorContainer.bottomAnchor).isActive = true
-        planSelector.leadingAnchor.constraint(equalTo: selectorContainer.leadingAnchor, constant: 88).isActive = true
-        planSelector.trailingAnchor.constraint(equalTo: selectorContainer.trailingAnchor, constant: -88).isActive = true
+        planSelector.leadingAnchor.constraint(equalTo: selectorContainer.leadingAnchor, constant: viewWidth * 0.21).isActive = true
+        planSelector.trailingAnchor.constraint(equalTo: selectorContainer.trailingAnchor, constant: -viewWidth * 0.21).isActive = true
 
         tableContainerView.addSubview(subscritionPlanTableView)
-        subscritionPlanTableView.topAnchor.constraint(equalTo: tableContainerView.topAnchor, constant: 32).isActive = true
+        subscritionPlanTableView.topAnchor.constraint(equalTo: tableContainerView.topAnchor, constant: 15).isActive = true
         subscritionPlanTableView.leadingAnchor.constraint(equalTo: tableContainerView.leadingAnchor).isActive = true
         subscritionPlanTableView.bottomAnchor.constraint(equalTo: tableContainerView.bottomAnchor).isActive = true
         subscritionPlanTableView.trailingAnchor.constraint(equalTo: tableContainerView.trailingAnchor).isActive = true
+        
+        additionalInformationView.HStack(subscriptionInformationView,
+                                         termsOfUseInformationView,
+                                         privacyPolicyInformationView,
+                                         spacing: 1,
+                                         alignment: .fill,
+                                         distribution: .fillEqually)
+        
+        subscriptionInformationView.addSubview(subscriptionInformationButton)
+        subscriptionInformationButton.centerYAnchor.constraint(equalTo: subscriptionInformationView.centerYAnchor).isActive = true
+        subscriptionInformationButton.trailingAnchor.constraint(equalTo: subscriptionInformationView.trailingAnchor, constant: -5).isActive = true
+        
+        termsOfUseInformationView.addSubview(termsOfUseInformationButton)
+        termsOfUseInformationButton.centerInSuperview()
+        
+        privacyPolicyInformationView.addSubview(privacyPolicyInformationButton)
+        privacyPolicyInformationButton.centerYAnchor.constraint(equalTo: privacyPolicyInformationView.centerYAnchor).isActive = true
+        privacyPolicyInformationButton.leadingAnchor.constraint(equalTo: privacyPolicyInformationView.leadingAnchor, constant: 5).isActive = true
     }
 
 
@@ -173,6 +259,10 @@ class AccountViewController: UIViewController {
         
         subscritionPlanTableView.register(SubscritionPlanTableViewCell.self, forCellReuseIdentifier: Constants.subscritionPlanTableViewCellIdentifier)
         subscritionPlanTableView.separatorStyle = .none
+        
+        subscriptionInformationButton.addTarget(self, action: #selector(showAboutSubscription), for: .touchUpInside)
+        termsOfUseInformationButton.addTarget(self, action: #selector(showTermsOfUse), for: .touchUpInside)
+        privacyPolicyInformationButton.addTarget(self, action: #selector(showPrivacyPolicy), for: .touchUpInside)
     }
     
     @objc func restorePurchase() {
@@ -198,6 +288,27 @@ class AccountViewController: UIViewController {
         default:
             print("default plan...")
         }
+    }
+    
+    @objc func showAboutSubscription() {
+        let viewController = AboutSubscriptionViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func showTermsOfUse() {
+        let viewController = TermsOfUseViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func showPrivacyPolicy() {
+        let viewController = PrivacyPolicyViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
     }
 
 }

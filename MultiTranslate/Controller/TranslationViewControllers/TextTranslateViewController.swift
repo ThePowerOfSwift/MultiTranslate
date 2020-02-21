@@ -35,15 +35,13 @@ class TextTranslateViewController: UIViewController {
     
     private var cloudDBTranslatedCharacters = 0
     
-//    private let sourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.sourceLanguageGCPIndexKey)
-//    private let targetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.targetLanguageGCPIndexKey)
     
     //MARK: - UI Parts Declaration
     
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
@@ -59,15 +57,213 @@ class TextTranslateViewController: UIViewController {
         return view
     }()
     
+    private let sourceLanguageButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    private let sourceLanguageButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let sourceLanguageButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let sourceLanguageButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        
+        return view
+    }()
+    
+    private let sourceLanguageButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        
+        return view
+    }()
+    
     private let exchangeButtonView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    private let exchangeButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    private let exchangeButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let exchangeButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let exchangeButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        
+        return view
+    }()
+    
+    private let exchangeButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        
+        return view
+    }()
+    
     private let targetLanguageView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let targetLanguageButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    private let targetLanguageButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let targetLanguageButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let targetLanguageButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        
+        return view
+    }()
+    
+    private let targetLanguageButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        
         return view
     }()
 
@@ -102,13 +298,8 @@ class TextTranslateViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Clear", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.backgroundColor = .blue
-//        button.layer.borderWidth = 2.0
-//        button.layer.borderColor = UIColor.purple.cgColor
-        button.layer.cornerRadius = 15.0
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.darkGray, for: .highlighted)
-        button.backgroundColor = .systemBlue
         return button
     }()
     
@@ -139,38 +330,22 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    private let sourceLanguageLabel: UILabel = {
-        let label = UILabel()
-//        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        label.isUserInteractionEnabled = true
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.frame = .zero
-        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = languageList[1]
-        return label
+    private let sourceLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        return button
     }()
     
-    private let targetLanguageLabel: UILabel = {
-        let label = UILabel()
-//        label.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        label.isUserInteractionEnabled = true
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.frame = .zero
-        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = languageList[2]
-        return label
-    }()
-    
-    private let sourceInputLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Enter text"
-//        label.backgroundColor = .systemBackground
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let targetLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        return button
     }()
     
     let sourceInputText: KMPlaceholderTextView = {
@@ -187,7 +362,7 @@ class TextTranslateViewController: UIViewController {
         return textView
     }()
     
-    private let sourceInputLabelView: UIView = {
+    private let clearButtonContainerView: UIView = {
         let view = UIView()
 //        view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         return view
@@ -242,59 +417,132 @@ class TextTranslateViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        let viewHeight = view.frame.height
+        let viewWidth = view.frame.width
+        
         view.addSubview(container)
         container.edgeTo(view, safeArea: .top)
         
-        container.VStack(languageSelectView.setHeight(75),
-                         sourceInputView.setHeight(200),
-                         translateButtonView.setHeight(50),
+        container.VStack(languageSelectView.setHeight(viewHeight * 0.12),
+                         sourceInputView.setHeight(viewHeight * 0.25),
+                         translateButtonView.setHeight(viewHeight * 0.05),
                          targetOutputView,
                          spacing: 5,
                          alignment: .fill,
                          distribution: .fill)
         
         languageSelectView.HStack(sourceLanguageView,
-                                  exchangeButtonView.setWidth(65),
+                                  exchangeButtonView.setWidth(viewWidth * 0.12),
                                   targetLanguageView,
-                                  spacing: 5,
+                                  spacing: 0,
                                   alignment: .fill,
                                   distribution: .fill)
         exchangeButtonView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
 
+        sourceLanguageView.addSubview(sourceLanguageButtonContainerView)
+        sourceLanguageButtonContainerView.topAnchor.constraint(equalTo: sourceLanguageView.topAnchor, constant: 25).isActive = true
+        sourceLanguageButtonContainerView.bottomAnchor.constraint(equalTo: sourceLanguageView.bottomAnchor).isActive = true
+        sourceLanguageButtonContainerView.leadingAnchor.constraint(equalTo: sourceLanguageView.leadingAnchor, constant: 25).isActive = true
+        sourceLanguageButtonContainerView.trailingAnchor.constraint(equalTo: sourceLanguageView.trailingAnchor, constant: -20).isActive = true
         
-        sourceLanguageView.addSubview(sourceLanguageLabel)
-        sourceLanguageLabel.centerYAnchor.constraint(equalTo: sourceLanguageView.centerYAnchor).isActive = true
-        sourceLanguageLabel.widthAnchor.constraint(equalTo: sourceLanguageView.widthAnchor).isActive = true
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterDarkView)
+        sourceLanguageButtonOutterDarkView.edgeTo(sourceLanguageButtonContainerView)
         
-        exchangeButtonView.addSubview(exchangeButton)
-        exchangeButton.centerXAnchor.constraint(equalTo: exchangeButtonView.centerXAnchor).isActive = true
-        exchangeButton.centerYAnchor.constraint(equalTo: exchangeButtonView.centerYAnchor).isActive = true
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterLightView)
+        sourceLanguageButtonOutterLightView.edgeTo(sourceLanguageButtonContainerView)
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonInnerDarkView)
+        sourceLanguageButtonInnerDarkView.topAnchor.constraint(equalTo: sourceLanguageButtonContainerView.topAnchor).isActive = true
+        sourceLanguageButtonInnerDarkView.leadingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.leadingAnchor).isActive = true
+        sourceLanguageButtonInnerDarkView.bottomAnchor.constraint(equalTo: sourceLanguageButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        sourceLanguageButtonInnerDarkView.trailingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonInnerLightView)
+        sourceLanguageButtonInnerLightView.bottomAnchor.constraint(equalTo: sourceLanguageButtonContainerView.bottomAnchor).isActive = true
+        sourceLanguageButtonInnerLightView.trailingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.trailingAnchor).isActive = true
+        sourceLanguageButtonInnerLightView.topAnchor.constraint(equalTo: sourceLanguageButtonContainerView.topAnchor, constant: -20).isActive = true
+        sourceLanguageButtonInnerLightView.leadingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButton)
+        sourceLanguageButton.edgeTo(sourceLanguageButtonContainerView)
+        
+        exchangeButtonView.addSubview(exchangeButtonContainerView)
+        exchangeButtonContainerView.leadingAnchor.constraint(equalTo: exchangeButtonView.leadingAnchor).isActive = true
+        exchangeButtonContainerView.trailingAnchor.constraint(equalTo: exchangeButtonView.trailingAnchor).isActive = true
+        exchangeButtonContainerView.centerYAnchor.constraint(equalTo: sourceLanguageButtonContainerView.centerYAnchor).isActive = true
+        exchangeButtonContainerView.heightAnchor.constraint(equalTo: exchangeButtonContainerView.widthAnchor).isActive = true
+        
+        exchangeButtonContainerView.addSubview(exchangeButtonOutterDarkView)
+        exchangeButtonOutterDarkView.edgeTo(exchangeButtonContainerView)
+        
+        exchangeButtonContainerView.addSubview(exchangeButtonOutterLightView)
+        exchangeButtonOutterLightView.edgeTo(exchangeButtonContainerView)
+        
+        exchangeButtonContainerView.addSubview(exchangeButtonInnerDarkView)
+        exchangeButtonInnerDarkView.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor).isActive = true
+        exchangeButtonInnerDarkView.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor).isActive = true
+        exchangeButtonInnerDarkView.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        exchangeButtonInnerDarkView.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        exchangeButtonContainerView.addSubview(exchangeButtonInnerLightView)
+        exchangeButtonInnerLightView.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor).isActive = true
+        exchangeButtonInnerLightView.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor).isActive = true
+        exchangeButtonInnerLightView.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor, constant: -20).isActive = true
+        exchangeButtonInnerLightView.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        exchangeButtonContainerView.addSubview(exchangeButton)
+        exchangeButton.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor, constant: 8).isActive = true
+        exchangeButton.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor, constant: 8).isActive = true
+        exchangeButton.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor, constant: -8).isActive = true
+        exchangeButton.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor, constant: -8).isActive = true
 
-        targetLanguageView.addSubview(targetLanguageLabel)
-        targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
-        targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
+        targetLanguageView.addSubview(targetLanguageButtonContainerView)
+        targetLanguageButtonContainerView.topAnchor.constraint(equalTo: targetLanguageView.topAnchor, constant: 25).isActive = true
+        targetLanguageButtonContainerView.bottomAnchor.constraint(equalTo: targetLanguageView.bottomAnchor).isActive = true
+        targetLanguageButtonContainerView.leadingAnchor.constraint(equalTo: targetLanguageView.leadingAnchor, constant: 25).isActive = true
+        targetLanguageButtonContainerView.trailingAnchor.constraint(equalTo: targetLanguageView.trailingAnchor, constant: -20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonOutterDarkView)
+        targetLanguageButtonOutterDarkView.edgeTo(targetLanguageButtonContainerView)
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonOutterLightView)
+        targetLanguageButtonOutterLightView.edgeTo(targetLanguageButtonContainerView)
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonInnerDarkView)
+        targetLanguageButtonInnerDarkView.topAnchor.constraint(equalTo: targetLanguageButtonContainerView.topAnchor).isActive = true
+        targetLanguageButtonInnerDarkView.leadingAnchor.constraint(equalTo: targetLanguageButtonContainerView.leadingAnchor).isActive = true
+        targetLanguageButtonInnerDarkView.bottomAnchor.constraint(equalTo: targetLanguageButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        targetLanguageButtonInnerDarkView.trailingAnchor.constraint(equalTo: targetLanguageButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonInnerLightView)
+        targetLanguageButtonInnerLightView.bottomAnchor.constraint(equalTo: targetLanguageButtonContainerView.bottomAnchor).isActive = true
+        targetLanguageButtonInnerLightView.trailingAnchor.constraint(equalTo: targetLanguageButtonContainerView.trailingAnchor).isActive = true
+        targetLanguageButtonInnerLightView.topAnchor.constraint(equalTo: targetLanguageButtonContainerView.topAnchor, constant: -20).isActive = true
+        targetLanguageButtonInnerLightView.leadingAnchor.constraint(equalTo: targetLanguageButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButton)
+        targetLanguageButton.edgeTo(targetLanguageButtonContainerView)
 
         if languagePickerType == .targetLanguage {
             sourceLanguageView.isHidden = true
             exchangeButtonView.isHidden = true
         }
         
-        sourceInputView.VStack(sourceInputLabelView.setHeight(30),
+        sourceInputView.VStack(clearButtonContainerView,
                                sourceInputTextView,
-                               spacing: 5,
+                               spacing: 0,
                                alignment: .fill,
                                distribution: .fill)
         
-        sourceInputLabelView.addSubview(sourceInputLabel)
-        sourceInputLabel.leadingAnchor.constraint(equalTo: sourceInputLabelView.leadingAnchor, constant: 20).isActive = true
-        sourceInputLabel.topAnchor.constraint(equalTo: sourceInputLabelView.topAnchor).isActive = true
-        sourceInputLabel.bottomAnchor.constraint(equalTo: sourceInputLabelView.bottomAnchor).isActive = true
-        sourceInputLabel.widthAnchor.constraint(equalTo: sourceInputLabelView.widthAnchor, multiplier: 0.5).isActive = true
+        clearButtonContainerView.addSubview(clearButton)
+        clearButton.topAnchor.constraint(equalTo: clearButtonContainerView.topAnchor).isActive = true
+        clearButton.bottomAnchor.constraint(equalTo: clearButtonContainerView.bottomAnchor).isActive = true
+        clearButton.trailingAnchor.constraint(equalTo: clearButtonContainerView.trailingAnchor, constant: -10).isActive = true
         
         sourceInputTextView.addSubview(sourceInputText)
         sourceInputText.leadingAnchor.constraint(equalTo: sourceInputTextView.leadingAnchor, constant: 10).isActive = true
         sourceInputText.trailingAnchor.constraint(equalTo: sourceInputTextView.trailingAnchor, constant: -10).isActive = true
-        sourceInputText.topAnchor.constraint(equalTo: sourceInputTextView.topAnchor, constant: 10).isActive = true
+        sourceInputText.topAnchor.constraint(equalTo: sourceInputTextView.topAnchor).isActive = true
         sourceInputText.bottomAnchor.constraint(equalTo: sourceInputTextView.bottomAnchor, constant: -10).isActive = true
         
         translateButtonView.addSubview(translateButton)
@@ -331,19 +579,27 @@ class TextTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(rgb: 0xe1f2fb)
-        
         savedTranslations = realm.objects(SavedTranslation.self)
         
-        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        let sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchDown), for: .touchDown)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchUpInside), for: .touchUpInside)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchDown), for: .touchDown)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchUpInside), for: .touchUpInside)
         
-        let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
-        sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
-        let targetLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
-        targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
+        clearButton.isHidden = true
+        sourceLanguageButtonInnerLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = true
+        exchangeButtonInnerLightView.isHidden = true
+        exchangeButtonInnerDarkView.isHidden = true
         
-        exchangeButton.addTarget(self, action: #selector(exchangeLanguage), for: .touchUpInside)
+        exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchDown), for: .touchDown)
+        exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchUpInside), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
         translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
         
@@ -382,14 +638,18 @@ class TextTranslateViewController: UIViewController {
         if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey) {
             temporarySourceLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
             defaultSourceLanguageIndex = temporarySourceLanguageGCPIndex
-            sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+            
+            let sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+            sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
             print("defaultSourceLanguageIndex changed")
         }
         
         if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey) {
             temporaryTargetLanguageGCPIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
             defaultTargetLanguageIndex = temporaryTargetLanguageGCPIndex
-            targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+
+            let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+            targetLanguageButton.setTitle(targetLanguage, for: .normal)
             print("defaultTargetLanguageIndex changed")
         }
         
@@ -401,6 +661,66 @@ class TextTranslateViewController: UIViewController {
     // MARK: - UIButton Implementation
     @objc func doneButtonTapped() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func sourceLanguageButtonTouchDown() {
+        sourceLanguageButtonOutterDarkView.isHidden = true
+        sourceLanguageButtonOutterLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = false
+        sourceLanguageButtonInnerLightView.isHidden = false
+        
+        sourceLanguageButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func sourceLanguageButtonTouchUpInside() {
+        sourceLanguageButtonOutterDarkView.isHidden = false
+        sourceLanguageButtonOutterLightView.isHidden = false
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        sourceLanguageButtonInnerLightView.isHidden = true
+        
+        sourceLanguageButtonContainerView.layer.masksToBounds = false
+        
+        selectLanguage()
+    }
+    
+    @objc func targetLanguageButtonTouchDown() {
+        targetLanguageButtonOutterDarkView.isHidden = true
+        targetLanguageButtonOutterLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = false
+        targetLanguageButtonInnerLightView.isHidden = false
+        
+        targetLanguageButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func targetLanguageButtonTouchUpInside() {
+        targetLanguageButtonOutterDarkView.isHidden = false
+        targetLanguageButtonOutterLightView.isHidden = false
+        targetLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        
+        targetLanguageButtonContainerView.layer.masksToBounds = false
+
+        selectLanguage()
+    }
+    
+    @objc func exchangeButtonTouchDown() {
+        exchangeButtonOutterDarkView.isHidden = true
+        exchangeButtonOutterLightView.isHidden = true
+        exchangeButtonInnerDarkView.isHidden = false
+        exchangeButtonInnerLightView.isHidden = false
+        
+        exchangeButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func exchangeButtonTouchUpInside() {
+        exchangeButtonOutterDarkView.isHidden = false
+        exchangeButtonOutterLightView.isHidden = false
+        exchangeButtonInnerDarkView.isHidden = true
+        exchangeButtonInnerLightView.isHidden = true
+        
+        exchangeButtonContainerView.layer.masksToBounds = false
+        
+        exchangeLanguage()
     }
     
     @objc func selectLanguage() {
@@ -417,13 +737,14 @@ class TextTranslateViewController: UIViewController {
     
     @objc func exchangeLanguage() {
         
-        let exchangeText = targetLanguageLabel.text
+        guard let exchangeText = targetLanguageButton.titleLabel?.text,
+            let sourceLanguage = sourceLanguageButton.titleLabel?.text else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
             self.exchangeButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
             self.exchangeButton.transform = self.exchangeButton.transform.rotated(by: CGFloat.pi)
-            self.targetLanguageLabel.text = self.sourceLanguageLabel.text
-            self.sourceLanguageLabel.text = exchangeText
+            self.targetLanguageButton.setTitle(sourceLanguage, for: .normal)
+            self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
         }, completion: nil)
         
         swap(&temporarySourceLanguageGCPIndex, &temporaryTargetLanguageGCPIndex)
@@ -491,8 +812,8 @@ class TextTranslateViewController: UIViewController {
     
     func performTranslate() {
         guard let textToTranslate = sourceInputText.text,
-            let sourceLanguage = sourceLanguageLabel.text,
-            let targetLanguage = targetLanguageLabel.text else { return }
+            let sourceLanguage = sourceLanguageButton.titleLabel?.text,
+            let targetLanguage = targetLanguageButton.titleLabel?.text else { return }
         let sourceLanguageCode = SupportedLanguages.gcpLanguageCode[temporarySourceLanguageGCPIndex]
         let targetLanguageCode = SupportedLanguages.gcpLanguageCode[temporaryTargetLanguageGCPIndex]
 
@@ -603,12 +924,6 @@ class TextTranslateViewController: UIViewController {
 // MARK: - Extensions
 extension TextTranslateViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        sourceInputLabelView.addSubview(clearButton)
-        clearButton.topAnchor.constraint(equalTo: sourceInputLabelView.topAnchor).isActive = true
-        clearButton.bottomAnchor.constraint(equalTo: sourceInputLabelView.bottomAnchor).isActive = true
-        clearButton.trailingAnchor.constraint(equalTo: sourceInputLabelView.trailingAnchor, constant: -10).isActive = true
-        clearButton.widthAnchor.constraint(equalToConstant: 75).isActive = true
-        
         clearButton.isHidden = false
     }
     
@@ -621,8 +936,10 @@ extension TextTranslateViewController: UITextViewDelegate {
 
 extension TextTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        let sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
         self.temporarySourceLanguageGCPIndex = temporarySourceLanguageGCPIndex
         self.temporaryTargetLanguageGCPIndex = temporaryTargetLanguageGCPIndex
     }

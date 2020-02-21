@@ -53,6 +53,8 @@
 		80A403D623FF650100E84231 /* AboutSubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403D523FF650100E84231 /* AboutSubscriptionViewController.swift */; };
 		80A403D823FF652E00E84231 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403D723FF652E00E84231 /* TermsOfUseViewController.swift */; };
 		80A403DA23FF655400E84231 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403D923FF655400E84231 /* PrivacyPolicyViewController.swift */; };
+		80A403DD23FFA70800E84231 /* SwiftyInnerShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403DB23FFA70800E84231 /* SwiftyInnerShadowView.swift */; };
+		80A403DE23FFA70800E84231 /* SwiftyInnerShadowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A403DC23FFA70800E84231 /* SwiftyInnerShadowLayer.swift */; };
 		80A7331023C951C400438ED5 /* VoiceRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */; };
 		80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB6A723CF3EDA00F81D40 /* Conversation.swift */; };
 		80C535C923C56A530044D6F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535C823C56A530044D6F0 /* Constants.swift */; };
@@ -115,6 +117,8 @@
 		80A403D523FF650100E84231 /* AboutSubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSubscriptionViewController.swift; sourceTree = "<group>"; };
 		80A403D723FF652E00E84231 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		80A403D923FF655400E84231 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		80A403DB23FFA70800E84231 /* SwiftyInnerShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyInnerShadowView.swift; sourceTree = "<group>"; };
+		80A403DC23FFA70800E84231 /* SwiftyInnerShadowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyInnerShadowLayer.swift; sourceTree = "<group>"; };
 		80A7330F23C951C400438ED5 /* VoiceRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderViewController.swift; sourceTree = "<group>"; };
 		80BDB6A723CF3EDA00F81D40 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		80C535C823C56A530044D6F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				8078D1DA23D6C8A3007FAF85 /* SavedTranslationsTableViewCell.swift */,
 				806482DE23F63387006BBDD5 /* FBLanguageTableViewCell.swift */,
 				801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */,
+				80A403DC23FFA70800E84231 /* SwiftyInnerShadowLayer.swift */,
+				80A403DB23FFA70800E84231 /* SwiftyInnerShadowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -435,6 +441,7 @@
 				808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */,
 				80A403D623FF650100E84231 /* AboutSubscriptionViewController.swift in Sources */,
 				803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */,
+				80A403DD23FFA70800E84231 /* SwiftyInnerShadowView.swift in Sources */,
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
 				8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */,
 				8052A1D823C2FD9600883123 /* TextTranslateViewController.swift in Sources */,
@@ -465,6 +472,7 @@
 				806052EC23F5382700C58BC3 /* FBLanguageTableViewController.swift in Sources */,
 				803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */,
 				803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */,
+				80A403DE23FFA70800E84231 /* SwiftyInnerShadowLayer.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* LanguagePickerViewController.swift in Sources */,
 				806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,

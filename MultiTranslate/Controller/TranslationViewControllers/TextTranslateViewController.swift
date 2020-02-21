@@ -409,6 +409,7 @@ class TextTranslateViewController: UIViewController {
         textView.font = UIFont.preferredFont(forTextStyle: .title3)
         textView.text = "Hello Blur"
         textView.backgroundColor = .clear
+        textView.isEditable = false
         return textView
     }()
     

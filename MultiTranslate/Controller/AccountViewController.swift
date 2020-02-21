@@ -21,7 +21,7 @@ class AccountViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
@@ -89,7 +89,7 @@ class AccountViewController: UIViewController {
         let selector = UISegmentedControl(items: ["Yearly plan", "Monthly plan"])
         selector.translatesAutoresizingMaskIntoConstraints = false
         selector.selectedSegmentIndex = 0
-//        selector.backgroundColor = UIColor(rgb: 0xe1f2fb)
+//        selector.backgroundColor = UIColor(rgb: 0xC1D2EB)
 //        selector.selectedSegmentTintColor = UIColor(rgb: 0x4d80e4)
         selector.layer.borderWidth = 1
         selector.layer.borderColor = UIColor.white.cgColor
@@ -119,21 +119,24 @@ class AccountViewController: UIViewController {
     private let subscriptionInformationView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+//        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
     private let termsOfUseInformationView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+//        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
     private let privacyPolicyInformationView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+//        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
@@ -213,7 +216,7 @@ class AccountViewController: UIViewController {
         
         selectorContainer.addSubview(planSelector)
         planSelector.topAnchor.constraint(equalTo: selectorContainer.topAnchor, constant: viewHeight * 0.027).isActive = true
-        planSelector.bottomAnchor.constraint(equalTo: selectorContainer.bottomAnchor).isActive = true
+        planSelector.bottomAnchor.constraint(equalTo: selectorContainer.bottomAnchor, constant: -1).isActive = true
         planSelector.leadingAnchor.constraint(equalTo: selectorContainer.leadingAnchor, constant: viewWidth * 0.21).isActive = true
         planSelector.trailingAnchor.constraint(equalTo: selectorContainer.trailingAnchor, constant: -viewWidth * 0.21).isActive = true
 
@@ -247,11 +250,14 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        subscritionPlanTableView.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restorePurchase))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Purchase", style: .plain, target: self, action: #selector(purchaseTest))
         
         planSelector.addTarget(self, action: #selector(planSelectorValueChanged(_:)), for: .valueChanged)
+        planSelector.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.label], for: .selected)
+        planSelector.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBackground], for: .normal)
         
         print(InAppPurchaseManager.retrievedProducts)
         subscritionPlanTableView.dataSource = self

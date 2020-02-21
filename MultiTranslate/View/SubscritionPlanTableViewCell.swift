@@ -86,6 +86,8 @@ class SubscritionPlanTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
         self.addSubview(container)
         container.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         container.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16).isActive = true

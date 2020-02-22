@@ -133,7 +133,6 @@ class TextTranslateViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
-        view.layer.cornerRadius = 20
         return view
     }()
     
@@ -142,7 +141,6 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
-        view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
         view.layer.shadowColor = UIColor.white.cgColor
@@ -158,7 +156,6 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
-        view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
         view.layer.shadowColor = UIColor.black.cgColor
@@ -177,8 +174,6 @@ class TextTranslateViewController: UIViewController {
         view.shadowLayer.shadowColor = UIColor.white.cgColor
         view.shadowLayer.shadowOpacity = 1
         view.shadowLayer.shadowOffset = CGSize.zero
-        view.cornerRadius = 20
-        
         return view
     }()
     
@@ -190,8 +185,6 @@ class TextTranslateViewController: UIViewController {
         view.shadowLayer.shadowColor = UIColor.black.cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
-        view.cornerRadius = 20
-        
         return view
     }()
     
@@ -289,8 +282,6 @@ class TextTranslateViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "exchange"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: CGFloat(30)).isActive = true
-        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
         return button
     }()
     
@@ -353,7 +344,7 @@ class TextTranslateViewController: UIViewController {
         textView.backgroundColor = .systemBackground
         textView.placeholder = "Enter text here"
         textView.layer.style = .none
-        textView.layer.cornerRadius = 10
+        textView.layer.cornerRadius = 20
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1
         textView.layer.masksToBounds = true
@@ -441,10 +432,10 @@ class TextTranslateViewController: UIViewController {
         exchangeButtonView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
 
         sourceLanguageView.addSubview(sourceLanguageButtonContainerView)
-        sourceLanguageButtonContainerView.topAnchor.constraint(equalTo: sourceLanguageView.topAnchor, constant: 25).isActive = true
+        sourceLanguageButtonContainerView.topAnchor.constraint(equalTo: sourceLanguageView.topAnchor, constant: 20).isActive = true
         sourceLanguageButtonContainerView.bottomAnchor.constraint(equalTo: sourceLanguageView.bottomAnchor).isActive = true
         sourceLanguageButtonContainerView.leadingAnchor.constraint(equalTo: sourceLanguageView.leadingAnchor, constant: 25).isActive = true
-        sourceLanguageButtonContainerView.trailingAnchor.constraint(equalTo: sourceLanguageView.trailingAnchor, constant: -20).isActive = true
+        sourceLanguageButtonContainerView.trailingAnchor.constraint(equalTo: sourceLanguageView.trailingAnchor, constant: -25).isActive = true
         
         sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterDarkView)
         sourceLanguageButtonOutterDarkView.edgeTo(sourceLanguageButtonContainerView)
@@ -482,20 +473,26 @@ class TextTranslateViewController: UIViewController {
         exchangeButtonContainerView.addSubview(exchangeButtonInnerDarkView)
         exchangeButtonInnerDarkView.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor).isActive = true
         exchangeButtonInnerDarkView.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor).isActive = true
-        exchangeButtonInnerDarkView.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor, constant: 20).isActive = true
-        exchangeButtonInnerDarkView.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        exchangeButtonInnerDarkView.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor, constant: 30).isActive = true
+        exchangeButtonInnerDarkView.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor, constant: 30).isActive = true
         
         exchangeButtonContainerView.addSubview(exchangeButtonInnerLightView)
         exchangeButtonInnerLightView.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor).isActive = true
         exchangeButtonInnerLightView.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor).isActive = true
-        exchangeButtonInnerLightView.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor, constant: -20).isActive = true
-        exchangeButtonInnerLightView.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        exchangeButtonInnerLightView.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor, constant: -30).isActive = true
+        exchangeButtonInnerLightView.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor, constant: -30).isActive = true
         
         exchangeButtonContainerView.addSubview(exchangeButton)
-        exchangeButton.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor, constant: 8).isActive = true
-        exchangeButton.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor, constant: 8).isActive = true
-        exchangeButton.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor, constant: -8).isActive = true
-        exchangeButton.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor, constant: -8).isActive = true
+        exchangeButton.topAnchor.constraint(equalTo: exchangeButtonContainerView.topAnchor, constant: viewWidth * 0.02).isActive = true
+        exchangeButton.leadingAnchor.constraint(equalTo: exchangeButtonContainerView.leadingAnchor, constant: viewWidth * 0.02).isActive = true
+        exchangeButton.trailingAnchor.constraint(equalTo: exchangeButtonContainerView.trailingAnchor, constant: -viewWidth * 0.02).isActive = true
+        exchangeButton.bottomAnchor.constraint(equalTo: exchangeButtonContainerView.bottomAnchor, constant: -viewWidth * 0.02).isActive = true
+        
+        exchangeButtonContainerView.layer.cornerRadius =  viewWidth * 0.12 / 2
+        exchangeButtonOutterLightView.layer.cornerRadius = viewWidth * 0.12 / 2
+        exchangeButtonOutterDarkView.layer.cornerRadius = viewWidth * 0.12 / 2
+        exchangeButtonInnerLightView.cornerRadius = viewWidth * 0.12 / 2
+        exchangeButtonInnerDarkView.cornerRadius = viewWidth * 0.12 / 2
 
         targetLanguageView.addSubview(targetLanguageButtonContainerView)
         targetLanguageButtonContainerView.topAnchor.constraint(equalTo: targetLanguageView.topAnchor, constant: 25).isActive = true
@@ -541,8 +538,8 @@ class TextTranslateViewController: UIViewController {
         clearButton.trailingAnchor.constraint(equalTo: clearButtonContainerView.trailingAnchor, constant: -10).isActive = true
         
         sourceInputTextView.addSubview(sourceInputText)
-        sourceInputText.leadingAnchor.constraint(equalTo: sourceInputTextView.leadingAnchor, constant: 10).isActive = true
-        sourceInputText.trailingAnchor.constraint(equalTo: sourceInputTextView.trailingAnchor, constant: -10).isActive = true
+        sourceInputText.leadingAnchor.constraint(equalTo: sourceInputTextView.leadingAnchor, constant: 20).isActive = true
+        sourceInputText.trailingAnchor.constraint(equalTo: sourceInputTextView.trailingAnchor, constant: -20).isActive = true
         sourceInputText.topAnchor.constraint(equalTo: sourceInputTextView.topAnchor).isActive = true
         sourceInputText.bottomAnchor.constraint(equalTo: sourceInputTextView.bottomAnchor, constant: -10).isActive = true
         

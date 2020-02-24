@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 
-import PMSuperButton
+//import PMSuperButton
 import Alamofire
 import SwiftyJSON
 //import RAMAnimatedTabBarController
@@ -272,6 +272,65 @@ class TextTranslateViewController: UIViewController {
         return view
     }()
     
+    private let translateButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        return view
+    }()
+    
+    private let translateButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let translateButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        
+        return view
+    }()
+    
+    private let translateButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        return view
+    }()
+    
+    private let translateButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        return view
+    }()
+    
     private let targetOutputView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -294,30 +353,12 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    private let translateButton: PMSuperButton = {
-        let button = PMSuperButton()
-        button.borderColor = .white
-        button.borderWidth = 2
-        button.cornerRadius = 25
-//        button.shadowColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        button.shadowOpacity = 1
-        button.shadowOffset.width = 1
-        button.shadowOffset.height = 1
-        button.shadowRadius = 5
-        
-        button.gradientEnabled = true
-        button.gradientStartColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
-        button.gradientEndColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        button.gradientHorizontal = true
-        button.ripple = true
-        button.rippleColor = #colorLiteral(red: 0.9880490899, green: 0.7656863332, blue: 0.9337566495, alpha: 0.5442262414)
-        
+    private let translateButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Translate", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
     
@@ -413,7 +454,7 @@ class TextTranslateViewController: UIViewController {
         
         container.VStack(languageSelectView.setHeight(viewHeight * 0.12),
                          sourceInputView.setHeight(viewHeight * 0.25),
-                         translateButtonView.setHeight(viewHeight * 0.05),
+                         translateButtonView.setHeight(viewHeight * 0.1),
                          targetOutputView,
                          spacing: 5,
                          alignment: .fill,
@@ -539,11 +580,40 @@ class TextTranslateViewController: UIViewController {
         sourceInputText.topAnchor.constraint(equalTo: sourceInputTextView.topAnchor).isActive = true
         sourceInputText.bottomAnchor.constraint(equalTo: sourceInputTextView.bottomAnchor, constant: -10).isActive = true
         
-        translateButtonView.addSubview(translateButton)
-        translateButton.topAnchor.constraint(equalTo: translateButtonView.topAnchor).isActive = true
-        translateButton.leadingAnchor.constraint(equalTo: translateButtonView.leadingAnchor, constant: 50).isActive = true
-        translateButton.trailingAnchor.constraint(equalTo: translateButtonView.trailingAnchor, constant: -50).isActive = true
-        translateButton.bottomAnchor.constraint(equalTo: translateButtonView.bottomAnchor).isActive = true
+        translateButtonView.addSubview(translateButtonContainerView)
+        translateButtonContainerView.centerInSuperview()
+        translateButtonContainerView.heightAnchor.constraint(equalToConstant: viewHeight * 0.075).isActive = true
+        translateButtonContainerView.widthAnchor.constraint(equalToConstant: viewWidth * 0.5).isActive = true
+        
+        translateButtonContainerView.addSubview(translateButtonOutterDarkView)
+        translateButtonOutterDarkView.edgeTo(translateButtonContainerView)
+        
+        translateButtonContainerView.addSubview(translateButtonOutterLightView)
+        translateButtonOutterLightView.edgeTo(translateButtonContainerView)
+        
+        translateButtonContainerView.addSubview(translateButtonInnerDarkView)
+        translateButtonInnerDarkView.topAnchor.constraint(equalTo: translateButtonContainerView.topAnchor).isActive = true
+        translateButtonInnerDarkView.leadingAnchor.constraint(equalTo: translateButtonContainerView.leadingAnchor).isActive = true
+        translateButtonInnerDarkView.bottomAnchor.constraint(equalTo: translateButtonContainerView.bottomAnchor, constant: viewHeight * 0.075 / 2).isActive = true
+        translateButtonInnerDarkView.trailingAnchor.constraint(equalTo: translateButtonContainerView.trailingAnchor, constant: viewHeight * 0.075 / 2).isActive = true
+        
+        translateButtonContainerView.addSubview(translateButtonInnerLightView)
+        translateButtonInnerLightView.bottomAnchor.constraint(equalTo: translateButtonContainerView.bottomAnchor).isActive = true
+        translateButtonInnerLightView.trailingAnchor.constraint(equalTo: translateButtonContainerView.trailingAnchor).isActive = true
+        translateButtonInnerLightView.topAnchor.constraint(equalTo: translateButtonContainerView.topAnchor, constant: -viewHeight * 0.075 / 2).isActive = true
+        translateButtonInnerLightView.leadingAnchor.constraint(equalTo: translateButtonContainerView.leadingAnchor, constant: -viewHeight * 0.075 / 2).isActive = true
+        
+        translateButtonContainerView.addSubview(translateButton)
+        translateButton.topAnchor.constraint(equalTo: translateButtonContainerView.topAnchor, constant: viewWidth * 0.02).isActive = true
+        translateButton.leadingAnchor.constraint(equalTo: translateButtonContainerView.leadingAnchor, constant: viewWidth * 0.02).isActive = true
+        translateButton.trailingAnchor.constraint(equalTo: translateButtonContainerView.trailingAnchor, constant: -viewWidth * 0.02).isActive = true
+        translateButton.bottomAnchor.constraint(equalTo: translateButtonContainerView.bottomAnchor, constant: -viewWidth * 0.02).isActive = true
+        
+        translateButtonContainerView.layer.cornerRadius =  viewHeight * 0.075 / 2
+        translateButtonOutterLightView.layer.cornerRadius = viewHeight * 0.075 / 2
+        translateButtonOutterDarkView.layer.cornerRadius = viewHeight * 0.075 / 2
+        translateButtonInnerLightView.cornerRadius = viewHeight * 0.075 / 2
+        translateButtonInnerDarkView.cornerRadius = viewHeight * 0.075 / 2
         
         targetOutputView.VStack(outputActionView.setHeight(30),
                                 outputTextView,
@@ -583,6 +653,8 @@ class TextTranslateViewController: UIViewController {
         targetLanguageButton.setTitle(targetLanguage, for: .normal)
         targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchDown), for: .touchDown)
         targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchUpInside), for: .touchUpInside)
+        translateButton.addTarget(self, action: #selector(translateButtonTouchDown), for: .touchDown)
+        translateButton.addTarget(self, action: #selector(translateButtonTouchUpInside), for: .touchUpInside)
         
         clearButton.isHidden = true
         sourceLanguageButtonInnerLightView.isHidden = true
@@ -591,11 +663,12 @@ class TextTranslateViewController: UIViewController {
         targetLanguageButtonInnerDarkView.isHidden = true
         exchangeButtonInnerLightView.isHidden = true
         exchangeButtonInnerDarkView.isHidden = true
+        translateButtonInnerLightView.isHidden = true
+        translateButtonInnerDarkView.isHidden = true
         
         exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchDown), for: .touchDown)
         exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchUpInside), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
-        translateButton.addTarget(self, action: #selector(doTranslate), for: .touchUpInside)
         
         starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
         speechButton.addTarget(self, action: #selector(speechButtonTapped), for: .touchUpInside)
@@ -717,7 +790,27 @@ class TextTranslateViewController: UIViewController {
         exchangeLanguage()
     }
     
-    @objc func selectLanguage() {
+    @objc func translateButtonTouchDown() {
+        translateButtonOutterDarkView.isHidden = true
+        translateButtonOutterLightView.isHidden = true
+        translateButtonInnerDarkView.isHidden = false
+        translateButtonInnerLightView.isHidden = false
+        
+        translateButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func translateButtonTouchUpInside() {
+        translateButtonOutterDarkView.isHidden = false
+        translateButtonOutterLightView.isHidden = false
+        translateButtonInnerDarkView.isHidden = true
+        translateButtonInnerLightView.isHidden = true
+        
+        translateButtonContainerView.layer.masksToBounds = false
+        
+        doTranslate()
+    }
+    
+    func selectLanguage() {
         //present picker view modal
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
@@ -729,7 +822,7 @@ class TextTranslateViewController: UIViewController {
         self.navigationController?.present(navController, animated: true, completion: nil)
     }
     
-    @objc func exchangeLanguage() {
+    func exchangeLanguage() {
         
         guard let exchangeText = targetLanguageButton.titleLabel?.text,
             let sourceLanguage = sourceLanguageButton.titleLabel?.text else { return }
@@ -755,7 +848,7 @@ class TextTranslateViewController: UIViewController {
         targetOutputText.isHidden = true
     }
     
-    @objc func doTranslate() {
+    func doTranslate() {
         print("do translate")
         
         guard let raw = UserDefaults.standard.string(forKey: Constants.userTypeKey) else { return }

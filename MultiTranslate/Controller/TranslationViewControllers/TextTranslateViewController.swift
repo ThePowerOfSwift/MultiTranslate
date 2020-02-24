@@ -341,15 +341,11 @@ class TextTranslateViewController: UIViewController {
     
     let sourceInputText: KMPlaceholderTextView = {
         let textView = KMPlaceholderTextView()
-        textView.backgroundColor = .systemBackground
-        textView.placeholder = "Enter text here"
-        textView.layer.style = .none
-        textView.layer.cornerRadius = 20
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.masksToBounds = true
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
+        textView.backgroundColor = .systemBackground
+        textView.placeholder = "Input source text"
+        textView.placeholderFont = UIFont.preferredFont(forTextStyle: .body)
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
         return textView
     }()
     
@@ -535,7 +531,7 @@ class TextTranslateViewController: UIViewController {
         clearButtonContainerView.addSubview(clearButton)
         clearButton.topAnchor.constraint(equalTo: clearButtonContainerView.topAnchor).isActive = true
         clearButton.bottomAnchor.constraint(equalTo: clearButtonContainerView.bottomAnchor).isActive = true
-        clearButton.trailingAnchor.constraint(equalTo: clearButtonContainerView.trailingAnchor, constant: -10).isActive = true
+        clearButton.trailingAnchor.constraint(equalTo: clearButtonContainerView.trailingAnchor, constant: -20).isActive = true
         
         sourceInputTextView.addSubview(sourceInputText)
         sourceInputText.leadingAnchor.constraint(equalTo: sourceInputTextView.leadingAnchor, constant: 20).isActive = true

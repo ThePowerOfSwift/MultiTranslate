@@ -34,7 +34,7 @@ class TextTranslateViewController: UIViewController {
     private var savedTranslations: Results<SavedTranslation>!
     
     private var cloudDBTranslatedCharacters = 0
-    
+    private var starBadgeNum = 0
     
     //MARK: - UI Parts Declaration
     
@@ -417,17 +417,16 @@ class TextTranslateViewController: UIViewController {
     private let starButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "star")?.withTintColor(.systemGray), for: .normal)
-//        button.backgroundColor = .white
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.tintColor = .systemBlue
         return button
     }()
     
     private let speechButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "speech")?.withTintColor(.systemBlue), for: .normal)
-//        button.backgroundColor = .white
-        
+        button.setImage(UIImage(systemName: "speaker.2"), for: .normal)
+        button.tintColor = .systemBlue
         return button
     }()
     
@@ -615,17 +614,17 @@ class TextTranslateViewController: UIViewController {
         translateButtonInnerLightView.cornerRadius = viewHeight * 0.075 / 2
         translateButtonInnerDarkView.cornerRadius = viewHeight * 0.075 / 2
         
-        targetOutputView.VStack(outputActionView.setHeight(30),
+        targetOutputView.VStack(outputActionView.setHeight(viewHeight * 0.035),
                                 outputTextView,
-                                spacing: 5,
+                                spacing: 0,
                                 alignment: .fill,
                                 distribution: .fill)
         
         outputActionView.addSubview(starButton)
         starButton.topAnchor.constraint(equalTo: outputActionView.topAnchor).isActive = true
         starButton.bottomAnchor.constraint(equalTo: outputActionView.bottomAnchor).isActive = true
-        starButton.trailingAnchor.constraint(equalTo: outputActionView.trailingAnchor, constant: -5).isActive = true
-        starButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        starButton.trailingAnchor.constraint(equalTo: outputActionView.trailingAnchor, constant: -20).isActive = true
+        starButton.widthAnchor.constraint(equalTo: starButton.heightAnchor).isActive = true
         
         outputActionView.addSubview(speechButton)
         speechButton.topAnchor.constraint(equalTo: starButton.topAnchor).isActive = true
@@ -635,9 +634,9 @@ class TextTranslateViewController: UIViewController {
 
         outputTextView.addSubview(targetOutputText)
         targetOutputText.topAnchor.constraint(equalTo: outputTextView.topAnchor).isActive = true
-        targetOutputText.leadingAnchor.constraint(equalTo: outputTextView.leadingAnchor, constant: 16).isActive = true
-        targetOutputText.trailingAnchor.constraint(equalTo: outputTextView.trailingAnchor, constant: -16).isActive = true
-        targetOutputText.bottomAnchor.constraint(equalTo: outputTextView.bottomAnchor, constant: -16).isActive = true
+        targetOutputText.leadingAnchor.constraint(equalTo: outputTextView.leadingAnchor, constant: 20).isActive = true
+        targetOutputText.trailingAnchor.constraint(equalTo: outputTextView.trailingAnchor, constant: -20).isActive = true
+        targetOutputText.bottomAnchor.constraint(equalTo: outputTextView.bottomAnchor, constant: -20).isActive = true
     }
 
     override func viewDidLoad() {
@@ -697,6 +696,10 @@ class TextTranslateViewController: UIViewController {
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        
+        NotificationCenter.default.addObserver(forName: .savedTranlationsDidShow, object: nil, queue: .main) { (notification) in
+            self.starBadgeNum = 0
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -851,6 +854,10 @@ class TextTranslateViewController: UIViewController {
     func doTranslate() {
         print("do translate")
         
+        starButton.setImage(UIImage(systemName: "star"), for: .normal)
+        starButton.tintColor = .systemBlue
+        isStarButtonTapped = false
+        
         guard let raw = UserDefaults.standard.string(forKey: Constants.userTypeKey) else { return }
         let userType = UserType(rawValue: raw)!
         print(userType)
@@ -943,8 +950,8 @@ class TextTranslateViewController: UIViewController {
     func showResult(result: String) {
         starButton.isHidden = false
         isStarButtonTapped = false
-        starButton.setImage(UIImage(systemName: "star"), for: .normal)
-        starButton.tintColor = .gray
+//        starButton.setImage(UIImage(systemName: "star"), for: .normal)
+//        starButton.tintColor = .gray
         
         speechButton.isHidden = false
         
@@ -959,9 +966,9 @@ class TextTranslateViewController: UIViewController {
             starButton.tintColor = .systemYellow
             
             let savedTranslation = SavedTranslation()
-            savedTranslation.sourceLanguage = "English"
+            savedTranslation.sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
             savedTranslation.sourceText = sourceInputText.text
-            savedTranslation.targetLanguage = "Japanese"
+            savedTranslation.targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
             savedTranslation.targetText = targetOutputText.text
             savedTranslation.dateCreated = Date()
             
@@ -976,9 +983,32 @@ class TextTranslateViewController: UIViewController {
             let vc = SavedTranslationsTableViewController()
             vc.tableView.reloadData()
             
+            if let tabBarItems = tabBarController?.tabBar.items {
+                let tabItem = tabBarItems[1]
+                starBadgeNum += 1
+                tabItem.badgeValue = "\(starBadgeNum)"
+                print("badge + 1")
+                print(tabBarItems.count)
+                print(starBadgeNum)
+            }
+            
         } else {
             starButton.setImage(UIImage(systemName: "star"), for: .normal)
-            starButton.tintColor = .gray
+            starButton.tintColor = .systemBlue
+            
+            if let tabBarItems = tabBarController?.tabBar.items {
+                let tabItem = tabBarItems[1]
+                if starBadgeNum > 1 {
+                    starBadgeNum -= 1
+                    tabItem.badgeValue = "\(starBadgeNum)"
+                    print("badge - 1")
+                } else {
+                    tabItem.badgeValue = nil
+                    if starBadgeNum > 0 {
+                        starBadgeNum -= 1                        
+                    }
+                }
+            }
             
             if let savedTranslation = savedTranslations.last {
                 do {

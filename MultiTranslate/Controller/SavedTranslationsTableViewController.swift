@@ -39,6 +39,12 @@ class SavedTranslationsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+        
+        if let tabBarItems = tabBarController?.tabBar.items {
+            let tabItem = tabBarItems[1]
+            tabItem.badgeValue = nil
+        }
+        NotificationCenter.default.post(name: .savedTranlationsDidShow, object: nil)
     }
     
     @objc func clearRecords() {

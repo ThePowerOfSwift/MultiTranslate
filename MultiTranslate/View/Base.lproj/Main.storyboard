@@ -27,7 +27,7 @@
         <scene sceneID="CO3-gl-Kgf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rxA-6Y-5nG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Translation" image="translation_icon" selectedImage="translation_icon" id="0hc-Ow-sXn" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
+                    <tabBarItem key="tabBarItem" title="Translation" image="translation_icon" selectedImage="translation_icon" id="0hc-Ow-sXn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lru-ya-TLb">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -106,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="1048" y="869"/>
         </scene>
-        <!--Animated Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="tkO-zv-ChZ">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vaE-vv-7n1" customClass="RAMAnimatedTabBarController" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vaE-vv-7n1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="quu-aH-WLd">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -131,7 +131,7 @@
         <scene sceneID="zK0-bY-dHr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fy-H8-xx2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Saved" image="folder" catalog="system" id="KD8-cT-Evn" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
+                    <tabBarItem key="tabBarItem" title="Saved" image="folder" catalog="system" id="KD8-cT-Evn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="leS-df-Bd0">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -150,7 +150,7 @@
         <scene sceneID="10L-ZM-drL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1df-SZ-W3O" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Account" image="person" catalog="system" selectedImage="person" id="aS4-7C-gAr" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="person" catalog="system" selectedImage="person" id="aS4-7C-gAr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UOr-vg-LiJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -169,7 +169,7 @@
         <scene sceneID="X4P-Sj-Mv6">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yza-EZ-GR1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Setting" image="gear" catalog="system" id="qhy-s2-8g3" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController"/>
+                    <tabBarItem key="tabBarItem" title="Setting" image="gear" catalog="system" id="qhy-s2-8g3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lfy-WQ-M4m">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

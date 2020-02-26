@@ -346,10 +346,9 @@ class TextTranslateViewController: UIViewController {
     
     private let clearButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Clear", for: .normal)
+        button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.systemBlue, for: .normal)
-        button.setTitleColor(.darkGray, for: .highlighted)
         return button
     }()
     
@@ -576,7 +575,7 @@ class TextTranslateViewController: UIViewController {
             exchangeButtonView.isHidden = true
         }
         
-        sourceInputView.VStack(clearButtonContainerView,
+        sourceInputView.VStack(clearButtonContainerView.setHeight(viewHeight * 0.035),
                                sourceInputTextView,
                                spacing: 0,
                                alignment: .fill,

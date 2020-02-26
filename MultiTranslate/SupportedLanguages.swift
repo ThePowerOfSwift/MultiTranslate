@@ -125,9 +125,9 @@ struct SupportedLanguages {
     
     static let speechRecognizerSupportedLocaleIdentifier = [
         // Use for speech recognizing
-        "ar-SA", "ca-ES", "cs-CZ", "da-DK", "de-AT", "de-CH", "de-DE", "el-GR", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-PH",
-        "en-SA", "en-SG", "en-US", "en-ZA", "es-419", "es-CL", "es-CO", "es-ES", "es-MX", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "he-IL", "hi-IN",
-        "hr-HR", "hu-HU", "id-ID", "it-CH", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nb-NO", "nl-BE", "nl-NL", "pl-PL", "pt-BR", "pt-PT",
+        "ar-SA", "ca-ES", "cs-CZ", "da-DK", "de-DE", "de-AT", "de-CH", "el-GR", "en-US", "en-AU", "en-CA", "en-GB", "en-IE", "en-IN", "en-NZ", "en-PH",
+        "en-SA", "en-SG",  "en-ZA", "es-ES", "es-419", "es-CL", "es-CO", "es-MX", "es-US", "fi-FI", "fr-FR", "fr-BE", "fr-CA", "fr-CH", "he-IL", "hi-IN",
+        "hr-HR", "hu-HU", "id-ID", "it-IT", "it-CH", "ja-JP", "ko-KR", "ms-MY", "nb-NO", "nl-NL", "nl-BE", "pl-PL", "pt-PT", "pt-BR",
         "ro-RO", "ru-RU", "sk-SK", "sv-SE", "th-TH", "tr-TR", "uk-UA", "vi-VN", "zh-CN", "zh-HK"
 //        "ar-SA", "ca-ES", "cs-CZ", "da-DK", "de-AT", "de-CH", "de-DE", "el-GR", "en-AE", "en-AU", "en-CA", "en-GB", "en-ID", "en-IE", "en-IN", "en-NZ", "en-PH",
 //        "en-SA", "en-SG", "en-US", "en-ZA", "es-419", "es-CL", "es-CO", "es-ES", "es-MX", "es-US", "fi-FI", "fr-BE", "fr-CA", "fr-CH", "fr-FR", "he-IL", "hi-IN",
@@ -137,13 +137,13 @@ struct SupportedLanguages {
     
     static let speechRecognizerSupportedLocale = [
         // Use for display in LanguagePickerViewController
-        "Arabic (Saudi Arabia)", "Catalan (Spain)", "Czech (Czech)", "Danish", "German (Austria)", "German (Switzerland)", "German (Germany)", "Greek", "English (Australia)",
+        "Arabic (Saudi Arabia)", "Catalan (Spain)", "Czech (Czech)", "Danish", "German (Germany)", "German (Austria)", "German (Switzerland)", "Greek", "English (United States)", "English (Australia)",
         "English (Canada)", "English (United Kingdom)", "English (Ireland)", "English (India)", "English (New Zealand)", "English (Philippines)",
-        "English (Saudi Arabia)", "English (Singapore)", "English (United States)", "English (South Africa)", "Spanish (Latin America & Caribbean)", "Spanish (Chile)", "Spanish (Colombia)",
-        "Spanish (Spain)", "Spanish (Mexico)", "Spanish (United States)", "Finnish (Finland)", "French (Belgium)", "French (Canada)", "French (Switzerland)",
-        "French (France)", "Hebrew (Israel)", "Hindi (India)", "Croatian (Croatia)", "Hungarian (Hungary)", "Indonesian (Indonesia)", "Italian (Switzerland)",
-        "Italian (Italy)", "Japanese (Japan)", "Korean (Korea)", "Malay (Malaysia)", "Norwegian (Norway)", "Dutch (Belgium)", "Dutch (Netherlands)", "Polish (Poland)",
-        "Portuguese (Brazil)", "Portuguese (Portugal)", "Romanian (Romania)", "Russian (Russia)", "Slovak (Slovakia)", "Swedish (Sweden)", "Thai (Thailand)",
+        "English (Saudi Arabia)", "English (Singapore)", "English (South Africa)", "Spanish (Spain)", "Spanish (Latin America & Caribbean)", "Spanish (Chile)", "Spanish (Colombia)",
+        "Spanish (Mexico)", "Spanish (United States)", "Finnish (Finland)", "French (France)", "French (Belgium)", "French (Canada)", "French (Switzerland)",
+        "Hebrew (Israel)", "Hindi (India)", "Croatian (Croatia)", "Hungarian (Hungary)", "Indonesian (Indonesia)", "Italian (Italy)", "Italian (Switzerland)",
+        "Japanese (Japan)", "Korean (Korea)", "Malay (Malaysia)", "Norwegian (Norway)", "Dutch (Netherlands)", "Dutch (Belgium)", "Polish (Poland)",
+        "Portuguese (Portugal)", "Portuguese (Brazil)", "Romanian (Romania)", "Russian (Russia)", "Slovak (Slovakia)", "Swedish (Sweden)", "Thai (Thailand)",
         "Turkish (Turkey)", "Ukrainian (Ukraine)", "Vietnamese (Vietnam)", "Chinese (China)", "Chinese (Hongkong)"
     ]
     

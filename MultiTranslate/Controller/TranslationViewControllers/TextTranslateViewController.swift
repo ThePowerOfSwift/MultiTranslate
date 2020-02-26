@@ -953,7 +953,12 @@ class TextTranslateViewController: UIViewController {
 //        starButton.setImage(UIImage(systemName: "star"), for: .normal)
 //        starButton.tintColor = .gray
         
-        speechButton.isHidden = false
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        if SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage) != nil {
+            speechButton.isHidden = false
+        } else {
+            speechButton.isHidden = true
+        }
         
         targetOutputText.isHidden = false
         targetOutputText.text = result
@@ -1027,12 +1032,17 @@ class TextTranslateViewController: UIViewController {
     
     @objc func speechButtonTapped() {
         //Siri speech
-        let utterance = AVSpeechUtterance(string: targetOutputText.text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "ja")
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        guard let index = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage) else { return }
 
+        let utterance = AVSpeechUtterance(string: targetOutputText.text)
+        let speechCode = SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[index]
         let synthesizer = AVSpeechSynthesizer()
+        utterance.voice = AVSpeechSynthesisVoice(language: speechCode)
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         synthesizer.speak(utterance)
+        
+        print("speechCode is \(speechCode)")
     }
 
 }

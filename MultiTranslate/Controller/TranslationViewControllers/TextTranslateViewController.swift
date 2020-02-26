@@ -430,6 +430,20 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
+    private let copyTextButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "doc.on.doc"), for: .normal)
+        button.tintColor = .systemBlue
+        return button
+    }()
+    
+    private let spacerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let targetOutputText: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -620,17 +634,17 @@ class TextTranslateViewController: UIViewController {
                                 alignment: .fill,
                                 distribution: .fill)
         
-        outputActionView.addSubview(starButton)
-        starButton.topAnchor.constraint(equalTo: outputActionView.topAnchor).isActive = true
-        starButton.bottomAnchor.constraint(equalTo: outputActionView.bottomAnchor).isActive = true
-        starButton.trailingAnchor.constraint(equalTo: outputActionView.trailingAnchor, constant: -20).isActive = true
+        outputActionView.hstack(spacerView,
+                                copyTextButton,
+                                speechButton,
+                                starButton,
+                                spacing: 10,
+                                alignment: .fill,
+            distribution: .fill).padRight(20).padLeft(20)
+
         starButton.widthAnchor.constraint(equalTo: starButton.heightAnchor).isActive = true
-        
-        outputActionView.addSubview(speechButton)
-        speechButton.topAnchor.constraint(equalTo: starButton.topAnchor).isActive = true
-        speechButton.bottomAnchor.constraint(equalTo: starButton.bottomAnchor).isActive = true
-        speechButton.trailingAnchor.constraint(equalTo: starButton.leadingAnchor, constant: -10).isActive = true
-        speechButton.widthAnchor.constraint(equalTo: starButton.widthAnchor).isActive = true
+        speechButton.widthAnchor.constraint(equalTo: speechButton.heightAnchor).isActive = true
+        copyTextButton.widthAnchor.constraint(equalTo: copyTextButton.heightAnchor).isActive = true
 
         outputTextView.addSubview(targetOutputText)
         targetOutputText.topAnchor.constraint(equalTo: outputTextView.topAnchor).isActive = true
@@ -671,9 +685,9 @@ class TextTranslateViewController: UIViewController {
         
         starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
         speechButton.addTarget(self, action: #selector(speechButtonTapped), for: .touchUpInside)
+        copyTextButton.addTarget(self, action: #selector(copyTranslatedText), for: .touchUpInside)
         
-        starButton.isHidden = true
-        speechButton.isHidden = true
+        outputActionView.isHidden = true
         targetOutputText.isHidden = true
         
         sourceInputText.delegate = self
@@ -846,8 +860,7 @@ class TextTranslateViewController: UIViewController {
         sourceInputText.text = ""
         
         clearButton.isHidden = true
-        starButton.isHidden = true
-        speechButton.isHidden = true
+        outputActionView.isHidden = true
         targetOutputText.isHidden = true
     }
     
@@ -948,10 +961,7 @@ class TextTranslateViewController: UIViewController {
     }
     
     func showResult(result: String) {
-        starButton.isHidden = false
         isStarButtonTapped = false
-//        starButton.setImage(UIImage(systemName: "star"), for: .normal)
-//        starButton.tintColor = .gray
         
         let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
         if SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage) != nil {
@@ -959,6 +969,7 @@ class TextTranslateViewController: UIViewController {
         } else {
             speechButton.isHidden = true
         }
+        outputActionView.isHidden = false
         
         targetOutputText.isHidden = false
         targetOutputText.text = result
@@ -1043,6 +1054,12 @@ class TextTranslateViewController: UIViewController {
         synthesizer.speak(utterance)
         
         print("speechCode is \(speechCode)")
+    }
+    
+    @objc func copyTranslatedText() {
+        //Show UIAlert
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = targetOutputText.text
     }
 
 }

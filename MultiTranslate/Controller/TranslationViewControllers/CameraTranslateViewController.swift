@@ -26,44 +26,25 @@ class CameraTranslateViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xe1f2fb)
-        
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
 
-    private let cameraImageContainer: PMSuperButton = {
-        let button = PMSuperButton()
-        button.gradientEnabled = true
-        button.gradientStartColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-        button.gradientEndColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-        button.gradientHorizontal = true
-        button.ripple = true
-        button.rippleColor = #colorLiteral(red: 0.9880490899, green: 0.7656863332, blue: 0.9337566495, alpha: 0.5442262414)
-        
-        return button
-    }()
-    
-    private let cameraImage = UIImageView(image: UIImage(named: "color_camera"), contentMode: .scaleAspectFit)
-    private let cameraLabel = UILabel(text: "Use camera", font: .systemFont(ofSize: 50, weight: .thin), textAlignment: .center, numberOfLines: 1)
-    
     private let languageSelectView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-
         return view
     }()
 
     private let paddingView2: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
     private let buttonView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     
@@ -73,32 +54,72 @@ class CameraTranslateViewController: UIViewController {
         return view
     }()
     
-    private let targetLanguageView: UIView = {
+    private let sourceLanguageButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
         return view
     }()
     
-    private let sourceLanguageLabel: UILabel = {
-        let label = UILabel()
-        label.isUserInteractionEnabled = true
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.frame = .zero
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let sourceLanguageButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        return view
     }()
     
-    private let targetLanguageLabel: UILabel = {
-        let label = UILabel()
-        label.isUserInteractionEnabled = true
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.frame = .zero
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let sourceLanguageButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let sourceLanguageButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let sourceLanguageButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let arrowView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let arrowImageView: UIImageView = {
@@ -107,9 +128,163 @@ class CameraTranslateViewController: UIViewController {
         
         let config = UIImage.SymbolConfiguration(weight: .thin)
         imageView.image = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
-        imageView.tintColor = .label
+        imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private let targetLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let targetLanguageButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    private let targetLanguageButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let targetLanguageButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let targetLanguageButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let targetLanguageButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let sourceLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
+    private let targetLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
+    private let cameraButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        return view
+    }()
+    
+    private let cameraButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let cameraButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let cameraButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        return view
+    }()
+    
+    private let cameraButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        return view
+    }()
+    
+    private let cameraButton: UIButton = {
+        let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .thin, scale: .large)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.setImage(UIImage(systemName: "camera", withConfiguration: config), for: .normal)
+        button.tintColor = .systemBlue
+        button.contentMode = .scaleAspectFill
+        return button
     }()
     
     private let imagePicker: UIImagePickerController = {
@@ -137,64 +312,145 @@ class CameraTranslateViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        let viewHeight = view.frame.height
+        let viewWidth = view.frame.width
         
         view.addSubview(container)
-        container.edgeTo(view, safeArea: .all)
+        container.edgeTo(view, safeArea: .top)
         
-        container.VStack(languageSelectView,
-                         buttonView.setHeight(300),
-                         paddingView2,
-                         spacing: 10,
+        container.VStack(languageSelectView.setHeight(viewHeight * 0.12),
+                         buttonView,
+                         paddingView2.setHeight(viewHeight * 0.2),
+                         spacing: 5,
                          alignment: .fill,
                          distribution: .fill)
         
-        languageSelectView.heightAnchor.constraint(equalTo: paddingView2.heightAnchor).isActive = true
-        
         languageSelectView.HStack(sourceLanguageView,
-                            arrowImageView.setWidth(30),
-                            targetLanguageView,
-                            spacing: 5,
-                            alignment: .fill,
-                            distribution: .fill)
-        arrowImageView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
+                                  arrowView.setWidth(viewWidth * 0.12),
+                                  targetLanguageView,
+                                  spacing: 0,
+                                  alignment: .fill,
+                                  distribution: .fill)
         
-        sourceLanguageView.addSubview(sourceLanguageLabel)
-        sourceLanguageLabel.centerYAnchor.constraint(equalTo: sourceLanguageView.centerYAnchor).isActive = true
-        sourceLanguageLabel.widthAnchor.constraint(equalTo: sourceLanguageView.widthAnchor).isActive = true
-
-        targetLanguageView.addSubview(targetLanguageLabel)
-        targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
-        targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
+        arrowView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
         
-        buttonView.VStack(cameraImageContainer.setWidth(150).setHeight(150),
-                          cameraLabel,
-                          spacing: 8,
-                          alignment: .center,
-                          distribution: .fillProportionally).padTop(50)
+        sourceLanguageView.addSubview(sourceLanguageButtonContainerView)
+        sourceLanguageButtonContainerView.topAnchor.constraint(equalTo: sourceLanguageView.topAnchor, constant: 20).isActive = true
+        sourceLanguageButtonContainerView.bottomAnchor.constraint(equalTo: sourceLanguageView.bottomAnchor).isActive = true
+        sourceLanguageButtonContainerView.leadingAnchor.constraint(equalTo: sourceLanguageView.leadingAnchor, constant: 25).isActive = true
+        sourceLanguageButtonContainerView.trailingAnchor.constraint(equalTo: sourceLanguageView.trailingAnchor, constant: -25).isActive = true
         
-        cameraImageContainer.layer.cornerRadius = 75
-
-        cameraImageContainer.addSubview(cameraImage)
-        cameraImage.translatesAutoresizingMaskIntoConstraints = false
-        cameraImage.centerXAnchor.constraint(equalTo: cameraImageContainer.centerXAnchor).isActive = true
-        cameraImage.centerYAnchor.constraint(equalTo: cameraImageContainer.centerYAnchor).isActive = true
-        cameraImage.setWidth(100)
-        cameraImage.setHeight(100)
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterDarkView)
+        sourceLanguageButtonOutterDarkView.edgeTo(sourceLanguageButtonContainerView)
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterLightView)
+        sourceLanguageButtonOutterLightView.edgeTo(sourceLanguageButtonContainerView)
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonInnerDarkView)
+        sourceLanguageButtonInnerDarkView.topAnchor.constraint(equalTo: sourceLanguageButtonContainerView.topAnchor).isActive = true
+        sourceLanguageButtonInnerDarkView.leadingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.leadingAnchor).isActive = true
+        sourceLanguageButtonInnerDarkView.bottomAnchor.constraint(equalTo: sourceLanguageButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        sourceLanguageButtonInnerDarkView.trailingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonInnerLightView)
+        sourceLanguageButtonInnerLightView.bottomAnchor.constraint(equalTo: sourceLanguageButtonContainerView.bottomAnchor).isActive = true
+        sourceLanguageButtonInnerLightView.trailingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.trailingAnchor).isActive = true
+        sourceLanguageButtonInnerLightView.topAnchor.constraint(equalTo: sourceLanguageButtonContainerView.topAnchor, constant: -20).isActive = true
+        sourceLanguageButtonInnerLightView.leadingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButton)
+        sourceLanguageButton.edgeTo(sourceLanguageButtonContainerView)
+        
+        arrowView.addSubview(arrowImageView)
+        arrowImageView.centerYAnchor.constraint(equalTo: sourceLanguageButtonContainerView.centerYAnchor).isActive = true
+        arrowImageView.centerXAnchor.constraint(equalTo: arrowView.centerXAnchor).isActive = true
+        arrowImageView.setHeight(30).setWidth(30)
+        
+        targetLanguageView.addSubview(targetLanguageButtonContainerView)
+        targetLanguageButtonContainerView.topAnchor.constraint(equalTo: targetLanguageView.topAnchor, constant: 20).isActive = true
+        targetLanguageButtonContainerView.bottomAnchor.constraint(equalTo: targetLanguageView.bottomAnchor).isActive = true
+        targetLanguageButtonContainerView.leadingAnchor.constraint(equalTo: targetLanguageView.leadingAnchor, constant: 25).isActive = true
+        targetLanguageButtonContainerView.trailingAnchor.constraint(equalTo: targetLanguageView.trailingAnchor, constant: -20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonOutterDarkView)
+        targetLanguageButtonOutterDarkView.edgeTo(targetLanguageButtonContainerView)
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonOutterLightView)
+        targetLanguageButtonOutterLightView.edgeTo(targetLanguageButtonContainerView)
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonInnerDarkView)
+        targetLanguageButtonInnerDarkView.topAnchor.constraint(equalTo: targetLanguageButtonContainerView.topAnchor).isActive = true
+        targetLanguageButtonInnerDarkView.leadingAnchor.constraint(equalTo: targetLanguageButtonContainerView.leadingAnchor).isActive = true
+        targetLanguageButtonInnerDarkView.bottomAnchor.constraint(equalTo: targetLanguageButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        targetLanguageButtonInnerDarkView.trailingAnchor.constraint(equalTo: targetLanguageButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonInnerLightView)
+        targetLanguageButtonInnerLightView.bottomAnchor.constraint(equalTo: targetLanguageButtonContainerView.bottomAnchor).isActive = true
+        targetLanguageButtonInnerLightView.trailingAnchor.constraint(equalTo: targetLanguageButtonContainerView.trailingAnchor).isActive = true
+        targetLanguageButtonInnerLightView.topAnchor.constraint(equalTo: targetLanguageButtonContainerView.topAnchor, constant: -20).isActive = true
+        targetLanguageButtonInnerLightView.leadingAnchor.constraint(equalTo: targetLanguageButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButton)
+        targetLanguageButton.edgeTo(targetLanguageButtonContainerView)
+        
+        buttonView.addSubview(cameraButtonContainerView)
+        cameraButtonContainerView.setWidth(viewWidth * 0.4).setHeight(viewWidth * 0.4)
+        cameraButtonContainerView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        cameraButtonContainerView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+        
+        cameraButtonContainerView.addSubview(cameraButtonOutterDarkView)
+        cameraButtonOutterDarkView.edgeTo(cameraButtonContainerView)
+        
+        cameraButtonContainerView.addSubview(cameraButtonOutterLightView)
+        cameraButtonOutterLightView.edgeTo(cameraButtonContainerView)
+        
+        cameraButtonContainerView.addSubview(cameraButtonInnerDarkView)
+        cameraButtonInnerDarkView.topAnchor.constraint(equalTo: cameraButtonContainerView.topAnchor).isActive = true
+        cameraButtonInnerDarkView.leadingAnchor.constraint(equalTo: cameraButtonContainerView.leadingAnchor).isActive = true
+        cameraButtonInnerDarkView.bottomAnchor.constraint(equalTo: cameraButtonContainerView.bottomAnchor, constant: viewWidth * 0.4).isActive = true
+        cameraButtonInnerDarkView.trailingAnchor.constraint(equalTo: cameraButtonContainerView.trailingAnchor, constant: viewWidth * 0.4).isActive = true
+        
+        cameraButtonContainerView.addSubview(cameraButtonInnerLightView)
+        cameraButtonInnerLightView.bottomAnchor.constraint(equalTo: cameraButtonContainerView.bottomAnchor).isActive = true
+        cameraButtonInnerLightView.trailingAnchor.constraint(equalTo: cameraButtonContainerView.trailingAnchor).isActive = true
+        cameraButtonInnerLightView.topAnchor.constraint(equalTo: cameraButtonContainerView.topAnchor, constant: -viewWidth * 0.4).isActive = true
+        cameraButtonInnerLightView.leadingAnchor.constraint(equalTo: cameraButtonContainerView.leadingAnchor, constant: -viewWidth * 0.4).isActive = true
+        
+        cameraButtonContainerView.addSubview(cameraButton)
+        cameraButton.topAnchor.constraint(equalTo: cameraButtonContainerView.topAnchor, constant: viewWidth * 0.02).isActive = true
+        cameraButton.leadingAnchor.constraint(equalTo: cameraButtonContainerView.leadingAnchor, constant: viewWidth * 0.02).isActive = true
+        cameraButton.trailingAnchor.constraint(equalTo: cameraButtonContainerView.trailingAnchor, constant: -viewWidth * 0.02).isActive = true
+        cameraButton.bottomAnchor.constraint(equalTo: cameraButtonContainerView.bottomAnchor, constant: -viewWidth * 0.02).isActive = true
+        
+        cameraButtonContainerView.layer.cornerRadius =  viewWidth * 0.4 / 2
+        cameraButtonOutterLightView.layer.cornerRadius = viewWidth * 0.4 / 2
+        cameraButtonOutterDarkView.layer.cornerRadius = viewWidth * 0.4 / 2
+        cameraButtonInnerLightView.cornerRadius = viewWidth * 0.4 / 2
+        cameraButtonInnerDarkView.cornerRadius = viewWidth * 0.4 / 2
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cameraImageContainer.addTarget(self, action: #selector(useCamera), for: .touchUpInside)
         imagePicker.delegate = self
         
-        sourceLanguageLabel.text = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+        let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchDown), for: .touchDown)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchUpInside), for: .touchUpInside)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchDown), for: .touchDown)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchUpInside), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(cameraButtonTouchDown), for: .touchDown)
+        cameraButton.addTarget(self, action: #selector(cameraButtonTouchUpInside), for: .touchUpInside)
         
-        let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
-        sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
-        let targetLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
-        targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
+        sourceLanguageButtonInnerLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = true
+        cameraButtonInnerDarkView.isHidden = true
+        cameraButtonInnerLightView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -203,14 +459,16 @@ class CameraTranslateViewController: UIViewController {
         if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey) {
             temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
             defaultSourceLanguageIndex = temporarySourceLanguageIndex
-            sourceLanguageLabel.text = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+            let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+            sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
             print("defaultSourceLanguageIndex changed")
         }
         
         if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey) {
             temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
             defaultTargetLanguageIndex = temporaryTargetLanguageIndex
-            targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+            let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+            targetLanguageButton.setTitle(targetLanguage, for: .normal)
             print("defaultTargetLanguageIndex changed")
         }
         
@@ -218,7 +476,67 @@ class CameraTranslateViewController: UIViewController {
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
-    @objc func useCamera() {
+    @objc func sourceLanguageButtonTouchDown() {
+        sourceLanguageButtonOutterDarkView.isHidden = true
+        sourceLanguageButtonOutterLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = false
+        sourceLanguageButtonInnerLightView.isHidden = false
+        
+        sourceLanguageButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func sourceLanguageButtonTouchUpInside() {
+        sourceLanguageButtonOutterDarkView.isHidden = false
+        sourceLanguageButtonOutterLightView.isHidden = false
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        sourceLanguageButtonInnerLightView.isHidden = true
+        
+        sourceLanguageButtonContainerView.layer.masksToBounds = false
+        
+        selectLanguage()
+    }
+    
+    @objc func targetLanguageButtonTouchDown() {
+        targetLanguageButtonOutterDarkView.isHidden = true
+        targetLanguageButtonOutterLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = false
+        targetLanguageButtonInnerLightView.isHidden = false
+        
+        targetLanguageButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func targetLanguageButtonTouchUpInside() {
+        targetLanguageButtonOutterDarkView.isHidden = false
+        targetLanguageButtonOutterLightView.isHidden = false
+        targetLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        
+        targetLanguageButtonContainerView.layer.masksToBounds = false
+
+        selectLanguage()
+    }
+    
+    @objc func cameraButtonTouchDown() {
+        cameraButtonOutterDarkView.isHidden = true
+        cameraButtonOutterLightView.isHidden = true
+        cameraButtonInnerDarkView.isHidden = false
+        cameraButtonInnerLightView.isHidden = false
+        
+        cameraButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func cameraButtonTouchUpInside() {
+        cameraButtonOutterDarkView.isHidden = false
+        cameraButtonOutterLightView.isHidden = false
+        cameraButtonInnerDarkView.isHidden = true
+        cameraButtonInnerLightView.isHidden = true
+        
+        cameraButtonContainerView.layer.masksToBounds = false
+        
+        useCamera()
+    }
+    
+    func useCamera() {
         print("Use camera tapped.")
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -302,8 +620,8 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
             if self.detectedResultString.isEmpty {
                 print("Result is empty.") // UIAlertViewController
             } else {
-                guard let sourceLanguage = self.sourceLanguageLabel.text,
-                    let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
+                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
+                guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
                 
                 let viewController = TextTranslateViewController()
                 viewController.temporarySourceLanguageGCPIndex = index
@@ -323,8 +641,10 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
 
 extension CameraTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageLabel.text = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageGCPIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[temporarySourceLanguageGCPIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
         self.temporarySourceLanguageIndex = temporarySourceLanguageGCPIndex
         self.temporaryTargetLanguageIndex = temporaryTargetLanguageGCPIndex
     }

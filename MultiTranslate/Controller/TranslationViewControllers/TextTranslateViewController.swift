@@ -13,7 +13,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 //import RAMAnimatedTabBarController
-import KMPlaceholderTextView
+//import KMPlaceholderTextView
 import RealmSwift
 
 class TextTranslateViewController: UIViewController {
@@ -380,8 +380,8 @@ class TextTranslateViewController: UIViewController {
         return button
     }()
     
-    let sourceInputText: KMPlaceholderTextView = {
-        let textView = KMPlaceholderTextView()
+    let sourceInputText: NoSelectTextView = {
+        let textView = NoSelectTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .systemBackground
         textView.placeholder = "Input source text"

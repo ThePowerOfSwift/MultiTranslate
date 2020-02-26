@@ -61,6 +61,7 @@
 		80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */; };
 		80D844AC23F287BD003D0C8C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */; };
 		80DB054423EAABD9003DE94D /* SupportedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB054323EAABD9003DE94D /* SupportedLanguages.swift */; };
+		80FE80F524062CEE00CC70DF /* NoSelectTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */; };
 		CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A32ED9C279B46E2913F1257 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +126,7 @@
 		80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerDelegate.swift; sourceTree = "<group>"; };
 		80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		80DB054323EAABD9003DE94D /* SupportedLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedLanguages.swift; sourceTree = "<group>"; };
+		80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectTextView.swift; sourceTree = "<group>"; };
 		C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyxc.config; path = ./amplifyxc.config; sourceTree = "<group>"; };
 		CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.release.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.release.xcconfig"; sourceTree = "<group>"; };
 		EE9BFFEA60324C8A8DEE20CA /* amplify */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplify; path = ./amplify; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */,
 				80A403DC23FFA70800E84231 /* SwiftyInnerShadowLayer.swift */,
 				80A403DB23FFA70800E84231 /* SwiftyInnerShadowView.swift */,
+				80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */,
 				8052A1DA23C2FDA800883123 /* CameraTranslateViewController.swift in Sources */,
 				809455B023E7E88A0056A501 /* PurchasePageViewController.swift in Sources */,
+				80FE80F524062CEE00CC70DF /* NoSelectTextView.swift in Sources */,
 				80A403DA23FF655400E84231 /* PrivacyPolicyViewController.swift in Sources */,
 				808E75ED23C43718009A0EB4 /* UIStackView+.swift in Sources */,
 				8052A1DC23C2FDBF00883123 /* VoiceTranslateViewController.swift in Sources */,

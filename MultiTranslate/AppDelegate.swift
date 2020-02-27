@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 
 import Firebase
-import IQKeyboardManager
+//import IQKeyboardManager
 import RealmSwift
 import SwiftyStoreKit
 
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        IQKeyboardManager.shared().isEnabled = true
+//        IQKeyboardManager.shared().isEnabled = true
         
         if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
             print(fileURL)

@@ -654,59 +654,15 @@ class TextTranslateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setUpCloudKit()
+        translatedCharactersCurrentMonth = UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey)
         
         savedTranslations = realm.objects(SavedTranslation.self)
         
-        let sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
-        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
-        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
-        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchDown), for: .touchDown)
-        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchUpInside), for: .touchUpInside)
-        targetLanguageButton.setTitle(targetLanguage, for: .normal)
-        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchDown), for: .touchDown)
-        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchUpInside), for: .touchUpInside)
-        translateButton.addTarget(self, action: #selector(translateButtonTouchDown), for: .touchDown)
-        translateButton.addTarget(self, action: #selector(translateButtonTouchUpInside), for: .touchUpInside)
-        
-        clearButton.isHidden = true
-        sourceLanguageButtonInnerLightView.isHidden = true
-        sourceLanguageButtonInnerDarkView.isHidden = true
-        targetLanguageButtonInnerLightView.isHidden = true
-        targetLanguageButtonInnerDarkView.isHidden = true
-        exchangeButtonInnerLightView.isHidden = true
-        exchangeButtonInnerDarkView.isHidden = true
-        translateButtonInnerLightView.isHidden = true
-        translateButtonInnerDarkView.isHidden = true
-        
-        exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchDown), for: .touchDown)
-        exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchUpInside), for: .touchUpInside)
-        clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
-        
-        starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
-        speechButton.addTarget(self, action: #selector(speechButtonTapped), for: .touchUpInside)
-        copyTextButton.addTarget(self, action: #selector(copyTranslatedText), for: .touchUpInside)
-        
-        outputActionView.isHidden = true
-        targetOutputText.isHidden = true
-        
+        setUpViewsAndButtons()
+        setUpKeyboardToolBar()
         sourceInputText.delegate = self
-        
-        translatedCharactersCurrentMonth = UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey)
-        
-        CloudKitManager.isCountRecordEmpty { (isEmpty) in
-            if isEmpty {
-                CloudKitManager.initializeCloudDatabase()
-            } else {
-                CloudKitManager.queryCloudDatabaseCountData { (result, error) in
-                    if let result = result {
-                        self.cloudDBTranslatedCharacters = result
-                        print("cloudDBTranslatedCharacters is \(result)")
-                    } else {
-                        print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
-                    }
-                }
-            }
-        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         
@@ -738,6 +694,66 @@ class TextTranslateViewController: UIViewController {
         
         let titleInfo = ["title" : "Text"]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
+    }
+    
+    func setUpCloudKit() {
+        CloudKitManager.isCountRecordEmpty { (isEmpty) in
+            if isEmpty {
+                CloudKitManager.initializeCloudDatabase()
+            } else {
+                CloudKitManager.queryCloudDatabaseCountData { (result, error) in
+                    if let result = result {
+                        self.cloudDBTranslatedCharacters = result
+                        print("cloudDBTranslatedCharacters is \(result)")
+                    } else {
+                        print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func setUpViewsAndButtons() {
+        let sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchDown), for: .touchDown)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchUpInside), for: .touchUpInside)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchDown), for: .touchDown)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchUpInside), for: .touchUpInside)
+        translateButton.addTarget(self, action: #selector(translateButtonTouchDown), for: .touchDown)
+        translateButton.addTarget(self, action: #selector(translateButtonTouchUpInside), for: .touchUpInside)
+        exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchDown), for: .touchDown)
+        exchangeButton.addTarget(self, action: #selector(exchangeButtonTouchUpInside), for: .touchUpInside)
+        
+        sourceLanguageButtonInnerLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = true
+        exchangeButtonInnerLightView.isHidden = true
+        exchangeButtonInnerDarkView.isHidden = true
+        translateButtonInnerLightView.isHidden = true
+        translateButtonInnerDarkView.isHidden = true
+
+        clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
+        starButton.addTarget(self, action: #selector(starButtonTapped), for: .touchUpInside)
+        speechButton.addTarget(self, action: #selector(speechButtonTapped), for: .touchUpInside)
+        copyTextButton.addTarget(self, action: #selector(copyTranslatedText), for: .touchUpInside)
+        
+        clearButton.isHidden = true
+        outputActionView.isHidden = true //outputActionView = clearButton + starButton + copyTextButton
+        targetOutputText.isHidden = true
+    }
+    
+    func setUpKeyboardToolBar() {
+        let bar = UIToolbar()
+        let dismissItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let translateItem = UIBarButtonItem(title: "Translate", style: .plain, target: self, action: #selector(doTranslate))
+        bar.items = [dismissItem, spacer, translateItem]
+        bar.sizeToFit()
+        sourceInputText.inputAccessoryView = bar
     }
     
     
@@ -861,10 +877,17 @@ class TextTranslateViewController: UIViewController {
         clearButton.isHidden = true
         outputActionView.isHidden = true
         targetOutputText.isHidden = true
+        
+        sourceInputText.resignFirstResponder()
     }
     
-    func doTranslate() {
+    @objc func dismissKeyboard() {
+        sourceInputText.resignFirstResponder()
+    }
+    
+    @objc func doTranslate() {
         print("do translate")
+        sourceInputText.resignFirstResponder()
         
         starButton.setImage(UIImage(systemName: "star"), for: .normal)
         starButton.tintColor = .systemBlue

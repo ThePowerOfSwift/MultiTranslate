@@ -248,6 +248,8 @@ class AccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
 
         // Do any additional setup after loading the view.
         subscritionPlanTableView.backgroundColor = UIColor(rgb: 0xC1D2EB)

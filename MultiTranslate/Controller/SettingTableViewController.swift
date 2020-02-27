@@ -48,6 +48,7 @@ class SettingTableViewController: UITableViewController {
         
         self.title = "Setting"
         self.clearsSelectionOnViewWillAppear = true
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         sectionList = [textTranslateLanguageSection, cameraTranslateLanguageSection, voiceTranslateLanguageSection, conversationLanguageSection, offlineLanguagesSection]
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.settingTableViewCellIdentifier)
@@ -67,8 +68,19 @@ class SettingTableViewController: UITableViewController {
         return sections.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return sections[section]
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+        let sectionTitle = UILabel(frame: CGRect(x: 20, y: 0, width: headerView.bounds.size.width, height: headerView.bounds.size.height))
+        headerView.backgroundColor = UIColor(rgb: 0x9ab6df)
+        headerView.addSubview(sectionTitle)
+        sectionTitle.text = sections[section]
+        sectionTitle.font = UIFont.boldSystemFont(ofSize: 16)
+        return headerView
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,6 +106,7 @@ class SettingTableViewController: UITableViewController {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: Constants.settingTableViewCellIdentifier)
         cell.textLabel?.text = sectionList[indexPath.section][indexPath.row]
         cell.accessoryType = .disclosureIndicator
+        cell.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
         switch indexPath.section {
         case 0:

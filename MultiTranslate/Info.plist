@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Please allow to transcripte from voice to text.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Please allow the microphone.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please allow the photo library.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Please allow the camera.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -28,6 +20,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow the camera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow the photo library.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Please allow to transcripte from voice to text.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -58,8 +58,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

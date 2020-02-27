@@ -93,6 +93,7 @@ class TranslationViewController: UIViewController {
         addChild(pagingViewController)
         view.addSubview(pagingViewController.view)
         view.constrainToEdges(pagingViewController.view)
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         pagingViewController.didMove(toParent: self)
         
         NotificationCenter.default.addObserver(forName: .translationViewControllerDidChange, object: nil, queue: .main) { (notification) in

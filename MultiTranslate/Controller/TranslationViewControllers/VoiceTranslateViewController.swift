@@ -12,46 +12,27 @@ import PMSuperButton
 
 class VoiceTranslateViewController: UIViewController {
     
-    private var sourceText: String = ""
+    //MARK: - Variables and Constants
+    private var detectedResultString: String = ""
     private var temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey)
     private var temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
     private var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey)
     private var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
 
+    //MARK: - UI Parts Declaration
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xe1f2fb)
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
-    
-//    let microphoneImageContainer = UIView(backgroundColor: .cyan)
-    private let microphoneImageContainer: PMSuperButton = {
-        let button = PMSuperButton()
-        button.gradientEnabled = true
-        button.gradientStartColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
-        button.gradientEndColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-        button.gradientHorizontal = true
-        button.ripple = true
-        button.rippleColor = #colorLiteral(red: 0.9880490899, green: 0.7656863332, blue: 0.9337566495, alpha: 0.5442262414)
-        
-        return button
-    }()
-    
-    private let microphoneImage = UIImageView(image: UIImage(named: "color_microphone"),
-                                      contentMode: .scaleAspectFit)
-    
-    private let microphoneLabel = UILabel(text: "Use microphone",
-                                  font: .systemFont(ofSize: 50, weight: .thin),
-                                  textAlignment: .center,
-                                  numberOfLines: 1)
     
     private let languageSelectView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private let paddingView2: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -70,32 +51,72 @@ class VoiceTranslateViewController: UIViewController {
         return view
     }()
     
-    private let targetLanguageView: UIView = {
+    private let sourceLanguageButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
         return view
     }()
     
-    private let sourceLanguageLabel: UILabel = {
-        let label = UILabel()
-        label.isUserInteractionEnabled = true
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.frame = .zero
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let sourceLanguageButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        return view
     }()
     
-    private let targetLanguageLabel: UILabel = {
-        let label = UILabel()
-        label.isUserInteractionEnabled = true
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.frame = .zero
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private let sourceLanguageButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let sourceLanguageButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let sourceLanguageButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let arrowView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let arrowImageView: UIImageView = {
@@ -104,71 +125,307 @@ class VoiceTranslateViewController: UIViewController {
         
         let config = UIImage.SymbolConfiguration(weight: .thin)
         imageView.image = UIImage(systemName: "arrow.right.circle", withConfiguration: config)
-        imageView.tintColor = .label
+        imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
+    private let targetLanguageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let targetLanguageButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    private let targetLanguageButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let targetLanguageButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let targetLanguageButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let targetLanguageButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        view.cornerRadius = 20
+        return view
+    }()
+    
+    private let sourceLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
+    private let targetLanguageButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
+    private let microphoneButtonContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        return view
+    }()
+    
+    private let microphoneButtonOutterLightView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: -5, height: -5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let microphoneButtonOutterDarkView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
+        view.layer.masksToBounds = false
+        
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 5, height: 5)
+        view.layer.shadowRadius = 5
+        return view
+    }()
+    
+    private let microphoneButtonInnerLightView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.white.cgColor
+        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowOffset = CGSize.zero
+        return view
+    }()
+    
+    private let microphoneButtonInnerDarkView: SwiftyInnerShadowView = {
+        let view = SwiftyInnerShadowView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.shadowLayer.shadowRadius = 5
+        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowOpacity = 0.5
+        view.shadowLayer.shadowOffset = CGSize.zero
+        return view
+    }()
+    
+    private let microphoneButton: UIButton = {
+        let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .thin, scale: .large)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.setImage(UIImage(systemName: "mic", withConfiguration: config), for: .normal)
+        button.tintColor = .systemBlue
+        button.contentMode = .scaleAspectFill
+        return button
+    }()
+    
+    // MARK: - ViewController Life Cirecle
+    
     override func loadView() {
         super.loadView()
         
+        let viewHeight = view.frame.height
+        let viewWidth = view.frame.width
         
         view.addSubview(container)
-        container.edgeTo(view, safeArea: .all)
+        container.edgeTo(view, safeArea: .top)
         
-        container.VStack(languageSelectView,
-                         buttonView.setHeight(300),
-                         paddingView2,
-                         spacing: 10,
+        container.VStack(languageSelectView.setHeight(viewHeight * 0.12),
+                         buttonView,
+                         paddingView2.setHeight(viewHeight * 0.2),
+                         spacing: 5,
                          alignment: .fill,
                          distribution: .fill)
         
-        languageSelectView.heightAnchor.constraint(equalTo: paddingView2.heightAnchor).isActive = true
-        
         languageSelectView.HStack(sourceLanguageView,
-                            arrowImageView.setWidth(30),
-                            targetLanguageView,
-                            spacing: 5,
-                            alignment: .fill,
-                            distribution: .fill)
-        arrowImageView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
+                                  arrowView.setWidth(viewWidth * 0.12),
+                                  targetLanguageView,
+                                  spacing: 0,
+                                  alignment: .fill,
+                                  distribution: .fill)
         
-        sourceLanguageView.addSubview(sourceLanguageLabel)
-        sourceLanguageLabel.centerYAnchor.constraint(equalTo: sourceLanguageView.centerYAnchor).isActive = true
-        sourceLanguageLabel.widthAnchor.constraint(equalTo: sourceLanguageView.widthAnchor).isActive = true
-
-        targetLanguageView.addSubview(targetLanguageLabel)
-        targetLanguageLabel.centerYAnchor.constraint(equalTo: targetLanguageView.centerYAnchor).isActive = true
-        targetLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageView.widthAnchor).isActive = true
+        arrowView.centerXAnchor.constraint(equalTo: languageSelectView.centerXAnchor).isActive = true
         
-        buttonView.VStack(microphoneImageContainer.setWidth(150).setHeight(150),
-                          microphoneLabel,
-                          spacing: 8,
-                          alignment: .center,
-                          distribution: .fillProportionally).padTop(50)
+        sourceLanguageView.addSubview(sourceLanguageButtonContainerView)
+        sourceLanguageButtonContainerView.topAnchor.constraint(equalTo: sourceLanguageView.topAnchor, constant: 20).isActive = true
+        sourceLanguageButtonContainerView.bottomAnchor.constraint(equalTo: sourceLanguageView.bottomAnchor).isActive = true
+        sourceLanguageButtonContainerView.leadingAnchor.constraint(equalTo: sourceLanguageView.leadingAnchor, constant: 25).isActive = true
+        sourceLanguageButtonContainerView.trailingAnchor.constraint(equalTo: sourceLanguageView.trailingAnchor, constant: -25).isActive = true
         
-        microphoneImageContainer.layer.cornerRadius = 75
-
-        microphoneImageContainer.addSubview(microphoneImage)
-        microphoneImage.translatesAutoresizingMaskIntoConstraints = false
-        microphoneImage.centerXAnchor.constraint(equalTo: microphoneImageContainer.centerXAnchor).isActive = true
-        microphoneImage.centerYAnchor.constraint(equalTo: microphoneImageContainer.centerYAnchor).isActive = true
-        microphoneImage.setWidth(100)
-        microphoneImage.setHeight(100)
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterDarkView)
+        sourceLanguageButtonOutterDarkView.edgeTo(sourceLanguageButtonContainerView)
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonOutterLightView)
+        sourceLanguageButtonOutterLightView.edgeTo(sourceLanguageButtonContainerView)
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonInnerDarkView)
+        sourceLanguageButtonInnerDarkView.topAnchor.constraint(equalTo: sourceLanguageButtonContainerView.topAnchor).isActive = true
+        sourceLanguageButtonInnerDarkView.leadingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.leadingAnchor).isActive = true
+        sourceLanguageButtonInnerDarkView.bottomAnchor.constraint(equalTo: sourceLanguageButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        sourceLanguageButtonInnerDarkView.trailingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButtonInnerLightView)
+        sourceLanguageButtonInnerLightView.bottomAnchor.constraint(equalTo: sourceLanguageButtonContainerView.bottomAnchor).isActive = true
+        sourceLanguageButtonInnerLightView.trailingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.trailingAnchor).isActive = true
+        sourceLanguageButtonInnerLightView.topAnchor.constraint(equalTo: sourceLanguageButtonContainerView.topAnchor, constant: -20).isActive = true
+        sourceLanguageButtonInnerLightView.leadingAnchor.constraint(equalTo: sourceLanguageButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        sourceLanguageButtonContainerView.addSubview(sourceLanguageButton)
+        sourceLanguageButton.edgeTo(sourceLanguageButtonContainerView)
+        
+        arrowView.addSubview(arrowImageView)
+        arrowImageView.centerYAnchor.constraint(equalTo: sourceLanguageButtonContainerView.centerYAnchor).isActive = true
+        arrowImageView.centerXAnchor.constraint(equalTo: arrowView.centerXAnchor).isActive = true
+        arrowImageView.setHeight(30).setWidth(30)
+        
+        targetLanguageView.addSubview(targetLanguageButtonContainerView)
+        targetLanguageButtonContainerView.topAnchor.constraint(equalTo: targetLanguageView.topAnchor, constant: 20).isActive = true
+        targetLanguageButtonContainerView.bottomAnchor.constraint(equalTo: targetLanguageView.bottomAnchor).isActive = true
+        targetLanguageButtonContainerView.leadingAnchor.constraint(equalTo: targetLanguageView.leadingAnchor, constant: 25).isActive = true
+        targetLanguageButtonContainerView.trailingAnchor.constraint(equalTo: targetLanguageView.trailingAnchor, constant: -20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonOutterDarkView)
+        targetLanguageButtonOutterDarkView.edgeTo(targetLanguageButtonContainerView)
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonOutterLightView)
+        targetLanguageButtonOutterLightView.edgeTo(targetLanguageButtonContainerView)
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonInnerDarkView)
+        targetLanguageButtonInnerDarkView.topAnchor.constraint(equalTo: targetLanguageButtonContainerView.topAnchor).isActive = true
+        targetLanguageButtonInnerDarkView.leadingAnchor.constraint(equalTo: targetLanguageButtonContainerView.leadingAnchor).isActive = true
+        targetLanguageButtonInnerDarkView.bottomAnchor.constraint(equalTo: targetLanguageButtonContainerView.bottomAnchor, constant: 20).isActive = true
+        targetLanguageButtonInnerDarkView.trailingAnchor.constraint(equalTo: targetLanguageButtonContainerView.trailingAnchor, constant: 20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButtonInnerLightView)
+        targetLanguageButtonInnerLightView.bottomAnchor.constraint(equalTo: targetLanguageButtonContainerView.bottomAnchor).isActive = true
+        targetLanguageButtonInnerLightView.trailingAnchor.constraint(equalTo: targetLanguageButtonContainerView.trailingAnchor).isActive = true
+        targetLanguageButtonInnerLightView.topAnchor.constraint(equalTo: targetLanguageButtonContainerView.topAnchor, constant: -20).isActive = true
+        targetLanguageButtonInnerLightView.leadingAnchor.constraint(equalTo: targetLanguageButtonContainerView.leadingAnchor, constant: -20).isActive = true
+        
+        targetLanguageButtonContainerView.addSubview(targetLanguageButton)
+        targetLanguageButton.edgeTo(targetLanguageButtonContainerView)
+        
+        buttonView.addSubview(microphoneButtonContainerView)
+        microphoneButtonContainerView.setWidth(viewWidth * 0.4).setHeight(viewWidth * 0.4)
+        microphoneButtonContainerView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        microphoneButtonContainerView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+        
+        microphoneButtonContainerView.addSubview(microphoneButtonOutterDarkView)
+        microphoneButtonOutterDarkView.edgeTo(microphoneButtonContainerView)
+        
+        microphoneButtonContainerView.addSubview(microphoneButtonOutterLightView)
+        microphoneButtonOutterLightView.edgeTo(microphoneButtonContainerView)
+        
+        microphoneButtonContainerView.addSubview(microphoneButtonInnerDarkView)
+        microphoneButtonInnerDarkView.topAnchor.constraint(equalTo: microphoneButtonContainerView.topAnchor).isActive = true
+        microphoneButtonInnerDarkView.leadingAnchor.constraint(equalTo: microphoneButtonContainerView.leadingAnchor).isActive = true
+        microphoneButtonInnerDarkView.bottomAnchor.constraint(equalTo: microphoneButtonContainerView.bottomAnchor, constant: viewWidth * 0.22).isActive = true
+        microphoneButtonInnerDarkView.trailingAnchor.constraint(equalTo: microphoneButtonContainerView.trailingAnchor, constant: viewWidth * 0.22).isActive = true
+        
+        microphoneButtonContainerView.addSubview(microphoneButtonInnerLightView)
+        microphoneButtonInnerLightView.bottomAnchor.constraint(equalTo: microphoneButtonContainerView.bottomAnchor).isActive = true
+        microphoneButtonInnerLightView.trailingAnchor.constraint(equalTo: microphoneButtonContainerView.trailingAnchor).isActive = true
+        microphoneButtonInnerLightView.topAnchor.constraint(equalTo: microphoneButtonContainerView.topAnchor, constant: -viewWidth * 0.4).isActive = true
+        microphoneButtonInnerLightView.leadingAnchor.constraint(equalTo: microphoneButtonContainerView.leadingAnchor, constant: -viewWidth * 0.4).isActive = true
+        
+        microphoneButtonContainerView.addSubview(microphoneButton)
+        microphoneButton.topAnchor.constraint(equalTo: microphoneButtonContainerView.topAnchor, constant: viewWidth * 0.02).isActive = true
+        microphoneButton.leadingAnchor.constraint(equalTo: microphoneButtonContainerView.leadingAnchor, constant: viewWidth * 0.02).isActive = true
+        microphoneButton.trailingAnchor.constraint(equalTo: microphoneButtonContainerView.trailingAnchor, constant: -viewWidth * 0.02).isActive = true
+        microphoneButton.bottomAnchor.constraint(equalTo: microphoneButtonContainerView.bottomAnchor, constant: -viewWidth * 0.02).isActive = true
+        
+        microphoneButtonContainerView.layer.cornerRadius =  viewWidth * 0.4 / 2
+        microphoneButtonOutterLightView.layer.cornerRadius = viewWidth * 0.4 / 2
+        microphoneButtonOutterDarkView.layer.cornerRadius = viewWidth * 0.4 / 2
+        microphoneButtonInnerLightView.cornerRadius = viewWidth * 0.4 / 2
+        microphoneButtonInnerDarkView.cornerRadius = viewWidth * 0.4 / 2
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        microphoneImageContainer.addTarget(self, action: #selector(useMicrophone), for: .touchUpInside)
+        let sourceLanguage = SupportedLanguages.speechRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchDown), for: .touchDown)
+        sourceLanguageButton.addTarget(self, action: #selector(sourceLanguageButtonTouchUpInside), for: .touchUpInside)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchDown), for: .touchDown)
+        targetLanguageButton.addTarget(self, action: #selector(targetLanguageButtonTouchUpInside), for: .touchUpInside)
+        microphoneButton.addTarget(self, action: #selector(microphoneButtonTouchDown), for: .touchDown)
+        microphoneButton.addTarget(self, action: #selector(microphoneButtonTouchUpInside), for: .touchUpInside)
         
-        sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
-        
-        let sourceLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
-        sourceLanguageLabel.addGestureRecognizer(sourceLanguageRecognizer)
-        let targetLanguageRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectLanguage))
-        targetLanguageLabel.addGestureRecognizer(targetLanguageRecognizer)
+        sourceLanguageButtonInnerLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = true
+//        microphoneButtonInnerDarkView.isHidden = true
+//        microphoneButtonInnerLightView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -177,22 +434,86 @@ class VoiceTranslateViewController: UIViewController {
         if defaultSourceLanguageIndex != UserDefaults.standard.integer(forKey: Constants.voiceSourceLanguageIndexKey) {
             temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
             defaultSourceLanguageIndex = temporarySourceLanguageIndex
-            sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageIndex]
+            let sourceLanguage = SupportedLanguages.speechRecognizerSupportedLanguage[temporarySourceLanguageIndex]
+            sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
             print("defaultSourceLanguageIndex changed")
         }
         
         if defaultTargetLanguageIndex != UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey) {
             temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
             defaultTargetLanguageIndex = temporaryTargetLanguageIndex
-            targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+            let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageIndex]
+            targetLanguageButton.setTitle(targetLanguage, for: .normal)
             print("defaultTargetLanguageIndex changed")
         }
         
         let titleInfo = ["title" : "Voice"]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
+    
+    // MARK: - UIButton Implementation
+    @objc func sourceLanguageButtonTouchDown() {
+        sourceLanguageButtonOutterDarkView.isHidden = true
+        sourceLanguageButtonOutterLightView.isHidden = true
+        sourceLanguageButtonInnerDarkView.isHidden = false
+        sourceLanguageButtonInnerLightView.isHidden = false
         
-    @objc func useMicrophone() {
+        sourceLanguageButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func sourceLanguageButtonTouchUpInside() {
+        sourceLanguageButtonOutterDarkView.isHidden = false
+        sourceLanguageButtonOutterLightView.isHidden = false
+        sourceLanguageButtonInnerDarkView.isHidden = true
+        sourceLanguageButtonInnerLightView.isHidden = true
+        
+        sourceLanguageButtonContainerView.layer.masksToBounds = false
+        
+        selectLanguage()
+    }
+    
+    @objc func targetLanguageButtonTouchDown() {
+        targetLanguageButtonOutterDarkView.isHidden = true
+        targetLanguageButtonOutterLightView.isHidden = true
+        targetLanguageButtonInnerDarkView.isHidden = false
+        targetLanguageButtonInnerLightView.isHidden = false
+        
+        targetLanguageButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func targetLanguageButtonTouchUpInside() {
+        targetLanguageButtonOutterDarkView.isHidden = false
+        targetLanguageButtonOutterLightView.isHidden = false
+        targetLanguageButtonInnerDarkView.isHidden = true
+        targetLanguageButtonInnerLightView.isHidden = true
+        
+        targetLanguageButtonContainerView.layer.masksToBounds = false
+
+        selectLanguage()
+    }
+    
+    @objc func microphoneButtonTouchDown() {
+        microphoneButtonOutterDarkView.isHidden = true
+        microphoneButtonOutterLightView.isHidden = true
+        microphoneButtonInnerDarkView.isHidden = false
+        microphoneButtonInnerLightView.isHidden = false
+        
+        microphoneButtonContainerView.layer.masksToBounds = true
+    }
+    
+    @objc func microphoneButtonTouchUpInside() {
+        microphoneButtonOutterDarkView.isHidden = false
+        microphoneButtonOutterLightView.isHidden = false
+        microphoneButtonInnerDarkView.isHidden = true
+        microphoneButtonInnerLightView.isHidden = true
+        
+        microphoneButtonContainerView.layer.masksToBounds = false
+        
+        useMicrophone()
+    }
+    
+    // MARK: - Other Function Implementation
+    func useMicrophone() {
         print("Use microphone tapped.")
         let viewController = VoiceRecorderViewController(with: temporarySourceLanguageIndex)
         viewController.modalPresentationStyle = .automatic
@@ -201,7 +522,7 @@ class VoiceTranslateViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
-    @objc func selectLanguage() {
+    func selectLanguage() {
         //present picker view modal
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageIndex
@@ -219,18 +540,14 @@ class VoiceTranslateViewController: UIViewController {
 extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("PresentationControllerDidDismiss called.")
-        if !sourceText.isEmpty {
-//            let index: Int
-//            if let sourceLanguage = sourceLanguageLabel.text {
-//                index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) ?? 0
-//            }
-            guard let sourceLanguage = sourceLanguageLabel.text,
-                let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
+        if !detectedResultString.isEmpty {
+            let sourceLanguage = SupportedLanguages.speechRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
+            guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
             
             let viewController = TextTranslateViewController()
             viewController.temporarySourceLanguageGCPIndex = index
             viewController.temporaryTargetLanguageGCPIndex = temporaryTargetLanguageIndex
-            viewController.sourceInputText.text = sourceText
+            viewController.sourceInputText.text = detectedResultString
             viewController.languagePickerType = .targetLanguage
             
             let navController = UINavigationController(rootViewController: viewController)
@@ -240,15 +557,17 @@ extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate
 }
 
 extension VoiceTranslateViewController: SourceTextInputDelegate {
-    func didSetSourceText(sourceText: String) {
-        self.sourceText = sourceText
+    func didSetSourceText(detectedResult: String) {
+        self.detectedResultString = detectedResult
     }
 }
 
 extension VoiceTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
-        sourceLanguageLabel.text = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageGCPIndex]
-        targetLanguageLabel.text = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        let sourceLanguage = SupportedLanguages.speechRecognizerSupportedLocale[temporarySourceLanguageGCPIndex]
+        let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
+        sourceLanguageButton.setTitle(sourceLanguage, for: .normal)
+        targetLanguageButton.setTitle(targetLanguage, for: .normal)
         self.temporarySourceLanguageIndex = temporarySourceLanguageGCPIndex
         self.temporaryTargetLanguageIndex = temporaryTargetLanguageGCPIndex
     }

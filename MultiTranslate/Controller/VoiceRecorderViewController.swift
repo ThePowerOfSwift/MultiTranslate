@@ -172,7 +172,7 @@ class VoiceRecorderViewController: UIViewController {
         recorderButton.layer.cornerRadius = 25
         
         extractedText = ""
-        delegate?.didSetSourceText(sourceText: self.extractedText)
+        delegate?.didSetSourceText(detectedResult: self.extractedText)
     }
 
     
@@ -296,7 +296,7 @@ class VoiceRecorderViewController: UIViewController {
             if result.isFinal {
                 self.extractedText = result.bestTranscription.formattedString
                 print(self.extractedText)
-                self.delegate?.didSetSourceText(sourceText: self.extractedText)
+                self.delegate?.didSetSourceText(detectedResult: self.extractedText)
 
                 KRProgressHUD.dismiss()
                 self.dismiss(animated: true, completion: nil)

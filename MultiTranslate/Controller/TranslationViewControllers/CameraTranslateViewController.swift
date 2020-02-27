@@ -17,12 +17,14 @@ import KRProgressHUD
 
 class CameraTranslateViewController: UIViewController {
     
+    //MARK: - Variables and Constants
     var detectedResultString = ""
     private var temporarySourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
     private var temporaryTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
     private var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraSourceLanguageIndexKey)
     private var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.cameraTargetLanguageIndexKey)
     
+    //MARK: - UI Parts Declaration
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -309,6 +311,7 @@ class CameraTranslateViewController: UIViewController {
         return request
     }()
     
+    // MARK: - ViewController Life Cirecle
     override func loadView() {
         super.loadView()
         
@@ -476,6 +479,7 @@ class CameraTranslateViewController: UIViewController {
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
+    // MARK: - UIButton Implementation
     @objc func sourceLanguageButtonTouchDown() {
         sourceLanguageButtonOutterDarkView.isHidden = true
         sourceLanguageButtonOutterLightView.isHidden = true
@@ -536,6 +540,7 @@ class CameraTranslateViewController: UIViewController {
         useCamera()
     }
     
+    // MARK: - Other Function Implementation
     func useCamera() {
         print("Use camera tapped.")
         
@@ -547,7 +552,7 @@ class CameraTranslateViewController: UIViewController {
         
     }
     
-    @objc func selectLanguage() {
+    func selectLanguage() {
         //present picker view modal
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageIndex
@@ -586,6 +591,7 @@ class CameraTranslateViewController: UIViewController {
 
 }
 
+//MARK: - Extensions
 extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 

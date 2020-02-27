@@ -6,6 +6,7 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
+import AVFoundation
 import Foundation
 
 class SavedTranslationsTableViewCell: UITableViewCell {
@@ -22,7 +23,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.init(white: 0.9, alpha: 0.8)
+        view.backgroundColor = UIColor.init(white: 1, alpha: 0.35)
         view.layer.cornerRadius = 8
         
         return view
@@ -54,6 +55,12 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.layer.masksToBounds = true
         
+        return view
+    }()
+    
+    let buttonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -109,9 +116,33 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let copyButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "doc.on.doc"), for: .normal)
+        button.tintColor = .systemBlue
+        return button
+    }()
+    
+    private let speechButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "speaker.2"), for: .normal)
+        button.tintColor = .systemBlue
+        return button
+    }()
+    
+    private let spacerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
         self.addSubview(container)
         container.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
@@ -122,6 +153,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         container.VStack(sourceView,
                          languageView.setHeight(30),
                          targetView,
+                         buttonView.setHeight(30),
                          spacing: 0,
                          alignment: .fill,
                          distribution: .fill).padding([.allMargins], amount: 8)
@@ -150,6 +182,37 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         
         sourceLanguageLabel.widthAnchor.constraint(equalTo: targetLanguageLabel.widthAnchor).isActive = true
         
+        buttonView.HStack(spacerView,
+                          speechButton,
+                          copyButton,
+                          spacing: 20,
+                          alignment: .fill,
+                          distribution: .fill)
+        speechButton.widthAnchor.constraint(equalTo: speechButton.heightAnchor).isActive = true
+        copyButton.widthAnchor.constraint(equalTo: copyButton.heightAnchor).isActive = true
+        
+        speechButton.addTarget(self, action: #selector(speakTargetText), for: .touchUpInside)
+        copyButton.addTarget(self, action: #selector(copyTargetText), for: .touchUpInside)
+    }
+    
+    @objc func copyTargetText() {
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = targetTextLabel.text
+    }
+    
+    @objc func speakTargetText() {
+        guard let targetLanguage = targetLanguageLabel.text,
+            let index = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage),
+            let translatedText = targetTextLabel.text else { return }
+
+        let utterance = AVSpeechUtterance(string: translatedText)
+        let speechCode = SupportedLanguages.speechRecognizerSupportedLocaleIdentifier[index]
+        let synthesizer = AVSpeechSynthesizer()
+        utterance.voice = AVSpeechSynthesisVoice(language: speechCode)
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        synthesizer.speak(utterance)
+        
+        print("speechCode is \(speechCode)")
     }
     
     required init?(coder: NSCoder) {

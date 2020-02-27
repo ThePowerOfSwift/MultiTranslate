@@ -25,14 +25,18 @@ class SavedTranslationsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.title = "Saved Translations"
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
         savedTranslations = realm.objects(SavedTranslation.self).sorted(byKeyPath: "dateCreated", ascending: false)
 //        savedTranslations = realm.objects(SavedTranslation.self)
         
         tableView.register(SavedTranslationsTableViewCell.self, forCellReuseIdentifier: Constants.savedTranslationsTableViewCellIdentifier)
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+        if !savedTranslations.isEmpty {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,11 +49,24 @@ class SavedTranslationsTableViewController: UITableViewController {
             tabItem.badgeValue = nil
         }
         NotificationCenter.default.post(name: .savedTranlationsDidShow, object: nil)
+        
+        if !savedTranslations.isEmpty {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     @objc func clearRecords() {
-        print("Trash button tapped.")
-        print(savedTranslations.count)
+        do {
+            try realm.write {
+                realm.delete(savedTranslations)
+            }
+            tableView.reloadData()
+        } catch {
+            print("Error adding item, \(error)")
+        }
+        self.navigationItem.rightBarButtonItem = nil
     }
 
     // MARK: - Table view data source
@@ -72,49 +89,31 @@ class SavedTranslationsTableViewController: UITableViewController {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
+    //MARK: - Tableview delegates
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let savedTranslation = savedTranslations[indexPath.row]
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+            do {
+                try self.realm.write {
+                    self.realm.delete(savedTranslation)
+                }
+            } catch {
+                print("Error adding item, \(error)")
+            }
+            tableView.reloadData()
+            if self.savedTranslations.isEmpty {
+                self.navigationItem.rightBarButtonItem = nil
+            }
+        }
+        let config = UIImage.SymbolConfiguration(weight: .regular)
+        deleteAction.image = UIImage(systemName: "trash", withConfiguration: config)
+        deleteAction.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -639,7 +639,7 @@ class TextTranslateViewController: UIViewController {
                                 starButton,
                                 spacing: 10,
                                 alignment: .fill,
-            distribution: .fill).padRight(20).padLeft(20)
+                                distribution: .fill).padRight(20).padLeft(20)
 
         starButton.widthAnchor.constraint(equalTo: starButton.heightAnchor).isActive = true
         speechButton.widthAnchor.constraint(equalTo: speechButton.heightAnchor).isActive = true

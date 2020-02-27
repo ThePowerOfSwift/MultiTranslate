@@ -424,8 +424,8 @@ class VoiceTranslateViewController: UIViewController {
         sourceLanguageButtonInnerDarkView.isHidden = true
         targetLanguageButtonInnerLightView.isHidden = true
         targetLanguageButtonInnerDarkView.isHidden = true
-//        microphoneButtonInnerDarkView.isHidden = true
-//        microphoneButtonInnerLightView.isHidden = true
+        microphoneButtonInnerDarkView.isHidden = true
+        microphoneButtonInnerLightView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -14,15 +14,55 @@ class SavedTranslationsTableViewController: UITableViewController {
     
     private let realm = try! Realm()
     private var savedTranslations: Results<SavedTranslation>!
+    
+    private let container: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let emptyBoxImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "emptybox")
+        view.contentMode = .scaleAspectFill
+        return view
+    }()
+    
+    private let noItemLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "No item"
+        label.font = UIFont.systemFont(ofSize: 30, weight: .thin)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    override func loadView() {
+        super.loadView()
+                
+        view.addSubview(container)
+        container.edgeTo(view, safeArea: .all)
+        
+        container.addSubview(emptyBoxImageView)
+        emptyBoxImageView.centerXAnchor.constraint(equalTo: container.centerXAnchor, constant: 20).isActive = true
+        emptyBoxImageView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+        emptyBoxImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        emptyBoxImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        container.addSubview(noItemLabel)
+        noItemLabel.topAnchor.constraint(equalTo: emptyBoxImageView.bottomAnchor, constant: 30).isActive = true
+        noItemLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.title = "Saved Translations"
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
@@ -36,6 +76,7 @@ class SavedTranslationsTableViewController: UITableViewController {
         
         if !savedTranslations.isEmpty {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+            container.isHidden = true
         }
     }
     
@@ -52,8 +93,10 @@ class SavedTranslationsTableViewController: UITableViewController {
         
         if !savedTranslations.isEmpty {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+            container.isHidden = true
         } else {
             self.navigationItem.rightBarButtonItem = nil
+            container.isHidden = false
         }
     }
     
@@ -67,6 +110,7 @@ class SavedTranslationsTableViewController: UITableViewController {
             print("Error adding item, \(error)")
         }
         self.navigationItem.rightBarButtonItem = nil
+        container.isHidden = false
     }
 
     // MARK: - Table view data source
@@ -96,7 +140,7 @@ class SavedTranslationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let savedTranslation = savedTranslations[indexPath.row]
-        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             do {
                 try self.realm.write {
                     self.realm.delete(savedTranslation)
@@ -107,6 +151,7 @@ class SavedTranslationsTableViewController: UITableViewController {
             tableView.reloadData()
             if self.savedTranslations.isEmpty {
                 self.navigationItem.rightBarButtonItem = nil
+                self.container.isHidden = false
             }
         }
         let config = UIImage.SymbolConfiguration(weight: .regular)

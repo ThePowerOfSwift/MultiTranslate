@@ -91,7 +91,7 @@ class FBLanguageTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! FBLanguageTableViewCell
         guard let language = cell.languageNameLabel.text else { return nil }
         
-        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             if language == "English" {
                 print("English language cannot be deleted.")
                 //Show UIAlert

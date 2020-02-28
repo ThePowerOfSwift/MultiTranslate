@@ -9,6 +9,7 @@
 import UIKit
 
 import RealmSwift
+import SPAlert
 
 class SavedTranslationsTableViewController: UITableViewController {
     
@@ -105,10 +106,11 @@ class SavedTranslationsTableViewController: UITableViewController {
             try realm.write {
                 realm.delete(savedTranslations)
             }
-            tableView.reloadData()
         } catch {
             print("Error adding item, \(error)")
         }
+        SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
+        tableView.reloadData()
         self.navigationItem.rightBarButtonItem = nil
         container.isHidden = false
     }
@@ -148,6 +150,7 @@ class SavedTranslationsTableViewController: UITableViewController {
             } catch {
                 print("Error adding item, \(error)")
             }
+            SPAlert.present(title: "Translation deleted", message: nil, image: UIImage(systemName: "trash.fill")!)
             tableView.reloadData()
             if self.savedTranslations.isEmpty {
                 self.navigationItem.rightBarButtonItem = nil

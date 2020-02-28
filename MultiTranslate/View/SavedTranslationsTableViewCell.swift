@@ -9,6 +9,8 @@
 import AVFoundation
 import Foundation
 
+import SPAlert
+
 class SavedTranslationsTableViewCell: UITableViewCell {
     
     var savedTranslation: SavedTranslation? {
@@ -198,6 +200,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     @objc func copyTargetText() {
         let pasteboard = UIPasteboard.general
         pasteboard.string = targetTextLabel.text
+        SPAlert.present(title: "Copied to clipboard", message: nil, image: UIImage(systemName: "doc.on.clipboard.fill")!)
     }
     
     @objc func speakTargetText() {

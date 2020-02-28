@@ -12,6 +12,7 @@ import UIKit
 //import PMSuperButton
 import Alamofire
 import SwiftyJSON
+import SPAlert
 //import RAMAnimatedTabBarController
 //import KMPlaceholderTextView
 import RealmSwift
@@ -916,6 +917,16 @@ class TextTranslateViewController: UIViewController {
                 
             } else {
                 print("Here is the limit, pay more money!")
+                let alert = PMAlertController(title: "Translate character has reach the limit", description: "You can change your plan and get more characters", image: UIImage(named: "reading2"), style: .alert)
+                let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
+                let defaultAction = PMAlertAction(title: "See more plans", style: .default) {
+                    let viewController = AccountViewController()
+                    let navController = UINavigationController(rootViewController: viewController)
+                    self.present(navController, animated: true, completion: nil)
+                }
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -967,6 +978,7 @@ class TextTranslateViewController: UIViewController {
                 print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
+                SPAlert.present(title: "Error", message: error?.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
             }
         }
     }
@@ -978,6 +990,7 @@ class TextTranslateViewController: UIViewController {
                 print("the GCP translation is \(result)")
             } else {
                 print(error!.localizedDescription)
+                SPAlert.present(title: "Error", message: error?.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
             }
         }
     }
@@ -1002,6 +1015,8 @@ class TextTranslateViewController: UIViewController {
         if isStarButtonTapped {
             starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             starButton.tintColor = .systemYellow
+            
+            SPAlert.present(title: "Translation saved", message: nil, image: UIImage(systemName: "star.fill")!)
             
             let savedTranslation = SavedTranslation()
             savedTranslation.sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
@@ -1033,6 +1048,8 @@ class TextTranslateViewController: UIViewController {
         } else {
             starButton.setImage(UIImage(systemName: "star"), for: .normal)
             starButton.tintColor = .systemBlue
+            
+            SPAlert.present(title: "Removed", message: nil, image: UIImage(systemName: "star.slash.fill")!)
             
             if let tabBarItems = tabBarController?.tabBar.items {
                 let tabItem = tabBarItems[1]
@@ -1079,9 +1096,10 @@ class TextTranslateViewController: UIViewController {
     }
     
     @objc func copyTranslatedText() {
-        //Show UIAlert
         let pasteboard = UIPasteboard.general
         pasteboard.string = targetOutputText.text
+        
+        SPAlert.present(title: "Copied to clipboard", message: nil, image: UIImage(systemName: "doc.on.clipboard.fill")!)
     }
 
 }

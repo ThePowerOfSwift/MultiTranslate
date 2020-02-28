@@ -9,6 +9,7 @@
 import UIKit
 
 import Firebase
+import SPAlert
 
 class FBLanguageTableViewController: UITableViewController {
     
@@ -21,7 +22,8 @@ class FBLanguageTableViewController: UITableViewController {
         tableView.allowsSelection = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadTableView))
         
-        NotificationCenter.default.addObserver(forName: .fbDownloadedLanguagesDidUpdate, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: .fbDownloadedLanguagesDidUpdate, object: nil, queue: nil) { (notification) in
+            SPAlert.present(title: "Language downloaded", message: nil, image: UIImage(systemName: "tray.and.arrow.down.fill")!)
             self.tableView.reloadData()
         }
         
@@ -116,12 +118,15 @@ class FBLanguageTableViewController: UITableViewController {
         ModelManager.modelManager().deleteDownloadedModel(requestModel) { (error) in
             if error == nil {
                 print("language \(language) is deleted successfully.")
-                //Show UIAlert
                 FBOfflineTranslate.initializeFBTranslation()
+                SPAlert.present(title: "Language deleted", message: nil, image: UIImage(systemName: "trash.fill")!)
                 self.tableView.reloadData()
             } else {
                 print(error!.localizedDescription)
-                //Show UIAlert
+                let alert = PMAlertController(title: "Error", description: error?.localizedDescription, image: UIImage(named: "error"), style: .alert)
+                let cancelAction = PMAlertAction(title: "cancel", style: .cancel)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

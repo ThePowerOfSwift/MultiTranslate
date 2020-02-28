@@ -9,7 +9,7 @@
 import UIKit
 
 import Firebase
-import KRProgressHUD
+//import KRProgressHUD
 
 class FBLanguageTableViewCell: UITableViewCell {
     
@@ -102,7 +102,7 @@ class FBLanguageTableViewCell: UITableViewCell {
     }
     
     @objc func downloadFBLanguage() {
-        KRProgressHUD.show()
+//        KRProgressHUD.show()
         
         downloadButton.isHidden = true
         downloadedImageView.isHidden = true
@@ -142,7 +142,7 @@ class FBLanguageTableViewCell: UITableViewCell {
             
             NotificationCenter.default.post(name: .fbDownloadedLanguagesDidUpdate, object: nil)
             
-            KRProgressHUD.dismiss()
+//            KRProgressHUD.dismiss()
             print("download completed.")
         }
     }

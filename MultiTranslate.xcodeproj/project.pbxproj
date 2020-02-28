@@ -19,6 +19,9 @@
 		803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */; };
 		803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C9CD923DE578E00FCA145 /* AccountViewController.swift */; };
 		803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */; };
+		803E269D2408996A00DF5DF6 /* PMAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 803E269A2408996A00DF5DF6 /* PMAlertController.xib */; };
+		803E269E2408996A00DF5DF6 /* PMAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E269B2408996A00DF5DF6 /* PMAlertAction.swift */; };
+		803E269F2408996A00DF5DF6 /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E269C2408996A00DF5DF6 /* PMAlertController.swift */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
 		8052A1BF23C2A24400883123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1BD23C2A24400883123 /* Main.storyboard */; };
@@ -80,6 +83,9 @@
 		803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		803C9CD923DE578E00FCA145 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
+		803E269A2408996A00DF5DF6 /* PMAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMAlertController.xib; sourceTree = "<group>"; };
+		803E269B2408996A00DF5DF6 /* PMAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertAction.swift; sourceTree = "<group>"; };
+		803E269C2408996A00DF5DF6 /* PMAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertController.swift; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8052A1B923C2A24400883123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +160,16 @@
 				CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		803E26A12408999100DF5DF6 /* PMAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				803E269B2408996A00DF5DF6 /* PMAlertAction.swift */,
+				803E269C2408996A00DF5DF6 /* PMAlertController.swift */,
+				803E269A2408996A00DF5DF6 /* PMAlertController.xib */,
+			);
+			name = PMAlertController;
 			sourceTree = "<group>";
 		};
 		8052A1AB23C2A24400883123 = {
@@ -262,6 +278,7 @@
 				803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */,
 				8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
+				803E26A12408999100DF5DF6 /* PMAlertController */,
 				807B489523C95C7900A588F3 /* SCSiriWaveformView */,
 			);
 			path = Controller;
@@ -362,6 +379,7 @@
 			files = (
 				8052A1C423C2A24500883123 /* LaunchScreen.storyboard in Resources */,
 				8052A1C123C2A24500883123 /* Assets.xcassets in Resources */,
+				803E269D2408996A00DF5DF6 /* PMAlertController.xib in Resources */,
 				8052A1BF23C2A24400883123 /* Main.storyboard in Resources */,
 				CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */,
 				0527CE27504C48AA82D2AB57 /* amplifyconfiguration.json in Resources */,
@@ -436,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */,
+				803E269E2408996A00DF5DF6 /* PMAlertAction.swift in Sources */,
 				80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */,
 				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
 				80C535C923C56A530044D6F0 /* Constants.swift in Sources */,
@@ -479,6 +498,7 @@
 				80A403DE23FFA70800E84231 /* SwiftyInnerShadowLayer.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* LanguagePickerViewController.swift in Sources */,
 				806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */,
+				803E269F2408996A00DF5DF6 /* PMAlertController.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
 				80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */,
 				806482E123F6A7C5006BBDD5 /* NotificationNameExtension.swift in Sources */,

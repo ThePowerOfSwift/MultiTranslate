@@ -901,6 +901,7 @@ class TextTranslateViewController: UIViewController {
         guard let text = sourceInputText.text else { return }
         if text.isEmpty {
             print("text is empty")
+            SPAlert.present(message: "Empty text")
         } else {
         
             if isTranslatePossible(userType: userType) {

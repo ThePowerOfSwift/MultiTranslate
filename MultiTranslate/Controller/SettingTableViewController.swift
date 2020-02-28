@@ -79,7 +79,7 @@ class SettingTableViewController: UITableViewController {
         headerView.backgroundColor = UIColor(rgb: 0x9ab6df)
         headerView.addSubview(sectionTitle)
         sectionTitle.text = sections[section]
-        sectionTitle.font = UIFont.boldSystemFont(ofSize: 16)
+        sectionTitle.font = UIFont.boldSystemFont(ofSize: 18)
         return headerView
     }
 

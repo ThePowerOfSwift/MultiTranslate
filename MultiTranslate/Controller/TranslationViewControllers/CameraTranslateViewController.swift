@@ -551,14 +551,12 @@ class CameraTranslateViewController: UIViewController {
                 present(imagePicker, animated: true, completion: nil)
             } else {
                 AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
-                    if granted {
-                        //access allowed
-                        DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        if granted {
+                            //access allowed
                             self.present(self.imagePicker, animated: true, completion: nil)
-                        }
-                    } else {
-                        //access denied
-                        DispatchQueue.main.async {
+                        } else {
+                            //access denied
                             let alert = PMAlertController(title: "Camera access not allowed", description: "Use camera to detect words", image: UIImage(named: "color_camera"), style: .alert)
                             let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
                             let defaultAction = PMAlertAction(title: "Setting", style: .default) {

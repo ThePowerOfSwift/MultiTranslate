@@ -184,7 +184,10 @@ class VoiceRecorderViewController: UIViewController {
                 self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.recorderButton.layer.cornerRadius = 25
             }
-            KRProgressHUD.show()
+            
+            if SFSpeechRecognizer.authorizationStatus() == .authorized {
+                KRProgressHUD.show()
+            }
 
         } else {
             startRecording()
@@ -262,13 +265,31 @@ class VoiceRecorderViewController: UIViewController {
     }
     
     func requestTranscribePermissions() {
-        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
-            DispatchQueue.main.async {
-                if authStatus == .authorized {
-                    print("Good to go!")
-                    self.transcribeAudio(url: self.audioFileURL!)
-                } else {
-                    print("Transcription permission was declined.")
+        if SFSpeechRecognizer.authorizationStatus() == .authorized {
+            transcribeAudio(url: self.audioFileURL!)
+        } else {
+            SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+                DispatchQueue.main.async {
+                    if authStatus == .authorized {
+                        print("Good to go!")
+                        self.transcribeAudio(url: self.audioFileURL!)
+                    } else {
+                        print("Transcription permission was declined.")
+                        let alert = PMAlertController(title: "Speech recognizer", description: "Detect word in speech", image: UIImage(named: "color_microphone"), style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    print("Settings opened: \(success)")
+                                })
+                            }
+                        }
+                        alert.addAction(cancelAction)
+                        alert.addAction(defaultAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }

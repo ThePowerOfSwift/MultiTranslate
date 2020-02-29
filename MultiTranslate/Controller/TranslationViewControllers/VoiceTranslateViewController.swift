@@ -6,7 +6,9 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
+import Speech
 
 import PMSuperButton
 
@@ -509,12 +511,75 @@ class VoiceTranslateViewController: UIViewController {
         
         microphoneButtonContainerView.layer.masksToBounds = false
         
-        useMicrophone()
+        requestMicrophonePermission()
     }
     
     // MARK: - Other Function Implementation
-    func useMicrophone() {
+    func requestMicrophonePermission() {
         print("Use microphone tapped.")
+        if AVCaptureDevice.authorizationStatus(for: .audio) ==  .authorized {
+            //already authorized
+            requestTranscribePermissions()
+        } else {
+            AVCaptureDevice.requestAccess(for: .audio, completionHandler: { [unowned self] (granted: Bool) in
+                DispatchQueue.main.async {
+                    if granted {
+                        //access allowed
+                        self.requestTranscribePermissions()
+                    } else {
+                        //access denied
+                        let alert = PMAlertController(title: "Microphone access not allowed", description: "Use microphone to record voice", image: UIImage(named: "color_microphone"), style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    print("Settings opened: \(success)")
+                                })
+                            }
+                        }
+                        alert.addAction(cancelAction)
+                        alert.addAction(defaultAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            })
+        }
+    }
+    
+    func requestTranscribePermissions() {
+        if SFSpeechRecognizer.authorizationStatus() == .authorized {
+            presentRecorder()
+        } else {
+            SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+                DispatchQueue.main.async {
+                    if authStatus == .authorized {
+                        print("Good to go!")
+                        self.presentRecorder()
+                    } else {
+                        print("Transcription permission was declined.")
+                        let alert = PMAlertController(title: "Speech recognizer", description: "Detect word in speech", image: UIImage(named: "color_microphone"), style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    print("Settings opened: \(success)")
+                                })
+                            }
+                        }
+                        alert.addAction(cancelAction)
+                        alert.addAction(defaultAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    func presentRecorder() {
         let viewController = VoiceRecorderViewController(with: temporarySourceLanguageIndex)
         viewController.modalPresentationStyle = .automatic
         viewController.presentationController?.delegate = self

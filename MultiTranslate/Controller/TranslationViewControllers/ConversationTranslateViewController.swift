@@ -12,6 +12,7 @@ import UIKit
 import Alamofire
 import LBTATools
 import RealmSwift
+import SPAlert
 import SwiftyJSON
 
 class ConversationTranslateViewController: UIViewController {
@@ -34,7 +35,7 @@ class ConversationTranslateViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xe1f2fb)
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return view
     }()
     
@@ -78,7 +79,7 @@ class ConversationTranslateViewController: UIViewController {
         return selector
     }()
     
-    let languageListButton: UIButton = {
+    private let languageListButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .medium)
@@ -87,7 +88,14 @@ class ConversationTranslateViewController: UIViewController {
         return button
     }()
     
-
+    private let clearButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .medium)
+        button.setImage(UIImage(systemName: "trash", withConfiguration: config), for: .normal)
+        button.tintColor = .white
+        return button
+    }()
     
     private let recorderButton: UIButton = {
         let button = UIButton()
@@ -144,6 +152,12 @@ class ConversationTranslateViewController: UIViewController {
         languageListButton.widthAnchor.constraint(equalTo: languageListButton.heightAnchor).isActive = true
         languageListButton.centerYAnchor.constraint(equalTo: languageSelector.centerYAnchor).isActive = true
         
+        languageButtonsView.addSubview(clearButton)
+        clearButton.trailingAnchor.constraint(equalTo: languageSelector.leadingAnchor, constant: -8).isActive = true
+        clearButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        clearButton.widthAnchor.constraint(equalTo: clearButton.heightAnchor).isActive = true
+        clearButton.centerYAnchor.constraint(equalTo: languageSelector.centerYAnchor).isActive = true
+        
         recordButtonView.addSubview(recorderButtonBorder)
         recorderButtonBorder.centerInSuperview()
 
@@ -183,6 +197,13 @@ class ConversationTranslateViewController: UIViewController {
         languageSelector.addTarget(self, action: #selector(handleLanguageSelectorValueChanged(_:)), for: .valueChanged)
         
         languageListButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearRecords), for: .touchUpInside)
+        
+        if conversations.isEmpty {
+            clearButton.isHidden = true
+        } else {
+            clearButton.isHidden = false
+        }
         
         recorderButton.addTarget(self, action: #selector(speechStartRecording), for: .touchDown)
         recorderButton.addTarget(self, action: #selector(speechEndRecording), for: .touchUpInside)
@@ -217,6 +238,8 @@ class ConversationTranslateViewController: UIViewController {
         super.viewDidAppear(animated)
         
         requestMicrophonePermission()
+        print(conversationTableView.frame.height)
+        print(conversationTableView.frame.width)
     }
     
     func requestMicrophonePermission() {
@@ -315,6 +338,29 @@ class ConversationTranslateViewController: UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         
         self.navigationController?.present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func clearRecords() {
+        let alert = PMAlertController(title: "Delete all records?",
+                                      description: "The records cannot be recovered once deleted",
+                                      image: UIImage(named: "trash_color"),
+                                      style: .alert)
+        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+        let defaultAction = PMAlertAction(title: "Delete", style: .default) {
+            do {
+                try self.realm.write {
+                    self.realm.delete(self.conversations)
+                }
+            } catch {
+                print("Error adding item, \(error)")
+            }
+            SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
+            self.conversationTableView.reloadData()
+            self.clearButton.isHidden = true
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
     }
 
     @objc func speechStartRecording() {
@@ -495,6 +541,7 @@ class ConversationTranslateViewController: UIViewController {
         
         conversationTableView.reloadData()
         conversationTableView.showLastRow()
+        clearButton.isHidden = false
     }
 
 

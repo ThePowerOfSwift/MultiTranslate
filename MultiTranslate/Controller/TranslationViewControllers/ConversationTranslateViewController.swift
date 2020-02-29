@@ -22,7 +22,6 @@ class ConversationTranslateViewController: UIViewController {
     private var defaultSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey)
     private var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey)
     
-    private var recordingSession: AVAudioSession!
     private var audioRecorder: AVAudioRecorder?
     private var audioFileURL: URL?
     private var extractedText = ""
@@ -42,6 +41,7 @@ class ConversationTranslateViewController: UIViewController {
     private let conversationTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = UIColor(rgb: 0xC1D2EB)
         return tableView
     }()
 
@@ -162,6 +162,8 @@ class ConversationTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        
         conversations = realm.objects(Conversation.self)
         
         conversationTableView.delegate = self
@@ -184,24 +186,6 @@ class ConversationTranslateViewController: UIViewController {
         
         recorderButton.addTarget(self, action: #selector(speechStartRecording), for: .touchDown)
         recorderButton.addTarget(self, action: #selector(speechEndRecording), for: .touchUpInside)
-        
-        recordingSession = AVAudioSession.sharedInstance()
-
-        do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
-            try recordingSession.setActive(true)
-            recordingSession.requestRecordPermission() { [unowned self] allowed in
-                DispatchQueue.main.async {
-                    if !allowed {
-                        print("Failed to record!")
-                    }
-                }
-            }
-        } catch {
-            print("Failed to record!")
-        }
-        
-//        perform(#selector(showBottom), with: nil, afterDelay: 0.05)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,6 +211,78 @@ class ConversationTranslateViewController: UIViewController {
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
         
         perform(#selector(showBottom), with: nil, afterDelay: 0.05)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        requestMicrophonePermission()
+    }
+    
+    func requestMicrophonePermission() {
+        if AVCaptureDevice.authorizationStatus(for: .audio) ==  .authorized {
+            //already authorized
+            requestTranscribePermissions()
+        } else {
+            AVCaptureDevice.requestAccess(for: .audio, completionHandler: { [unowned self] (granted: Bool) in
+                DispatchQueue.main.async {
+                    if granted {
+                        //access allowed
+                        self.requestTranscribePermissions()
+                    } else {
+                        //access denied
+                        let alert = PMAlertController(title: "Microphone access not allowed",
+                                                      description: "Use microphone to record voice",
+                                                      image: UIImage(named: "color_microphone"),
+                                                      style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    print("Settings opened: \(success)")
+                                })
+                            }
+                        }
+                        alert.addAction(cancelAction)
+                        alert.addAction(defaultAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            })
+        }
+    }
+    
+    func requestTranscribePermissions() {
+        if SFSpeechRecognizer.authorizationStatus() == .authorized {
+            print("SFSpeechRecognizer is authorized.")
+        } else {
+            SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
+                DispatchQueue.main.async {
+                    if authStatus == .authorized {
+                        print("Good to go!")
+                    } else {
+                        print("Transcription permission was declined.")
+                        let alert = PMAlertController(title: "Speech recognizer",
+                                                      description: "Detect word in speech",
+                                                      image: UIImage(named: "color_microphone"),
+                                                      style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                    print("Settings opened: \(success)")
+                                })
+                            }
+                        }
+                        alert.addAction(cancelAction)
+                        alert.addAction(defaultAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     //MARK: - Functions
@@ -270,9 +326,12 @@ class ConversationTranslateViewController: UIViewController {
     }
     
     @objc func speechEndRecording() {
-        print("sourceLanguage button tap canceled")
-        
-        finishRecording(success: true)
+        if AVCaptureDevice.authorizationStatus(for: .audio) ==  .authorized &&
+            SFSpeechRecognizer.authorizationStatus() == .authorized {
+            finishRecording(success: true)
+        } else {
+            finishRecording(success: false)
+        }
         UIView.animate(withDuration: 0.2) {
             self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             self.recorderButton.layer.cornerRadius = 25
@@ -310,26 +369,33 @@ class ConversationTranslateViewController: UIViewController {
         if success {
             print("Recording successed.")
             
-            requestTranscribePermissions()
+//            requestTranscribePermissions()
+            transcribeAudio(url: self.audioFileURL!)
             
         } else {
             print("Recording failed.")
             //Show alert
-        }
-        print(isSource)
-    }
-    
-    func requestTranscribePermissions() {
-        SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
-            DispatchQueue.main.async {
-                if authStatus == .authorized {
-                    print("Good to go!")
-                    self.transcribeAudio(url: self.audioFileURL!)
-                } else {
-                    print("Transcription permission was declined.")
+            if AVCaptureDevice.authorizationStatus(for: .audio) !=  .authorized ||
+                SFSpeechRecognizer.authorizationStatus() != .authorized {
+                let alert = PMAlertController(title: "Chech app setting",
+                                              description: "Please allow microphone and speech recognizer",
+                                              image: UIImage(named: "color_microphone"),
+                                              style: .alert)
+                let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+                let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                    guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                    if UIApplication.shared.canOpenURL(settingsUrl) {
+                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            print("Settings opened: \(success)")
+                        })
+                    }
                 }
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
             }
         }
+        print(isSource)
     }
     
     func transcribeAudio(url: URL) {
@@ -340,7 +406,7 @@ class ConversationTranslateViewController: UIViewController {
 
         recognizer?.recognitionTask(with: request) { [unowned self] (result, error) in
             guard let result = result else {
-                print("There was an error: \(error!)")
+                print("There was an error: \(error!.localizedDescription)")
                 print("Cannot extract any text from the audio")
                 // show alert
                 return

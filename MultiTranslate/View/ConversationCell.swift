@@ -84,7 +84,7 @@ class ConversationCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(rgb: 0xe1f2fb)
+        self.backgroundColor = UIColor(rgb: 0xC1D2EB)
         
         self.addSubview(bubbleBackgroundView)
         bubbleBackgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true

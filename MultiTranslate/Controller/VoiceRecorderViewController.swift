@@ -11,6 +11,7 @@ import Speech
 import UIKit
 
 import KRProgressHUD
+import SPAlert
 
 class VoiceRecorderViewController: UIViewController {
     
@@ -160,6 +161,7 @@ class VoiceRecorderViewController: UIViewController {
             }
         } catch {
             print("Failed to record!")
+            SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
     
@@ -246,6 +248,7 @@ class VoiceRecorderViewController: UIViewController {
 
         } catch {
             finishRecording(success: false)
+            SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
 
@@ -261,6 +264,7 @@ class VoiceRecorderViewController: UIViewController {
         } else {
             print("Recording failed.")
             //Show alert
+            SPAlert.present(title: "Error", message: "Voice recorder error occurred.", image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
     
@@ -306,10 +310,17 @@ class VoiceRecorderViewController: UIViewController {
                 print("There was an error: \(error!)")
                 print("Cannot extract any text from the audio")
                 // show alert
+                let alert = PMAlertController(title: "No text",
+                                              description: "Cannot extract any text from the speech, please try again.",
+                                              image: UIImage(named: "question_mark"),
+                                              style: .alert)
+                let defaultAction = PMAlertAction(title: "Try again", style: .default) {
+                    self.dismiss(animated: true)
+                }
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
                 
                 KRProgressHUD.dismiss()
-                self.dismiss(animated: true, completion: nil)
-                // Transcription failed.
                 
                 return
             }

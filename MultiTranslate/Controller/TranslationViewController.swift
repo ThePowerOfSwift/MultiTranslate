@@ -108,12 +108,28 @@ class TranslationViewController: UIViewController {
     }
     
     @objc func showDownloadLanguageModelPage() {
-        let viewController = FBLanguageTableViewController()
-        let navController = UINavigationController(rootViewController: viewController)
-        navController.modalPresentationStyle = .pageSheet
-        present(navController, animated: true, completion: nil)
+        let isFBDownloadLanguangePageShown = UserDefaults.standard.bool(forKey: Constants.isFBDownloadLanguangePageShownKey)
+        
+        if isFBDownloadLanguangePageShown {
+            let viewController = FBLanguageTableViewController()
+            let navController = UINavigationController(rootViewController: viewController)
+            navController.modalPresentationStyle = .pageSheet
+            present(navController, animated: true, completion: nil)
+        } else {
+            print("this is the first time download page shown.")
+            let alert = PMAlertController(title: "Download offline language", description: "Download offline language fast and save your ...", image: UIImage(named: "download"), style: .alert)
+            let defaultAction = PMAlertAction(title: "Got it", style: .default) {
+                let viewController = FBLanguageTableViewController()
+                let navController = UINavigationController(rootViewController: viewController)
+                navController.modalPresentationStyle = .pageSheet
+                self.present(navController, animated: true, completion: nil)
+            }
+            alert.addAction(defaultAction)
+            present(alert, animated: true) {
+                UserDefaults.standard.set(true, forKey: Constants.isFBDownloadLanguangePageShownKey)
+            }
+        }
     }
-    
 }
 
 extension TranslationViewController: PagingViewControllerDataSource {

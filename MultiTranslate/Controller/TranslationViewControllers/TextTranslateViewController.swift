@@ -989,7 +989,9 @@ class TextTranslateViewController: UIViewController {
                 print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error", message: error?.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+                SPAlert.present(title: "Error",
+                                message: error?.localizedDescription,
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
             }
         }
     }
@@ -1001,7 +1003,9 @@ class TextTranslateViewController: UIViewController {
                 print("the GCP translation is \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error", message: error?.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+                SPAlert.present(title: "Error",
+                                message: error?.localizedDescription,
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
             }
         }
     }
@@ -1027,7 +1031,9 @@ class TextTranslateViewController: UIViewController {
             starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             starButton.tintColor = .systemYellow
             
-            SPAlert.present(title: "Translation saved", message: nil, image: UIImage(systemName: "star.fill")!)
+            SPAlert.present(title: "Translation saved",
+                            message: nil,
+                            image: UIImage(systemName: "star.fill")!)
             
             let savedTranslation = SavedTranslation()
             savedTranslation.sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
@@ -1042,7 +1048,9 @@ class TextTranslateViewController: UIViewController {
                 }
             } catch {
                 print("Error adding item, \(error)")
-                SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+                SPAlert.present(title: "Error",
+                                message: error.localizedDescription,
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
             }
             
             let vc = SavedTranslationsTableViewController()
@@ -1061,7 +1069,9 @@ class TextTranslateViewController: UIViewController {
             starButton.setImage(UIImage(systemName: "star"), for: .normal)
             starButton.tintColor = .systemBlue
             
-            SPAlert.present(title: "Removed", message: nil, image: UIImage(systemName: "star.slash.fill")!)
+            SPAlert.present(title: "Removed",
+                            message: nil,
+                            image: UIImage(systemName: "star.slash.fill")!)
             
             if let tabBarItems = tabBarController?.tabBar.items {
                 let tabItem = tabBarItems[1]
@@ -1111,7 +1121,9 @@ class TextTranslateViewController: UIViewController {
         let pasteboard = UIPasteboard.general
         pasteboard.string = targetOutputText.text
         
-        SPAlert.present(title: "Copied to clipboard", message: nil, image: UIImage(systemName: "doc.on.clipboard.fill")!)
+        SPAlert.present(title: "Copied to clipboard",
+                        message: nil,
+                        image: UIImage(systemName: "doc.on.clipboard.fill")!)
     }
 
 }

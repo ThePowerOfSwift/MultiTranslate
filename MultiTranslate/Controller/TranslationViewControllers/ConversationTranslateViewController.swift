@@ -353,9 +353,13 @@ class ConversationTranslateViewController: UIViewController {
                 }
             } catch {
                 print("Error adding item, \(error)")
-                SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+                SPAlert.present(title: "Error",
+                                message: error.localizedDescription,
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
             }
-            SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
+            SPAlert.present(title: "Records cleared",
+                            message: nil,
+                            image: UIImage(systemName: "trash.fill")!)
             self.conversationTableView.reloadData()
             self.clearButton.isHidden = true
         }
@@ -406,7 +410,9 @@ class ConversationTranslateViewController: UIViewController {
 
         } catch {
             finishRecording(success: false)
-            SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+            SPAlert.present(title: "Error",
+                            message: error.localizedDescription,
+                            image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
 
@@ -531,7 +537,9 @@ class ConversationTranslateViewController: UIViewController {
                 print("the FB translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error", message: error?.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+                SPAlert.present(title: "Error",
+                                message: error?.localizedDescription,
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
             }
         }
     }
@@ -543,7 +551,9 @@ class ConversationTranslateViewController: UIViewController {
                 print("the GCP translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error", message: error?.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+                SPAlert.present(title: "Error",
+                                message: error?.localizedDescription,
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
             }
         }
     }

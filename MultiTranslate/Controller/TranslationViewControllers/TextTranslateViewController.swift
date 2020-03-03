@@ -958,10 +958,20 @@ class TextTranslateViewController: UIViewController {
         let sourceLanguageCode = SupportedLanguages.gcpLanguageCode[temporarySourceLanguageGCPIndex]
         let targetLanguageCode = SupportedLanguages.gcpLanguageCode[temporaryTargetLanguageGCPIndex]
 
-        if isOfflineTranslateAvailable(from: sourceLanguage, to: targetLanguage) {
-            performFBOfflineTranslate(from: sourceLanguage, to: targetLanguage, for: textToTranslate)
+        if sourceLanguage == targetLanguage {
+            let alert = PMAlertController(title: "Error",
+                                          description: "You cannot translate \(sourceLanguage) to \(targetLanguage)",
+                                          image: UIImage(named: "error"),
+                                          style: .alert)
+            let defaultAction = PMAlertAction(title: "Change language", style: .default)
+            alert.addAction(defaultAction)
+            present(alert, animated: true, completion: nil)
         } else {
-            performGoogleCloudTranslate(from: sourceLanguageCode, to: targetLanguageCode, for: textToTranslate)
+            if isOfflineTranslateAvailable(from: sourceLanguage, to: targetLanguage) {
+                performFBOfflineTranslate(from: sourceLanguage, to: targetLanguage, for: textToTranslate)
+            } else {
+                performGoogleCloudTranslate(from: sourceLanguageCode, to: targetLanguageCode, for: textToTranslate)
+            }            
         }
     }
     
@@ -1032,6 +1042,7 @@ class TextTranslateViewController: UIViewController {
                 }
             } catch {
                 print("Error adding item, \(error)")
+                SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
             }
             
             let vc = SavedTranslationsTableViewController()

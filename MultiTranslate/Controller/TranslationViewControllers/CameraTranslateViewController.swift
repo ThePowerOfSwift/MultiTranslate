@@ -14,6 +14,7 @@ import LBTATools
 import PMSuperButton
 import CropViewController
 import KRProgressHUD
+import SPAlert
 
 
 class CameraTranslateViewController: UIViewController {
@@ -602,6 +603,9 @@ class CameraTranslateViewController: UIViewController {
         if error == nil {
             guard let observations = request?.results as? [VNRecognizedTextObservation] else {
                 print("Detecting error.")
+                SPAlert.present(title: "Error",
+                                message: "Cannot recognize text in this photo.",
+                                image: UIImage(systemName: "exclamationmark.triangle")!)
                 return
             }
             
@@ -620,6 +624,9 @@ class CameraTranslateViewController: UIViewController {
             
         } else {
             print(error!.localizedDescription)
+            SPAlert.present(title: "Error",
+                            message: error!.localizedDescription,
+                            image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
 
@@ -652,13 +659,22 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
             try imageRequestHandler.perform(requests)
         } catch {
             print("Process image error: \(error.localizedDescription)")
+            SPAlert.present(title: "Error",
+                            message: "Cannot recognize text in this photo. \(error.localizedDescription)",
+                            image: UIImage(systemName: "exclamationmark.triangle")!)
         }
         
         KRProgressHUD.dismiss()
         
         dismiss(animated: true) {
             if self.detectedResultString.isEmpty {
-                print("Result is empty.") // UIAlertViewController
+                let alert = PMAlertController(title: "No text",
+                                              description: "Cannot recognize text in this photo. Please try again.",
+                                              image: UIImage(named: "error"),
+                                              style: .alert)
+                let defaultAction = PMAlertAction(title: "Try again", style: .default)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
             } else {
                 let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
                 guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }

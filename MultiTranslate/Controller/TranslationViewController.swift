@@ -19,7 +19,7 @@ class TranslationViewController: UIViewController {
         "microphone",
         "conversation",
         "AR",
-        "pdf",
+        "doc",
         "image",
     ]
     

@@ -19,6 +19,7 @@ class FBLanguageTableViewController: UITableViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        title = "Offline translate languages"
         
         tableView.register(FBLanguageTableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
         tableView.allowsSelection = false

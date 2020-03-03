@@ -13,37 +13,96 @@ class LanguagePickerViewController: UIViewController {
     var sourceLanguageRow = 0
     var targetLanguageRow = 0
     
-//    var isVoiceTranslate: Bool = false
     var languagePickerType: LanguagePickerType = .textTranslate
     var isSetting: Bool = false
     
-    private var pickerView = UIPickerView()
+    private let container: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let labelContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let fromLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "From"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .black)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let toLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "To"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .black)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let pickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        return picker
+    }()
     
     var delegate: LanguagePickerDelegate?
 
+    override func loadView() {
+        super.loadView()
+        
+        view.addSubview(container)
+        container.edgeTo(view, safeArea: .top)
+        
+        container.addSubview(pickerView)
+        pickerView.edgeTo(container)
+        
+        container.addSubview(labelContainer)
+        labelContainer.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        labelContainer.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        labelContainer.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        labelContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        labelContainer.HStack(fromLabel,
+                              toLabel,
+                              spacing: 0,
+                              alignment: .center,
+                              distribution: .fillEqually)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        // ViewContorller 背景色
-        self.view.backgroundColor = UIColor(red: 0.92, green: 1.0, blue: 0.94, alpha: 1.0)
-        
-        // PickerView のサイズと位置
-        pickerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 2)
-        pickerView.backgroundColor = UIColor(red: 0.69, green: 0.93, blue: 0.9, alpha: 1.0)
-        
-        // PickerViewはスクリーンの中央に設定
-        pickerView.center = self.view.center
-        
-        // Delegate設定
+        self.view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        self.title = "Language selector"
+
         pickerView.delegate = self
         pickerView.dataSource = self
-        
-        self.view.addSubview(pickerView)
         
         if !isSetting {
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneChange))
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelChange))
+        }
+        
+        switch languagePickerType {
+        case .targetLanguage:
+            fromLabel.isHidden = true
+            toLabel.isHidden = false
+        case .textSourceSetting, .visionSourceSetting, .speechSourceSetting:
+            fromLabel.isHidden = false
+            toLabel.isHidden = true
+        default:
+            fromLabel.isHidden = false
+            toLabel.isHidden = false
         }
     }
     
@@ -61,9 +120,6 @@ class LanguagePickerViewController: UIViewController {
             pickerView.selectRow(sourceLanguageRow, inComponent: 0, animated: true)
             pickerView.selectRow(targetLanguageRow, inComponent: 1, animated: true)
         }
-        
-//        print(pickerView.selectedRow(inComponent: 0))
-//        print(pickerView.selectedRow(inComponent: 1))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -85,7 +141,6 @@ class LanguagePickerViewController: UIViewController {
 
 extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataSource {
  
-    // ドラムロールの列数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         switch languagePickerType {
         case .textSourceSetting, .visionSourceSetting, .speechSourceSetting, .targetLanguage:
@@ -96,7 +151,6 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
         
     }
     
-    // ドラムロールの行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         switch languagePickerType {
@@ -135,7 +189,6 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
         }
     }
     
-    // ドラムロールの各タイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         switch languagePickerType {
@@ -175,7 +228,6 @@ extension LanguagePickerViewController : UIPickerViewDelegate, UIPickerViewDataS
         
     }
     
-    // ドラムロール選択時
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch languagePickerType {
             

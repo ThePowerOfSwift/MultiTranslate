@@ -6,12 +6,14 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 import StoreKit
 
 import Firebase
 //import IQKeyboardManager
 import RealmSwift
+import SPAlert
 import SwiftyStoreKit
 
 @UIApplicationMain
@@ -37,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initializeFirebase()
         
         FBOfflineTranslate.initializeFBTranslation()
+        
+        initializeAVAudioSession()
         
         return true
     }
@@ -130,6 +134,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         InAppPurchaseManager.completeIAPTransactions()
+    }
+    
+    func initializeAVAudioSession() {
+        // Get the singleton instance.
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            // Set the audio session category, mode, and options.
+            try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+        } catch {
+            print("Failed to set audio session category.")
+        }
     }
     
 }

@@ -12,12 +12,20 @@ import Firebase
 
 class SettingTableViewController: UITableViewController {
 
-    private let sections = ["Text translate language", "Camera translate language", "Voice translate language", "Conversation translate language", "Offline translation module"]
+    private let sections = ["Text translate language",
+                            "Camera translate language",
+                            "Voice translate language",
+                            "Conversation translate language",
+                            "Documnet translate language",
+                            "Image translate language",
+                            "Offline translation module"]
     
     private let textTranslateLanguageSection = ["Source", "Target"]
     private let cameraTranslateLanguageSection = ["Source", "Target"]
     private let voiceTranslateLanguageSection = ["Source", "Target"]
-    private let conversationLanguageSection = ["Source", "Target"]
+    private let conversationTranslateLanguageSection = ["Source", "Target"]
+    private let documentTranslateLanguageSection = ["Source", "Target"]
+    private let imageTranslateLanguageSection = ["Source", "Target"]
     private let offlineLanguagesSection = ["Offline languages"]
     private var sectionList = [Array<String>]()
     
@@ -29,6 +37,10 @@ class SettingTableViewController: UITableViewController {
     private var voiceTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.voiceTargetLanguageIndexKey)
     private var conversationSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationSourceLanguageIndexKey)
     private var conversationTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.conversationTargetLanguageIndexKey)
+    private var documentSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.docSourceLanguageIndexKey)
+    private var documentTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.docTargetLanguageIndexKey)
+    private var imageSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.imageSourceLanguageIndexKey)
+    private var imageTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.imageTargetLanguageIndexKey)
     
     enum LanguageSettingType {
         case textSource
@@ -39,6 +51,10 @@ class SettingTableViewController: UITableViewController {
         case voiceTarget
         case conversationSource
         case conversationTarget
+        case documentSource
+        case documentTarget
+        case imageSource
+        case imageTarget
     }
     
     private var languageSettingType = LanguageSettingType.textSource
@@ -49,7 +65,13 @@ class SettingTableViewController: UITableViewController {
         self.title = "Setting"
         self.clearsSelectionOnViewWillAppear = true
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
-        sectionList = [textTranslateLanguageSection, cameraTranslateLanguageSection, voiceTranslateLanguageSection, conversationLanguageSection, offlineLanguagesSection]
+        sectionList = [textTranslateLanguageSection,
+                       cameraTranslateLanguageSection,
+                       voiceTranslateLanguageSection,
+                       conversationTranslateLanguageSection,
+                       documentTranslateLanguageSection,
+                       imageTranslateLanguageSection,
+                       offlineLanguagesSection]
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.settingTableViewCellIdentifier)
         tableView.separatorStyle = .none
@@ -93,8 +115,12 @@ class SettingTableViewController: UITableViewController {
         case 2:
             return voiceTranslateLanguageSection.count
         case 3:
-            return conversationLanguageSection.count
+            return conversationTranslateLanguageSection.count
         case 4:
+            return documentTranslateLanguageSection.count
+        case 5:
+            return imageTranslateLanguageSection.count
+        case 6:
             return offlineLanguagesSection.count
         default:
             return 0
@@ -134,6 +160,18 @@ class SettingTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = SupportedLanguages.speechRecognizerSupportedLocale[conversationTargetLanguageIndex]
             }
         case 4:
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = SupportedLanguages.visionRecognizerSupportedLanguage[documentSourceLanguageIndex]
+            } else {
+                cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[documentTargetLanguageIndex]
+            }
+        case 5:
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = SupportedLanguages.visionRecognizerSupportedLanguage[imageSourceLanguageIndex]
+            } else {
+                cell.detailTextLabel?.text = SupportedLanguages.gcpLanguageList[imageTargetLanguageIndex]
+            }
+        case 6:
             return cell
         default:
             return cell
@@ -186,16 +224,40 @@ class SettingTableViewController: UITableViewController {
         case 3:
             if indexPath.row == 0 {
                 languageSettingType = .conversationSource
-                didSelectRow(section: 2, row: 0)
+                didSelectRow(section: 3, row: 0)
                 
                 presentLanguagePicker(languagePickerType: .speechSourceSetting, sourceLanguageRow: conversationSourceLanguageIndex, targetLanguageRow: 0)
             } else {
                 languageSettingType = .conversationTarget
-                didSelectRow(section: 2, row: 1)
+                didSelectRow(section: 3, row: 1)
                 
                 presentLanguagePicker(languagePickerType: .speechSourceSetting, sourceLanguageRow: conversationTargetLanguageIndex, targetLanguageRow: 0)
             }
         case 4:
+            if indexPath.row == 0 {
+                languageSettingType = .documentSource
+                didSelectRow(section: 4, row: 0)
+                
+                presentLanguagePicker(languagePickerType: .visionSourceSetting, sourceLanguageRow: documentSourceLanguageIndex, targetLanguageRow: 0)
+            } else {
+                languageSettingType = .documentTarget
+                didSelectRow(section: 4, row: 1)
+                
+                presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: documentTargetLanguageIndex)
+            }
+        case 5:
+            if indexPath.row == 0 {
+                languageSettingType = .imageSource
+                didSelectRow(section: 5, row: 0)
+                
+                presentLanguagePicker(languagePickerType: .visionSourceSetting, sourceLanguageRow: imageSourceLanguageIndex, targetLanguageRow: 0)
+            } else {
+                languageSettingType = .imageTarget
+                didSelectRow(section: 5, row: 1)
+                
+                presentLanguagePicker(languagePickerType: .targetLanguage, sourceLanguageRow: 0, targetLanguageRow: imageTargetLanguageIndex)
+            }
+        case 6:
             presentFBLanguageTable()
         default:
             return
@@ -263,6 +325,22 @@ extension SettingTableViewController: LanguagePickerDelegate {
         case .conversationTarget:
             conversationTargetLanguageIndex = temporarySourceLanguageGCPIndex
             userDefaults.set(conversationTargetLanguageIndex, forKey: Constants.conversationTargetLanguageIndexKey)
+            
+        case .documentSource:
+            documentSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(documentSourceLanguageIndex, forKey: Constants.docSourceLanguageIndexKey)
+            
+        case .documentTarget:
+            documentTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+            userDefaults.set(documentTargetLanguageIndex, forKey: Constants.docTargetLanguageIndexKey)
+            
+        case .imageSource:
+            imageSourceLanguageIndex = temporarySourceLanguageGCPIndex
+            userDefaults.set(imageSourceLanguageIndex, forKey: Constants.imageSourceLanguageIndexKey)
+            
+        case .imageTarget:
+            imageTargetLanguageIndex = temporaryTargetLanguageGCPIndex
+            userDefaults.set(imageTargetLanguageIndex, forKey: Constants.imageTargetLanguageIndexKey)
         }
     }
 }

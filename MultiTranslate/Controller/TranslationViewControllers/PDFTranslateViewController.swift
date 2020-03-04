@@ -457,7 +457,7 @@ class PDFTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Document"]
+        let titleInfo = ["title" : "Document Scan"]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     

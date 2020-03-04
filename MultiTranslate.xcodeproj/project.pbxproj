@@ -12,6 +12,8 @@
 		8003E2DB23CB24CD00268D35 /* ConversationTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */; };
 		8014E75E23ED2C8C00793258 /* TranslateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8014E75D23ED2C8C00793258 /* TranslateType.swift */; };
 		801CA5CB23FD183F00C5285C /* SubscritionPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */; };
+		80207718240F6C7C00F604E5 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80207717240F6C7C00F604E5 /* ARViewController.swift */; };
+		8020771A240F6CEB00F604E5 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 80207719240F6CEB00F604E5 /* Inceptionv3.mlmodel */; };
 		80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */; };
 		8037C0CD23E0FBB000DD3B09 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */; };
 		8037C0CF23E1002800DD3B09 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8037C0CE23E1002800DD3B09 /* StoreKit.framework */; };
@@ -75,6 +77,8 @@
 		8003E2DA23CB24CD00268D35 /* ConversationTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTranslateViewController.swift; sourceTree = "<group>"; };
 		8014E75D23ED2C8C00793258 /* TranslateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateType.swift; sourceTree = "<group>"; };
 		801CA5CA23FD183F00C5285C /* SubscritionPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscritionPlanTableViewCell.swift; sourceTree = "<group>"; };
+		80207717240F6C7C00F604E5 /* ARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		80207719240F6CEB00F604E5 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		80293EED23C9C2C100E33096 /* SourceTextInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextInputDelegate.swift; sourceTree = "<group>"; };
 		8037C0CB23E0FBAA00DD3B09 /* MultiTranslate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiTranslate.entitlements; sourceTree = "<group>"; };
 		8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -265,6 +269,8 @@
 				80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */,
 				806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */,
 				809455AF23E7E88A0056A501 /* PurchasePageViewController.swift */,
+				80207717240F6C7C00F604E5 /* ARViewController.swift */,
+				80207719240F6CEB00F604E5 /* Inceptionv3.mlmodel */,
 				80A403D523FF650100E84231 /* AboutSubscriptionViewController.swift */,
 				80A403D723FF652E00E84231 /* TermsOfUseViewController.swift */,
 				80A403D923FF655400E84231 /* PrivacyPolicyViewController.swift */,
@@ -453,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80207718240F6C7C00F604E5 /* ARViewController.swift in Sources */,
 				807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */,
 				803E269E2408996A00DF5DF6 /* PMAlertAction.swift in Sources */,
 				80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */,
@@ -462,6 +469,7 @@
 				808E75EB23C43718009A0EB4 /* Stack.swift in Sources */,
 				808E75EC23C43718009A0EB4 /* UIView+.swift in Sources */,
 				80A403D623FF650100E84231 /* AboutSubscriptionViewController.swift in Sources */,
+				8020771A240F6CEB00F604E5 /* Inceptionv3.mlmodel in Sources */,
 				803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */,
 				80A403DD23FFA70800E84231 /* SwiftyInnerShadowView.swift in Sources */,
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,

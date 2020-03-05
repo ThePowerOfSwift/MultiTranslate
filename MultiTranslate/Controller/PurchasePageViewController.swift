@@ -47,8 +47,8 @@ class PurchasePageViewController: UIViewController {
     private let closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "close"), for: .normal)
-        button.tintColor = .gray
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .darkGray
         
         return button
     }()
@@ -56,7 +56,7 @@ class PurchasePageViewController: UIViewController {
     private let restoreButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 12.5
+//        button.layer.cornerRadius = 12.5
         button.setTitle("Restore", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
@@ -78,7 +78,7 @@ class PurchasePageViewController: UIViewController {
         label.textAlignment = .center
         label.text = "Try 14 Days for FREE!"
         label.font = UIFont.boldSystemFont(ofSize: 35)
-        label.textColor = .label
+        label.textColor = .black
         label.sizeToFit()
         label.numberOfLines = 1
         
@@ -91,7 +91,7 @@ class PurchasePageViewController: UIViewController {
         label.textAlignment = .left
         label.text = "then \(InAppPurchaseManager.retrievedProducts[0].localizedPrice!) / year"
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.textColor = .label
+        label.textColor = .black
         label.sizeToFit()
         
         return label
@@ -168,7 +168,7 @@ class PurchasePageViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "camera")
         view.contentMode = .scaleAspectFit
-        view.tintColor = .label
+        view.tintColor = .black
         
         return view
     }()
@@ -177,7 +177,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = .label
+        label.textColor = .black
         label.text = "Detect words in photos and translate."
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
@@ -190,7 +190,7 @@ class PurchasePageViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "microphone")
         view.contentMode = .scaleAspectFit
-        view.tintColor = .label
+        view.tintColor = .black
         
         return view
     }()
@@ -199,7 +199,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = .label
+        label.textColor = .black
         label.text = "Detect words in photos and translate."
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
@@ -212,7 +212,7 @@ class PurchasePageViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "conversation")
         view.contentMode = .scaleAspectFit
-        view.tintColor = .label
+        view.tintColor = .black
         
         return view
     }()
@@ -221,7 +221,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = .label
+        label.textColor = .black
         label.text = "Detect words in photos and translate."
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
@@ -234,7 +234,7 @@ class PurchasePageViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "AR")
         view.contentMode = .scaleAspectFit
-        view.tintColor = .label
+        view.tintColor = .black
         
         return view
     }()
@@ -243,7 +243,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = .label
+        label.textColor = .black
         label.text = "Detect words in photos and translate."
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
@@ -256,7 +256,7 @@ class PurchasePageViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "pdf")
         view.contentMode = .scaleAspectFit
-        view.tintColor = .label
+        view.tintColor = .black
         
         return view
     }()
@@ -265,7 +265,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.textColor = .label
+        label.textColor = .black
         label.text = "Detect words in photos and translate."
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
@@ -278,13 +278,14 @@ class PurchasePageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("START", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 35, weight: .bold)
-        button.backgroundColor = .systemBlue
+//        button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.systemGray, for: .highlighted)
         
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.white.cgColor
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
         
         return button
     }()
@@ -293,11 +294,10 @@ class PurchasePageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Subscribe Monthly", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: .regular)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.systemGray, for: .highlighted)
-        
-        button.sizeToFit()
+        button.backgroundColor = .clear
         button.underline()
         
         return button
@@ -306,9 +306,7 @@ class PurchasePageViewController: UIViewController {
     private let statementView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemOrange
-        // FIXME: Add statement (Privacy Policy and Terms of Use)
-        
+
         return view
     }()
     
@@ -341,16 +339,16 @@ class PurchasePageViewController: UIViewController {
         restoreButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         restoreButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
-//        container.addSubview(closeButton)
-//        closeButton.topAnchor.constraint(equalTo: container.topAnchor, constant: 25).isActive = true
-//        closeButton.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 10).isActive = true
-//        closeButton.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
-//        closeButton.widthAnchor.constraint(equalTo: closeButton.heightAnchor).isActive = true
+        container.addSubview(closeButton)
+        closeButton.topAnchor.constraint(equalTo: container.topAnchor, constant: 25).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 30).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        closeButton.widthAnchor.constraint(equalTo: closeButton.heightAnchor).isActive = true
         
         container.addSubview(titleView)
         titleView.topAnchor.constraint(equalTo: container.topAnchor, constant: 165).isActive = true
-        titleView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 35).isActive = true
-        titleView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -35).isActive = true
+        titleView.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        titleView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
         titleView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         container.addSubview(detailView)
@@ -362,8 +360,10 @@ class PurchasePageViewController: UIViewController {
         container.addSubview(subscribeButton)
         subscribeButton.topAnchor.constraint(equalTo: detailView.bottomAnchor, constant: 30).isActive = true
         subscribeButton.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
-        subscribeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        subscribeButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
+        subscribeButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        subscribeButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
+        subscribeButton.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 35).isActive = true
+        subscribeButton.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -35).isActive = true
         
         container.addSubview(subscribeMonthlyButton)
         subscribeMonthlyButton.topAnchor.constraint(equalTo: subscribeButton.bottomAnchor, constant: 10).isActive = true
@@ -380,6 +380,7 @@ class PurchasePageViewController: UIViewController {
         titleView.addSubview(promotionTitle1)
         promotionTitle1.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 5).isActive = true
         promotionTitle1.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 5).isActive = true
+        promotionTitle1.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -5).isActive = true
         
         titleView.addSubview(promotionTitle2)
         promotionTitle2.topAnchor.constraint(equalTo: promotionTitle1.bottomAnchor, constant: 10).isActive = true
@@ -450,6 +451,8 @@ class PurchasePageViewController: UIViewController {
 
             self.scrollView.contentSize = contentRect.size
         }
+        
+        subscribeButton.setGradientBackground(startColor: UIColor(rgb: 0x1BFFFF), endColor: UIColor(rgb: 0x2E3192))
     }
     
     @objc func restorePurchase() {

@@ -171,3 +171,15 @@ extension Array where Element: Hashable {
         return Array(thisSet.subtracting(otherSet))
     }
 }
+
+extension UIView {
+    func setGradientBackground(startColor: UIColor, endColor: UIColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+}

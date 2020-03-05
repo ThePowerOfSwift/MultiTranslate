@@ -614,6 +614,7 @@ extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate
             viewController.temporaryTargetLanguageGCPIndex = temporaryTargetLanguageIndex
             viewController.sourceInputText.text = detectedResultString
             viewController.languagePickerType = .targetLanguage
+            viewController.isTranslateTypeNeedPro = true
             
             let navController = UINavigationController(rootViewController: viewController)
             present(navController, animated: true, completion: nil)

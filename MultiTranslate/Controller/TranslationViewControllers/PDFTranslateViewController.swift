@@ -658,6 +658,7 @@ extension PDFTranslateViewController: UINavigationControllerDelegate, ImageScann
                 viewController.temporaryTargetLanguageGCPIndex = self.temporaryTargetLanguageIndex
                 viewController.sourceInputText.text = self.detectedResultString
                 viewController.languagePickerType = .targetLanguage
+                viewController.isTranslateTypeNeedPro = true
                 
                 let navController = UINavigationController(rootViewController: viewController)
                 self.present(navController, animated: true, completion: nil)

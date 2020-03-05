@@ -561,8 +561,17 @@ class ARTranslateViewController: UIViewController {
     func useCamera() {
         print("Use camera tapped.")
         
-        guard let targetLanguage = self.targetLanguageButton.titleLabel?.text else { return }
-        print("target language is \(targetLanguage) haha")
+        guard let targetLanguage = self.targetLanguageButton.titleLabel?.text,
+            let raw = UserDefaults.standard.string(forKey: Constants.userTypeKey)else { return }
+        
+        let userType = UserType(rawValue: raw)!
+        
+        guard userType != .guestUser else {
+            let viewController = PurchasePageViewController()
+            viewController.modalPresentationStyle = .automatic
+            present(viewController, animated: true, completion: nil)
+            return
+        }
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {

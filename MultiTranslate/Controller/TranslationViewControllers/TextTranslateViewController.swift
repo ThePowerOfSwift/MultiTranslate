@@ -26,6 +26,7 @@ class TextTranslateViewController: UIViewController {
     var defaultTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
     
     var languagePickerType: LanguagePickerType = .textTranslate
+    var isTranslateTypeNeedPro = false
     
     private var isStarButtonTapped: Bool = false
     
@@ -903,31 +904,37 @@ class TextTranslateViewController: UIViewController {
             print("text is empty")
             SPAlert.present(message: "Empty text")
         } else {
-        
-            if isTranslatePossible(userType: userType) {
-                performTranslate()
-                translatedCharactersCurrentMonth += text.count
-                cloudDBTranslatedCharacters += text.count
-                
-                let updatedCount = translatedCharactersCurrentMonth >= cloudDBTranslatedCharacters ? translatedCharactersCurrentMonth : cloudDBTranslatedCharacters
-                print("updatedCount is \(updatedCount)")
-                
-                UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
-                
-                CloudKitManager.updateCountData(to: updatedCount)
-                
+            
+            if userType == .guestUser && isTranslateTypeNeedPro == true {
+                let viewController = PurchasePageViewController()
+                viewController.modalPresentationStyle = .automatic
+                present(viewController, animated: true, completion: nil)
             } else {
-                print("Here is the limit, pay more money!")
-                let alert = PMAlertController(title: "Translate character has reach the limit", description: "You can change your plan and get more characters", image: UIImage(named: "reading2"), style: .alert)
-                let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
-                let defaultAction = PMAlertAction(title: "See more plans", style: .default) {
-                    let viewController = AccountViewController()
-                    let navController = UINavigationController(rootViewController: viewController)
-                    self.present(navController, animated: true, completion: nil)
+                if isTranslatePossible(userType: userType) {
+                    performTranslate()
+                    translatedCharactersCurrentMonth += text.count
+                    cloudDBTranslatedCharacters += text.count
+                    
+                    let updatedCount = translatedCharactersCurrentMonth >= cloudDBTranslatedCharacters ? translatedCharactersCurrentMonth : cloudDBTranslatedCharacters
+                    print("updatedCount is \(updatedCount)")
+                    
+                    UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
+                    
+                    CloudKitManager.updateCountData(to: updatedCount)
+                    
+                } else {
+                    print("Here is the limit, pay more money!")
+                    let alert = PMAlertController(title: "Translate character has reach the limit", description: "You can change your plan and get more characters", image: UIImage(named: "reading2"), style: .alert)
+                    let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
+                    let defaultAction = PMAlertAction(title: "See more plans", style: .default) {
+                        let viewController = AccountViewController()
+                        let navController = UINavigationController(rootViewController: viewController)
+                        self.present(navController, animated: true, completion: nil)
+                    }
+                    alert.addAction(cancelAction)
+                    alert.addAction(defaultAction)
+                    present(alert, animated: true, completion: nil)
                 }
-                alert.addAction(cancelAction)
-                alert.addAction(defaultAction)
-                present(alert, animated: true, completion: nil)
             }
         }
     }

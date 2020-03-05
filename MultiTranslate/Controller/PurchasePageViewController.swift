@@ -306,8 +306,55 @@ class PurchasePageViewController: UIViewController {
     private let statementView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-
         return view
+    }()
+    
+    private let subscriptionInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+        
+    private let termsOfUseInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let privacyPolicyInformationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let subscriptionInformationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("About subscription", for: .normal)
+        button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return button
+    }()
+    
+    private let termsOfUseInformationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Terms of use", for: .normal)
+        button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return button
+    }()
+    
+    private let privacyPolicyInformationButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Privacy policy", for: .normal)
+        button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return button
     }()
     
     
@@ -370,12 +417,12 @@ class PurchasePageViewController: UIViewController {
         subscribeMonthlyButton.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
         
         container.addSubview(statementView)
-        statementView.topAnchor.constraint(equalTo: subscribeMonthlyButton.bottomAnchor, constant: 10).isActive = true
-        statementView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 30).isActive = true
-        statementView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -30).isActive = true
+        statementView.topAnchor.constraint(equalTo: subscribeMonthlyButton.bottomAnchor, constant: 30).isActive = true
+        statementView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 10).isActive = true
+        statementView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -10).isActive = true
 //        statementView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        statementView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        statementView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -50).isActive = true
+        statementView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        statementView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -30).isActive = true
      
         titleView.addSubview(promotionTitle1)
         promotionTitle1.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 5).isActive = true
@@ -428,6 +475,24 @@ class PurchasePageViewController: UIViewController {
                                   spacing: 5,
                                   alignment: .fill,
                                   distribution: .fill)
+        
+        statementView.HStack(subscriptionInformationView,
+                             termsOfUseInformationView,
+                             privacyPolicyInformationView,
+                             spacing: 1,
+                             alignment: .fill,
+                             distribution: .fillEqually)
+        
+        subscriptionInformationView.addSubview(subscriptionInformationButton)
+        subscriptionInformationButton.centerYAnchor.constraint(equalTo: subscriptionInformationView.centerYAnchor).isActive = true
+        subscriptionInformationButton.trailingAnchor.constraint(equalTo: subscriptionInformationView.trailingAnchor, constant: -5).isActive = true
+        
+        termsOfUseInformationView.addSubview(termsOfUseInformationButton)
+        termsOfUseInformationButton.centerInSuperview()
+        
+        privacyPolicyInformationView.addSubview(privacyPolicyInformationButton)
+        privacyPolicyInformationButton.centerYAnchor.constraint(equalTo: privacyPolicyInformationView.centerYAnchor).isActive = true
+        privacyPolicyInformationButton.leadingAnchor.constraint(equalTo: privacyPolicyInformationView.leadingAnchor, constant: 5).isActive = true
     }
 
     override func viewDidLoad() {
@@ -436,6 +501,10 @@ class PurchasePageViewController: UIViewController {
         restoreButton.addTarget(self, action: #selector(restorePurchase), for: .touchUpInside)
         subscribeButton.addTarget(self, action: #selector(subscribeButtonTapped), for: .touchUpInside)
         subscribeMonthlyButton.addTarget(self, action: #selector(subscribeMonthlyButtonTapped), for: .touchUpInside)
+        
+        subscriptionInformationButton.addTarget(self, action: #selector(showAboutSubscription), for: .touchUpInside)
+        termsOfUseInformationButton.addTarget(self, action: #selector(showTermsOfUse), for: .touchUpInside)
+        privacyPolicyInformationButton.addTarget(self, action: #selector(showPrivacyPolicy), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -465,5 +534,26 @@ class PurchasePageViewController: UIViewController {
 
     @objc func subscribeMonthlyButtonTapped() {
         InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[1].productIdentifier)
+    }
+    
+    @objc func showAboutSubscription() {
+        let viewController = AboutSubscriptionViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func showTermsOfUse() {
+        let viewController = TermsOfUseViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
+    }
+    
+    @objc func showPrivacyPolicy() {
+        let viewController = PrivacyPolicyViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .pageSheet
+        present(navController, animated: true, completion: nil)
     }
 }

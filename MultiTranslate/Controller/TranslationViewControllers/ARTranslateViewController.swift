@@ -471,6 +471,9 @@ class ARTranslateViewController: UIViewController {
         targetLanguageButtonInnerDarkView.isHidden = true
         cameraButtonInnerDarkView.isHidden = true
         cameraButtonInnerLightView.isHidden = true
+        
+        sourceLanguageView.isHidden = true
+        arrowView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -624,7 +627,7 @@ class ARTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageIndex
         viewController.targetLanguageRow = temporaryTargetLanguageIndex
-        viewController.languagePickerType = .visionTranslate
+        viewController.languagePickerType = .targetLanguage
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         

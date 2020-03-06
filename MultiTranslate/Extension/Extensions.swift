@@ -150,6 +150,8 @@ extension UIColor {
            blue: rgb & 0xFF
        )
    }
+    
+    static let mtSystemBackground = UIColor(named: "MTSystemBackgroundColor")!
 }
 
 extension UIButton {

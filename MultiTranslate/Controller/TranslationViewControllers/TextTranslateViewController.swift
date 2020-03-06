@@ -11,6 +11,7 @@ import UIKit
 
 //import PMSuperButton
 import Alamofire
+import DynamicColor
 import SwiftyJSON
 import SPAlert
 //import RAMAnimatedTabBarController
@@ -43,7 +44,7 @@ class TextTranslateViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
@@ -62,7 +63,7 @@ class TextTranslateViewController: UIViewController {
     private let sourceLanguageButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         view.layer.cornerRadius = 20
         return view
     }()
@@ -70,13 +71,13 @@ class TextTranslateViewController: UIViewController {
     private let sourceLanguageButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
         
@@ -86,13 +87,13 @@ class TextTranslateViewController: UIViewController {
     private let sourceLanguageButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
         
@@ -104,8 +105,8 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
         
@@ -116,8 +117,8 @@ class TextTranslateViewController: UIViewController {
         let view = SwiftyInnerShadowView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
@@ -134,19 +135,19 @@ class TextTranslateViewController: UIViewController {
     private let exchangeButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
     private let exchangeButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
         
@@ -156,12 +157,12 @@ class TextTranslateViewController: UIViewController {
     private let exchangeButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
         
@@ -173,8 +174,8 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         return view
     }()
@@ -183,8 +184,8 @@ class TextTranslateViewController: UIViewController {
         let view = SwiftyInnerShadowView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         return view
@@ -199,7 +200,7 @@ class TextTranslateViewController: UIViewController {
     private let targetLanguageButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         view.layer.cornerRadius = 20
         return view
     }()
@@ -207,13 +208,13 @@ class TextTranslateViewController: UIViewController {
     private let targetLanguageButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
         
@@ -223,13 +224,13 @@ class TextTranslateViewController: UIViewController {
     private let targetLanguageButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
         
@@ -241,8 +242,8 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
         
@@ -253,8 +254,8 @@ class TextTranslateViewController: UIViewController {
         let view = SwiftyInnerShadowView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
@@ -277,18 +278,18 @@ class TextTranslateViewController: UIViewController {
     private let translateButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
     private let translateButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
@@ -299,11 +300,11 @@ class TextTranslateViewController: UIViewController {
     private let translateButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
@@ -316,8 +317,8 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         return view
     }()
@@ -327,7 +328,7 @@ class TextTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         return view
@@ -384,7 +385,7 @@ class TextTranslateViewController: UIViewController {
     let sourceInputText: NoSelectTextView = {
         let textView = NoSelectTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = .systemBackground
+        textView.backgroundColor = UIColor.systemBackground.adjustedAlpha(amount: 0.8)
         textView.placeholder = "Input source text"
         textView.placeholderFont = UIFont.preferredFont(forTextStyle: .body)
         textView.font = UIFont.preferredFont(forTextStyle: .body)

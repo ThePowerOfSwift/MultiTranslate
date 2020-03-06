@@ -85,7 +85,7 @@ class TranslationViewController: UIViewController {
         pagingViewController.dataSource = self
         pagingViewController.select(pagingItem: IconItem(icon: icons[0], index: 0))
 //        pagingViewController.menuBackgroundColor = UIColor(rgb: 0xe1f2fb)
-        pagingViewController.menuBackgroundColor = UIColor(rgb: 0xC1D2EB)
+        pagingViewController.menuBackgroundColor = UIColor.mtSystemBackground
         pagingViewController.borderColor = .white
         
         // Add the paging view controller as a child view controller
@@ -93,7 +93,7 @@ class TranslationViewController: UIViewController {
         addChild(pagingViewController)
         view.addSubview(pagingViewController.view)
         view.constrainToEdges(pagingViewController.view)
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         pagingViewController.didMove(toParent: self)
         
         NotificationCenter.default.addObserver(forName: .translationViewControllerDidChange, object: nil, queue: .main) { (notification) in

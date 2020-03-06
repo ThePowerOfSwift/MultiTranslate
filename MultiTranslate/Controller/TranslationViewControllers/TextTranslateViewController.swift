@@ -671,6 +671,12 @@ class TextTranslateViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: .savedTranlationsDidShow, object: nil, queue: .main) { (notification) in
             self.starBadgeNum = 0
         }
+        
+        NotificationCenter.default.addObserver(forName: .firstSavedTranslationDeleted, object: nil, queue: .main) { (notification) in
+            self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            self.starButton.tintColor = .systemBlue
+            self.isStarButtonTapped = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1059,9 +1065,9 @@ class TextTranslateViewController: UIViewController {
                                 message: error.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
-            
-            let vc = SavedTranslationsTableViewController()
-            vc.tableView.reloadData()
+//
+//            let vc = SavedTranslationsTableViewController()
+//            vc.tableView.reloadData()
             
             if let tabBarItems = tabBarController?.tabBar.items {
                 let tabItem = tabBarItems[1]

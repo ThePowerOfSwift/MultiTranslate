@@ -143,6 +143,11 @@ class SavedTranslationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let savedTranslation = savedTranslations[indexPath.row]
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+
+            if indexPath.row == 0 {
+                NotificationCenter.default.post(name: .firstSavedTranslationDeleted, object: nil)
+            }
+
             do {
                 try self.realm.write {
                     self.realm.delete(savedTranslation)

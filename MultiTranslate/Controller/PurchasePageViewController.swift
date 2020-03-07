@@ -499,6 +499,7 @@ class PurchasePageViewController: UIViewController {
         super.viewDidLoad()
 
         restoreButton.addTarget(self, action: #selector(restorePurchase), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
         subscribeButton.addTarget(self, action: #selector(subscribeButtonTapped), for: .touchUpInside)
         subscribeMonthlyButton.addTarget(self, action: #selector(subscribeMonthlyButtonTapped), for: .touchUpInside)
         
@@ -526,6 +527,10 @@ class PurchasePageViewController: UIViewController {
     
     @objc func restorePurchase() {
         InAppPurchaseManager.restorePurchase()
+    }
+    
+    @objc func dismissViewController() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func subscribeButtonTapped() {

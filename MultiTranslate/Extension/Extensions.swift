@@ -152,6 +152,9 @@ extension UIColor {
    }
     
     static let mtSystemBackground = UIColor(named: "MTSystemBackgroundColor")!
+    static let mtConversationSourceBubble = UIColor(named: "MTConversationSourceBubble")!
+    static let mtConversationTargetBubble = UIColor(named: "MTConversationTargetBubble")!
+    static let mtSettingSectionTitle = UIColor(named: "MTSettingSectionTitle")!
 }
 
 extension UIButton {

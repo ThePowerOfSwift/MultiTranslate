@@ -35,14 +35,14 @@ class ConversationTranslateViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
     private let conversationTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        tableView.backgroundColor = .mtSystemBackground
         return tableView
     }()
 
@@ -72,7 +72,7 @@ class ConversationTranslateViewController: UIViewController {
         let selector = UISegmentedControl(items: ["left", "right"])
         selector.translatesAutoresizingMaskIntoConstraints = false
         selector.selectedSegmentIndex = 0
-        selector.backgroundColor = UIColor(rgb: 0xe1f2fb)
+        selector.backgroundColor = .mtSystemBackground
         selector.selectedSegmentTintColor = UIColor(rgb: 0x4d80e4)
         selector.layer.borderWidth = 1
         selector.layer.borderColor = UIColor.white.cgColor
@@ -176,7 +176,7 @@ class ConversationTranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         conversations = realm.objects(Conversation.self)
         

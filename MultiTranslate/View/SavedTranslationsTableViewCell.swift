@@ -25,7 +25,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.init(white: 1, alpha: 0.35)
+        view.backgroundColor = UIColor.mtSystemBackground.darkened(amount: 0.1)
         view.layer.cornerRadius = 8
         
         return view
@@ -34,7 +34,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     let sourceView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 250/250, green: 227/250, blue: 217/250, alpha: 0.98)
+        view.backgroundColor = .mtConversationSourceBubble
         view.layer.cornerRadius = 21
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.layer.masksToBounds = true
@@ -52,7 +52,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     let targetView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 187/250, green: 222/250, blue: 214/250, alpha: 1.0)
+        view.backgroundColor = .mtConversationTargetBubble
         view.layer.cornerRadius = 21
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.layer.masksToBounds = true
@@ -144,7 +144,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        self.backgroundColor = .mtSystemBackground
         
         self.addSubview(container)
         container.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true

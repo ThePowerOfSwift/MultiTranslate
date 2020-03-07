@@ -21,7 +21,7 @@ class AccountViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
@@ -89,7 +89,7 @@ class AccountViewController: UIViewController {
         let selector = UISegmentedControl(items: ["Yearly plan", "Monthly plan"])
         selector.translatesAutoresizingMaskIntoConstraints = false
         selector.selectedSegmentIndex = 0
-//        selector.backgroundColor = UIColor(rgb: 0xC1D2EB)
+//        selector.backgroundColor = .mtSystemBackground
 //        selector.selectedSegmentTintColor = UIColor(rgb: 0x4d80e4)
         selector.layer.borderWidth = 1
         selector.layer.borderColor = UIColor.white.cgColor
@@ -120,7 +120,7 @@ class AccountViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = .systemBackground
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
@@ -128,7 +128,7 @@ class AccountViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = .systemBackground
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
@@ -136,7 +136,7 @@ class AccountViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = .systemBackground
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
@@ -249,10 +249,10 @@ class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
 
         // Do any additional setup after loading the view.
-        subscritionPlanTableView.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        subscritionPlanTableView.backgroundColor = .mtSystemBackground
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restorePurchase))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Purchase", style: .plain, target: self, action: #selector(purchaseTest))

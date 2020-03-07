@@ -18,7 +18,7 @@ class FBLanguageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         title = "Offline translate languages"
         
         tableView.register(FBLanguageTableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
@@ -50,7 +50,7 @@ class FBLanguageTableViewController: UITableViewController {
     {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         let sectionTitle = UILabel(frame: CGRect(x: 20, y: 0, width: headerView.bounds.size.width, height: headerView.bounds.size.height))
-        headerView.backgroundColor = UIColor(rgb: 0x9ab6df)
+        headerView.backgroundColor = .mtSettingSectionTitle
         headerView.addSubview(sectionTitle)
         sectionTitle.text = sectionTitles[section]
         sectionTitle.font = UIFont.boldSystemFont(ofSize: 18)

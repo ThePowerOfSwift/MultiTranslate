@@ -66,7 +66,7 @@ class SavedTranslationsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Saved Translations"
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         savedTranslations = realm.objects(SavedTranslation.self).sorted(byKeyPath: "dateCreated", ascending: false)
 //        savedTranslations = realm.objects(SavedTranslation.self)

@@ -26,7 +26,7 @@ class PDFTranslateViewController: UIViewController {
     private let container: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
 
@@ -57,7 +57,7 @@ class PDFTranslateViewController: UIViewController {
     private let sourceLanguageButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         view.layer.cornerRadius = 20
         return view
     }()
@@ -65,13 +65,13 @@ class PDFTranslateViewController: UIViewController {
     private let sourceLanguageButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
         return view
@@ -80,13 +80,13 @@ class PDFTranslateViewController: UIViewController {
     private let sourceLanguageButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
         return view
@@ -97,8 +97,8 @@ class PDFTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
         return view
@@ -108,8 +108,8 @@ class PDFTranslateViewController: UIViewController {
         let view = SwiftyInnerShadowView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
@@ -142,7 +142,7 @@ class PDFTranslateViewController: UIViewController {
     private let targetLanguageButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         view.layer.cornerRadius = 20
         return view
     }()
@@ -150,13 +150,13 @@ class PDFTranslateViewController: UIViewController {
     private let targetLanguageButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
         return view
@@ -165,13 +165,13 @@ class PDFTranslateViewController: UIViewController {
     private let targetLanguageButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
         return view
@@ -182,8 +182,8 @@ class PDFTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
         return view
@@ -193,8 +193,8 @@ class PDFTranslateViewController: UIViewController {
         let view = SwiftyInnerShadowView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         view.cornerRadius = 20
@@ -222,19 +222,19 @@ class PDFTranslateViewController: UIViewController {
     private let cameraButtonContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         return view
     }()
     
     private let cameraButtonOutterLightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.white.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: -5, height: -5)
         view.layer.shadowRadius = 5
         return view
@@ -243,12 +243,12 @@ class PDFTranslateViewController: UIViewController {
     private let cameraButtonOutterDarkView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         
         view.layer.masksToBounds = false
         
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
+        view.layer.shadowOpacity = 0.35
         view.layer.shadowOffset = CGSize(width: 5, height: 5)
         view.layer.shadowRadius = 5
         return view
@@ -259,8 +259,8 @@ class PDFTranslateViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         view.shadowLayer.shadowRadius = 10
-        view.shadowLayer.shadowColor = UIColor.white.cgColor
-        view.shadowLayer.shadowOpacity = 1
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.lighter().cgColor
+        view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         return view
     }()
@@ -269,8 +269,8 @@ class PDFTranslateViewController: UIViewController {
         let view = SwiftyInnerShadowView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.shadowLayer.shadowRadius = 5
-        view.shadowLayer.shadowColor = UIColor.black.cgColor
+        view.shadowLayer.shadowRadius = 10
+        view.shadowLayer.shadowColor = UIColor.mtSystemBackground.darkened().cgColor
         view.shadowLayer.shadowOpacity = 0.5
         view.shadowLayer.shadowOffset = CGSize.zero
         return view

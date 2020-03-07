@@ -51,7 +51,7 @@ class LanguagePickerViewController: UIViewController {
     private let pickerView: UIPickerView = {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        picker.backgroundColor = .mtSystemBackground
         return picker
     }()
     
@@ -82,7 +82,7 @@ class LanguagePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        self.view.backgroundColor = .mtSystemBackground
         self.title = "Language selector"
 
         pickerView.delegate = self

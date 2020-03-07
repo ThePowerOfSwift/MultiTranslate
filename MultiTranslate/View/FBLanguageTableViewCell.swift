@@ -71,7 +71,7 @@ class FBLanguageTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        self.backgroundColor = .mtSystemBackground
         
         self.addSubview(container)
         container.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true

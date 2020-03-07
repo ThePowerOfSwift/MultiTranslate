@@ -68,7 +68,7 @@ class SettingTableViewController: UITableViewController {
         
         self.title = "Setting"
         self.clearsSelectionOnViewWillAppear = true
-        view.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        view.backgroundColor = .mtSystemBackground
         sectionList = [textTranslateLanguageSection,
                        cameraTranslateLanguageSection,
                        voiceTranslateLanguageSection,
@@ -103,7 +103,7 @@ class SettingTableViewController: UITableViewController {
     {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         let sectionTitle = UILabel(frame: CGRect(x: 20, y: 0, width: headerView.bounds.size.width, height: headerView.bounds.size.height))
-        headerView.backgroundColor = UIColor(rgb: 0x9ab6df)
+        headerView.backgroundColor = .mtSettingSectionTitle
         headerView.addSubview(sectionTitle)
         sectionTitle.text = sections[section]
         sectionTitle.font = UIFont.boldSystemFont(ofSize: 18)
@@ -139,7 +139,7 @@ class SettingTableViewController: UITableViewController {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: Constants.settingTableViewCellIdentifier)
         cell.textLabel?.text = sectionList[indexPath.section][indexPath.row]
         cell.accessoryType = .disclosureIndicator
-        cell.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        cell.backgroundColor = .mtSystemBackground
         
         switch indexPath.section {
         case 0:

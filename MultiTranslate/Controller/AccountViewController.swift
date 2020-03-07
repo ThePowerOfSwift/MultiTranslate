@@ -255,7 +255,6 @@ class AccountViewController: UIViewController {
         subscritionPlanTableView.backgroundColor = .mtSystemBackground
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restorePurchase))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Purchase", style: .plain, target: self, action: #selector(purchaseTest))
         
         planSelector.addTarget(self, action: #selector(planSelectorValueChanged(_:)), for: .valueChanged)
         planSelector.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.label], for: .selected)
@@ -275,12 +274,6 @@ class AccountViewController: UIViewController {
     
     @objc func restorePurchase() {
         InAppPurchaseManager.restorePurchase()
-    }
-    
-    @objc func purchaseTest() {
-        let vc = PurchasePageViewController()
-        vc.modalPresentationStyle = .pageSheet
-        present(vc, animated: true, completion: nil)
     }
     
     @objc func planSelectorValueChanged(_ sender: UISegmentedControl) {

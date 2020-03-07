@@ -102,17 +102,27 @@ class SavedTranslationsTableViewController: UITableViewController {
     }
     
     @objc func clearRecords() {
-        do {
-            try realm.write {
-                realm.delete(savedTranslations)
+        let alert = PMAlertController(title: "Clear records?",
+                                      description: "Records cannot be recovered once deleted.",
+                                      image: UIImage(named: "trash_color"),
+                                      style: .alert)
+        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+        let defaultAction = PMAlertAction(title: "Clear records", style: .default) {
+            do {
+                try self.realm.write {
+                    self.realm.delete(self.savedTranslations)
+                }
+            } catch {
+                print("Error adding item, \(error)")
             }
-        } catch {
-            print("Error adding item, \(error)")
+            SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
+            self.tableView.reloadData()
+            self.navigationItem.rightBarButtonItem = nil
+            self.container.isHidden = false
         }
-        SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
-        tableView.reloadData()
-        self.navigationItem.rightBarButtonItem = nil
-        container.isHidden = false
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source

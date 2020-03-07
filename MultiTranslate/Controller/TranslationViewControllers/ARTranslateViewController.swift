@@ -228,6 +228,9 @@ class ARTranslateViewController: UIViewController {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
+        button.setTitleColor(.mtButtonLabel, for: .normal)
+        button.setTitleColor(.systemBackground, for: .highlighted)
         return button
     }()
     
@@ -237,6 +240,9 @@ class ARTranslateViewController: UIViewController {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
+        button.setTitleColor(.mtButtonLabel, for: .normal)
+        button.setTitleColor(.systemBackground, for: .highlighted)
         return button
     }()
     

@@ -359,8 +359,9 @@ class TextTranslateViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Translate", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.gray, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .black)
+        button.setTitleColor(.mtButtonLabel, for: .normal)
+        button.setTitleColor(.systemBackground, for: .highlighted)
         return button
     }()
     
@@ -370,6 +371,9 @@ class TextTranslateViewController: UIViewController {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
+        button.setTitleColor(.mtButtonLabel, for: .normal)
+        button.setTitleColor(.systemBackground, for: .highlighted)
         return button
     }()
     
@@ -379,16 +383,20 @@ class TextTranslateViewController: UIViewController {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .black)
+        button.setTitleColor(.mtButtonLabel, for: .normal)
+        button.setTitleColor(.systemBackground, for: .highlighted)
         return button
     }()
     
     let sourceInputText: NoSelectTextView = {
         let textView = NoSelectTextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = UIColor.systemBackground.adjustedAlpha(amount: 0.8)
+        textView.backgroundColor = .mtTextfieldBackground
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
         textView.placeholder = "Input source text"
         textView.placeholderFont = UIFont.preferredFont(forTextStyle: .body)
-        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.placeholderColor = .placeholderText
         return textView
     }()
     
@@ -598,7 +606,7 @@ class TextTranslateViewController: UIViewController {
         translateButtonView.addSubview(translateButtonContainerView)
         translateButtonContainerView.centerInSuperview()
         translateButtonContainerView.heightAnchor.constraint(equalToConstant: viewHeight * 0.075).isActive = true
-        translateButtonContainerView.widthAnchor.constraint(equalToConstant: viewWidth * 0.5).isActive = true
+        translateButtonContainerView.widthAnchor.constraint(equalToConstant: viewWidth * 0.75).isActive = true
         
         translateButtonContainerView.addSubview(translateButtonOutterDarkView)
         translateButtonOutterDarkView.edgeTo(translateButtonContainerView)

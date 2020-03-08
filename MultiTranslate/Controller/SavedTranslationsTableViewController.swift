@@ -140,12 +140,6 @@ class SavedTranslationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.savedTranslationsTableViewCellIdentifier, for: indexPath) as! SavedTranslationsTableViewCell
         cell.savedTranslation = savedTranslations[indexPath.row]
-        if let targetLanguage = cell.targetLanguageLabel.text,
-            SupportedLanguages.speechRecognizerSupportedLanguage.contains(targetLanguage) {
-            cell.speechButton.isHidden = false
-        } else {
-            cell.speechButton.isHidden = true
-        }
 
         return cell
     }

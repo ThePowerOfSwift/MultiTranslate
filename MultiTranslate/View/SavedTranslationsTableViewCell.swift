@@ -19,6 +19,13 @@ class SavedTranslationsTableViewCell: UITableViewCell {
             sourceLanguageLabel.text = savedTranslation?.sourceLanguage
             targetTextLabel.text = savedTranslation?.targetText
             targetLanguageLabel.text = savedTranslation?.targetLanguage
+            
+            guard let targetLanguage = targetLanguageLabel.text else { return }
+            if SupportedLanguages.speechRecognizerSupportedLanguage.contains(targetLanguage) {
+                speechButton.isHidden = false
+            } else {
+                speechButton.isHidden = true
+            }
         }
     }
     

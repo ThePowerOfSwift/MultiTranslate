@@ -1188,6 +1188,10 @@ extension TextTranslateViewController: UITextViewDelegate {
 
 extension TextTranslateViewController: LanguagePickerDelegate {
     func didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: Int, temporaryTargetLanguageGCPIndex: Int) {
+        if temporaryTargetLanguageGCPIndex != self.temporaryTargetLanguageGCPIndex {
+            outputActionView.isHidden = true
+        }
+        
         let sourceLanguage = SupportedLanguages.gcpLanguageList[temporarySourceLanguageGCPIndex]
         let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
         sourceLanguageButton.setTitle(sourceLanguage, for: .normal)

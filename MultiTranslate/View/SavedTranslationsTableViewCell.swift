@@ -126,7 +126,7 @@ class SavedTranslationsTableViewCell: UITableViewCell {
         return button
     }()
     
-    private let speechButton: UIButton = {
+    let speechButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "speaker.2"), for: .normal)

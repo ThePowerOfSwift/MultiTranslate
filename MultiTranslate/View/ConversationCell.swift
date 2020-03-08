@@ -19,7 +19,7 @@ class ConversationCell: UITableViewCell {
             targetLabel.text = conversation?.targetMessage
             
             if conversation?.isSource == true {
-                bubbleBackgroundView.backgroundColor = UIColor(rgb: 0x40e0d0)
+                bubbleBackgroundView.backgroundColor = .mtConversationSourceBubble
                 for eachConstraint in leadingConstraints {
                     eachConstraint.isActive = true
                 }
@@ -31,7 +31,7 @@ class ConversationCell: UITableViewCell {
                 sourceLabel.textAlignment = .left
                 targetLabel.textAlignment = .left
             } else {
-                bubbleBackgroundView.backgroundColor = UIColor(rgb: 0xec7373)
+                bubbleBackgroundView.backgroundColor = .mtConversationTargetBubble
                 for eachConstraint in trailingConstraints {
                     eachConstraint.isActive = true
                 }
@@ -84,7 +84,7 @@ class ConversationCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(rgb: 0xC1D2EB)
+        self.backgroundColor = .mtSystemBackground
         
         self.addSubview(bubbleBackgroundView)
         bubbleBackgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true

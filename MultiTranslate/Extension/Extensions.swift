@@ -157,6 +157,7 @@ extension UIColor {
     static let mtSettingSectionTitle = UIColor(named: "MTSettingSectionTitle")!
     static let mtButtonLabel = UIColor(named: "MTButtonLabel")!
     static let mtTextfieldBackground = UIColor(named: "MTTextfieldBackground")!
+    static let mtRecorderButtonContainerBackground = UIColor(named: "MTRecorderButtonContainerBackground")!
 }
 
 extension UIButton {

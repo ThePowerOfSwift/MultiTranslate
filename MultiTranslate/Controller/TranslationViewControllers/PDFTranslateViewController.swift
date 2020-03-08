@@ -288,7 +288,7 @@ class PDFTranslateViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setImage(UIImage(systemName: "camera", withConfiguration: config), for: .normal)
-        button.tintColor = .systemBlue
+        button.tintColor = .mtButtonLabel
         button.contentMode = .scaleAspectFill
         return button
     }()

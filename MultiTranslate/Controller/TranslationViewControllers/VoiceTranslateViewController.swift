@@ -287,7 +287,7 @@ class VoiceTranslateViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setImage(UIImage(systemName: "mic", withConfiguration: config), for: .normal)
-        button.tintColor = .systemBlue
+        button.tintColor = .mtButtonLabel
         button.contentMode = .scaleAspectFill
         return button
     }()

@@ -48,7 +48,7 @@ class ConversationTranslateViewController: UIViewController {
 
     private let buttonsContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(rgb: 0x4d80e4)
+        view.backgroundColor = .mtRecorderButtonContainerBackground
         view.layer.cornerRadius = 16
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.layer.masksToBounds = true
@@ -73,7 +73,7 @@ class ConversationTranslateViewController: UIViewController {
         selector.translatesAutoresizingMaskIntoConstraints = false
         selector.selectedSegmentIndex = 0
         selector.backgroundColor = .mtSystemBackground
-        selector.selectedSegmentTintColor = UIColor(rgb: 0x4d80e4)
+        selector.selectedSegmentTintColor = .mtRecorderButtonContainerBackground
         selector.layer.borderWidth = 1
         selector.layer.borderColor = UIColor.white.cgColor
         return selector

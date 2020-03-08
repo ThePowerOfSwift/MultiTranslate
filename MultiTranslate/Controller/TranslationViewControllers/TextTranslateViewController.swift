@@ -342,8 +342,9 @@ class TextTranslateViewController: UIViewController {
     
     private let exchangeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "exchange"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "exchange"), for: .normal)
+        button.tintColor = .mtButtonLabel
         return button
     }()
     
@@ -961,7 +962,10 @@ class TextTranslateViewController: UIViewController {
                     
                 } else {
                     print("Here is the limit, pay more money!")
-                    let alert = PMAlertController(title: "Translate character has reach the limit", description: "You can change your plan and get more characters", image: UIImage(named: "reading2"), style: .alert)
+                    let alert = PMAlertController(title: "Translate character has reach the limit",
+                                                  description: "You can change your plan and get more characters",
+                                                  image: UIImage(named: "reading2"),
+                                                  style: .alert)
                     let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
                     let defaultAction = PMAlertAction(title: "See more plans", style: .default) {
                         let viewController = AccountViewController()
@@ -1058,7 +1062,7 @@ class TextTranslateViewController: UIViewController {
         isStarButtonTapped = false
         
         let targetLanguage = SupportedLanguages.gcpLanguageList[temporaryTargetLanguageGCPIndex]
-        if SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: targetLanguage) != nil {
+        if SupportedLanguages.speechRecognizerSupportedLanguage.contains(targetLanguage) {
             speechButton.isHidden = false
         } else {
             speechButton.isHidden = true

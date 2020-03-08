@@ -876,12 +876,34 @@ class TextTranslateViewController: UIViewController {
         guard let exchangeText = targetLanguageButton.titleLabel?.text,
             let sourceLanguage = sourceLanguageButton.titleLabel?.text else { return }
         
-        UIView.animate(withDuration: 0.25, animations: {
-            self.exchangeButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        /*
+        Animating exchangeButton to rotate 90 degree anti-clockwise
+         - rotate exchangeButton for 45 degree anti-clockwise
+         - when first animation is done, make another animation rotating exchangeButton for another 45 degree anti-clockwise
+         - when all the animations are done(succeed), change the uiview back to .identity(the uiview before animations)
+         * rotate a view for 90 degree anti-clockwise at one time is not supportted
+         ** reference: https://stackoverflow.com/questions/39045122/rotating-a-uibutton-by-90-degrees-every-time-the-button-is-clicked
+             https://developer.apple.com/documentation/coregraphics/cgaffinetransform/1455666-init
+             https://developer.apple.com/documentation/coregraphics/cgaffinetransform/1455962-rotated
+         
+         UIView.animate(withDuration: 0.5, animations: {
+             self.exchangeButton.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+             self.exchangeButton.transform = self.exchangeButton.transform.rotated(by: -CGFloat.pi / 2)
+         }) { (succeed) in
+             self.exchangeButton.transform = .identity
+             self.targetLanguageButton.setTitle(sourceLanguage, for: .normal)
+             self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
+         }
+        */
+        
+        UIView.animate(withDuration: 0.5, animations: {
             self.exchangeButton.transform = self.exchangeButton.transform.rotated(by: CGFloat.pi)
+            //rotate exchangeButton by 90 degrees every time exchangeButton is clicked
+            //reference: https://stackoverflow.com/questions/39045122/rotating-a-uibutton-by-90-degrees-every-time-the-button-is-clicked
+        }) { (succeed) in
             self.targetLanguageButton.setTitle(sourceLanguage, for: .normal)
             self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
-        }, completion: nil)
+        }
         
         swap(&temporarySourceLanguageGCPIndex, &temporaryTargetLanguageGCPIndex)
         

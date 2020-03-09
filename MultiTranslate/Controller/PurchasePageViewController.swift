@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 import SwiftyStoreKit
+import SPAlert
 
 class PurchasePageViewController: UIViewController {
     
@@ -534,7 +535,27 @@ class PurchasePageViewController: UIViewController {
     }
     
     @objc func subscribeButtonTapped() {
-        InAppPurchaseManager.purchaseProduct(with: InAppPurchaseManager.retrievedProducts[0].productIdentifier)
+        let productIdentifier = InAppPurchaseManager.retrievedProducts[0].productIdentifier
+        SwiftyStoreKit.purchaseProduct(productIdentifier, atomically: true) { (result) in
+            switch result {
+            case .success(let purchase):
+                print("Subscription successed.")
+                // Deliver content from server, then:
+                if purchase.needsFinishTransaction {
+                    SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    print("finished transaction.")
+                }
+                InAppPurchaseManager.verifyPurchase(with: productIdentifier)
+                
+                self.dismiss(animated: true) {
+                    SPAlert.present(title: "Purchase successfully.", preset: .done)
+                }
+                
+            case .error(let error):
+                print(error.localizedDescription)
+                SPAlert.present(title: "Purchase failed.", message: error.localizedDescription, preset: .error)
+            }
+        }
     }
 
     @objc func subscribeMonthlyButtonTapped() {

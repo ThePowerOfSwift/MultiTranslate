@@ -26,11 +26,11 @@ struct IconItem: PagingItem, Hashable, Comparable {
         return icon.hashValue
     }
     
-    static func <(lhs: IconItem, rhs: IconItem) -> Bool {
+    static func < (lhs: IconItem, rhs: IconItem) -> Bool {
         return lhs.index < rhs.index
     }
     
-    static func ==(lhs: IconItem, rhs: IconItem) -> Bool {
+    static func == (lhs: IconItem, rhs: IconItem) -> Bool {
         return (
             lhs.index == rhs.index &&
                 lhs.icon == rhs.icon

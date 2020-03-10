@@ -22,12 +22,12 @@ import UIKit
     
     open var separator = UIImageView()
     
-    init(){
+    init() {
         self.actionStyle = .cancel
         super.init(frame: CGRect.zero)
     }
     
-    @objc public convenience init(title: String?, style: PMAlertActionStyle, action: (() -> Void)? = nil){
+    @objc public convenience init(title: String?, style: PMAlertActionStyle, action: (() -> Void)? = nil) {
         self.init()
         
         self.action = action
@@ -53,7 +53,7 @@ import UIKit
         }
     }
     
-    @objc fileprivate func addSeparator(){
+    @objc fileprivate func addSeparator() {
         separator.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
         self.addSubview(separator)
         

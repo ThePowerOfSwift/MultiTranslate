@@ -29,7 +29,7 @@ class SettingTableViewController: UITableViewController {
     private let documentTranslateLanguageSection = ["Source", "Target"]
     private let imageTranslateLanguageSection = ["Source", "Target"]
     private let offlineLanguagesSection = ["Offline languages"]
-    private var sectionList = [Array<String>]()
+    private var sectionList = [[String]]()
     
     private var textSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
     private var textTargetLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textTargetLanguageIndexKey)
@@ -99,8 +99,7 @@ class SettingTableViewController: UITableViewController {
 //        return sections[section]
 //    }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
         let sectionTitle = UILabel(frame: CGRect(x: 20, y: 0, width: headerView.bounds.size.width, height: headerView.bounds.size.height))
         headerView.backgroundColor = .mtSettingSectionTitle

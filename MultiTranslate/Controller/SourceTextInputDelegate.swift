@@ -10,6 +10,6 @@ import Foundation
 
 protocol SourceTextInputDelegate {
     
-    func didSetSourceText(detectedResult: String) -> Void
+    func didSetSourceText(detectedResult: String)
     
 }

@@ -334,6 +334,7 @@
 				8052A1B223C2A24400883123 /* Resources */,
 				5A42BF262F1EF444C8F78B6D /* [CP] Embed Pods Frameworks */,
 				280B70A8647B994ED8BDA22B /* [CP] Copy Pods Resources */,
+				80B7DB702417928500BE2217 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -429,6 +430,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		80B7DB702417928500BE2217 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		862D3B0053F6A947D012FF11 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

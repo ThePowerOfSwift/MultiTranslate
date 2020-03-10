@@ -57,7 +57,7 @@ struct CloudKitManager {
         }
     }
     
-    static func isCountRecordEmpty(completionHandler: @escaping (Bool) -> Void){
+    static func isCountRecordEmpty(completionHandler: @escaping (Bool) -> Void) {
 
         let query = CKQuery(recordType: Constants.iCloudTypeKey, predicate: NSPredicate(value: true))
         CloudDatabase.perform(query, inZoneWith: nil) { (records, error) in

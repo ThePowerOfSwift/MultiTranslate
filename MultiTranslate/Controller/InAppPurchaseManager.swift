@@ -132,12 +132,10 @@ struct InAppPurchaseManager {
             if results.restoreFailedPurchases.count > 0 {
                 print("Restore Failed: \(results.restoreFailedPurchases)")
                 SPAlert.present(title: "Restore purchase failed.", message: "Please try again.", preset: .error)
-            }
-            else if results.restoredPurchases.count > 0 {
+            } else if results.restoredPurchases.count > 0 {
                 print("Restore Success: \(results.restoredPurchases)")
                 SPAlert.present(title: "Restored purchase successfully.", preset: .done)
-            }
-            else {
+            } else {
                 print("Nothing to Restore")
                 SPAlert.present(title: "No purchase restored.", preset: .error)
             }

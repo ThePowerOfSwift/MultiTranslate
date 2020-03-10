@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        // デフォルトRealmに新しい設定を適用します
 //        Realm.Configuration.defaultConfiguration = config
         
-        let _ = try! Realm()
+        _ = try! Realm()
     }
     
     func initializeCloudDatabase() {

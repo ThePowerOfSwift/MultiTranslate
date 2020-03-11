@@ -138,13 +138,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initializeAVAudioSession() {
         // Get the singleton instance.
-        let audioSession = AVAudioSession.sharedInstance()
+        let recordingSession = AVAudioSession.sharedInstance()
         do {
             // Set the audio session category, mode, and options.
-            try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+            try recordingSession.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+            try recordingSession.setActive(true)
         } catch {
             print("Failed to set audio session category.")
         }
+        ///https://developer.apple.com/documentation/avfoundation/avaudiosession
+        ///https://developer.apple.com/documentation/avfoundation/avaudiosession/category
+        ///https://developer.apple.com/documentation/avfoundation/avaudiosession/mode
+        ///https://developer.apple.com/documentation/avfoundation/avaudiosession/categoryoptions
+        ///https://stackoverflow.com/questions/51010390/avaudiosession-setcategory-swift-4-2-ios-12-play-sound-on-silent
+        ///https://stackoverflow.com/questions/1022992/how-to-get-avaudioplayer-output-to-the-speaker
     }
     
 }

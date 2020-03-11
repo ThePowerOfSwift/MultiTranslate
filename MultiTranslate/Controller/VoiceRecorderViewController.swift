@@ -27,7 +27,7 @@ class VoiceRecorderViewController: UIViewController {
     
     // MARK: - Variables and constants
     private var isRecording: Bool = true
-    private var recordingSession: AVAudioSession!
+//    private var recordingSession: AVAudioSession!
     private var audioRecorder: AVAudioRecorder?
     private var audioFileURL: URL?
     private var extractedText = ""
@@ -144,25 +144,28 @@ class VoiceRecorderViewController: UIViewController {
         
         recorderButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
 
-        recordingSession = AVAudioSession.sharedInstance()
-
-        do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
-            try recordingSession.setActive(true)
-            recordingSession.requestRecordPermission() { [unowned self] allowed in
-                DispatchQueue.main.async {
-                    if allowed {
-                        self.loadRecorderButton()
-                        self.loadWaveform()
-                    } else {
-                        print("Failed to record!")
-                    }
-                }
-            }
-        } catch {
-            print("Failed to record!")
-            SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
-        }
+//        recordingSession = AVAudioSession.sharedInstance()
+//
+//        do {
+//            try recordingSession.setCategory(.playAndRecord, mode: .default)
+//            try recordingSession.setActive(true)
+//            recordingSession.requestRecordPermission() { [unowned self] allowed in
+//                DispatchQueue.main.async {
+//                    if allowed {
+//                        self.loadRecorderButton()
+//                        self.loadWaveform()
+//                    } else {
+//                        print("Failed to record!")
+//                    }
+//                }
+//            }
+//        } catch {
+//            print("Failed to record!")
+//            SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+//        }
+        
+        loadRecorderButton()
+        loadWaveform()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

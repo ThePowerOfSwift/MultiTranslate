@@ -65,7 +65,7 @@ class SavedTranslationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Saved Translations"
+        title = "Saved Translations"
         view.backgroundColor = .mtSystemBackground
         
         savedTranslations = realm.objects(SavedTranslation.self).sorted(byKeyPath: "dateCreated", ascending: false)
@@ -76,7 +76,7 @@ class SavedTranslationsTableViewController: UITableViewController {
         tableView.allowsSelection = false
         
         if !savedTranslations.isEmpty {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
             container.isHidden = true
         }
     }
@@ -93,10 +93,10 @@ class SavedTranslationsTableViewController: UITableViewController {
         NotificationCenter.default.post(name: .savedTranlationsDidShow, object: nil)
         
         if !savedTranslations.isEmpty {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clearRecords))
             container.isHidden = true
         } else {
-            self.navigationItem.rightBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
             container.isHidden = false
         }
     }
@@ -107,18 +107,19 @@ class SavedTranslationsTableViewController: UITableViewController {
                                       image: UIImage(named: "trash_color"),
                                       style: .alert)
         let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-        let defaultAction = PMAlertAction(title: "Clear records", style: .default) {
+        let defaultAction = PMAlertAction(title: "Clear records", style: .default) { [weak self] in
+            guard let records = self?.savedTranslations else { return }
             do {
-                try self.realm.write {
-                    self.realm.delete(self.savedTranslations)
+                try self?.realm.write {
+                    self?.realm.delete(records)
                 }
             } catch {
                 print("Error adding item, \(error)")
             }
             SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
-            self.tableView.reloadData()
-            self.navigationItem.rightBarButtonItem = nil
-            self.container.isHidden = false
+            self?.tableView.reloadData()
+            self?.navigationItem.rightBarButtonItem = nil
+            self?.container.isHidden = false
         }
         alert.addAction(cancelAction)
         alert.addAction(defaultAction)

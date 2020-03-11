@@ -93,9 +93,9 @@ class NoSelectTextView: UITextView {
         #endif
       
         NotificationCenter.default.addObserver(self,
-            selector: #selector(textDidChange),
-            name: notificationName,
-            object: nil)
+                                               selector: #selector(textDidChange),
+                                               name: notificationName,
+                                               object: nil)
         
         placeholderLabel.font = font
         placeholderLabel.textColor = placeholderColor
@@ -173,7 +173,7 @@ class NoSelectTextView: UITextView {
       #endif
       
         NotificationCenter.default.removeObserver(self,
-            name: notificationName,
-            object: nil)
+                                                  name: notificationName,
+                                                  object: nil)
     }
 }

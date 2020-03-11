@@ -173,8 +173,8 @@ class AccountViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        let viewHeight = self.view.frame.height
-        let viewWidth = self.view.frame.width
+        let viewHeight = view.frame.height
+        let viewWidth = view.frame.width
         
         print("viewHeight is \(viewHeight)")
         print("viewWidth is \(viewWidth)")
@@ -254,7 +254,10 @@ class AccountViewController: UIViewController {
         // Do any additional setup after loading the view.
         subscritionPlanTableView.backgroundColor = .mtSystemBackground
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore", style: .plain, target: self, action: #selector(restorePurchase))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Restore",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(restorePurchase))
         
         planSelector.addTarget(self, action: #selector(planSelectorValueChanged(_:)), for: .valueChanged)
         planSelector.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.label], for: .selected)
@@ -264,7 +267,8 @@ class AccountViewController: UIViewController {
         subscritionPlanTableView.dataSource = self
         subscritionPlanTableView.delegate = self
         
-        subscritionPlanTableView.register(SubscritionPlanTableViewCell.self, forCellReuseIdentifier: Constants.subscritionPlanTableViewCellIdentifier)
+        subscritionPlanTableView.register(SubscritionPlanTableViewCell.self,
+                                          forCellReuseIdentifier: Constants.subscritionPlanTableViewCellIdentifier)
         subscritionPlanTableView.separatorStyle = .none
         
         subscriptionInformationButton.addTarget(self, action: #selector(showAboutSubscription), for: .touchUpInside)
@@ -310,6 +314,10 @@ class AccountViewController: UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.modalPresentationStyle = .pageSheet
         present(navController, animated: true, completion: nil)
+    }
+    
+    deinit {
+        print("AccountViewController deallocated.")
     }
 
 }

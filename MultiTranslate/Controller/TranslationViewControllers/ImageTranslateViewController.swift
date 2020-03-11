@@ -306,7 +306,7 @@ class ImageTranslateViewController: UIViewController {
     }()
     
     lazy private var textDetectionRequest: VNRecognizeTextRequest = {
-        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
+        let request = VNRecognizeTextRequest(completionHandler: handleDetectedText)
         request.recognitionLevel = .accurate
         request.recognitionLanguages = ["en_US"]
         request.usesLanguageCorrection = true
@@ -554,9 +554,10 @@ class ImageTranslateViewController: UIViewController {
                 present(imagePicker, animated: true, completion: nil)
             } else {
                 PHPhotoLibrary.requestAuthorization { (authorizationStatus) in
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let weakSelf = self else { return }
                         if authorizationStatus == .authorized {
-                            self.present(self.imagePicker, animated: true, completion: nil)
+                            weakSelf.present(weakSelf.imagePicker, animated: true, completion: nil)
                         } else {
                             let alert = PMAlertController(title: "Photo access not allowed",
                                                           description: "Select a photo to detect words",
@@ -574,7 +575,7 @@ class ImageTranslateViewController: UIViewController {
                             }
                             alert.addAction(cancelAction)
                             alert.addAction(defaultAction)
-                            self.present(alert, animated: true, completion: nil)
+                            weakSelf.present(alert, animated: true, completion: nil)
                         }
                     }
                 }
@@ -600,7 +601,7 @@ class ImageTranslateViewController: UIViewController {
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
     
     func handleDetectedText(request: VNRequest?, error: Error?) {
@@ -637,12 +638,12 @@ class ImageTranslateViewController: UIViewController {
 extension ImageTranslateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        dismiss(animated: true) {
+        dismiss(animated: true) { [weak self] in
             guard let image = info[.editedImage] as? UIImage else { return }
 
             let cropViewController = CropViewController(image: image)
             cropViewController.delegate = self
-            self.present(cropViewController, animated: true, completion: nil)
+            self?.present(cropViewController, animated: true, completion: nil)
         }
     }
     
@@ -666,30 +667,31 @@ extension ImageTranslateViewController: UIImagePickerControllerDelegate, UINavig
         
         KRProgressHUD.dismiss()
         
-        dismiss(animated: true) {
-            if self.detectedResultString.isEmpty {
+        dismiss(animated: true) { [weak self] in
+            guard let weakSelf = self else { return }
+            if weakSelf.detectedResultString.isEmpty {
                 let alert = PMAlertController(title: "No text",
                                               description: "Cannot recognize text in this photo. Please try again.",
                                               image: UIImage(named: "error"),
                                               style: .alert)
                 let defaultAction = PMAlertAction(title: "Try again", style: .default)
                 alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
+                weakSelf.present(alert, animated: true, completion: nil)
             } else {
-                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
+                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[weakSelf.temporarySourceLanguageIndex]
                 guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
                 
                 let viewController = TextTranslateViewController()
                 viewController.temporarySourceLanguageGCPIndex = index
-                viewController.temporaryTargetLanguageGCPIndex = self.temporaryTargetLanguageIndex
-                viewController.sourceInputText.text = self.detectedResultString
+                viewController.temporaryTargetLanguageGCPIndex = weakSelf.temporaryTargetLanguageIndex
+                viewController.sourceInputText.text = weakSelf.detectedResultString
                 viewController.languagePickerType = .targetLanguage
                 viewController.isTranslateTypeNeedPro = true
                 
                 let navController = UINavigationController(rootViewController: viewController)
-                self.present(navController, animated: true, completion: nil)
+                weakSelf.present(navController, animated: true, completion: nil)
                 
-                self.detectedResultString = ""
+                weakSelf.detectedResultString = ""
             }
         }
     }

@@ -14,7 +14,10 @@ class PrivacyPolicyViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = "Privacy policy"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(dismissPage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(dismissPage))
         view.backgroundColor = UIColor(rgb: 0xC1D2EB)
     }
 

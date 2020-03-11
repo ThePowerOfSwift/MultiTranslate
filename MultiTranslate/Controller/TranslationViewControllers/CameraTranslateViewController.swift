@@ -312,7 +312,7 @@ class CameraTranslateViewController: UIViewController {
     }()
     
     lazy private var textDetectionRequest: VNRecognizeTextRequest = {
-        let request = VNRecognizeTextRequest(completionHandler: self.handleDetectedText)
+        let request = VNRecognizeTextRequest(completionHandler: handleDetectedText)
         request.recognitionLevel = .accurate
         request.recognitionLanguages = ["en_US"]
         request.usesLanguageCorrection = true
@@ -557,14 +557,18 @@ class CameraTranslateViewController: UIViewController {
                 //already authorized
                 present(imagePicker, animated: true, completion: nil)
             } else {
-                AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] (granted: Bool) in
                     DispatchQueue.main.async {
+                        guard let imagePicker = self?.imagePicker else { return }
                         if granted {
                             //access allowed
-                            self.present(self.imagePicker, animated: true, completion: nil)
+                            self?.present(imagePicker, animated: true, completion: nil)
                         } else {
                             //access denied
-                            let alert = PMAlertController(title: "Camera access not allowed", description: "Use camera to detect words", image: UIImage(named: "color_camera"), style: .alert)
+                            let alert = PMAlertController(title: "Camera access not allowed",
+                                                          description: "Use camera to detect words",
+                                                          image: UIImage(named: "color_camera"),
+                                                          style: .alert)
                             let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
                             let defaultAction = PMAlertAction(title: "Setting", style: .default) {
                                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -577,7 +581,7 @@ class CameraTranslateViewController: UIViewController {
                             }
                             alert.addAction(cancelAction)
                             alert.addAction(defaultAction)
-                            self.present(alert, animated: true, completion: nil)
+                            self?.present(alert, animated: true, completion: nil)
                         }
                     }
                 })
@@ -585,7 +589,10 @@ class CameraTranslateViewController: UIViewController {
             
         } else {
             print("Camera is not available.")
-            let alert = PMAlertController(title: "No camera", description: "Camera is not supported on this device", image: UIImage(named: "error"), style: .alert)
+            let alert = PMAlertController(title: "No camera",
+                                          description: "Camera is not supported on this device",
+                                          image: UIImage(named: "error"),
+                                          style: .alert)
             let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
             alert.addAction(cancelAction)
             present(alert, animated: true, completion: nil)
@@ -602,7 +609,7 @@ class CameraTranslateViewController: UIViewController {
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
     
     func handleDetectedText(request: VNRequest?, error: Error?) {
@@ -642,12 +649,12 @@ class CameraTranslateViewController: UIViewController {
 extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        dismiss(animated: true) {
+        dismiss(animated: true) { [weak self] in
             guard let image = info[.editedImage] as? UIImage else { return }
 
             let cropViewController = CropViewController(image: image)
             cropViewController.delegate = self
-            self.present(cropViewController, animated: true, completion: nil)
+            self?.present(cropViewController, animated: true, completion: nil)
         }
     }
     
@@ -672,30 +679,31 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
         
         KRProgressHUD.dismiss()
         
-        dismiss(animated: true) {
-            if self.detectedResultString.isEmpty {
+        dismiss(animated: true) { [weak self] in
+            guard let weakSelf = self else { return }
+            if weakSelf.detectedResultString.isEmpty {
                 let alert = PMAlertController(title: "No text",
                                               description: "Cannot recognize text in this photo. Please try again.",
                                               image: UIImage(named: "error"),
                                               style: .alert)
                 let defaultAction = PMAlertAction(title: "Try again", style: .default)
                 alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
+                weakSelf.present(alert, animated: true, completion: nil)
             } else {
-                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
+                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[weakSelf.temporarySourceLanguageIndex]
                 guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
                 
                 let viewController = TextTranslateViewController()
                 viewController.temporarySourceLanguageGCPIndex = index
-                viewController.temporaryTargetLanguageGCPIndex = self.temporaryTargetLanguageIndex
-                viewController.sourceInputText.text = self.detectedResultString
+                viewController.temporaryTargetLanguageGCPIndex = weakSelf.temporaryTargetLanguageIndex
+                viewController.sourceInputText.text = weakSelf.detectedResultString
                 viewController.languagePickerType = .targetLanguage
                 viewController.isTranslateTypeNeedPro = true
                 
                 let navController = UINavigationController(rootViewController: viewController)
-                self.present(navController, animated: true, completion: nil)
+                weakSelf.present(navController, animated: true, completion: nil)
                 
-                self.detectedResultString = ""
+                weakSelf.detectedResultString = ""
             }
         }
     }

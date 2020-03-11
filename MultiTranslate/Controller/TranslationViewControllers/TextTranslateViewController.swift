@@ -678,14 +678,18 @@ class TextTranslateViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         
-        NotificationCenter.default.addObserver(forName: .savedTranlationsDidShow, object: nil, queue: .main) { (notification) in
-            self.starBadgeNum = 0
+        NotificationCenter.default.addObserver(forName: .savedTranlationsDidShow,
+                                               object: nil,
+                                               queue: .main) { [weak self] (notification) in
+            self?.starBadgeNum = 0
         }
         
-        NotificationCenter.default.addObserver(forName: .firstSavedTranslationDeleted, object: nil, queue: .main) { (notification) in
-            self.starButton.setImage(UIImage(systemName: "star"), for: .normal)
-            self.starButton.tintColor = .systemBlue
-            self.isStarButtonTapped = false
+        NotificationCenter.default.addObserver(forName: .firstSavedTranslationDeleted,
+                                               object: nil,
+                                               queue: .main) { [weak self] (notification) in
+            self?.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            self?.starButton.tintColor = .systemBlue
+            self?.isStarButtonTapped = false
         }
     }
     
@@ -715,13 +719,13 @@ class TextTranslateViewController: UIViewController {
     }
     
     func setUpCloudKit() {
-        CloudKitManager.isCountRecordEmpty { (isEmpty) in
+        CloudKitManager.isCountRecordEmpty { [weak self] (isEmpty) in
             if isEmpty {
                 CloudKitManager.initializeCloudDatabase()
             } else {
                 CloudKitManager.queryCloudDatabaseCountData { (result, error) in
                     if let result = result {
-                        self.cloudDBTranslatedCharacters = result
+                        self?.cloudDBTranslatedCharacters = result
                         print("cloudDBTranslatedCharacters is \(result)")
                     } else {
                         print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
@@ -865,11 +869,11 @@ class TextTranslateViewController: UIViewController {
         let viewController = LanguagePickerViewController()
         viewController.sourceLanguageRow = temporarySourceLanguageGCPIndex
         viewController.targetLanguageRow = temporaryTargetLanguageGCPIndex
-        viewController.languagePickerType = self.languagePickerType
+        viewController.languagePickerType = languagePickerType
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
     
     func exchangeLanguage() {
@@ -897,13 +901,14 @@ class TextTranslateViewController: UIViewController {
          }
         */
         
-        UIView.animate(withDuration: 0.5, animations: {
-            self.exchangeButton.transform = self.exchangeButton.transform.rotated(by: CGFloat.pi)
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            guard let rotateTransform = self?.exchangeButton.transform.rotated(by: CGFloat.pi) else { return }
+            self?.exchangeButton.transform = rotateTransform
             //rotate exchangeButton by 90 degrees every time exchangeButton is clicked
             //reference: https://stackoverflow.com/questions/39045122/rotating-a-uibutton-by-90-degrees-every-time-the-button-is-clicked
-        }) { (succeed) in
-            self.targetLanguageButton.setTitle(sourceLanguage, for: .normal)
-            self.sourceLanguageButton.setTitle(exchangeText, for: .normal)
+        }) { [weak self] (succeed) in
+            self?.targetLanguageButton.setTitle(sourceLanguage, for: .normal)
+            self?.sourceLanguageButton.setTitle(exchangeText, for: .normal)
         }
         
         swap(&temporarySourceLanguageGCPIndex, &temporaryTargetLanguageGCPIndex)
@@ -967,10 +972,10 @@ class TextTranslateViewController: UIViewController {
                                                   image: UIImage(named: "reading2"),
                                                   style: .alert)
                     let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
-                    let defaultAction = PMAlertAction(title: "See more plans", style: .default) {
+                    let defaultAction = PMAlertAction(title: "See more plans", style: .default) { [weak self] in
                         let viewController = AccountViewController()
                         let navController = UINavigationController(rootViewController: viewController)
-                        self.present(navController, animated: true, completion: nil)
+                        self?.present(navController, animated: true, completion: nil)
                     }
                     alert.addAction(cancelAction)
                     alert.addAction(defaultAction)
@@ -1031,9 +1036,9 @@ class TextTranslateViewController: UIViewController {
     
     func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
         guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
-        fbTranslator.translate(textToTranslate) { (translatedText, error) in
+        fbTranslator.translate(textToTranslate) { [weak self] (translatedText, error) in
             if let result = translatedText {
-                self.showResult(result: result)
+                self?.showResult(result: result)
                 print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
@@ -1045,9 +1050,11 @@ class TextTranslateViewController: UIViewController {
     }
     
     func performGoogleCloudTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
-        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage, textToTranslate: textToTranslate) { (translatedText, error) in
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage,
+                                           targetLanguage: targetLanguage,
+                                           textToTranslate: textToTranslate) { [weak self] (translatedText, error) in
             if let result = translatedText {
-                self.showResult(result: result)
+                self?.showResult(result: result)
                 print("the GCP translation is \(result)")
             } else {
                 print(error!.localizedDescription)
@@ -1172,6 +1179,10 @@ class TextTranslateViewController: UIViewController {
         SPAlert.present(title: "Copied to clipboard",
                         message: nil,
                         image: UIImage(systemName: "doc.on.clipboard.fill")!)
+    }
+    
+    deinit {
+        print("TextTranslateViewController deallocated.")
     }
 
 }

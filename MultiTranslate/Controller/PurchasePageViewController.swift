@@ -363,7 +363,7 @@ class PurchasePageViewController: UIViewController {
         super.loadView()
         
         view.addSubview(scrollView)
-        scrollView.edgeTo(self.view, safeArea: .top)
+        scrollView.edgeTo(view, safeArea: .top)
         
         scrollView.addSubview(container)
         container.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -513,14 +513,15 @@ class PurchasePageViewController: UIViewController {
 
         super.viewDidLayoutSubviews()
 
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             var contentRect = CGRect.zero
+            guard let scrollViewSubviews = self?.scrollView.subviews else { return }
 
-            for view in self.scrollView.subviews {
+            for view in scrollViewSubviews {
                contentRect = contentRect.union(view.frame)
             }
 
-            self.scrollView.contentSize = contentRect.size
+            self?.scrollView.contentSize = contentRect.size
         }
         
         subscribeButton.setGradientBackground(startColor: UIColor(rgb: 0x1BFFFF), endColor: UIColor(rgb: 0x2E3192))
@@ -531,12 +532,12 @@ class PurchasePageViewController: UIViewController {
     }
     
     @objc func dismissViewController() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func subscribeButtonTapped() {
         let productIdentifier = InAppPurchaseManager.retrievedProducts[0].productIdentifier
-        SwiftyStoreKit.purchaseProduct(productIdentifier, atomically: true) { (result) in
+        SwiftyStoreKit.purchaseProduct(productIdentifier, atomically: true) { [weak self] (result) in
             switch result {
             case .success(let purchase):
                 print("Subscription successed.")
@@ -547,7 +548,7 @@ class PurchasePageViewController: UIViewController {
                 }
                 InAppPurchaseManager.verifyPurchase(with: productIdentifier)
                 
-                self.dismiss(animated: true) {
+                self?.dismiss(animated: true) {
                     SPAlert.present(title: "Purchase successfully.", preset: .done)
                 }
                 
@@ -581,5 +582,9 @@ class PurchasePageViewController: UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.modalPresentationStyle = .pageSheet
         present(navController, animated: true, completion: nil)
+    }
+    
+    deinit {
+        print("PurchasePageViewController deallocated.")
     }
 }

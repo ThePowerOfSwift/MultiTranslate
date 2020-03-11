@@ -96,15 +96,20 @@ class TranslationViewController: UIViewController {
         view.backgroundColor = .mtSystemBackground
         pagingViewController.didMove(toParent: self)
         
-        NotificationCenter.default.addObserver(forName: .translationViewControllerDidChange, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: .translationViewControllerDidChange,
+                                               object: nil,
+                                               queue: .main) { [weak self] (notification) in
             if let titleInfo = notification.userInfo as? [String : String] {
                 for (_, newTitleName) in titleInfo {
-                    self.title = newTitleName
+                    self?.title = newTitleName
                 }
             }
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "tray.and.arrow.down"), style: .plain, target: self, action: #selector(showDownloadLanguageModelPage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "tray.and.arrow.down"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(showDownloadLanguageModelPage))
     }
     
     @objc func showDownloadLanguageModelPage() {
@@ -117,12 +122,15 @@ class TranslationViewController: UIViewController {
             present(navController, animated: true, completion: nil)
         } else {
             print("this is the first time download page shown.")
-            let alert = PMAlertController(title: "Download offline language", description: "Download offline language fast and save your ...", image: UIImage(named: "download"), style: .alert)
-            let defaultAction = PMAlertAction(title: "Got it", style: .default) {
+            let alert = PMAlertController(title: "Download offline language",
+                                          description: "Download offline language fast and save your ...",
+                                          image: UIImage(named: "download"),
+                                          style: .alert)
+            let defaultAction = PMAlertAction(title: "Got it", style: .default) { [weak self] in
                 let viewController = FBLanguageTableViewController()
                 let navController = UINavigationController(rootViewController: viewController)
                 navController.modalPresentationStyle = .pageSheet
-                self.present(navController, animated: true, completion: nil)
+                self?.present(navController, animated: true, completion: nil)
             }
             alert.addAction(defaultAction)
             present(alert, animated: true) {

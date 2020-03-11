@@ -23,14 +23,22 @@ class FBLanguageTableViewController: UITableViewController {
         
         tableView.register(FBLanguageTableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
         tableView.allowsSelection = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadTableView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
+                                                            target: self,
+                                                            action: #selector(reloadTableView))
         
-        NotificationCenter.default.addObserver(forName: .fbDownloadedLanguagesDidUpdate, object: nil, queue: nil) { (notification) in
-            SPAlert.present(title: "Language downloaded", message: nil, image: UIImage(systemName: "tray.and.arrow.down.fill")!)
-            self.tableView.reloadData()
+        NotificationCenter.default.addObserver(forName: .fbDownloadedLanguagesDidUpdate,
+                                               object: nil,
+                                               queue: nil) { [weak self] (notification) in
+            SPAlert.present(title: "Language downloaded",
+                            message: nil,
+                            image: UIImage(systemName: "tray.and.arrow.down.fill")!)
+            self?.tableView.reloadData()
         }
         
-        NotificationCenter.default.addObserver(forName: .firebaseMLModelDownloadDidFail, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: .firebaseMLModelDownloadDidFail,
+                                               object: nil,
+                                               queue: .main) { (notification) in
             print("Firebase language model download failded.")
             //Show UIAlert here.
         }
@@ -106,17 +114,16 @@ class FBLanguageTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! FBLanguageTableViewCell
         guard let language = cell.languageNameLabel.text else { return nil }
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completion) in
             if language == "English" {
                 print("English language cannot be deleted.")
                 //Show UIAlert
                 completion(true)
             } else {
-                self.deleteFBLanguage(of: language)
+                self?.deleteFBLanguage(of: language)
                 print("delete \(language) language model")
                 completion(true)
             }
-            
         }
         
         let config = UIImage.SymbolConfiguration(weight: .regular)
@@ -128,24 +135,28 @@ class FBLanguageTableViewController: UITableViewController {
     
     func deleteFBLanguage(of language: String) {
         guard let requestModel = FBOfflineTranslate.createTranslateRemoteModel(from: language) else { return }
-        ModelManager.modelManager().deleteDownloadedModel(requestModel) { (error) in
+        ModelManager.modelManager().deleteDownloadedModel(requestModel) { [weak self] (error) in
             if error == nil {
                 print("language \(language) is deleted successfully.")
                 FBOfflineTranslate.initializeFBTranslation()
                 SPAlert.present(title: "Language deleted", message: nil, image: UIImage(systemName: "trash.fill")!)
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             } else {
                 print(error!.localizedDescription)
                 let alert = PMAlertController(title: "Error", description: error?.localizedDescription, image: UIImage(named: "error"), style: .alert)
                 let cancelAction = PMAlertAction(title: "cancel", style: .cancel)
                 alert.addAction(cancelAction)
-                self.present(alert, animated: true, completion: nil)
+                self?.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     @objc func reloadTableView() {
         tableView.reloadData()
+    }
+    
+    deinit {
+        print("FBLanguageTableViewController deallocated.")
     }
 }
 

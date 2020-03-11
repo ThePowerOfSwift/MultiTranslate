@@ -337,7 +337,7 @@ class ConversationTranslateViewController: UIViewController {
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
     
     @objc func clearRecords() {
@@ -346,10 +346,11 @@ class ConversationTranslateViewController: UIViewController {
                                       image: UIImage(named: "trash_color"),
                                       style: .alert)
         let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-        let defaultAction = PMAlertAction(title: "Delete", style: .default) {
+        let defaultAction = PMAlertAction(title: "Delete", style: .default) { [weak self] in
+            guard let weakSelf = self else { return }
             do {
-                try self.realm.write {
-                    self.realm.delete(self.conversations)
+                try weakSelf.realm.write {
+                    weakSelf.realm.delete(weakSelf.conversations)
                 }
             } catch {
                 print("Error adding item, \(error)")
@@ -360,8 +361,8 @@ class ConversationTranslateViewController: UIViewController {
             SPAlert.present(title: "Records cleared",
                             message: nil,
                             image: UIImage(systemName: "trash.fill")!)
-            self.conversationTableView.reloadData()
-            self.clearButton.isHidden = true
+            weakSelf.conversationTableView.reloadData()
+            weakSelf.clearButton.isHidden = true
         }
         alert.addAction(cancelAction)
         alert.addAction(defaultAction)
@@ -369,9 +370,9 @@ class ConversationTranslateViewController: UIViewController {
     }
 
     @objc func speechStartRecording() {
-        UIView.animate(withDuration: 0.2) {
-            self.recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            self.recorderButton.layer.cornerRadius = 3.0
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            self?.recorderButton.layer.cornerRadius = 3.0
         }
         startRecording()
     }
@@ -383,9 +384,9 @@ class ConversationTranslateViewController: UIViewController {
         } else {
             finishRecording(success: false)
         }
-        UIView.animate(withDuration: 0.2) {
-            self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            self.recorderButton.layer.cornerRadius = 25
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self?.recorderButton.layer.cornerRadius = 25
         }
     }
     
@@ -422,7 +423,7 @@ class ConversationTranslateViewController: UIViewController {
 
         if success {
             print("Recording successed.")
-            transcribeAudio(url: self.audioFileURL!)
+            transcribeAudio(url: audioFileURL!)
         } else {
             print("Recording failed.")
             //Show alert
@@ -443,7 +444,7 @@ class ConversationTranslateViewController: UIViewController {
                 }
                 alert.addAction(cancelAction)
                 alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
+                present(alert, animated: true, completion: nil)
             }
         }
         print(isSource)
@@ -531,9 +532,9 @@ class ConversationTranslateViewController: UIViewController {
     
     func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
         guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
-        fbTranslator.translate(textToTranslate) { (translatedText, error) in
+        fbTranslator.translate(textToTranslate) { [weak self] (translatedText, error) in
             if let result = translatedText {
-                self.createNewConversation(using: result)
+                self?.createNewConversation(using: result)
                 print("the FB translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
@@ -545,9 +546,11 @@ class ConversationTranslateViewController: UIViewController {
     }
     
     func performGoogleCloudTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
-        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage, textToTranslate: textToTranslate) { (translatedText, error) in
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage,
+                                           targetLanguage: targetLanguage,
+                                           textToTranslate: textToTranslate) { [weak self] (translatedText, error) in
             if let result = translatedText {
-                self.createNewConversation(using: result)
+                self?.createNewConversation(using: result)
                 print("the GCP translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
@@ -586,8 +589,8 @@ class ConversationTranslateViewController: UIViewController {
 // MARK: - Extensions
 extension UITableView {
     func showLastRow() {
-        guard self.numberOfRows(inSection: 0) > 0 else { return }
-        DispatchQueue.main.async {
+        guard numberOfRows(inSection: 0) > 0 else { return }
+        DispatchQueue.main.async { [unowned self] in
             let indexPath = IndexPath(row: self.numberOfRows(inSection: 0) - 1, section: 0)
             self.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }

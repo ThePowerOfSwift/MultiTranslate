@@ -537,7 +537,7 @@ class PDFTranslateViewController: UIViewController {
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
     
     func requestMicrophonePermission() {
@@ -547,10 +547,10 @@ class PDFTranslateViewController: UIViewController {
                 scanDocument()
             } else {
                 AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         if granted {
                             //access allowed
-                            self.scanDocument()
+                            self?.scanDocument()
                         } else {
                             //access denied
                             let alert = PMAlertController(title: "Camera access not allowed", description: "Use camera to detect words", image: UIImage(named: "color_camera"), style: .alert)
@@ -566,7 +566,7 @@ class PDFTranslateViewController: UIViewController {
                             }
                             alert.addAction(cancelAction)
                             alert.addAction(defaultAction)
-                            self.present(alert, animated: true, completion: nil)
+                            self?.present(alert, animated: true, completion: nil)
                         }
                     }
                 })
@@ -646,30 +646,31 @@ extension PDFTranslateViewController: UINavigationControllerDelegate, ImageScann
         }
         
         KRProgressHUD.dismiss()
-        dismiss(animated: true) {
-            if self.detectedResultString.isEmpty {
+        dismiss(animated: true) { [weak self] in
+            guard let weakSelf = self else { return }
+            if weakSelf.detectedResultString.isEmpty {
                 let alert = PMAlertController(title: "No text",
                                               description: "Cannot recognize text in this photo. Please try again.",
                                               image: UIImage(named: "error"),
                                               style: .alert)
                 let defaultAction = PMAlertAction(title: "Try again", style: .default)
                 alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
+                weakSelf.present(alert, animated: true, completion: nil)
             } else {
-                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
+                let sourceLanguage = SupportedLanguages.visionRecognizerSupportedLanguage[weakSelf.temporarySourceLanguageIndex]
                 guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
                 
                 let viewController = TextTranslateViewController()
                 viewController.temporarySourceLanguageGCPIndex = index
-                viewController.temporaryTargetLanguageGCPIndex = self.temporaryTargetLanguageIndex
-                viewController.sourceInputText.text = self.detectedResultString
+                viewController.temporaryTargetLanguageGCPIndex = weakSelf.temporaryTargetLanguageIndex
+                viewController.sourceInputText.text = weakSelf.detectedResultString
                 viewController.languagePickerType = .targetLanguage
                 viewController.isTranslateTypeNeedPro = true
                 
                 let navController = UINavigationController(rootViewController: viewController)
-                self.present(navController, animated: true, completion: nil)
+                weakSelf.present(navController, animated: true, completion: nil)
                 
-                self.detectedResultString = ""
+                weakSelf.detectedResultString = ""
             }
         }
     }

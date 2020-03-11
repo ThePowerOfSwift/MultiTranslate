@@ -82,15 +82,19 @@ class LanguagePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .mtSystemBackground
-        self.title = "Language selector"
+        view.backgroundColor = .mtSystemBackground
+        title = "Language selector"
 
         pickerView.delegate = self
         pickerView.dataSource = self
         
         if !isSetting {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneChange))
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelChange))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                target: self,
+                                                                action: #selector(doneChange))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                               target: self,
+                                                               action: #selector(cancelChange))
         }
         
         switch languagePickerType {
@@ -129,12 +133,16 @@ class LanguagePickerViewController: UIViewController {
     }
     
     @objc func doneChange() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
         delegate?.didSelectedLanguagePicker(temporarySourceLanguageGCPIndex: sourceLanguageRow, temporaryTargetLanguageGCPIndex: targetLanguageRow)
     }
     
     @objc func cancelChange() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    deinit {
+        print("LanguagePickerViewController deallocated.")
     }
 
 }

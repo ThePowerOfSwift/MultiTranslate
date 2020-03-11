@@ -17,7 +17,7 @@ class VoiceRecorderViewController: UIViewController {
     
     // MARK: - Initialization
     init(with languageCodeIndex: Int) {
-        self.speechLanguageCodeIndex = languageCodeIndex
+        speechLanguageCodeIndex = languageCodeIndex
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -177,7 +177,7 @@ class VoiceRecorderViewController: UIViewController {
         recorderButton.layer.cornerRadius = 25
         
         extractedText = ""
-        delegate?.didSetSourceText(detectedResult: self.extractedText)
+        delegate?.didSetSourceText(detectedResult: extractedText)
     }
 
     
@@ -185,9 +185,9 @@ class VoiceRecorderViewController: UIViewController {
     @objc func recordButtonTapped() {
         if isRecording {
             finishRecording(success: true)
-            UIView.animate(withDuration: 0.2) {
-                self.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                self.recorderButton.layer.cornerRadius = 25
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                self?.recorderButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self?.recorderButton.layer.cornerRadius = 25
             }
             
             if SFSpeechRecognizer.authorizationStatus() == .authorized {
@@ -196,9 +196,9 @@ class VoiceRecorderViewController: UIViewController {
 
         } else {
             startRecording()
-            UIView.animate(withDuration: 0.2) {
-                self.recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                self.recorderButton.layer.cornerRadius = 3.0
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                self?.recorderButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                self?.recorderButton.layer.cornerRadius = 3.0
             }
         }
         isRecording = !isRecording
@@ -251,7 +251,9 @@ class VoiceRecorderViewController: UIViewController {
 
         } catch {
             finishRecording(success: false)
-            SPAlert.present(title: "Error", message: error.localizedDescription, image: UIImage(systemName: "exclamationmark.triangle")!)
+            SPAlert.present(title: "Error",
+                            message: error.localizedDescription,
+                            image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
 
@@ -273,7 +275,7 @@ class VoiceRecorderViewController: UIViewController {
     
     func requestTranscribePermissions() {
         if SFSpeechRecognizer.authorizationStatus() == .authorized {
-            transcribeAudio(url: self.audioFileURL!)
+            transcribeAudio(url: audioFileURL!)
         } else {
             SFSpeechRecognizer.requestAuthorization { [unowned self] authStatus in
                 DispatchQueue.main.async {
@@ -344,6 +346,10 @@ class VoiceRecorderViewController: UIViewController {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         print(paths[0])
         return paths[0]
+    }
+    
+    deinit {
+        print("VoiceRecorderViewController deallocated.")
     }
 
 }

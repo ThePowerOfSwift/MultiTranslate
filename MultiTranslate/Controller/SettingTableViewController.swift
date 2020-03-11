@@ -66,8 +66,8 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Setting"
-        self.clearsSelectionOnViewWillAppear = true
+        title = "Setting"
+        clearsSelectionOnViewWillAppear = true
         view.backgroundColor = .mtSystemBackground
         sectionList = [textTranslateLanguageSection,
                        cameraTranslateLanguageSection,

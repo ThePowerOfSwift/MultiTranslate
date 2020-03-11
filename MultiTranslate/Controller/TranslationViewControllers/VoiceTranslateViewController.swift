@@ -602,7 +602,7 @@ class VoiceTranslateViewController: UIViewController {
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
 
 }
@@ -612,7 +612,7 @@ extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("PresentationControllerDidDismiss called.")
         if !detectedResultString.isEmpty {
-            let sourceLanguage = SupportedLanguages.speechRecognizerSupportedLanguage[self.temporarySourceLanguageIndex]
+            let sourceLanguage = SupportedLanguages.speechRecognizerSupportedLanguage[temporarySourceLanguageIndex]
             guard let index = SupportedLanguages.gcpLanguageList.firstIndex(of: sourceLanguage) else { return }
             
             let viewController = TextTranslateViewController()
@@ -630,7 +630,7 @@ extension VoiceTranslateViewController: UIAdaptivePresentationControllerDelegate
 
 extension VoiceTranslateViewController: SourceTextInputDelegate {
     func didSetSourceText(detectedResult: String) {
-        self.detectedResultString = detectedResult
+        detectedResultString = detectedResult
     }
 }
 

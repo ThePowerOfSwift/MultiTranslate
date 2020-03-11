@@ -570,7 +570,7 @@ class ARTranslateViewController: UIViewController {
     func useCamera() {
         print("Use camera tapped.")
         
-        guard let targetLanguage = self.targetLanguageButton.titleLabel?.text,
+        guard let targetLanguage = targetLanguageButton.titleLabel?.text,
             let raw = UserDefaults.standard.string(forKey: Constants.userTypeKey)else { return }
         
         let userType = UserType(rawValue: raw)!
@@ -590,14 +590,14 @@ class ARTranslateViewController: UIViewController {
                 viewController.modalPresentationStyle = .fullScreen
                 present(viewController, animated: true, completion: nil)
             } else {
-                AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] (granted: Bool) in
                     DispatchQueue.main.async {
                         if granted {
                             //access allowed
                             let viewController = ARViewController()
                             viewController.targetLanguage = targetLanguage
                             viewController.modalPresentationStyle = .fullScreen
-                            self.present(viewController, animated: true, completion: nil)
+                            self?.present(viewController, animated: true, completion: nil)
                         } else {
                             //access denied
                             let alert = PMAlertController(title: "Camera access not allowed", description: "Use camera to detect words", image: UIImage(named: "color_camera"), style: .alert)
@@ -612,7 +612,7 @@ class ARTranslateViewController: UIViewController {
                             }
                             alert.addAction(cancelAction)
                             alert.addAction(defaultAction)
-                            self.present(alert, animated: true, completion: nil)
+                            self?.present(alert, animated: true, completion: nil)
                         }
                     }
                 })
@@ -637,7 +637,7 @@ class ARTranslateViewController: UIViewController {
         viewController.delegate = self
         let navController = UINavigationController(rootViewController: viewController)
         
-        self.navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
 
 }

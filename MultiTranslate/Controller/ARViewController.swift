@@ -6,9 +6,9 @@
 //  Copyright © 2020 Keishin CHOU. All rights reserved.
 //
 
-import UIKit
-import SceneKit
 import ARKit
+import SceneKit
+import UIKit
 
 import SPAlert
 import Vision
@@ -129,7 +129,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         sceneView.autoenablesDefaultLighting = true
         
         // Tap Gesture Recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognize:)))
         view.addGestureRecognizer(tapGesture)
                 
         // Set up Vision Model
@@ -138,9 +138,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         }
         
         // Set up Vision-CoreML Request
-        let classificationRequest = VNCoreMLRequest(model: selectedModel, completionHandler: classificationCompleteHandler)
-        classificationRequest.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop // Crop from centre of images and scale to appropriate size.
-        visionRequests = [classificationRequest]
+        setUpVisionCoreMLRequest(with: selectedModel)
         
         // Begin Loop to Update CoreML
         loopCoreMLUpdate()
@@ -159,13 +157,13 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func setUpCloudKit() {
-        CloudKitManager.isCountRecordEmpty { (isEmpty) in
+        CloudKitManager.isCountRecordEmpty { [weak self] (isEmpty) in
             if isEmpty {
                 CloudKitManager.initializeCloudDatabase()
             } else {
                 CloudKitManager.queryCloudDatabaseCountData { (result, error) in
                     if let result = result {
-                        self.cloudDBTranslatedCharacters = result
+                        self?.cloudDBTranslatedCharacters = result
                         print("cloudDBTranslatedCharacters is \(result)")
                     } else {
                         print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
@@ -173,6 +171,47 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
         }
+    }
+    
+    func setUpVisionCoreMLRequest(with mlModel: VNCoreMLModel) {
+        let classificationRequest = VNCoreMLRequest(model: mlModel) { [weak self] (request, error) in
+            // Catch Errors
+            if error != nil {
+                print("Error: " + (error?.localizedDescription)!)
+                return
+            }
+            guard let observations = request.results else {
+                print("No results")
+                return
+            }
+            
+            // Get Classifications
+            let classifications = observations[0...1] // top 2 results
+                .compactMap({ $0 as? VNClassificationObservation })
+                .map({ "\($0.identifier) \(String(format: "- %.2f", $0.confidence))" })
+                .joined(separator: "\n")
+            
+            
+            DispatchQueue.main.async {
+            // Print Classifications
+//            print(classifications)
+//            print("--")
+                
+                // Display Debug Text on screen
+                var debugText: String = ""
+                debugText += classifications
+                self?.debugTextView.text = debugText
+                
+                // Store the latest prediction
+                var objectName: String = "…"
+                objectName = classifications.components(separatedBy: "-")[0]
+                objectName = objectName.components(separatedBy: ",")[0]
+                self?.latestPrediction = objectName
+            }
+        }
+        classificationRequest.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop
+        // Crop from centre of images and scale to appropriate size.
+        visionRequests = [classificationRequest]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,9 +239,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func dismissViewController() {
-        self.dismiss(animated: true) {
-            return
-        }
+        dismiss(animated: true)
     }
     
     @objc func clearRecord() {
@@ -253,10 +290,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                                           image: UIImage(named: "reading2"),
                                           style: .alert)
             let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
-            let defaultAction = PMAlertAction(title: "See more plans", style: .default) {
+            let defaultAction = PMAlertAction(title: "See more plans", style: .default) { [weak self] in
                 let viewController = AccountViewController()
                 let navController = UINavigationController(rootViewController: viewController)
-                self.present(navController, animated: true, completion: nil)
+                self?.present(navController, animated: true, completion: nil)
             }
             alert.addAction(cancelAction)
             alert.addAction(defaultAction)
@@ -299,9 +336,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     
     func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
         guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
-        fbTranslator.translate(textToTranslate) { (translatedText, error) in
+        fbTranslator.translate(textToTranslate) { [weak self] (translatedText, error) in
             if let result = translatedText {
-                self.addNodeToScene(using: result)
+                self?.addNodeToScene(using: result)
                 print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
@@ -313,9 +350,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func performGoogleCloudTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
-        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage, textToTranslate: textToTranslate) { (translatedText, error) in
+        GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage,
+                                           targetLanguage: targetLanguage,
+                                           textToTranslate: textToTranslate) { [weak self] (translatedText, error) in
             if let result = translatedText {
-                self.addNodeToScene(using: result)
+                self?.addNodeToScene(using: result)
                 print("the GCP translation is \(result)")
             } else {
                 print(error!.localizedDescription)
@@ -327,7 +366,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func addNodeToScene(using result: String) {
-        let screenCentre: CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
+        let screenCentre: CGPoint = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
         
         let arHitTestResults: [ARHitTestResult] = sceneView.hitTest(screenCentre, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
         
@@ -391,50 +430,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     func loopCoreMLUpdate() {
         // Continuously run CoreML whenever it's ready. (Preventing 'hiccups' in Frame Rate)
         
-        dispatchQueueML.async {
+        dispatchQueueML.async { [weak self] in
             // 1. Run Update.
-            self.updateCoreML()
+            self?.updateCoreML()
             
             // 2. Loop this function.
-            self.loopCoreMLUpdate()
-        }
-        
-    }
-    
-    func classificationCompleteHandler(request: VNRequest, error: Error?) {
-        // Catch Errors
-        if error != nil {
-            print("Error: " + (error?.localizedDescription)!)
-            return
-        }
-        guard let observations = request.results else {
-            print("No results")
-            return
-        }
-        
-        // Get Classifications
-        let classifications = observations[0...1] // top 2 results
-            .compactMap({ $0 as? VNClassificationObservation })
-            .map({ "\($0.identifier) \(String(format: "- %.2f", $0.confidence))" })
-            .joined(separator: "\n")
-        
-        
-        DispatchQueue.main.async {
-            // Print Classifications
-//            print(classifications)
-//            print("--")
-            
-            // Display Debug Text on screen
-            var debugText: String = ""
-            debugText += classifications
-            self.debugTextView.text = debugText
-            
-            // Store the latest prediction
-            var objectName: String = "…"
-            objectName = classifications.components(separatedBy: "-")[0]
-            objectName = objectName.components(separatedBy: ",")[0]
-            self.latestPrediction = objectName
-            
+            self?.loopCoreMLUpdate()
         }
     }
     
@@ -452,18 +453,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         
         // Run Image Request
         do {
-            try imageRequestHandler.perform(self.visionRequests)
+            try imageRequestHandler.perform(visionRequests)
         } catch {
             print(error)
         }
         
+    }
+    
+    deinit {
+        print("ARViewController deallocated.")
     }
 }
 
 extension UIFont {
     // Based on: https://stackoverflow.com/questions/4713236/how-do-i-set-bold-and-italic-on-uilabel-of-iphone-ipad
     func withTraits(traits:UIFontDescriptor.SymbolicTraits...) -> UIFont {
-        let descriptor = self.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits(traits))
+        let descriptor = fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits(traits))
         return UIFont(descriptor: descriptor!, size: 0)
     }
 }

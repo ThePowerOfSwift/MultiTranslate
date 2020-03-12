@@ -76,13 +76,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if lastLaunchMonth == 0 {
                 //First launch of the app.
                 userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
+                print("lastLaunchMonth is 0")
             } else if lastLaunchMonth != intValueOfCurrentMonth {
                 //Month has changed since last launch.
+                userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
                 userDefaults.set(0, forKey: Constants.translatedCharactersCountKey)
                 CloudKitManager.refreshCloudDatabaseCountData()
+                print("lastLaunchMonth is not 0, but month has changed.")
             }
-            print(userDefaults.integer(forKey: Constants.lastLaunchMonthKey))
-            print(userDefaults.integer(forKey: Constants.translatedCharactersCountKey))
+            
+            print("lastLaunchMonth is \(userDefaults.integer(forKey: Constants.lastLaunchMonthKey))")
+            print("translatedCharactersCount is \(userDefaults.integer(forKey: Constants.translatedCharactersCountKey))")
+            translatedCharacterCountLocal = userDefaults.integer(forKey: Constants.translatedCharactersCountKey)
         }
     }
     
@@ -110,11 +115,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initializeCloudDatabase() {
-        CloudKitManager.isCountRecordEmpty { (isEmpty) in
+        CloudKitManager.isCountRecordEmpty {(isEmpty) in
             if isEmpty {
                 CloudKitManager.initializeCloudDatabase()
+            } else {
+                CloudKitManager.queryCloudDatabaseCountData { [weak self] (result, error) in
+                    if let result = result {
+                        translatedCharacterCountCloud = result
+                        print("cloudDBTranslatedCharacters is \(result)")
+                        self?.checkCharacterCounts()
+                    } else {
+                        print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
+                    }
+                }
             }
         }
+    }
+    
+    func checkCharacterCounts() {
+        translatedCharacterCountLocal = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
+        translatedCharacterCountCloud = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
     }
     
     func initializeFirebase() {

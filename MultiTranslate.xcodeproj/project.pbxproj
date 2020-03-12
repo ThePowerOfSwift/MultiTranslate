@@ -64,6 +64,7 @@
 		80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BDB6A723CF3EDA00F81D40 /* Conversation.swift */; };
 		80C535C923C56A530044D6F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535C823C56A530044D6F0 /* Constants.swift */; };
 		80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */; };
+		80CAB17D2419D0C900133B25 /* TranslatedCharacterCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */; };
 		80D844AC23F287BD003D0C8C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */; };
 		80DB054423EAABD9003DE94D /* SupportedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB054323EAABD9003DE94D /* SupportedLanguages.swift */; };
 		80FE80F524062CEE00CC70DF /* NoSelectTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */; };
@@ -134,6 +135,7 @@
 		80BDB6A723CF3EDA00F81D40 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		80C535C823C56A530044D6F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		80C535CA23C572CD0044D6F0 /* LanguagePickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerDelegate.swift; sourceTree = "<group>"; };
+		80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCharacterCount.swift; sourceTree = "<group>"; };
 		80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		80DB054323EAABD9003DE94D /* SupportedLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedLanguages.swift; sourceTree = "<group>"; };
 		80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectTextView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				8014E75D23ED2C8C00793258 /* TranslateType.swift */,
 				803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */,
 				8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */,
+				80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
 				803E26A12408999100DF5DF6 /* PMAlertController */,
 				807B489523C95C7900A588F3 /* SCSiriWaveformView */,
@@ -499,6 +502,7 @@
 				8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */,
 				8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */,
 				8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */,
+				80CAB17D2419D0C900133B25 /* TranslatedCharacterCount.swift in Sources */,
 				8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */,
 				80C535CB23C572CD0044D6F0 /* LanguagePickerDelegate.swift in Sources */,
 				801CA5CB23FD183F00C5285C /* SubscritionPlanTableViewCell.swift in Sources */,

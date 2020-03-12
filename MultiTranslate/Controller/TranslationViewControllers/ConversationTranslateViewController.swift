@@ -420,10 +420,30 @@ class ConversationTranslateViewController: UIViewController {
     func finishRecording(success: Bool) {
         audioRecorder!.stop()
         audioRecorder = nil
+        
+        guard let raw = UserDefaults.standard.string(forKey: Constants.userTypeKey) else { return }
+        let userType = UserType(rawValue: raw)!
 
         if success {
             print("Recording successed.")
-            transcribeAudio(url: audioFileURL!)
+            if isTranslatePossible(userType: userType) {
+                transcribeAudio(url: audioFileURL!)
+            } else {
+                print("Here is the limit, pay more money!")
+                let alert = PMAlertController(title: "Translate character has reach the limit",
+                                              description: "You can change your plan and get more characters",
+                                              image: UIImage(named: "reading2"),
+                                              style: .alert)
+                let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
+                let defaultAction = PMAlertAction(title: "See more plans", style: .default) { [weak self] in
+                    let viewController = AccountViewController()
+                    let navController = UINavigationController(rootViewController: viewController)
+                    self?.present(navController, animated: true, completion: nil)
+                }
+                alert.addAction(cancelAction)
+                alert.addAction(defaultAction)
+                present(alert, animated: true, completion: nil)
+            }
         } else {
             print("Recording failed.")
             //Show alert
@@ -448,6 +468,27 @@ class ConversationTranslateViewController: UIViewController {
             }
         }
         print(isSource)
+    }
+    
+    func isTranslatePossible(userType: UserType) -> Bool {
+        let characterCount = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
+        
+        if userType == .tenKUser && characterCount <= 10_000 {// the limits should be fetched from Firestore
+            print("translate ok")
+            return true
+        } else if userType == .fiftyKUser && characterCount <= 50_000 {
+            print("translate ok")
+            return true
+        } else if userType == .noLimitUset {
+            print("translate ok")
+            return true
+        } else if userType == .guestUser && characterCount <= 10_000 {
+            print("translate ok")
+            return true
+        } else {
+            print("here's the limit")
+            return false
+        }
     }
     
     func transcribeAudio(url: URL) {
@@ -477,8 +518,20 @@ class ConversationTranslateViewController: UIViewController {
                 print(self.extractedText)
 
                 self.translateText()
+                self.updateCharacterCount()
             }
         }
+    }
+    
+    func updateCharacterCount() {
+        translatedCharacterCountLocal += extractedText.count
+        translatedCharacterCountCloud += extractedText.count
+        
+        let updatedCount = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
+        print("updatedCount is \(updatedCount)")
+        
+        UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
+        CloudKitManager.updateCountData(to: updatedCount)
     }
     
     func translateText() {

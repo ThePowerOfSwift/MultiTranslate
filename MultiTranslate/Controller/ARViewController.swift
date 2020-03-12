@@ -275,17 +275,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             if targetLanguage == "English" {
                 addNodeToScene(using: latestPrediction)
             } else {
-                performTranslate()
+                performTranslate(for: latestPrediction)
             }
-            translatedCharactersCurrentMonth += latestPrediction.count
-            cloudDBTranslatedCharacters += latestPrediction.count
-            
-            let updatedCount = translatedCharactersCurrentMonth >= cloudDBTranslatedCharacters ? translatedCharactersCurrentMonth : cloudDBTranslatedCharacters
-            print("updatedCount is \(updatedCount)")
-            
-            UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
-            
-            CloudKitManager.updateCountData(to: updatedCount)
+            updateCharacterCount(with: latestPrediction)
             
         } else {
             print("Here is the limit, pay more money!")
@@ -306,16 +298,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func isTranslatePossible(userType: UserType) -> Bool {
-        if userType == .tenKUser && translatedCharactersCurrentMonth <= 10_000 {// the limits should be fetched from Firestore
+        let characterCount = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
+        
+        if userType == .tenKUser && characterCount <= 10_000 {// the limits should be fetched from Firestore
             print("translate ok")
             return true
-        } else if userType == .fiftyKUser && translatedCharactersCurrentMonth <= 50_000 {
+        } else if userType == .fiftyKUser && characterCount <= 50_000 {
             print("translate ok")
             return true
         } else if userType == .noLimitUset {
             print("translate ok")
             return true
-        } else if userType == .guestUser && translatedCharactersCurrentMonth <= 10_000 {
+        } else if userType == .guestUser && characterCount <= 10_000 {
             print("translate ok")
             return true
         } else {
@@ -324,11 +318,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func performTranslate() {
+    func updateCharacterCount(with predictionResult: String) {
+           translatedCharacterCountLocal += predictionResult.count
+           translatedCharacterCountCloud += predictionResult.count
+           
+           let updatedCount = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
+           print("updatedCount is \(updatedCount)")
+           
+           UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
+           CloudKitManager.updateCountData(to: updatedCount)
+       }
+    
+    func performTranslate(for predictionResult: String) {
         if isOfflineTranslateAvailable(from: "english", to: targetLanguage) {
-            performFBOfflineTranslate(from: "english", to: targetLanguage, for: latestPrediction)
+            performFBOfflineTranslate(from: "english", to: targetLanguage, for: predictionResult)
         } else {
-            performGoogleCloudTranslate(from: "en", to: targetLanguageCode, for: latestPrediction)
+            performGoogleCloudTranslate(from: "en", to: targetLanguageCode, for: predictionResult)
         }
     }
     

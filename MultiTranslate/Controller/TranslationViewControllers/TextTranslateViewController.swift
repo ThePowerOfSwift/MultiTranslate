@@ -31,12 +31,12 @@ class TextTranslateViewController: UIViewController {
     
     private var isStarButtonTapped: Bool = false
     
-    private var translatedCharactersCurrentMonth = 0
+//    private var translatedCharactersCurrentMonth = 0
     
     private let realm = try! Realm()
     private var savedTranslations: Results<SavedTranslation>!
     
-    private var cloudDBTranslatedCharacters = 0
+//    private var cloudDBTranslatedCharacters = 0
     private var starBadgeNum = 0
     
     //MARK: - UI Parts Declaration
@@ -666,9 +666,6 @@ class TextTranslateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setUpCloudKit()
-        translatedCharactersCurrentMonth = UserDefaults.standard.integer(forKey: Constants.translatedCharactersCountKey)
         
         savedTranslations = realm.objects(SavedTranslation.self)
         
@@ -716,23 +713,6 @@ class TextTranslateViewController: UIViewController {
         
         let titleInfo = ["title" : "Text"]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
-    }
-    
-    func setUpCloudKit() {
-        CloudKitManager.isCountRecordEmpty { [weak self] (isEmpty) in
-            if isEmpty {
-                CloudKitManager.initializeCloudDatabase()
-            } else {
-                CloudKitManager.queryCloudDatabaseCountData { (result, error) in
-                    if let result = result {
-                        self?.cloudDBTranslatedCharacters = result
-                        print("cloudDBTranslatedCharacters is \(result)")
-                    } else {
-                        print("queryCloudDatabaseCountData error \(error!.localizedDescription)")
-                    }
-                }
-            }
-        }
     }
     
     func setUpViewsAndButtons() {
@@ -955,10 +935,10 @@ class TextTranslateViewController: UIViewController {
             } else {
                 if isTranslatePossible(userType: userType) {
                     performTranslate()
-                    translatedCharactersCurrentMonth += text.count
-                    cloudDBTranslatedCharacters += text.count
+                    translatedCharacterCountLocal += text.count
+                    translatedCharacterCountCloud += text.count
                     
-                    let updatedCount = translatedCharactersCurrentMonth >= cloudDBTranslatedCharacters ? translatedCharactersCurrentMonth : cloudDBTranslatedCharacters
+                    let updatedCount = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
                     print("updatedCount is \(updatedCount)")
                     
                     UserDefaults.standard.set(updatedCount, forKey: Constants.translatedCharactersCountKey)
@@ -986,16 +966,18 @@ class TextTranslateViewController: UIViewController {
     }
     
     func isTranslatePossible(userType: UserType) -> Bool {
-        if userType == .tenKUser && translatedCharactersCurrentMonth <= 10_000 {// the limits should be fetched from Firestore
+        let characterCount = max(translatedCharacterCountLocal, translatedCharacterCountCloud)
+        
+        if userType == .tenKUser && characterCount <= 10_000 {// the limits should be fetched from Firestore
             print("translate ok")
             return true
-        } else if userType == .fiftyKUser && translatedCharactersCurrentMonth <= 50_000 {
+        } else if userType == .fiftyKUser && characterCount <= 50_000 {
             print("translate ok")
             return true
         } else if userType == .noLimitUset {
             print("translate ok")
             return true
-        } else if userType == .guestUser && translatedCharactersCurrentMonth <= 10_000 {
+        } else if userType == .guestUser && characterCount <= 10_000 {
             print("translate ok")
             return true
         } else {

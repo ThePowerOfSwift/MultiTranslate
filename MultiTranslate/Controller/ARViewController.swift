@@ -272,7 +272,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         print(userType)
         
         if isTranslatePossible(userType: userType) {
-            performTranslate()
+            if targetLanguage == "English" {
+                addNodeToScene(using: latestPrediction)
+            } else {
+                performTranslate()
+            }
             translatedCharactersCurrentMonth += latestPrediction.count
             cloudDBTranslatedCharacters += latestPrediction.count
             

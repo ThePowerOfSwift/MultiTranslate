@@ -8,6 +8,7 @@
 
 import UIKit
 
+import DynamicColor
 import Parchment
 import paper_onboarding
 
@@ -86,49 +87,101 @@ class TranslationViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("skip", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .thin)
-        button.setTitleColor(UIColor.systemGray.adjustedAlpha(amount: 0.9), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+        button.setTitleColor(UIColor.init(white: 1, alpha: 0.95), for: .normal)
         return button
     }()
     
     private let onboardItems = [
-        OnboardingItemInfo(informationImage: UIImage(systemName: "camera")!,
-                           title: "title",
-                           description: "description",
-                           pageIcon: UIImage(systemName: "camera")!,
-                           color: UIColor.systemPurple,
-                           titleColor: UIColor.label,
-                           descriptionColor: UIColor.label,
-                           titleFont: UIFont.preferredFont(forTextStyle: .title1),
+        OnboardingItemInfo(informationImage: UIImage(named: "text-onboard")!.withTintColor(.white),
+                           title: "Text translate",
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           pageIcon: UIImage(systemName: "1.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#7BC4E3"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
 
-        OnboardingItemInfo(informationImage: UIImage(systemName: "mic")!,
-                           title: "title",
-                           description: "description",
-                           pageIcon: UIImage(systemName: "mic")!,
-                           color: UIColor.systemTeal,
-                           titleColor: UIColor.label,
-                           descriptionColor: UIColor.label,
-                           titleFont: UIFont.preferredFont(forTextStyle: .title1),
+        OnboardingItemInfo(informationImage: UIImage(named: "camera-onboard")!.withTintColor(.white),
+                           title: "Camera translate",
+                           description: "Take a photo of an article, Multi-Translate can detect words in the photo automatically.",
+                           pageIcon: UIImage(systemName: "2.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#5FB947"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
+                           descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
+        
+        OnboardingItemInfo(informationImage: UIImage(named: "microphone-onboard")!.withTintColor(.white),
+                           title: "Speech translate",
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           pageIcon: UIImage(systemName: "3.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#F2B421"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
 
-        OnboardingItemInfo(informationImage: UIImage(systemName: "photo")!,
-                           title: "title",
-                           description: "description",
-                           pageIcon: UIImage(systemName: "photo")!,
-                           color: UIColor.systemOrange,
-                           titleColor: UIColor.label,
-                           descriptionColor: UIColor.label,
-                           titleFont: UIFont.preferredFont(forTextStyle: .title1),
+        OnboardingItemInfo(informationImage: UIImage(named: "conversation-onboard")!.withTintColor(.white),
+                           title: "Conversation translate",
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           pageIcon: UIImage(systemName: "4.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#F78019"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
+                           descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
+        
+        OnboardingItemInfo(informationImage: UIImage(named: "ar-onboard")!.withTintColor(.white),
+                           title: "AR object translate",
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           pageIcon: UIImage(systemName: "5.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#DE3B3C"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
+                           descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
+
+        OnboardingItemInfo(informationImage: UIImage(named: "doc-onboard")!.withTintColor(.white),
+                           title: "Document translate",
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           pageIcon: UIImage(systemName: "6.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#933C96"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
+                           descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
+        
+        OnboardingItemInfo(informationImage: UIImage(named: "image-onboard")!.withTintColor(.white),
+                           title: "Image translate",
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           pageIcon: UIImage(systemName: "7.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
+                           color: DynamicColor(hexString: "#009DDB"),
+                           titleColor: .init(white: 1, alpha: 0.9),
+                           descriptionColor: .init(white: 1, alpha: 0.9),
+                           titleFont: UIFont.preferredFont(forTextStyle: .largeTitle),
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
     ]
     
     
+    override func loadView() {
+        super.loadView()
+
+        addChild(pageViewController)
+        view.addSubview(pageViewController.view)
+        pageViewController.view.edgeTo(view, safeArea: .vertical)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .mtSystemBackground
+        
         pageViewController.dataSource = self
         pageViewController.select(pagingItem: IconItem(icon: icons[0], index: 0))
+        pageViewController.didMove(toParent: self)
+
         onboardPage.dataSource = self
         
         // Do any additional setup after loading the view.
@@ -158,25 +211,20 @@ class TranslationViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(showDownloadLanguageModelPage))
         
-        let isAppEverLaunched = UserDefaults.standard.bool(forKey: Constants.isAppEverLauchedKey)
-        if isAppEverLaunched {
-            addChild(pageViewController)
-            view.addSubview(pageViewController.view)
-            view.constrainToEdges(pageViewController.view)
-            view.backgroundColor = .mtSystemBackground
-            pageViewController.didMove(toParent: self)
-            
-        } else {
-            UserDefaults.standard.set(true, forKey: Constants.isAppEverLauchedKey)
+//        let isAppEverLaunched = UserDefaults.standard.bool(forKey: Constants.isAppEverLauchedKey)
+        let isAppEverLaunched = false // for test
+        if !isAppEverLaunched {
             view.addSubview(onboardPage)
             onboardPage.edgeTo(view)
             
             view.addSubview(skipButton)
-            skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35).isActive = true
-            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+            skipButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+            skipButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35).isActive = true
             
             navigationController?.navigationBar.isHidden = true
-            tabBarController?.tabBar.isHidden = true
+            tabBarController?.tabBar.alpha = 0
+            
+            UserDefaults.standard.set(true, forKey: Constants.isAppEverLauchedKey)
         }
         
     }
@@ -209,17 +257,11 @@ class TranslationViewController: UIViewController {
     }
     
     @objc func skipOnboard() {
+        navigationController?.navigationBar.isHidden = false
+        tabBarController?.tabBar.alpha = 1
+
         onboardPage.removeFromSuperview()
         skipButton.removeFromSuperview()
-        
-        addChild(pageViewController)
-        view.addSubview(pageViewController.view)
-        view.constrainToEdges(pageViewController.view)
-        view.backgroundColor = .mtSystemBackground
-        pageViewController.didMove(toParent: self)
-        
-        navigationController?.navigationBar.isHidden = false
-        tabBarController?.tabBar.isHidden = false
     }
 }
 

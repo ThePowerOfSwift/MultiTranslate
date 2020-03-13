@@ -39,6 +39,8 @@
 		8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */; };
 		8052A1E023C2FDE400883123 /* PDFTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */; };
 		8052A1E223C2FDF200883123 /* ImageTranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */; };
+		805733BB241BBCD40018C73F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 805733BA241BBCD40018C73F /* AdSupport.framework */; };
+		805733BD241BC26C0018C73F /* ICloudUserIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805733BC241BC26C0018C73F /* ICloudUserIDProvider.swift */; };
 		805AB0D523DD997800215415 /* InAppPurchaseProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */; };
 		805AB0D723DD9B1D00215415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */; };
 		806052EC23F5382700C58BC3 /* FBLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */; };
@@ -108,6 +110,8 @@
 		8052A1DD23C2FDCB00883123 /* ARTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1DF23C2FDE400883123 /* PDFTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTranslateViewController.swift; sourceTree = "<group>"; };
 		8052A1E123C2FDF200883123 /* ImageTranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranslateViewController.swift; sourceTree = "<group>"; };
+		805733BA241BBCD40018C73F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		805733BC241BC26C0018C73F /* ICloudUserIDProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudUserIDProvider.swift; sourceTree = "<group>"; };
 		805AB0D423DD997800215415 /* InAppPurchaseProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseProduct.swift; sourceTree = "<group>"; };
 		805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		806052EB23F5382700C58BC3 /* FBLanguageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLanguageTableViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8037C0CF23E1002800DD3B09 /* StoreKit.framework in Frameworks */,
+				805733BB241BBCD40018C73F /* AdSupport.framework in Frameworks */,
 				021058A83D2DED5A53886DAA /* Pods_MultiTranslate.framework in Frameworks */,
 				8037C0CD23E0FBB000DD3B09 /* CloudKit.framework in Frameworks */,
 			);
@@ -205,6 +210,7 @@
 			children = (
 				8037C0CB23E0FBAA00DD3B09 /* MultiTranslate.entitlements */,
 				8052A1B723C2A24400883123 /* AppDelegate.swift */,
+				805733BC241BC26C0018C73F /* ICloudUserIDProvider.swift */,
 				8052A1B923C2A24400883123 /* SceneDelegate.swift */,
 				80C535C823C56A530044D6F0 /* Constants.swift */,
 				80DB054323EAABD9003DE94D /* SupportedLanguages.swift */,
@@ -317,6 +323,7 @@
 		E41E6BBBF80C6EC88FE805E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				805733BA241BBCD40018C73F /* AdSupport.framework */,
 				8037C0CE23E1002800DD3B09 /* StoreKit.framework */,
 				8037C0CC23E0FBB000DD3B09 /* CloudKit.framework */,
 				FA0368F9DF73C9350661AAA8 /* Pods_MultiTranslate.framework */,
@@ -528,6 +535,7 @@
 				803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */,
 				80A403DE23FFA70800E84231 /* SwiftyInnerShadowLayer.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* LanguagePickerViewController.swift in Sources */,
+				805733BD241BC26C0018C73F /* ICloudUserIDProvider.swift in Sources */,
 				806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */,
 				803E269F2408996A00DF5DF6 /* PMAlertController.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,

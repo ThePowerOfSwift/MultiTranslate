@@ -32,11 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         initializeRealm()
         
+        initializeFirebase()
+        
         initializeUserDefaults()
         
         initializeCloudDatabase()
-        
-        initializeFirebase()
         
         FBOfflineTranslate.initializeFBTranslation()
         
@@ -78,7 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
                 print("lastLaunchMonth is 0")
             } else if lastLaunchMonth != intValueOfCurrentMonth {
+//            } else if lastLaunchMonth != 4 { for test
                 //Month has changed since last launch.
+                let currentCount = userDefaults.integer(forKey: Constants.translatedCharactersCountKey)
+                updateMonthlyCountInfo(update: currentCount)
+                
                 userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
                 userDefaults.set(0, forKey: Constants.translatedCharactersCountKey)
                 CloudKitManager.refreshCloudDatabaseCountData()
@@ -172,6 +176,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///https://developer.apple.com/documentation/avfoundation/avaudiosession/categoryoptions
         ///https://stackoverflow.com/questions/51010390/avaudiosession-setcategory-swift-4-2-ios-12-play-sound-on-silent
         ///https://stackoverflow.com/questions/1022992/how-to-get-avaudioplayer-output-to-the-speaker
+    }
+    
+    func updateMonthlyCountInfo(update count: Int) {
+       
+        var userID = "unknownID"
+        
+        ICloudUserIDProvider.getUserID { [weak self] (response) in
+            switch response {
+            case .success(let record):
+                print("recordName: \(record.recordName)")
+                userID = record.recordName
+                self?.sendFirebaseRecord(id: userID, count: count)
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            case .notSignedIn:
+                print("please sign in to iCloud")
+                if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                }
+            }
+        }
+    }
+    
+    func sendFirebaseRecord(id: String, count: Int) {
+        let db = Firestore.firestore()
+        db.collection(Constants.FireStore.collectionName).addDocument(data: [
+            Constants.FireStore.idField: id,
+            Constants.FireStore.countField: count,
+            Constants.FireStore.dateField: Date(),
+        ]) { (error) in
+            if let e = error {
+                print("There was an issue saving data to firestore, \(e)")
+            } else {
+                print("Successfully saved data.")
+            }
+        }
     }
     
 }

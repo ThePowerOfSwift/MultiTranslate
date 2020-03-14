@@ -210,7 +210,6 @@
 			children = (
 				8037C0CB23E0FBAA00DD3B09 /* MultiTranslate.entitlements */,
 				8052A1B723C2A24400883123 /* AppDelegate.swift */,
-				805733BC241BC26C0018C73F /* ICloudUserIDProvider.swift */,
 				8052A1B923C2A24400883123 /* SceneDelegate.swift */,
 				80C535C823C56A530044D6F0 /* Constants.swift */,
 				80DB054323EAABD9003DE94D /* SupportedLanguages.swift */,
@@ -291,6 +290,7 @@
 				8014E75D23ED2C8C00793258 /* TranslateType.swift */,
 				803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */,
 				8037C0D023E1295D00DD3B09 /* CloudKitManager.swift */,
+				805733BC241BC26C0018C73F /* ICloudUserIDProvider.swift */,
 				80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
 				803E26A12408999100DF5DF6 /* PMAlertController */,

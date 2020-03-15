@@ -77,8 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //First launch of the app.
                 userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
                 print("lastLaunchMonth is 0")
-            } else if lastLaunchMonth != intValueOfCurrentMonth {
-//            } else if lastLaunchMonth != 4 { for test
+//            } else if lastLaunchMonth != intValueOfCurrentMonth {
+            } else if lastLaunchMonth != 4 { // for test
                 //Month has changed since last launch.
                 let currentCount = userDefaults.integer(forKey: Constants.translatedCharactersCountKey)
                 updateMonthlyCountInfo(update: currentCount)
@@ -200,18 +200,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func sendFirebaseRecord(id: String, count: Int) {
+//        let db = Firestore.firestore()
+//        db.collection(Constants.FireStore.collectionName).addDocument(data: [
+//            Constants.FireStore.idField: id,
+//            Constants.FireStore.countField: count,
+//            Constants.FireStore.dateField: Date(),
+//        ]) { (error) in
+//            if let e = error {
+//                print("There was an issue saving data to firestore, \(e)")
+//            } else {
+//                print("Successfully saved data.")
+//            }
+//        }
+        
         let db = Firestore.firestore()
-        db.collection(Constants.FireStore.collectionName).addDocument(data: [
-            Constants.FireStore.idField: id,
-            Constants.FireStore.countField: count,
-            Constants.FireStore.dateField: Date(),
-        ]) { (error) in
+        let dataSet: [String : Any] = [
+            "monthly count": count,
+            "time stamp": Date()
+        ]
+        
+        db.collection(Constants.FireStore.collectionName).document(id).setData(dataSet) { (error) in
             if let e = error {
                 print("There was an issue saving data to firestore, \(e)")
             } else {
                 print("Successfully saved data.")
             }
         }
+        //Use user id as Firestore document name.
+        ///https://firebase.google.com/docs/firestore/manage-data/add-data?authuser=0
     }
     
 }

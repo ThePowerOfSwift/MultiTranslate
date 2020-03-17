@@ -14,8 +14,8 @@ class AccountViewController: UIViewController {
 
     private var isYearlyPlan: Bool = true
     private let colors = [UIColor(rgb: 0xff4d4d), UIColor(rgb: 0x46b3e6), UIColor(rgb: 0x738598)]
-    private let titles = ["No Limit", "50k characters/month", "10k characters/month"]
-    private let subTitles = ["For a pro translater", "Most popular", "Limited"]
+    private let titles = ["No Limit".localized(), "50k characters/month".localized(), "10k characters/month".localized()]
+    private let subTitles = ["For a pro translater".localized(), "Most popular".localized(), "Limited".localized()]
     private let illustrations = [UIImage(named: "crown"), UIImage(named: "firework"), UIImage(named: "diamond")]
     
     private let container: UIView = {
@@ -53,7 +53,7 @@ class AccountViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Get Multi-Translate PRO"
+        label.text = "Get Multi-Translate PRO".localized()
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 20.0)
         return label
@@ -70,7 +70,7 @@ class AccountViewController: UIViewController {
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Multiple ways to translate with high accuracy!"
+        label.text = "Multiple ways to translate with high accuracy!".localized()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 17)
         label.textColor = .systemGray
@@ -86,7 +86,7 @@ class AccountViewController: UIViewController {
     }()
     
     private let planSelector: UISegmentedControl = {
-        let selector = UISegmentedControl(items: ["Yearly plan", "Monthly plan"])
+        let selector = UISegmentedControl(items: ["Yearly plan".localized(), "Monthly plan".localized()])
         selector.translatesAutoresizingMaskIntoConstraints = false
         selector.selectedSegmentIndex = 0
 //        selector.backgroundColor = .mtSystemBackground
@@ -143,7 +143,7 @@ class AccountViewController: UIViewController {
     private let subscriptionInformationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("About subscription", for: .normal)
+        button.setTitle("About subscription".localized(), for: .normal)
         button.setTitleColor(.systemGray2, for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -153,7 +153,7 @@ class AccountViewController: UIViewController {
     private let termsOfUseInformationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Terms of use", for: .normal)
+        button.setTitle("Terms of use".localized(), for: .normal)
         button.setTitleColor(.systemGray2, for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -163,7 +163,7 @@ class AccountViewController: UIViewController {
     private let privacyPolicyInformationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Privacy policy", for: .normal)
+        button.setTitle("Privacy policy".localized(), for: .normal)
         button.setTitleColor(.systemGray2, for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -175,10 +175,7 @@ class AccountViewController: UIViewController {
         
         let viewHeight = view.frame.height
         let viewWidth = view.frame.width
-        
-        print("viewHeight is \(viewHeight)")
-        print("viewWidth is \(viewWidth)")
-        
+
         view.addSubview(container)
         container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -332,10 +329,10 @@ extension AccountViewController: UITableViewDataSource {
         
         if isYearlyPlan {
             cell.priceLabel.text = InAppPurchaseManager.retrievedProducts[indexPath.row * 2].localizedPrice!
-            cell.priceExplanationLabel.text = "/year"
+            cell.priceExplanationLabel.text = "/year".localized()
         } else {
             cell.priceLabel.text = InAppPurchaseManager.retrievedProducts[indexPath.row * 2 + 1].localizedPrice!
-            cell.priceExplanationLabel.text = "/month"
+            cell.priceExplanationLabel.text = "/month".localized()
         }
         
         cell.illustration.image = illustrations[indexPath.row]

@@ -77,8 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //First launch of the app.
                 userDefaults.set(intValueOfCurrentMonth, forKey: Constants.lastLaunchMonthKey)
                 print("lastLaunchMonth is 0")
-//            } else if lastLaunchMonth != intValueOfCurrentMonth {
-            } else if lastLaunchMonth != 4 { // for test
+            } else if lastLaunchMonth != intValueOfCurrentMonth {
+//            } else if lastLaunchMonth != 4 { // for test
                 //Month has changed since last launch.
                 let currentCount = userDefaults.integer(forKey: Constants.translatedCharactersCountKey)
                 updateMonthlyCountInfo(update: currentCount)

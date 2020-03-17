@@ -99,11 +99,13 @@ struct InAppPurchaseManager {
                     print("finished transaction.")
                 }
                 InAppPurchaseManager.verifyPurchase(with: productIdentifier)
-                SPAlert.present(title: "Purchase successfully.", preset: .done)
+//                SPAlert.present(title: "Purchase successfully.".localized(), preset: .done)
                 
             case .error(let error):
                 print(error.localizedDescription)
-                SPAlert.present(title: "Purchase failed.", message: error.localizedDescription, preset: .error)
+                SPAlert.present(title: "Purchase failed.".localized(),
+                                message: error.localizedDescription,
+                                preset: .error)
             }
         }
     }
@@ -131,13 +133,13 @@ struct InAppPurchaseManager {
         SwiftyStoreKit.restorePurchases(atomically: true) { results in
             if results.restoreFailedPurchases.count > 0 {
                 print("Restore Failed: \(results.restoreFailedPurchases)")
-                SPAlert.present(title: "Restore purchase failed.", message: "Please try again.", preset: .error)
+                SPAlert.present(title: "Restore purchase failed.".localized(), message: "Please try again.".localized(), preset: .error)
             } else if results.restoredPurchases.count > 0 {
                 print("Restore Success: \(results.restoredPurchases)")
-                SPAlert.present(title: "Restored purchase successfully.", preset: .done)
+                SPAlert.present(title: "Restored purchase successfully.".localized(), preset: .done)
             } else {
                 print("Nothing to Restore")
-                SPAlert.present(title: "No purchase restored.", preset: .error)
+                SPAlert.present(title: "No purchase restored.".localized(), preset: .error)
             }
         }
         

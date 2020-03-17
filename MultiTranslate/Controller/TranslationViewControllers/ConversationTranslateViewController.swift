@@ -228,7 +228,7 @@ class ConversationTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Conversation"]
+        let titleInfo = ["title" : "Conversation".localized()]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
         
         perform(#selector(showBottom), with: nil, afterDelay: 0.05)
@@ -254,12 +254,12 @@ class ConversationTranslateViewController: UIViewController {
                         self.requestTranscribePermissions()
                     } else {
                         //access denied
-                        let alert = PMAlertController(title: "Microphone access not allowed",
-                                                      description: "Use microphone to record voice",
+                        let alert = PMAlertController(title: "Microphone access not allowed".localized(),
+                                                      description: "Use microphone to record voice".localized(),
                                                       image: UIImage(named: "color_microphone"),
                                                       style: .alert)
-                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                        let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                             if UIApplication.shared.canOpenURL(settingsUrl) {
                                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
@@ -286,12 +286,12 @@ class ConversationTranslateViewController: UIViewController {
                         print("Good to go!")
                     } else {
                         print("Transcription permission was declined.")
-                        let alert = PMAlertController(title: "Speech recognizer",
-                                                      description: "Detect word in speech",
+                        let alert = PMAlertController(title: "Speech recognizer".localized(),
+                                                      description: "Detect word in speech".localized(),
                                                       image: UIImage(named: "color_microphone"),
                                                       style: .alert)
-                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                        let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                             if UIApplication.shared.canOpenURL(settingsUrl) {
                                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
@@ -341,12 +341,12 @@ class ConversationTranslateViewController: UIViewController {
     }
     
     @objc func clearRecords() {
-        let alert = PMAlertController(title: "Delete all records?",
-                                      description: "The records cannot be recovered once deleted",
+        let alert = PMAlertController(title: "Delete all records?".localized(),
+                                      description: "The records cannot be recovered once deleted".localized(),
                                       image: UIImage(named: "trash_color"),
                                       style: .alert)
-        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-        let defaultAction = PMAlertAction(title: "Delete", style: .default) { [weak self] in
+        let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+        let defaultAction = PMAlertAction(title: "Delete".localized(), style: .default) { [weak self] in
             guard let weakSelf = self else { return }
             do {
                 try weakSelf.realm.write {
@@ -354,11 +354,11 @@ class ConversationTranslateViewController: UIViewController {
                 }
             } catch {
                 print("Error adding item, \(error)")
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
-            SPAlert.present(title: "Records cleared",
+            SPAlert.present(title: "Records cleared".localized(),
                             message: nil,
                             image: UIImage(systemName: "trash.fill")!)
             weakSelf.conversationTableView.reloadData()
@@ -430,12 +430,12 @@ class ConversationTranslateViewController: UIViewController {
                 transcribeAudio(url: audioFileURL!)
             } else {
                 print("Here is the limit, pay more money!")
-                let alert = PMAlertController(title: "Translate character has reach the limit",
-                                              description: "You can change your plan and get more characters",
+                let alert = PMAlertController(title: "Translate character has reach the limit".localized(),
+                                              description: "You can change your plan and get more characters".localized(),
                                               image: UIImage(named: "reading2"),
                                               style: .alert)
-                let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
-                let defaultAction = PMAlertAction(title: "See more plans", style: .default) { [weak self] in
+                let cancelAction = PMAlertAction(title: "Not now".localized(), style: .cancel)
+                let defaultAction = PMAlertAction(title: "See more plans".localized(), style: .default) { [weak self] in
                     let viewController = AccountViewController()
                     let navController = UINavigationController(rootViewController: viewController)
                     self?.present(navController, animated: true, completion: nil)
@@ -449,12 +449,12 @@ class ConversationTranslateViewController: UIViewController {
             //Show alert
             if AVCaptureDevice.authorizationStatus(for: .audio) !=  .authorized ||
                 SFSpeechRecognizer.authorizationStatus() != .authorized {
-                let alert = PMAlertController(title: "Chech app setting",
-                                              description: "Please allow microphone and speech recognizer",
+                let alert = PMAlertController(title: "Chech app setting".localized(),
+                                              description: "Please allow microphone and speech recognizer".localized(),
                                               image: UIImage(named: "color_microphone"),
                                               style: .alert)
-                let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                     guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                     if UIApplication.shared.canOpenURL(settingsUrl) {
                         UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
@@ -502,11 +502,11 @@ class ConversationTranslateViewController: UIViewController {
                 print("There was an error: \(error!.localizedDescription)")
                 print("Cannot extract any text from the audio")
                 // show alert
-                let alert = PMAlertController(title: "No text",
-                                              description: "Cannot extract any text from the speech, please try again.",
+                let alert = PMAlertController(title: "No text".localized(),
+                                              description: "Cannot extract any text from the speech, please try again.".localized(),
                                               image: UIImage(named: "question_mark"),
                                               style: .alert)
-                let defaultAction = PMAlertAction(title: "Try again", style: .default)
+                let defaultAction = PMAlertAction(title: "Try again".localized(), style: .default)
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
                 
@@ -561,11 +561,11 @@ class ConversationTranslateViewController: UIViewController {
         }
 
         if sourceLanguage == targetLanguage {
-            let alert = PMAlertController(title: "Error",
-                                          description: "You cannot translate \(sourceLanguage) to \(targetLanguage)",
-                                          image: UIImage(named: "error"),
+            let alert = PMAlertController(title: "Error".localized(),
+                                          description: "You cannot translate %@ to %@".localizedFormat(sourceLanguage, targetLanguage),
+                                          image: UIImage(named: "error".localized()),
                                           style: .alert)
-            let defaultAction = PMAlertAction(title: "Change language", style: .default)
+            let defaultAction = PMAlertAction(title: "Change language".localized(), style: .default)
             alert.addAction(defaultAction)
             present(alert, animated: true, completion: nil)
         } else {
@@ -591,7 +591,7 @@ class ConversationTranslateViewController: UIViewController {
                 print("the FB translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error?.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
@@ -607,7 +607,7 @@ class ConversationTranslateViewController: UIViewController {
                 print("the GCP translation is: \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error?.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }

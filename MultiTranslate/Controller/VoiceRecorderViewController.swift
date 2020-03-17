@@ -269,7 +269,9 @@ class VoiceRecorderViewController: UIViewController {
         } else {
             print("Recording failed.")
             //Show alert
-            SPAlert.present(title: "Error", message: "Voice recorder error occurred.", image: UIImage(systemName: "exclamationmark.triangle")!)
+            SPAlert.present(title: "Error".localized(),
+                            message: "Voice recorder error occurred.".localized(),
+                            image: UIImage(systemName: "exclamationmark.triangle")!)
         }
     }
     
@@ -284,9 +286,12 @@ class VoiceRecorderViewController: UIViewController {
                         self.transcribeAudio(url: self.audioFileURL!)
                     } else {
                         print("Transcription permission was declined.")
-                        let alert = PMAlertController(title: "Speech recognizer", description: "Detect word in speech", image: UIImage(named: "color_microphone"), style: .alert)
-                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                        let alert = PMAlertController(title: "Speech recognizer".localized(),
+                                                      description: "Detect word in speech".localized(),
+                                                      image: UIImage(named: "color_microphone"),
+                                                      style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                             
                             if UIApplication.shared.canOpenURL(settingsUrl) {
@@ -315,11 +320,11 @@ class VoiceRecorderViewController: UIViewController {
                 print("There was an error: \(error!)")
                 print("Cannot extract any text from the audio")
                 // show alert
-                let alert = PMAlertController(title: "No text",
-                                              description: "Cannot extract any text from the speech, please try again.",
+                let alert = PMAlertController(title: "No text".localized(),
+                                              description: "Cannot extract any text from the speech, please try again.".localized(),
                                               image: UIImage(named: "question_mark"),
                                               style: .alert)
-                let defaultAction = PMAlertAction(title: "Try again", style: .default) {
+                let defaultAction = PMAlertAction(title: "Try again".localized(), style: .default) {
                     self.dismiss(animated: true)
                 }
                 alert.addAction(defaultAction)

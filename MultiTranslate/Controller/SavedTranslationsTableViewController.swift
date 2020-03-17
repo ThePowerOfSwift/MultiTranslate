@@ -39,7 +39,7 @@ class SavedTranslationsTableViewController: UITableViewController {
     private let noItemLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "No item"
+        label.text = "No item".localized()
         label.font = UIFont.systemFont(ofSize: 30, weight: .thin)
         label.textAlignment = .center
         return label
@@ -65,7 +65,7 @@ class SavedTranslationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Saved Translations"
+        title = "Saved Translations".localized()
         view.backgroundColor = .mtSystemBackground
         
         savedTranslations = realm.objects(SavedTranslation.self).sorted(byKeyPath: "dateCreated", ascending: false)
@@ -102,8 +102,8 @@ class SavedTranslationsTableViewController: UITableViewController {
     }
     
     @objc func clearRecords() {
-        let alert = PMAlertController(title: "Clear records?",
-                                      description: "Records cannot be recovered once deleted.",
+        let alert = PMAlertController(title: "Clear records?".localized(),
+                                      description: "Records cannot be recovered once deleted.".localized(),
                                       image: UIImage(named: "trash_color"),
                                       style: .alert)
         let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
@@ -116,7 +116,7 @@ class SavedTranslationsTableViewController: UITableViewController {
             } catch {
                 print("Error adding item, \(error)")
             }
-            SPAlert.present(title: "Records cleared", message: nil, image: UIImage(systemName: "trash.fill")!)
+            SPAlert.present(title: "Records cleared".localized(), message: nil, image: UIImage(systemName: "trash.fill")!)
             self?.tableView.reloadData()
             self?.navigationItem.rightBarButtonItem = nil
             self?.container.isHidden = false
@@ -153,7 +153,7 @@ class SavedTranslationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let savedTranslation = savedTranslations[indexPath.row]
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete".localized()) { (action, view, completion) in
 
             if indexPath.row == 0 {
                 NotificationCenter.default.post(name: .firstSavedTranslationDeleted, object: nil)
@@ -166,7 +166,7 @@ class SavedTranslationsTableViewController: UITableViewController {
             } catch {
                 print("Error adding item, \(error)")
             }
-            SPAlert.present(title: "Translation deleted", message: nil, image: UIImage(systemName: "trash.fill")!)
+            SPAlert.present(title: "Translation deleted".localized(), message: nil, image: UIImage(systemName: "trash.fill")!)
             tableView.reloadData()
             if self.savedTranslations.isEmpty {
                 self.navigationItem.rightBarButtonItem = nil

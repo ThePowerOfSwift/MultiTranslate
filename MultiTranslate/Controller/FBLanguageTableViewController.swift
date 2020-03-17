@@ -13,13 +13,13 @@ import SPAlert
 
 class FBLanguageTableViewController: UITableViewController {
     
-    private let sectionTitles = ["Downloaded languages","Undownloaded languages"]
+    private let sectionTitles = ["Downloaded languages".localized(),"Undownloaded languages".localized()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .mtSystemBackground
-        title = "Offline translate languages"
+        title = "Offline translate languages".localized()
         
         tableView.register(FBLanguageTableViewCell.self, forCellReuseIdentifier: Constants.fbLanguageTableViewCellIdentifier)
         tableView.allowsSelection = false
@@ -30,7 +30,7 @@ class FBLanguageTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(forName: .fbDownloadedLanguagesDidUpdate,
                                                object: nil,
                                                queue: nil) { [weak self] (notification) in
-            SPAlert.present(title: "Language downloaded",
+            SPAlert.present(title: "Language downloaded".localized(),
                             message: nil,
                             image: UIImage(systemName: "tray.and.arrow.down.fill")!)
             self?.tableView.reloadData()
@@ -38,9 +38,17 @@ class FBLanguageTableViewController: UITableViewController {
         
         NotificationCenter.default.addObserver(forName: .firebaseMLModelDownloadDidFail,
                                                object: nil,
-                                               queue: .main) { (notification) in
+                                               queue: .main) { [weak self] (notification) in
             print("Firebase language model download failded.")
             //Show UIAlert here.
+            let alert = PMAlertController(title: "Download failed".localized(),
+                                          description: "Cannot download language, please try again.".localized(),
+                                          image: UIImage(named: "error"),
+                                          style: .alert)
+            let defaultAction = PMAlertAction(title: "Try again.".localized(), style: .default)
+            alert.addAction(defaultAction)
+            self?.present(alert, animated: true, completion: nil)
+                                            
         }
     }
 
@@ -114,11 +122,21 @@ class FBLanguageTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! FBLanguageTableViewCell
         guard let language = cell.languageNameLabel.text else { return nil }
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completion) in
-            if language == "English" {
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: "Delete".localized()) { [weak self] (action, view, completion) in
+            if language == "English".localized() {
                 print("English language cannot be deleted.")
                 //Show UIAlert
-                completion(true)
+                let alert = PMAlertController(title: "English language cannot be deleted.".localized(),
+                                              description: nil,
+                                              image: UIImage(named: "error"),
+                                              style: .alert)
+                let defaultAction = PMAlertAction(title: "Got it".localized(), style: .default) {
+                    completion(true)
+                }
+                alert.addAction(defaultAction)
+                self?.present(alert, animated: true, completion: nil)
+                
             } else {
                 self?.deleteFBLanguage(of: language)
                 print("delete \(language) language model")
@@ -139,12 +157,12 @@ class FBLanguageTableViewController: UITableViewController {
             if error == nil {
                 print("language \(language) is deleted successfully.")
                 FBOfflineTranslate.initializeFBTranslation()
-                SPAlert.present(title: "Language deleted", message: nil, image: UIImage(systemName: "trash.fill")!)
+                SPAlert.present(title: "Language deleted".localized(), message: nil, image: UIImage(systemName: "trash.fill")!)
                 self?.tableView.reloadData()
             } else {
                 print(error!.localizedDescription)
-                let alert = PMAlertController(title: "Error", description: error?.localizedDescription, image: UIImage(named: "error"), style: .alert)
-                let cancelAction = PMAlertAction(title: "cancel", style: .cancel)
+                let alert = PMAlertController(title: "Error".localized(), description: error?.localizedDescription, image: UIImage(named: "error"), style: .alert)
+                let cancelAction = PMAlertAction(title: "cancel".localized(), style: .cancel)
                 alert.addAction(cancelAction)
                 self?.present(alert, animated: true, completion: nil)
             }

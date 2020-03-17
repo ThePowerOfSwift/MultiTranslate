@@ -30,7 +30,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     private let debugTextView: UITextView = {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Detecting object..."
+        view.text = "Detecting object...".localized()
         view.isEditable = false
         return view
     }()
@@ -243,7 +243,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func clearRecord() {
-        debugTextView.text = "Restarting AR session..."
+        debugTextView.text = "Restarting AR session...".localized()
         if !nodeArray.isEmpty {
             for node in nodeArray {
                 node.removeFromParentNode()
@@ -272,7 +272,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         print(userType)
         
         if isTranslatePossible(userType: userType) {
-            if targetLanguage == "English" {
+            if targetLanguage == "English".localized() {
                 addNodeToScene(using: latestPrediction)
             } else {
                 performTranslate(for: latestPrediction)
@@ -281,12 +281,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
             
         } else {
             print("Here is the limit, pay more money!")
-            let alert = PMAlertController(title: "Translate character has reach the limit",
-                                          description: "You can change your plan and get more characters",
+            let alert = PMAlertController(title: "Translate character has reach the limit".localized(),
+                                          description: "You can change your plan and get more characters".localized(),
                                           image: UIImage(named: "reading2"),
                                           style: .alert)
-            let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
-            let defaultAction = PMAlertAction(title: "See more plans", style: .default) { [weak self] in
+            let cancelAction = PMAlertAction(title: "Not now".localized(), style: .cancel)
+            let defaultAction = PMAlertAction(title: "See more plans".localized(), style: .default) { [weak self] in
                 let viewController = AccountViewController()
                 let navController = UINavigationController(rootViewController: viewController)
                 self?.present(navController, animated: true, completion: nil)
@@ -351,7 +351,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error?.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
@@ -367,7 +367,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
                 print("the GCP translation is \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error?.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }

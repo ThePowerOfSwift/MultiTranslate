@@ -26,7 +26,7 @@ class AboutSubscriptionViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "About subscription"
+        label.text = "About subscription".localized()
         label.textAlignment = .natural
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         label.numberOfLines = 0
@@ -37,7 +37,7 @@ class AboutSubscriptionViewController: UIViewController {
     private let contentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period. "
+        label.text = "Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period. ".localized()
         label.textAlignment = .natural
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
@@ -75,7 +75,7 @@ class AboutSubscriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "About subscription"
+        self.title = "About subscription".localized()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(dismissPage))
         view.backgroundColor = .mtSystemBackground
     }

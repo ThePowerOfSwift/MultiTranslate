@@ -12,23 +12,23 @@ import Firebase
 
 class SettingTableViewController: UITableViewController {
 
-    private let sections = ["Text translate language",
-                            "Camera translate language",
-                            "Voice translate language",
-                            "Conversation translate language",
-                            "AR translate language",
-                            "Documnet translate language",
-                            "Image translate language",
-                            "Offline translation module"]
+    private let sections = ["Text translate language".localized(),
+                            "Camera translate language".localized(),
+                            "Voice translate language".localized(),
+                            "Conversation translate language".localized(),
+                            "AR translate language".localized(),
+                            "Documnet translate language".localized(),
+                            "Image translate language".localized(),
+                            "Offline translation module".localized()]
     
-    private let textTranslateLanguageSection = ["Source", "Target"]
-    private let cameraTranslateLanguageSection = ["Source", "Target"]
-    private let voiceTranslateLanguageSection = ["Source", "Target"]
-    private let conversationTranslateLanguageSection = ["Source", "Target"]
-    private let arTranslateLanguageSection = ["Target"]
-    private let documentTranslateLanguageSection = ["Source", "Target"]
-    private let imageTranslateLanguageSection = ["Source", "Target"]
-    private let offlineLanguagesSection = ["Offline languages"]
+    private let textTranslateLanguageSection = ["Source".localized(), "Target".localized()]
+    private let cameraTranslateLanguageSection = ["Source".localized(), "Target".localized()]
+    private let voiceTranslateLanguageSection = ["Source".localized(), "Target".localized()]
+    private let conversationTranslateLanguageSection = ["Source".localized(), "Target".localized()]
+    private let arTranslateLanguageSection = ["Target".localized()]
+    private let documentTranslateLanguageSection = ["Source".localized(), "Target".localized()]
+    private let imageTranslateLanguageSection = ["Source".localized(), "Target".localized()]
+    private let offlineLanguagesSection = ["Offline languages".localized()]
     private var sectionList = [[String]]()
     
     private var textSourceLanguageIndex = UserDefaults.standard.integer(forKey: Constants.textSourceLanguageIndexKey)
@@ -66,7 +66,7 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Setting"
+        title = "Setting".localized()
         clearsSelectionOnViewWillAppear = true
         view.backgroundColor = .mtSystemBackground
         sectionList = [textTranslateLanguageSection,

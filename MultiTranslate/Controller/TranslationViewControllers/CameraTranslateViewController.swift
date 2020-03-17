@@ -483,7 +483,7 @@ class CameraTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Camera"]
+        let titleInfo = ["title" : "Camera".localized()]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
@@ -565,12 +565,12 @@ class CameraTranslateViewController: UIViewController {
                             self?.present(imagePicker, animated: true, completion: nil)
                         } else {
                             //access denied
-                            let alert = PMAlertController(title: "Camera access not allowed",
-                                                          description: "Use camera to detect words",
+                            let alert = PMAlertController(title: "Camera access not allowed".localized(),
+                                                          description: "Use camera to detect words".localized(),
                                                           image: UIImage(named: "color_camera"),
                                                           style: .alert)
-                            let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                            let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                            let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                                 
                                 if UIApplication.shared.canOpenURL(settingsUrl) {
@@ -589,8 +589,8 @@ class CameraTranslateViewController: UIViewController {
             
         } else {
             print("Camera is not available.")
-            let alert = PMAlertController(title: "No camera",
-                                          description: "Camera is not supported on this device",
+            let alert = PMAlertController(title: "No camera".localized(),
+                                          description: "Camera is not supported on this device".localized(),
                                           image: UIImage(named: "error"),
                                           style: .alert)
             let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
@@ -616,8 +616,8 @@ class CameraTranslateViewController: UIViewController {
         if error == nil {
             guard let observations = request?.results as? [VNRecognizedTextObservation] else {
                 print("Detecting error.")
-                SPAlert.present(title: "Error",
-                                message: "Cannot recognize text in this photo.",
+                SPAlert.present(title: "Error".localized(),
+                                message: "Cannot recognize text in this photo.".localized(),
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
                 return
             }
@@ -637,7 +637,7 @@ class CameraTranslateViewController: UIViewController {
             
         } else {
             print(error!.localizedDescription)
-            SPAlert.present(title: "Error",
+            SPAlert.present(title: "Error".localized(),
                             message: error!.localizedDescription,
                             image: UIImage(systemName: "exclamationmark.triangle")!)
         }
@@ -672,8 +672,8 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
             try imageRequestHandler.perform(requests)
         } catch {
             print("Process image error: \(error.localizedDescription)")
-            SPAlert.present(title: "Error",
-                            message: "Cannot recognize text in this photo. \(error.localizedDescription)",
+            SPAlert.present(title: "Error".localized(),
+                            message: "Cannot recognize text in this photo. %@".localizedFormat(error.localizedDescription),
                             image: UIImage(systemName: "exclamationmark.triangle")!)
         }
         
@@ -682,11 +682,11 @@ extension CameraTranslateViewController: UIImagePickerControllerDelegate, UINavi
         dismiss(animated: true) { [weak self] in
             guard let weakSelf = self else { return }
             if weakSelf.detectedResultString.isEmpty {
-                let alert = PMAlertController(title: "No text",
-                                              description: "Cannot recognize text in this photo. Please try again.",
+                let alert = PMAlertController(title: "No text".localized(),
+                                              description: "Cannot recognize text in this photo. Please try again.".localized(),
                                               image: UIImage(named: "error"),
                                               style: .alert)
-                let defaultAction = PMAlertAction(title: "Try again", style: .default)
+                let defaultAction = PMAlertAction(title: "Try again".localized(), style: .default)
                 alert.addAction(defaultAction)
                 weakSelf.present(alert, animated: true, completion: nil)
             } else {

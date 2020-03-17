@@ -11,6 +11,7 @@ import UIKit
 import DynamicColor
 import Parchment
 import paper_onboarding
+import Localize_Swift
 
 
 class TranslationViewController: UIViewController {
@@ -86,7 +87,9 @@ class TranslationViewController: UIViewController {
     private let skipButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("skip", for: .normal)
+        button.setTitle("skip".localized(), for: .normal)
+        // use {Localize_Swift} to do localization
+        
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .thin)
         button.setTitleColor(UIColor.init(white: 1, alpha: 0.95), for: .normal)
         return button
@@ -94,8 +97,8 @@ class TranslationViewController: UIViewController {
     
     private let onboardItems = [
         OnboardingItemInfo(informationImage: UIImage(named: "text-onboard")!.withTintColor(.white),
-                           title: "Text translate",
-                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           title: "Text translate".localized(),
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.".localized(),
                            pageIcon: UIImage(systemName: "1.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#7BC4E3"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -104,8 +107,8 @@ class TranslationViewController: UIViewController {
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "camera-onboard")!.withTintColor(.white),
-                           title: "Camera translate",
-                           description: "Take a photo of an article, Multi-Translate can detect words in the photo automatically.",
+                           title: "Camera translate".localized(),
+                           description: "Take a photo of an article, Multi-Translate can detect words in the photo automatically.".localized(),
                            pageIcon: UIImage(systemName: "2.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#5FB947"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -114,8 +117,8 @@ class TranslationViewController: UIViewController {
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "microphone-onboard")!.withTintColor(.white),
-                           title: "Speech translate",
-                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           title: "Speech translate".localized(),
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.".localized(),
                            pageIcon: UIImage(systemName: "3.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#F2B421"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -124,8 +127,8 @@ class TranslationViewController: UIViewController {
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "conversation-onboard")!.withTintColor(.white),
-                           title: "Conversation translate",
-                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           title: "Conversation translate".localized(),
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.".localized(),
                            pageIcon: UIImage(systemName: "4.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#F78019"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -134,8 +137,8 @@ class TranslationViewController: UIViewController {
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "ar-onboard")!.withTintColor(.white),
-                           title: "AR object translate",
-                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           title: "AR object translate".localized(),
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.".localized(),
                            pageIcon: UIImage(systemName: "5.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#DE3B3C"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -144,8 +147,8 @@ class TranslationViewController: UIViewController {
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
 
         OnboardingItemInfo(informationImage: UIImage(named: "doc-onboard")!.withTintColor(.white),
-                           title: "Document translate",
-                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           title: "Document translate".localized(),
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.".localized(),
                            pageIcon: UIImage(systemName: "6.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#933C96"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -154,8 +157,8 @@ class TranslationViewController: UIViewController {
                            descriptionFont: UIFont.preferredFont(forTextStyle: .body)),
         
         OnboardingItemInfo(informationImage: UIImage(named: "image-onboard")!.withTintColor(.white),
-                           title: "Image translate",
-                           description: "Supporting 104 languages.Offline translate is also available for FREE.",
+                           title: "Image translate".localized(),
+                           description: "Supporting 104 languages.Offline translate is also available for FREE.".localized(),
                            pageIcon: UIImage(systemName: "7.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.init(white: 1, alpha: 0.8)),
                            color: DynamicColor(hexString: "#009DDB"),
                            titleColor: .init(white: 1, alpha: 0.9),
@@ -239,8 +242,8 @@ class TranslationViewController: UIViewController {
             present(navController, animated: true, completion: nil)
         } else {
             print("this is the first time download page shown.")
-            let alert = PMAlertController(title: "Download offline language",
-                                          description: "Download offline language fast and save your ...",
+            let alert = PMAlertController(title: "Download offline language".localized(),
+                                          description: "Download offline language fast and save your ...".localized(),
                                           image: UIImage(named: "download"),
                                           style: .alert)
             let defaultAction = PMAlertAction(title: "Got it", style: .default) { [weak self] in

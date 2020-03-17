@@ -207,7 +207,9 @@ class SavedTranslationsTableViewCell: UITableViewCell {
     @objc func copyTargetText() {
         let pasteboard = UIPasteboard.general
         pasteboard.string = targetTextLabel.text
-        SPAlert.present(title: "Copied to clipboard", message: nil, image: UIImage(systemName: "doc.on.clipboard.fill")!)
+        SPAlert.present(title: "Copied to clipboard".localized(),
+                        message: nil,
+                        image: UIImage(systemName: "doc.on.clipboard.fill")!)
     }
     
     @objc func speakTargetText() {

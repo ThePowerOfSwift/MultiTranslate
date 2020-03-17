@@ -455,7 +455,7 @@ class VoiceTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Voice"]
+        let titleInfo = ["title" : "Voice".localized()]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
@@ -534,9 +534,12 @@ class VoiceTranslateViewController: UIViewController {
                         self.requestTranscribePermissions()
                     } else {
                         //access denied
-                        let alert = PMAlertController(title: "Microphone access not allowed", description: "Use microphone to record voice", image: UIImage(named: "color_microphone"), style: .alert)
-                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                        let alert = PMAlertController(title: "Microphone access not allowed".localized(),
+                                                      description: "Use microphone to record voice".localized(),
+                                                      image: UIImage(named: "color_microphone"),
+                                                      style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                             
                             if UIApplication.shared.canOpenURL(settingsUrl) {
@@ -565,9 +568,12 @@ class VoiceTranslateViewController: UIViewController {
                         self.presentRecorder()
                     } else {
                         print("Transcription permission was declined.")
-                        let alert = PMAlertController(title: "Speech recognizer", description: "Detect word in speech", image: UIImage(named: "color_microphone"), style: .alert)
-                        let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                        let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                        let alert = PMAlertController(title: "Speech recognizer".localized(),
+                                                      description: "Detect word in speech".localized(),
+                                                      image: UIImage(named: "color_microphone"),
+                                                      style: .alert)
+                        let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                        let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                             
                             if UIApplication.shared.canOpenURL(settingsUrl) {

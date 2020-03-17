@@ -463,7 +463,7 @@ class PDFTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Document Scan"]
+        let titleInfo = ["title" : "Document Scan".localized()]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
@@ -553,9 +553,12 @@ class PDFTranslateViewController: UIViewController {
                             self?.scanDocument()
                         } else {
                             //access denied
-                            let alert = PMAlertController(title: "Camera access not allowed", description: "Use camera to detect words", image: UIImage(named: "color_camera"), style: .alert)
-                            let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                            let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            let alert = PMAlertController(title: "Camera access not allowed".localized(),
+                                                          description: "Use camera to detect words".localized(),
+                                                          image: UIImage(named: "color_camera"),
+                                                          style: .alert)
+                            let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                            let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                                 
                                 if UIApplication.shared.canOpenURL(settingsUrl) {
@@ -573,8 +576,11 @@ class PDFTranslateViewController: UIViewController {
             }
         } else {
             print("Camera is not available.")
-            let alert = PMAlertController(title: "No camera", description: "Camera is not supported on this device", image: UIImage(named: "error"), style: .alert)
-            let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
+            let alert = PMAlertController(title: "No camera".localized(),
+                                          description: "Camera is not supported on this device".localized(),
+                                          image: UIImage(named: "error"),
+                                          style: .alert)
+            let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
             alert.addAction(cancelAction)
             present(alert, animated: true, completion: nil)
         }
@@ -590,8 +596,8 @@ class PDFTranslateViewController: UIViewController {
         if error == nil {
             guard let observations = request?.results as? [VNRecognizedTextObservation] else {
                 print("Detecting error.")
-                SPAlert.present(title: "Error",
-                                message: "Cannot recognize text in this photo.",
+                SPAlert.present(title: "Error".localized(),
+                                message: "Cannot recognize text in this photo.".localized(),
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
                 return
             }
@@ -611,7 +617,7 @@ class PDFTranslateViewController: UIViewController {
             
         } else {
             print(error!.localizedDescription)
-            SPAlert.present(title: "Error",
+            SPAlert.present(title: "Error".localized(),
                             message: error!.localizedDescription,
                             image: UIImage(systemName: "exclamationmark.triangle")!)
         }
@@ -640,7 +646,7 @@ extension PDFTranslateViewController: UINavigationControllerDelegate, ImageScann
             try imageRequestHandler.perform(requests)
         } catch {
             print("Process image error: \(error.localizedDescription)")
-            SPAlert.present(title: "Error",
+            SPAlert.present(title: "Error".localized(),
                             message: error.localizedDescription,
                             image: UIImage(systemName: "exclamationmark.triangle")!)
         }
@@ -649,8 +655,8 @@ extension PDFTranslateViewController: UINavigationControllerDelegate, ImageScann
         dismiss(animated: true) { [weak self] in
             guard let weakSelf = self else { return }
             if weakSelf.detectedResultString.isEmpty {
-                let alert = PMAlertController(title: "No text",
-                                              description: "Cannot recognize text in this photo. Please try again.",
+                let alert = PMAlertController(title: "No text".localized(),
+                                              description: "Cannot recognize text in this photo. Please try again.".localized(),
                                               image: UIImage(named: "error"),
                                               style: .alert)
                 let defaultAction = PMAlertAction(title: "Try again", style: .default)

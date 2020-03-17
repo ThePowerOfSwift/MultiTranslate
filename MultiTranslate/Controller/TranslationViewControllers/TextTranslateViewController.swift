@@ -359,7 +359,7 @@ class TextTranslateViewController: UIViewController {
     private let translateButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Translate", for: .normal)
+        button.setTitle("Translate".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .black)
         button.setTitleColor(.mtButtonLabel, for: .normal)
         button.setTitleColor(.systemBackground, for: .highlighted)
@@ -395,7 +395,7 @@ class TextTranslateViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .mtTextfieldBackground
         textView.font = UIFont.preferredFont(forTextStyle: .body)
-        textView.placeholder = "Input source text"
+        textView.placeholder = "Input source text".localized()
         textView.placeholderFont = UIFont.preferredFont(forTextStyle: .body)
         textView.placeholderColor = .placeholderText
         return textView
@@ -711,7 +711,7 @@ class TextTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Text"]
+        let titleInfo = ["title" : "Text".localized()]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
@@ -750,9 +750,9 @@ class TextTranslateViewController: UIViewController {
     
     func setUpKeyboardToolBar() {
         let bar = UIToolbar()
-        let dismissItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let dismissItem = UIBarButtonItem(title: "Dismiss".localized(), style: .plain, target: self, action: #selector(dismissKeyboard))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let translateItem = UIBarButtonItem(title: "Translate", style: .plain, target: self, action: #selector(doTranslate))
+        let translateItem = UIBarButtonItem(title: "Translate".localized(), style: .plain, target: self, action: #selector(doTranslate))
         bar.items = [dismissItem, spacer, translateItem]
         bar.sizeToFit()
         sourceInputText.inputAccessoryView = bar
@@ -925,7 +925,7 @@ class TextTranslateViewController: UIViewController {
         guard let text = sourceInputText.text else { return }
         if text.isEmpty {
             print("text is empty")
-            SPAlert.present(message: "Empty text")
+            SPAlert.present(message: "Empty text".localized())
         } else {
             
             if userType == .guestUser && isTranslateTypeNeedPro == true {
@@ -947,12 +947,12 @@ class TextTranslateViewController: UIViewController {
                     
                 } else {
                     print("Here is the limit, pay more money!")
-                    let alert = PMAlertController(title: "Translate character has reach the limit",
-                                                  description: "You can change your plan and get more characters",
+                    let alert = PMAlertController(title: "Translate character has reach the limit".localized(),
+                                                  description: "You can change your plan and get more characters".localized(),
                                                   image: UIImage(named: "reading2"),
                                                   style: .alert)
-                    let cancelAction = PMAlertAction(title: "Not now", style: .cancel)
-                    let defaultAction = PMAlertAction(title: "See more plans", style: .default) { [weak self] in
+                    let cancelAction = PMAlertAction(title: "Not now".localized(), style: .cancel)
+                    let defaultAction = PMAlertAction(title: "See more plans".localized(), style: .default) { [weak self] in
                         let viewController = AccountViewController()
                         let navController = UINavigationController(rootViewController: viewController)
                         self?.present(navController, animated: true, completion: nil)
@@ -994,11 +994,11 @@ class TextTranslateViewController: UIViewController {
         let targetLanguageCode = SupportedLanguages.gcpLanguageCode[temporaryTargetLanguageGCPIndex]
 
         if sourceLanguage == targetLanguage {
-            let alert = PMAlertController(title: "Error",
-                                          description: "You cannot translate \(sourceLanguage) to \(targetLanguage)",
+            let alert = PMAlertController(title: "Error".localized(),
+                                          description: "You cannot translate %@ to %@".localizedFormat(sourceLanguage, targetLanguage),
                                           image: UIImage(named: "error"),
                                           style: .alert)
-            let defaultAction = PMAlertAction(title: "Change language", style: .default)
+            let defaultAction = PMAlertAction(title: "Change language".localized(), style: .default)
             alert.addAction(defaultAction)
             present(alert, animated: true, completion: nil)
         } else {
@@ -1024,7 +1024,7 @@ class TextTranslateViewController: UIViewController {
                 print("the FB translation is \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error?.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
@@ -1040,7 +1040,7 @@ class TextTranslateViewController: UIViewController {
                 print("the GCP translation is \(result)")
             } else {
                 print(error!.localizedDescription)
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error?.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
@@ -1068,7 +1068,7 @@ class TextTranslateViewController: UIViewController {
             starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
             starButton.tintColor = .systemYellow
             
-            SPAlert.present(title: "Translation saved",
+            SPAlert.present(title: "Translation saved".localized(),
                             message: nil,
                             image: UIImage(systemName: "star.fill")!)
             
@@ -1085,7 +1085,7 @@ class TextTranslateViewController: UIViewController {
                 }
             } catch {
                 print("Error adding item, \(error)")
-                SPAlert.present(title: "Error",
+                SPAlert.present(title: "Error".localized(),
                                 message: error.localizedDescription,
                                 image: UIImage(systemName: "exclamationmark.triangle")!)
             }
@@ -1106,7 +1106,7 @@ class TextTranslateViewController: UIViewController {
             starButton.setImage(UIImage(systemName: "star"), for: .normal)
             starButton.tintColor = .systemBlue
             
-            SPAlert.present(title: "Removed",
+            SPAlert.present(title: "Removed".localized(),
                             message: nil,
                             image: UIImage(systemName: "star.slash.fill")!)
             
@@ -1158,7 +1158,7 @@ class TextTranslateViewController: UIViewController {
         let pasteboard = UIPasteboard.general
         pasteboard.string = targetOutputText.text
         
-        SPAlert.present(title: "Copied to clipboard",
+        SPAlert.present(title: "Copied to clipboard".localized(),
                         message: nil,
                         image: UIImage(systemName: "doc.on.clipboard.fill")!)
     }

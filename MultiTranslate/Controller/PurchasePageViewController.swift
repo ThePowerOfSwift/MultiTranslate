@@ -58,7 +58,7 @@ class PurchasePageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
 //        button.layer.cornerRadius = 12.5
-        button.setTitle("Restore", for: .normal)
+        button.setTitle("Restore".localized(), for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
         
@@ -77,7 +77,7 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Try 14 Days for FREE!"
+        label.text = "Try 14 Days for FREE!".localized()
         label.font = UIFont.boldSystemFont(ofSize: 35)
         label.textColor = .black
         label.sizeToFit()
@@ -90,7 +90,11 @@ class PurchasePageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "then \(InAppPurchaseManager.retrievedProducts[0].localizedPrice!) / year"
+        label.text = "then %@ / year".localizedFormat(InAppPurchaseManager.retrievedProducts[0].localizedPrice!)
+        //↑ localize variable strings https://stackoverflow.com/questions/26277626/nslocalizedstring-with-swift-variable
+        //↑ https://stackoverflow.com/questions/35316655/how-to-format-localised-strings-in-swift
+        //↑ https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Strings/Articles/formatSpecifiers.html
+        
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .black
         label.sizeToFit()
@@ -108,7 +112,7 @@ class PurchasePageViewController: UIViewController {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "save \(formatter.string(from: savedPrice)!) / year"
+        label.text = "save %@ / year".localizedFormat(formatter.string(from: savedPrice)!)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.textColor = .systemPink
         label.sizeToFit()
@@ -179,7 +183,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate."
+        label.text = "Detect words in photos and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -201,7 +205,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate."
+        label.text = "Detect words in photos and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -223,7 +227,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate."
+        label.text = "Detect words in photos and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -245,7 +249,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate."
+        label.text = "Detect words in photos and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -267,7 +271,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate."
+        label.text = "Detect words in photos and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -277,7 +281,7 @@ class PurchasePageViewController: UIViewController {
     private let subscribeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("START", for: .normal)
+        button.setTitle("START".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 35, weight: .bold)
 //        button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
@@ -294,7 +298,7 @@ class PurchasePageViewController: UIViewController {
     private let subscribeMonthlyButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Subscribe Monthly", for: .normal)
+        button.setTitle("Subscribe Monthly".localized(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 25, weight: .regular)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.systemGray, for: .highlighted)
@@ -331,7 +335,7 @@ class PurchasePageViewController: UIViewController {
     private let subscriptionInformationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("About subscription", for: .normal)
+        button.setTitle("About subscription".localized(), for: .normal)
         button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -341,7 +345,7 @@ class PurchasePageViewController: UIViewController {
     private let termsOfUseInformationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Terms of use", for: .normal)
+        button.setTitle("Terms of use".localized(), for: .normal)
         button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -351,7 +355,7 @@ class PurchasePageViewController: UIViewController {
     private let privacyPolicyInformationButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Privacy policy", for: .normal)
+        button.setTitle("Privacy policy".localized(), for: .normal)
         button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -549,12 +553,15 @@ class PurchasePageViewController: UIViewController {
                 InAppPurchaseManager.verifyPurchase(with: productIdentifier)
                 
                 self?.dismiss(animated: true) {
-                    SPAlert.present(title: "Purchase successfully.", preset: .done)
+                    SPAlert.present(title: "Purchase successfully.".localized(),
+                                    preset: .done)
                 }
                 
             case .error(let error):
                 print(error.localizedDescription)
-                SPAlert.present(title: "Purchase failed.", message: error.localizedDescription, preset: .error)
+                SPAlert.present(title: "Purchase failed.".localized(),
+                                message: error.localizedDescription,
+                                preset: .error)
             }
         }
     }

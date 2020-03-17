@@ -501,7 +501,7 @@ class ARTranslateViewController: UIViewController {
             print("defaultTargetLanguageIndex changed")
         }
         
-        let titleInfo = ["title" : "Augmented Reality"]
+        let titleInfo = ["title" : "Augmented Reality".localized()]
         NotificationCenter.default.post(name: .translationViewControllerDidChange, object: nil, userInfo: titleInfo)
     }
     
@@ -600,9 +600,12 @@ class ARTranslateViewController: UIViewController {
                             self?.present(viewController, animated: true, completion: nil)
                         } else {
                             //access denied
-                            let alert = PMAlertController(title: "Camera access not allowed", description: "Use camera to detect words", image: UIImage(named: "color_camera"), style: .alert)
-                            let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
-                            let defaultAction = PMAlertAction(title: "Setting", style: .default) {
+                            let alert = PMAlertController(title: "Camera access not allowed".localized(),
+                                                          description: "Use camera to detect words".localized(),
+                                                          image: UIImage(named: "color_camera"),
+                                                          style: .alert)
+                            let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
+                            let defaultAction = PMAlertAction(title: "Setting".localized(), style: .default) {
                                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
                                 if UIApplication.shared.canOpenURL(settingsUrl) {
                                     UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
@@ -620,7 +623,10 @@ class ARTranslateViewController: UIViewController {
             
         } else {
             print("Camera is not available.")
-            let alert = PMAlertController(title: "No camera", description: "Camera is not supported on this device", image: UIImage(named: "error"), style: .alert)
+            let alert = PMAlertController(title: "No camera".localized(),
+                                          description: "Camera is not supported on this device".localized(),
+                                          image: UIImage(named: "error"),
+                                          style: .alert)
             let cancelAction = PMAlertAction(title: "Cancel", style: .cancel)
             alert.addAction(cancelAction)
             present(alert, animated: true, completion: nil)

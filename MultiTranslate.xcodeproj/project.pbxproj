@@ -21,9 +21,6 @@
 		803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */; };
 		803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C9CD923DE578E00FCA145 /* AccountViewController.swift */; };
 		803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */; };
-		803E269D2408996A00DF5DF6 /* PMAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 803E269A2408996A00DF5DF6 /* PMAlertController.xib */; };
-		803E269E2408996A00DF5DF6 /* PMAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E269B2408996A00DF5DF6 /* PMAlertAction.swift */; };
-		803E269F2408996A00DF5DF6 /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803E269C2408996A00DF5DF6 /* PMAlertController.swift */; };
 		8052A1B823C2A24400883123 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B723C2A24400883123 /* AppDelegate.swift */; };
 		8052A1BA23C2A24400883123 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8052A1B923C2A24400883123 /* SceneDelegate.swift */; };
 		8052A1BF23C2A24400883123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8052A1BD23C2A24400883123 /* Main.storyboard */; };
@@ -72,6 +69,9 @@
 		80CAB17D2419D0C900133B25 /* TranslatedCharacterCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */; };
 		80D844AC23F287BD003D0C8C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */; };
 		80DB054423EAABD9003DE94D /* SupportedLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB054323EAABD9003DE94D /* SupportedLanguages.swift */; };
+		80FA89EF2422533700B654B4 /* PMAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA89EC2422533600B654B4 /* PMAlertAction.swift */; };
+		80FA89F02422533700B654B4 /* PMAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FA89ED2422533600B654B4 /* PMAlertController.xib */; };
+		80FA89F12422533700B654B4 /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA89EE2422533600B654B4 /* PMAlertController.swift */; };
 		80FE80F524062CEE00CC70DF /* NoSelectTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */; };
 		CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A32ED9C279B46E2913F1257 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
@@ -93,9 +93,6 @@
 		803A5DF723CFDB2F00AC4D12 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		803C9CD923DE578E00FCA145 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		803C9CDB23DE6BEB00FCA145 /* InAppPurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseManager.swift; sourceTree = "<group>"; };
-		803E269A2408996A00DF5DF6 /* PMAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMAlertController.xib; sourceTree = "<group>"; };
-		803E269B2408996A00DF5DF6 /* PMAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertAction.swift; sourceTree = "<group>"; };
-		803E269C2408996A00DF5DF6 /* PMAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertController.swift; sourceTree = "<group>"; };
 		8052A1B423C2A24400883123 /* MultiTranslate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTranslate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8052A1B723C2A24400883123 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8052A1B923C2A24400883123 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +227,9 @@
 		80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedCharacterCount.swift; sourceTree = "<group>"; };
 		80D844AB23F287BD003D0C8C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		80DB054323EAABD9003DE94D /* SupportedLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedLanguages.swift; sourceTree = "<group>"; };
+		80FA89EC2422533600B654B4 /* PMAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertAction.swift; sourceTree = "<group>"; };
+		80FA89ED2422533600B654B4 /* PMAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMAlertController.xib; sourceTree = "<group>"; };
+		80FA89EE2422533600B654B4 /* PMAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertController.swift; sourceTree = "<group>"; };
 		80FE80F424062CEE00CC70DF /* NoSelectTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectTextView.swift; sourceTree = "<group>"; };
 		C0D83EF7DF1C4FC6ADEB5FD1 /* amplifyxc.config */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = amplifyxc.config; path = ./amplifyxc.config; sourceTree = "<group>"; };
 		CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiTranslate.release.xcconfig"; path = "Target Support Files/Pods-MultiTranslate/Pods-MultiTranslate.release.xcconfig"; sourceTree = "<group>"; };
@@ -259,16 +259,6 @@
 				CC0E7F64AD746A170BAF32D7 /* Pods-MultiTranslate.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		803E26A12408999100DF5DF6 /* PMAlertController */ = {
-			isa = PBXGroup;
-			children = (
-				803E269B2408996A00DF5DF6 /* PMAlertAction.swift */,
-				803E269C2408996A00DF5DF6 /* PMAlertController.swift */,
-				803E269A2408996A00DF5DF6 /* PMAlertController.xib */,
-			);
-			name = PMAlertController;
 			sourceTree = "<group>";
 		};
 		8052A1AB23C2A24400883123 = {
@@ -382,7 +372,7 @@
 				805733BC241BC26C0018C73F /* ICloudUserIDProvider.swift */,
 				80CAB17C2419D0C900133B25 /* TranslatedCharacterCount.swift */,
 				807B489023C95C5200A588F3 /* MultiTranslate-Bridging-Header.h */,
-				803E26A12408999100DF5DF6 /* PMAlertController */,
+				80FA89F22422533D00B654B4 /* PMAlertController */,
 				807B489523C95C7900A588F3 /* SCSiriWaveformView */,
 			);
 			path = Controller;
@@ -416,6 +406,16 @@
 				80C29BCB2420CAAE0040F291 /* InfoPlist.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		80FA89F22422533D00B654B4 /* PMAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				80FA89EC2422533600B654B4 /* PMAlertAction.swift */,
+				80FA89EE2422533600B654B4 /* PMAlertController.swift */,
+				80FA89ED2422533600B654B4 /* PMAlertController.xib */,
+			);
+			path = PMAlertController;
 			sourceTree = "<group>";
 		};
 		E41E6BBBF80C6EC88FE805E7 /* Frameworks */ = {
@@ -522,7 +522,7 @@
 				8052A1C423C2A24500883123 /* LaunchScreen.storyboard in Resources */,
 				8052A1C123C2A24500883123 /* Assets.xcassets in Resources */,
 				80C29BC82420C71D0040F291 /* info.plist in Resources */,
-				803E269D2408996A00DF5DF6 /* PMAlertController.xib in Resources */,
+				80FA89F02422533700B654B4 /* PMAlertController.xib in Resources */,
 				8052A1BF23C2A24400883123 /* Main.storyboard in Resources */,
 				80C8683E241FA7680030418F /* Localizable.strings in Resources */,
 				CB5C3A3FE63745719E73ED9A /* awsconfiguration.json in Resources */,
@@ -618,7 +618,6 @@
 			files = (
 				80207718240F6C7C00F604E5 /* ARViewController.swift in Sources */,
 				807AECB423D5665800EE2569 /* GoogleCloudTranslate.swift in Sources */,
-				803E269E2408996A00DF5DF6 /* PMAlertAction.swift in Sources */,
 				80BDB6A823CF3EDA00F81D40 /* Conversation.swift in Sources */,
 				8052A1CC23C2DCDC00883123 /* TranslationViewController.swift in Sources */,
 				80C535C923C56A530044D6F0 /* Constants.swift in Sources */,
@@ -629,6 +628,7 @@
 				8020771A240F6CEB00F604E5 /* Inceptionv3.mlmodel in Sources */,
 				803C9CDC23DE6BEB00FCA145 /* InAppPurchaseManager.swift in Sources */,
 				80A403DD23FFA70800E84231 /* SwiftyInnerShadowView.swift in Sources */,
+				80FA89F12422533700B654B4 /* PMAlertController.swift in Sources */,
 				8052A1D023C2E03800883123 /* IconPagingCell.swift in Sources */,
 				8078D1DD23D6EE61007FAF85 /* SavedTranslation.swift in Sources */,
 				8052A1D823C2FD9600883123 /* TextTranslateViewController.swift in Sources */,
@@ -662,10 +662,10 @@
 				803A5DF823CFDB2F00AC4D12 /* ConversationCell.swift in Sources */,
 				803C9CDA23DE578E00FCA145 /* AccountViewController.swift in Sources */,
 				80A403DE23FFA70800E84231 /* SwiftyInnerShadowLayer.swift in Sources */,
+				80FA89EF2422533700B654B4 /* PMAlertAction.swift in Sources */,
 				808E75EF23C45F90009A0EB4 /* LanguagePickerViewController.swift in Sources */,
 				805733BD241BC26C0018C73F /* ICloudUserIDProvider.swift in Sources */,
 				806482DF23F63387006BBDD5 /* FBLanguageTableViewCell.swift in Sources */,
-				803E269F2408996A00DF5DF6 /* PMAlertController.swift in Sources */,
 				8052A1DE23C2FDCB00883123 /* ARTranslateViewController.swift in Sources */,
 				80293EEE23C9C2C100E33096 /* SourceTextInputDelegate.swift in Sources */,
 				806482E123F6A7C5006BBDD5 /* NotificationNameExtension.swift in Sources */,

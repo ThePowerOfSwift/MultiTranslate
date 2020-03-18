@@ -274,7 +274,6 @@
 		8052A1AB23C2A24400883123 = {
 			isa = PBXGroup;
 			children = (
-				80C8683C241FA7670030418F /* Localizable.strings */,
 				8052A1B623C2A24400883123 /* MultiTranslate */,
 				8052A1B523C2A24400883123 /* Products */,
 				66B09DD0287145E07C68CE29 /* Pods */,
@@ -306,11 +305,11 @@
 				8052A1E523C305EB00883123 /* Model */,
 				8052A1E423C305C100883123 /* View */,
 				8052A1E723C3061600883123 /* Extension */,
+				80FA89EA2421A9A600B654B4 /* Localization */,
 				8052A1C023C2A24500883123 /* Assets.xcassets */,
 				8052A1C223C2A24500883123 /* LaunchScreen.storyboard */,
 				80C29BC72420C71D0040F291 /* info.plist */,
 				805AB0D623DD9B1D00215415 /* GoogleService-Info.plist */,
-				80C29BCB2420CAAE0040F291 /* InfoPlist.strings */,
 			);
 			path = MultiTranslate;
 			sourceTree = "<group>";
@@ -408,6 +407,15 @@
 				807B489123C95C5200A588F3 /* SCSiriWaveformView.m */,
 			);
 			path = SCSiriWaveformView;
+			sourceTree = "<group>";
+		};
+		80FA89EA2421A9A600B654B4 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				80C8683C241FA7670030418F /* Localizable.strings */,
+				80C29BCB2420CAAE0040F291 /* InfoPlist.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		E41E6BBBF80C6EC88FE805E7 /* Frameworks */ = {

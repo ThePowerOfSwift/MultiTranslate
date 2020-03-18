@@ -30,7 +30,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     private let debugTextView: UITextView = {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Detecting object...".localized()
+        view.text = "Detecting object. Please wait a miniute...".localized()
         view.isEditable = false
         return view
     }()

@@ -83,7 +83,7 @@ class LanguagePickerViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .mtSystemBackground
-        title = "Language selector"
+        title = "Language selector".localized()
 
         pickerView.delegate = self
         pickerView.dataSource = self

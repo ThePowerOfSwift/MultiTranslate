@@ -162,7 +162,7 @@ class FBLanguageTableViewController: UITableViewController {
             } else {
                 print(error!.localizedDescription)
                 let alert = PMAlertController(title: "Error".localized(), description: error?.localizedDescription, image: UIImage(named: "error"), style: .alert)
-                let cancelAction = PMAlertAction(title: "cancel".localized(), style: .cancel)
+                let cancelAction = PMAlertAction(title: "Cancel".localized(), style: .cancel)
                 alert.addAction(cancelAction)
                 self?.present(alert, animated: true, completion: nil)
             }

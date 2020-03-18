@@ -563,7 +563,7 @@ class ConversationTranslateViewController: UIViewController {
         if sourceLanguage == targetLanguage {
             let alert = PMAlertController(title: "Error".localized(),
                                           description: "You cannot translate %@ to %@".localizedFormat(sourceLanguage, targetLanguage),
-                                          image: UIImage(named: "error".localized()),
+                                          image: UIImage(named: "error"),
                                           style: .alert)
             let defaultAction = PMAlertAction(title: "Change language".localized(), style: .default)
             alert.addAction(defaultAction)

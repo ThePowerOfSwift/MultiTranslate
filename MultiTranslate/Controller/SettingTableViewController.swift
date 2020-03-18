@@ -12,14 +12,14 @@ import Firebase
 
 class SettingTableViewController: UITableViewController {
 
-    private let sections = ["Text translate language".localized(),
-                            "Camera translate language".localized(),
-                            "Voice translate language".localized(),
-                            "Conversation translate language".localized(),
-                            "AR translate language".localized(),
-                            "Documnet translate language".localized(),
-                            "Image translate language".localized(),
-                            "Offline translation module".localized()]
+    private let sections = ["Text translate languages".localized(),
+                            "Camera translate languages".localized(),
+                            "Voice translate languages".localized(),
+                            "Conversation translate languages".localized(),
+                            "AR translate languages".localized(),
+                            "Documnet translate languages".localized(),
+                            "Image translate languages".localized(),
+                            "Offline translation modules".localized()]
     
     private let textTranslateLanguageSection = ["Source".localized(), "Target".localized()]
     private let cameraTranslateLanguageSection = ["Source".localized(), "Target".localized()]

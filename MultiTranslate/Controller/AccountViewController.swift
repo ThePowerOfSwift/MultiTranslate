@@ -14,7 +14,7 @@ class AccountViewController: UIViewController {
 
     private var isYearlyPlan: Bool = true
     private let colors = [UIColor(rgb: 0xff4d4d), UIColor(rgb: 0x46b3e6), UIColor(rgb: 0x738598)]
-    private let titles = ["No Limit".localized(), "50k characters/month".localized(), "10k characters/month".localized()]
+    private let titles = ["No Limit".localized(), "50K characters/month".localized(), "10K characters/month".localized()]
     private let subTitles = ["For a pro translater".localized(), "Most popular".localized(), "Limited".localized()]
     private let illustrations = [UIImage(named: "crown"), UIImage(named: "firework"), UIImage(named: "diamond")]
     
@@ -144,6 +144,7 @@ class AccountViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("About subscription".localized(), for: .normal)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(.systemGray2, for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -154,6 +155,7 @@ class AccountViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Terms of use".localized(), for: .normal)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(.systemGray2, for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -164,6 +166,7 @@ class AccountViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Privacy policy".localized(), for: .normal)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(.systemGray2, for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -233,6 +236,7 @@ class AccountViewController: UIViewController {
         subscriptionInformationView.addSubview(subscriptionInformationButton)
         subscriptionInformationButton.centerYAnchor.constraint(equalTo: subscriptionInformationView.centerYAnchor).isActive = true
         subscriptionInformationButton.trailingAnchor.constraint(equalTo: subscriptionInformationView.trailingAnchor, constant: -5).isActive = true
+        subscriptionInformationButton.leadingAnchor.constraint(equalTo: subscriptionInformationView.leadingAnchor, constant: 10).isActive = true
         
         termsOfUseInformationView.addSubview(termsOfUseInformationButton)
         termsOfUseInformationButton.centerInSuperview()
@@ -240,6 +244,7 @@ class AccountViewController: UIViewController {
         privacyPolicyInformationView.addSubview(privacyPolicyInformationButton)
         privacyPolicyInformationButton.centerYAnchor.constraint(equalTo: privacyPolicyInformationView.centerYAnchor).isActive = true
         privacyPolicyInformationButton.leadingAnchor.constraint(equalTo: privacyPolicyInformationView.leadingAnchor, constant: 5).isActive = true
+        privacyPolicyInformationButton.trailingAnchor.constraint(equalTo: privacyPolicyInformationView.trailingAnchor, constant: -10).isActive = true
     }
 
 

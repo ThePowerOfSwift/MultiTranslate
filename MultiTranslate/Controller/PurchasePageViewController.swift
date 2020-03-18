@@ -81,7 +81,8 @@ class PurchasePageViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 35)
         label.textColor = .black
         label.sizeToFit()
-        label.numberOfLines = 1
+        label.numberOfLines = 0
+        label.textAlignment = .natural
         
         return label
     }()
@@ -205,7 +206,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate.".localized()
+        label.text = "Detect words in speech and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -227,7 +228,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate.".localized()
+        label.text = "Translate conversation smoothly.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -249,7 +250,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate.".localized()
+        label.text = "Detect objects in reality and translate.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -271,7 +272,7 @@ class PurchasePageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = .black
-        label.text = "Detect words in photos and translate.".localized()
+        label.text = "Scan document and detect words in document.".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         
@@ -336,6 +337,7 @@ class PurchasePageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("About subscription".localized(), for: .normal)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -346,6 +348,7 @@ class PurchasePageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Terms of use".localized(), for: .normal)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -356,6 +359,7 @@ class PurchasePageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Privacy policy".localized(), for: .normal)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
         button.setTitleColor(.systemGray5, for: .highlighted)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -401,7 +405,7 @@ class PurchasePageViewController: UIViewController {
         titleView.topAnchor.constraint(equalTo: container.topAnchor, constant: 165).isActive = true
         titleView.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
         titleView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         container.addSubview(detailView)
         detailView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 5).isActive = true
@@ -431,7 +435,7 @@ class PurchasePageViewController: UIViewController {
      
         titleView.addSubview(promotionTitle1)
         promotionTitle1.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 5).isActive = true
-        promotionTitle1.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 5).isActive = true
+        promotionTitle1.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 35).isActive = true
         promotionTitle1.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -5).isActive = true
         
         titleView.addSubview(promotionTitle2)
@@ -491,6 +495,7 @@ class PurchasePageViewController: UIViewController {
         subscriptionInformationView.addSubview(subscriptionInformationButton)
         subscriptionInformationButton.centerYAnchor.constraint(equalTo: subscriptionInformationView.centerYAnchor).isActive = true
         subscriptionInformationButton.trailingAnchor.constraint(equalTo: subscriptionInformationView.trailingAnchor, constant: -5).isActive = true
+        subscriptionInformationButton.leadingAnchor.constraint(equalTo: subscriptionInformationView.leadingAnchor, constant: 10).isActive = true
         
         termsOfUseInformationView.addSubview(termsOfUseInformationButton)
         termsOfUseInformationButton.centerInSuperview()
@@ -498,6 +503,7 @@ class PurchasePageViewController: UIViewController {
         privacyPolicyInformationView.addSubview(privacyPolicyInformationButton)
         privacyPolicyInformationButton.centerYAnchor.constraint(equalTo: privacyPolicyInformationView.centerYAnchor).isActive = true
         privacyPolicyInformationButton.leadingAnchor.constraint(equalTo: privacyPolicyInformationView.leadingAnchor, constant: 5).isActive = true
+        privacyPolicyInformationButton.trailingAnchor.constraint(equalTo: privacyPolicyInformationView.trailingAnchor, constant: -10).isActive = true
     }
 
     override func viewDidLoad() {

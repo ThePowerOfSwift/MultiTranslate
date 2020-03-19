@@ -5,3 +5,571 @@
   Created by Keishin CHOU on 2020/03/16.
   Copyright © 2020 Keishin CHOU. All rights reserved.
 */
+
+"/month" = "/月";
+
+"/year" = "/年";
+
+"10K characters/month" = "每月10K个字符";
+
+"50K characters/month" = "每月50K个字符";
+
+"AR object translate" = "AR对象翻译";
+
+"AR translate languages" = "AR翻译语言";
+
+"About subscription" = "关于订阅";
+
+"Afrikaans" = "南非语";
+
+"Albanian" = "阿尔巴尼亚语";
+
+"Amharic" = "阿姆哈拉语";
+
+"Arabic" = "阿拉伯";
+
+"Arabic (Saudi Arabia)" = "阿拉伯语（沙特阿拉伯）";
+
+"Armenian" = "亚美尼亚人";
+
+"Augmented Reality" = "增强现实";
+
+"Automatically recognize and translate words in images." = "自动识别并翻译图像中的单词。";
+
+"Automatically recognize and translate words in speech." = "自动识别和翻译语音中的单词。";
+
+"Automatically recognize objects in camera images. \n Display the names of the objects using AR." = "自动识别相机图像中的对象。\n 使用AR显示对象的名称。";
+
+"Automatically recognize words in conversations and translate smoothly." = "自动识别对话中的单词并顺利翻译。";
+
+"Automatically scan documents and recognize characters." = "自动扫描文档并识别字符。";
+
+"Azerbaijani" = "阿塞拜疆";
+
+"Basque" = "巴斯克";
+
+"Belarusian" = "白俄罗斯语";
+
+"Bengali" = "孟加拉";
+
+"Bosnian" = "波斯尼亚人";
+
+"Bulgarian" = "保加利亚语";
+
+"Camera" = "相机";
+
+"Camera access not allowed" = "不允许使用相机";
+
+"Camera is not supported on this device" = "此设备不支持相机";
+
+"Camera translate" = "相机翻译";
+
+"Camera translate languages" = "相机翻译语言";
+
+"Cancel" = "取消";
+
+"Cannot download language, please try again." = "无法下载语言，请重试。";
+
+"Cannot extract any text from the speech, please try again." = "无法从语音中提取任何文本，请重试。";
+
+"Cannot recognize text in this photo." = "无法识别这张照片中的文字。";
+
+"Cannot recognize text in this photo. %@" = "无法识别这张照片中的文字。 %@";
+
+"Cannot recognize text in this photo. Please try again." = "无法识别这张照片中的文字。请再试一遍。";
+
+"Catalan" = "加泰罗尼亚语";
+
+"Catalan (Spain)" = "加泰罗尼亚语（西班牙）";
+
+"Cebuano" = "宿务";
+
+"Change language" = "改变语言";
+
+"Chech app setting" = "检查应用程序设置";
+
+"Chinese (China)" = "中文（中国）";
+
+"Chinese (HK)" = "中文（香港）";
+
+"Chinese (Hongkong)" = "中文（香港）";
+
+"Chinese (Mandarin)" = "中文（普通话）";
+
+"Clear records?" = "清除记录？";
+
+"Conversation" = "会话";
+
+"Conversation translate" = "对话翻译";
+
+"Conversation translate languages" = "会话翻译语言";
+
+"Copied to clipboard" = "复制到剪贴板";
+
+"Corsican" = "科西嘉人";
+
+"Croatian" = "克罗地亚语";
+
+"Croatian (Croatia)" = "克罗地亚语（克罗地亚）";
+
+"Czech" = "捷克文";
+
+"Czech (Czech)" = "捷克文（捷克文）";
+
+"Danish" = "丹麦文";
+
+"Delete" = "删除";
+
+"Delete all records?" = "删除所有记录？";
+
+"Detect objects in reality and translate." = "在现实中检测物体并进行翻译。";
+
+"Detect word in speech" = "检测语音中的单词";
+
+"Detect words in photos and translate." = "检测照片中的单词并翻译。";
+
+"Detect words in speech and translate." = "检测语音中的单词并翻译。";
+
+"Detecting object. Please wait a miniute..." = "检测物体。请稍等...";
+
+"Dismiss" = "解雇";
+
+"Document Scan" = "文件扫描";
+
+"Document translate" = "文件翻译";
+
+"Documnet translate languages" = "Documnet翻译语言";
+
+"Download failed" = "下载失败";
+
+"Download offline language" = "下载离线语言";
+
+"Downloaded languages" = "下载语言";
+
+"Dutch" = "荷兰人";
+
+"Dutch (Belgium)" = "荷兰语（比利时）";
+
+"Dutch (Netherlands)" = "荷兰语（荷兰）";
+
+"Empty text" = "空文字";
+
+"English" = "英语";
+
+"English (Australia)" = "英文（澳洲）";
+
+"English (Canada)" = "英文（加拿大）";
+
+"English (India)" = "英文（印度）";
+
+"English (Ireland)" = "英文（爱尔兰）";
+
+"English (New Zealand)" = "英文（纽西兰）";
+
+"English (Philippines)" = "英文（菲律宾）";
+
+"English (Saudi Arabia)" = "英文（沙特阿拉伯）";
+
+"English (Singapore)" = "英文（新加坡）";
+
+"English (South Africa)" = "英语（南非）";
+
+"English (United Kingdom)" = "英文（英国）";
+
+"English (United States)" = "美国英语）";
+
+"English language cannot be deleted." = "不能删除英语。";
+
+"Error" = "错误";
+
+"Esperanto" = "世界语";
+
+"Estonian" = "爱沙尼亚语";
+
+"Finnish" = "芬兰";
+
+"Finnish (Finland)" = "芬兰文（芬兰）";
+
+"For a pro translater" = "对于专业翻译";
+
+"French" = "法文";
+
+"French (Belgium)" = "法语（比利时）";
+
+"French (Canada)" = "法语（加拿大）";
+
+"French (France)" = "法语（法国）";
+
+"French (Switzerland)" = "法语（瑞士）";
+
+"Frisian" = "弗里斯兰语";
+
+"Galician" = "加利西亚人";
+
+"Georgian" = "格鲁吉亚人";
+
+"German" = "德语";
+
+"German (Austria)" = "德语（奥地利）";
+
+"German (Germany)" = "德文（德国）";
+
+"German (Switzerland)" = "德语（瑞士）";
+
+"Get Multi-Translate PRO" = "获取多翻译专业版";
+
+"Got it" = "得到它了";
+
+"Greek" = "希腊语";
+
+"Gujarati" = "古吉拉特语";
+
+"Haitian Creole" = "海地克里奥尔语";
+
+"Hausa" = "豪萨";
+
+"Hawaiian" = "夏威夷人";
+
+"Hebrew" = "希伯来语";
+
+"Hebrew (Israel)" = "希伯来语（以色列）";
+
+"Hindi" = "印地语";
+
+"Hindi (India)" = "印地语（印度）";
+
+"Hmong" = "苗族";
+
+"Hungarian" = "匈牙利";
+
+"Hungarian (Hungary)" = "匈牙利文（匈牙利文）";
+
+"Icelandic" = "冰岛的";
+
+"Igbo" = "伊博";
+
+"Image" = "图片";
+
+"Image translate" = "图片翻译";
+
+"Image translate languages" = "图片翻译语言";
+
+"Indonesian" = "印度尼西亚";
+
+"Indonesian (Indonesia)" = "印尼文（印尼）";
+
+"Input source text" = "输入源文字";
+
+"Irish" = "爱尔兰人";
+
+"Italian" = "义大利文";
+
+"Italian (Italy)" = "义大利文（意大利）";
+
+"Italian (Switzerland)" = "义大利文（瑞士）";
+
+"Japanese" = "日本";
+
+"Japanese (Japan)" = "日语（日本）";
+
+"Javanese" = "爪哇语";
+
+"Kannada" = "卡纳达语";
+
+"Kazakh" = "哈萨克语";
+
+"Khmer" = "高棉语";
+
+"Korean" = "韩语";
+
+"Korean (Korea)" = "韩文（韩国）";
+
+"Kurdish" = "库尔德";
+
+"Kyrgyz" = "吉尔吉斯";
+
+"Language deleted" = "语言已删除";
+
+"Language downloaded" = "语言下载";
+
+"Language selector" = "语言选择器";
+
+"Lao" = "老挝";
+
+"Latin" = "拉丁";
+
+"Latvian" = "拉脱维亚语";
+
+"Limited" = "有限";
+
+"Lithuanian" = "立陶宛语";
+
+"Luxembourgish" = "卢森堡语";
+
+"Macedonian" = "马其顿语";
+
+"Malagasy" = "马尔加什";
+
+"Malay" = "马来语";
+
+"Malay (Malaysia)" = "马来语（马来西亚）";
+
+"Malayalam" = "马拉雅拉姆语";
+
+"Maltese" = "马耳他语";
+
+"Maori" = "毛利人";
+
+"Marathi" = "马拉地语";
+
+"Microphone access not allowed" = "不允许使用麦克风";
+
+"Mongolian" = "蒙";
+
+"Monthly plan" = "月度计划";
+
+"Most popular" = "最受欢迎";
+
+"Multiple ways to translate with high accuracy!" = "多种翻译方式！";
+
+"Myanmar (Burmese)" = "缅甸（缅甸）";
+
+"Nepali" = "尼泊尔文";
+
+"No Limit" = "没有限制";
+
+"No camera" = "没有相机";
+
+"No item" = "没有项目";
+
+"No photo" = "不许拍照";
+
+"No purchase restored." = "无法恢复购买。";
+
+"No text" = "没有文字";
+
+"Norwegian" = "挪威";
+
+"Norwegian (Norway)" = "挪威文（挪威）";
+
+"Not now" = "现在不要";
+
+"Nyanja (Chichewa)" = "Nyanja（奇切瓦）";
+
+"Offline languages" = "离线语言";
+
+"Offline translate faster with no network access. Offline translate can save your packet communication fee." = "脱机翻译速度更快，无需网络访问。离线翻译可以节省您的数据包通信费用。";
+
+"Offline translate languages" = "离线翻译语言";
+
+"Offline translation modules" = "离线翻译模块";
+
+"Pashto" = "普什图语";
+
+"Persian" = "波斯语";
+
+"Photo access not allowed" = "不允许照片访问";
+
+"Photo library is not supported on this device" = "此设备不支持照片库";
+
+"Please allow microphone and speech recognizer" = "请允许使用麦克风和语音识别器";
+
+"Please try again." = "请再试一遍。";
+
+"Polish" = "抛光";
+
+"Polish (Poland)" = "波兰文（波兰）";
+
+"Portuguese" = "葡萄牙语";
+
+"Portuguese (Brazil)" = "葡萄牙语（巴西）";
+
+"Portuguese (Portugal)" = "葡萄牙语（葡萄牙）";
+
+"Privacy policy" = "隐私政策";
+
+"Punjabi" = "旁遮普语";
+
+"Purchase failed." = "购买失败。";
+
+"Purchase successfully." = "购买成功。";
+
+"Records cannot be recovered once deleted." = "删除记录后将无法恢复记录。";
+
+"Records cleared" = "记录已清除";
+
+"Removed" = "已移除";
+
+"Restarting AR session..." = "正在重启AR会话...";
+
+"Restore" = "恢复";
+
+"Restore purchase failed." = "恢复购买失败。";
+
+"Restored purchase successfully." = "恢复购买成功。";
+
+"Romanian" = "罗马尼亚语";
+
+"Romanian (Romania)" = "罗马尼亚语（罗马尼亚）";
+
+"Russian" = "俄语";
+
+"Russian (Russia)" = "俄语（俄罗斯）";
+
+"START" = "开始";
+
+"Samoan" = "萨摩亚人";
+
+"Saved Translations" = "保存的翻译";
+
+"Scan document and detect words in document." = "扫描文档并检测文档中的单词。";
+
+"Scots Gaelic" = "苏格兰盖尔语";
+
+"See more plans" = "查看更多计划";
+
+"Select a photo to detect words" = "选择一张照片以检测单词";
+
+"Serbian" = "塞尔维亚";
+
+"Sesotho" = "塞索托";
+
+"Setting" = "设置";
+
+"Shona" = "庄名";
+
+"Sindhi" = "信地";
+
+"Sinhala (Sinhalese)" = "僧伽罗语（僧伽罗语）";
+
+"Slovak" = "斯洛伐克文";
+
+"Slovak (Slovakia)" = "斯洛伐克（斯洛伐克）";
+
+"Slovenian" = "斯洛文尼亚文";
+
+"Somali" = "索马里";
+
+"Source" = "资源";
+
+"Spanish" = "西班牙文";
+
+"Spanish (Chile)" = "西班牙语（智利）";
+
+"Spanish (Colombia)" = "西班牙语（哥伦比亚）";
+
+"Spanish (Latin America & Caribbean)" = "西班牙语（拉丁美洲和加勒比）";
+
+"Spanish (Mexico)" = "西班牙语（墨西哥）";
+
+"Spanish (Spain)" = "西班牙语（西班牙）";
+
+"Spanish (United States)" = "西班牙语（美国）";
+
+"Speech recognizer" = "语音识别器";
+
+"Speech translate" = "语音翻译";
+
+"Subscribe Monthly" = "每月订阅";
+
+"Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period." = "在确认购买时以及每个续订期开始时，订阅付款都将从您的iTunes帐户中扣除。\n 具有免费试用期的订阅将自动续订为付费订阅。您可以在每个当前订阅期结束前至少24小时在iTunes设置中取消订阅或免费试用。取消将在当前订阅期的最后一天之后生效，您将被降级为免费服务。当您在免费试用期内购买高级订阅时，免费试用期的任何未使用部分（如果提供）将被没收。";
+
+"Sundanese" = "dan他";
+
+"Supporting 104 languages. \n Offline translate is also available for FREE." = "支持104种语言。 \n 离线翻译也是免费的。";
+
+"Swahili" = "斯瓦希里语";
+
+"Swedish" = "瑞典";
+
+"Swedish (Sweden)" = "瑞典文（瑞典）";
+
+"Tagalog (Filipino)" = "他加禄语（菲律宾）";
+
+"Tajik" = "塔吉克";
+
+"Tamil" = "泰米尔语";
+
+"Target" = "目标";
+
+"Telugu" = "泰卢固语";
+
+"Terms of use" = "使用条款";
+
+"Text" = "文本";
+
+"Text translate" = "文字翻译";
+
+"Text translate languages" = "文字翻译语言";
+
+"Thai" = "泰国";
+
+"Thai (Thailand)" = "泰文（泰国）";
+
+"The records cannot be recovered once deleted" = "一旦删除记录将无法恢复";
+
+"Translate" = "翻译";
+
+"Translate character has reach the limit" = "翻译字符已达到上限";
+
+"Translate conversation smoothly." = "顺利进行对话。";
+
+"Translation deleted" = "翻译已删除";
+
+"Translation saved" = "翻译已保存";
+
+"Try 14 Days for FREE!" = "免费试用14天！";
+
+"Try again" = "再试一次";
+
+"Try again." = "再试一次。";
+
+"Turkish" = "土耳其";
+
+"Turkish (Turkey)" = "土耳其文（土耳其）";
+
+"Ukrainian" = "乌克兰";
+
+"Ukrainian (Ukraine)" = "乌克兰文（乌克兰）";
+
+"Undownloaded languages" = "未下载的语言";
+
+"Urdu" = "乌尔都语";
+
+"Use camera to detect words" = "使用相机检测单词";
+
+"Use microphone to record voice" = "使用麦克风录制语音";
+
+"Uzbek" = "乌兹别克语";
+
+"Vietnamese" = "越南文";
+
+"Vietnamese (Vietnam)" = "越南文（越南）";
+
+"Voice" = "语音";
+
+"Voice recorder error occurred." = "发生录音机错误。";
+
+"Voice translate languages" = "语音翻译语言";
+
+"Welsh" = "威尔士语";
+
+"Xhosa" = "科萨";
+
+"Yearly plan" = "年度计划";
+
+"Yiddish" = "意第绪语";
+
+"Yoruba" = "约鲁巴语";
+
+"You can change your plan and get more characters" = "您可以更改计划并获得更多角色";
+
+"You cannot translate %@ to %@" = "您不能将%@转换为%@";
+
+"Zulu" = "祖鲁族";
+
+"save %@ / year" = "每年节省%@";
+
+"skip" = "跳跃";
+
+"then %@ / year" = "然后%@ /年";

@@ -36,7 +36,7 @@ class PrivacyPolicyViewController: UIViewController {
     private let contentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("""
+        label.text = """
             Keishin Chou built the Multi Translate app as an Open Source app. This SERVICE is provided by Keishin Chou at no cost and is intended for use as is.
 
             This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
@@ -93,7 +93,8 @@ class PrivacyPolicyViewController: UIViewController {
             Contact Us
 
             If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at keishin.chou@gmail.com.
-            """, comment: "PrivacyPolicy")
+            """.localized()
+        
         label.textAlignment = .natural
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 0

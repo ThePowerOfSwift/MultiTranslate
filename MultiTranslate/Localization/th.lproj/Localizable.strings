@@ -5,3 +5,571 @@
   Created by Keishin CHOU on 2020/03/16.
   Copyright © 2020 Keishin CHOU. All rights reserved.
 */
+
+"/month" = "/ เดือน";
+
+"/year" = "/ ปี";
+
+"10K characters/month" = "10K ตัวอักษร / เดือน";
+
+"50K characters/month" = "50K ตัวอักษร / เดือน";
+
+"AR object translate" = "วัตถุ AR แปล";
+
+"AR translate languages" = "AR แปลภาษา";
+
+"About subscription" = "เกี่ยวกับการสมัครสมาชิก";
+
+"Afrikaans" = "แอฟริกาใต้";
+
+"Albanian" = "แอลเบเนีย";
+
+"Amharic" = "อัมฮาริค";
+
+"Arabic" = "ภาษาอาหรับ";
+
+"Arabic (Saudi Arabia)" = "อาหรับ (ซาอุดิอาระเบีย)";
+
+"Armenian" = "อาร์เมเนีย";
+
+"Augmented Reality" = "เพิ่มความเป็นจริง";
+
+"Automatically recognize and translate words in images." = "จดจำและแปลคำศัพท์ในภาพโดยอัตโนมัติ";
+
+"Automatically recognize and translate words in speech." = "จดจำและแปลคำศัพท์โดยอัตโนมัติ";
+
+"Automatically recognize objects in camera images. \n Display the names of the objects using AR." = "จดจำวัตถุในภาพกล้องโดยอัตโนมัติ \n แสดงชื่อของวัตถุโดยใช้ AR";
+
+"Automatically recognize words in conversations and translate smoothly." = "จดจำคำศัพท์ในการสนทนาโดยอัตโนมัติและแปลได้อย่างราบรื่น";
+
+"Automatically scan documents and recognize characters." = "สแกนเอกสารและจดจำอักขระโดยอัตโนมัติ";
+
+"Azerbaijani" = "อาเซอร์ไบจัน";
+
+"Basque" = "ชาวแบสค์";
+
+"Belarusian" = "เบลารุส";
+
+"Bengali" = "ประเทศบังคลาเทศ";
+
+"Bosnian" = "บอสเนีย";
+
+"Bulgarian" = "บัลแกเรีย";
+
+"Camera" = "กล้อง";
+
+"Camera access not allowed" = "ไม่อนุญาตให้เข้าถึงกล้อง";
+
+"Camera is not supported on this device" = "อุปกรณ์นี้ไม่รองรับกล้อง";
+
+"Camera translate" = "กล้องแปล";
+
+"Camera translate languages" = "กล้องแปลภาษา";
+
+"Cancel" = "ยกเลิก";
+
+"Cannot download language, please try again." = "ไม่สามารถดาวน์โหลดภาษาโปรดลองอีกครั้ง";
+
+"Cannot extract any text from the speech, please try again." = "ไม่สามารถแยกข้อความใด ๆ ออกมาจากคำพูดโปรดลองอีกครั้ง";
+
+"Cannot recognize text in this photo." = "ไม่รู้จักข้อความในรูปภาพนี้";
+
+"Cannot recognize text in this photo. %@" = "ไม่รู้จักข้อความในรูปภาพนี้ %@";
+
+"Cannot recognize text in this photo. Please try again." = "ไม่รู้จักข้อความในรูปภาพนี้โปรดลองอีกครั้ง";
+
+"Catalan" = "คาตาลัน";
+
+"Catalan (Spain)" = "คาตาลัน (สเปน)";
+
+"Cebuano" = "Cebuano";
+
+"Change language" = "เปลี่ยนภาษา";
+
+"Chech app setting" = "ตั้งค่าแอป Chech";
+
+"Chinese (China)" = "จีน (จีน)";
+
+"Chinese (HK)" = "จีน (HK)";
+
+"Chinese (Hongkong)" = "จีน (ฮ่องกง)";
+
+"Chinese (Mandarin)" = "จีน (แมนดาริน)";
+
+"Clear records?" = "ล้างบันทึกหรือไม่";
+
+"Conversation" = "การสนทนา";
+
+"Conversation translate" = "บทสนทนาแปล";
+
+"Conversation translate languages" = "บทสนทนาแปลภาษา";
+
+"Copied to clipboard" = "คัดลอกไปที่คลิปบอร์ดแล้ว";
+
+"Corsican" = "คอร์ซิกา";
+
+"Croatian" = "โครเอเชีย";
+
+"Croatian (Croatia)" = "โครเอเชีย (โครเอเชีย)";
+
+"Czech" = "สาธารณรัฐเช็ก";
+
+"Czech (Czech)" = "เช็ก (เช็ก)";
+
+"Danish" = "เดนมาร์ก";
+
+"Delete" = "ลบ";
+
+"Delete all records?" = "ลบระเบียนทั้งหมดหรือไม่";
+
+"Detect objects in reality and translate." = "ตรวจจับวัตถุในความเป็นจริงและแปล";
+
+"Detect word in speech" = "ตรวจจับคำในการพูด";
+
+"Detect words in photos and translate." = "ตรวจจับคำในภาพถ่ายและแปล";
+
+"Detect words in speech and translate." = "ตรวจสอบคำในคำพูดและแปล";
+
+"Detecting object. Please wait a miniute..." = "กำลังตรวจหาวัตถุโปรดรอ miniute ...";
+
+"Dismiss" = "ยกเลิก";
+
+"Document Scan" = "สแกนเอกสาร";
+
+"Document translate" = "แปลเอกสาร";
+
+"Documnet translate languages" = "Documnet แปลภาษา";
+
+"Download failed" = "การดาวน์โหลดล้มเหลว";
+
+"Download offline language" = "ดาวน์โหลดภาษาออฟไลน์";
+
+"Downloaded languages" = "ภาษาที่ดาวน์โหลด";
+
+"Dutch" = "ดัตช์";
+
+"Dutch (Belgium)" = "ดัตช์ (เบลเยียม)";
+
+"Dutch (Netherlands)" = "ดัตช์ (เนเธอร์แลนด์)";
+
+"Empty text" = "ข้อความว่างเปล่า";
+
+"English" = "อังกฤษ";
+
+"English (Australia)" = "อังกฤษ (ออสเตรเลีย)";
+
+"English (Canada)" = "อังกฤษ (แคนาดา)";
+
+"English (India)" = "อังกฤษ (อินเดีย)";
+
+"English (Ireland)" = "อังกฤษ (ไอร์แลนด์)";
+
+"English (New Zealand)" = "อังกฤษ (นิวซีแลนด์)";
+
+"English (Philippines)" = "อังกฤษ (ฟิลิปปินส์)";
+
+"English (Saudi Arabia)" = "อังกฤษ (ซาอุดิอาระเบีย)";
+
+"English (Singapore)" = "อังกฤษ (สิงคโปร์)";
+
+"English (South Africa)" = "อังกฤษ (แอฟริกาใต้)";
+
+"English (United Kingdom)" = "อังกฤษ (สหราชอาณาจักร)";
+
+"English (United States)" = "อังกฤษ (สหรัฐอเมริกา)";
+
+"English language cannot be deleted." = "ภาษาอังกฤษไม่สามารถลบได้";
+
+"Error" = "ความผิดพลาด";
+
+"Esperanto" = "ภาษาโลก";
+
+"Estonian" = "เอสโตเนีย";
+
+"Finnish" = "ฟินแลนด์";
+
+"Finnish (Finland)" = "ฟินแลนด์ (ฟินแลนด์)";
+
+"For a pro translater" = "สำหรับนักแปลมืออาชีพ";
+
+"French" = "ฝรั่งเศส";
+
+"French (Belgium)" = "ฝรั่งเศส (เบลเยียม)";
+
+"French (Canada)" = "ฝรั่งเศส (แคนาดา)";
+
+"French (France)" = "ฝรั่งเศส (ฝรั่งเศส)";
+
+"French (Switzerland)" = "ฝรั่งเศส (สวิตเซอร์แลนด์)";
+
+"Frisian" = "Frisian";
+
+"Galician" = "กาลิเซีย";
+
+"Georgian" = "จอร์เจีย";
+
+"German" = "เยอรมัน";
+
+"German (Austria)" = "เยอรมัน (ออสเตรีย)";
+
+"German (Germany)" = "เยอรมัน (เยอรมนี)";
+
+"German (Switzerland)" = "เยอรมัน (สวิตเซอร์แลนด์)";
+
+"Get Multi-Translate PRO" = "รับ PRO แปลหลายภาษา";
+
+"Got it" = "เข้าใจแล้ว";
+
+"Greek" = "กรีก";
+
+"Gujarati" = "คุชราต";
+
+"Haitian Creole" = "เฮติครีโอล";
+
+"Hausa" = "เฮาซา";
+
+"Hawaiian" = "ฮาวาย";
+
+"Hebrew" = "ชาวอิสราเอล";
+
+"Hebrew (Israel)" = "ฮิบรู (อิสราเอล)";
+
+"Hindi" = "ภาษาฮินดี";
+
+"Hindi (India)" = "ฮินดี (อินเดีย)";
+
+"Hmong" = "ชาวม้ง";
+
+"Hungarian" = "ฮังการี";
+
+"Hungarian (Hungary)" = "ฮังการี (ฮังการี)";
+
+"Icelandic" = "ไอซ์แลนด์";
+
+"Igbo" = "Igbo";
+
+"Image" = "ภาพ";
+
+"Image translate" = "แปลรูปภาพ";
+
+"Image translate languages" = "รูปภาพแปลภาษา";
+
+"Indonesian" = "ชาวอินโดนีเซีย";
+
+"Indonesian (Indonesia)" = "อินโดนีเซีย (อินโดนีเซีย)";
+
+"Input source text" = "ข้อความต้นฉบับอินพุต";
+
+"Irish" = "ไอริช";
+
+"Italian" = "อิตาลี";
+
+"Italian (Italy)" = "อิตาลี (อิตาลี)";
+
+"Italian (Switzerland)" = "อิตาลี (สวิตเซอร์แลนด์)";
+
+"Japanese" = "ญี่ปุ่น";
+
+"Japanese (Japan)" = "ญี่ปุ่น (ญี่ปุ่น)";
+
+"Javanese" = "ชาวชวา";
+
+"Kannada" = "ดา";
+
+"Kazakh" = "คาซัคสถาน";
+
+"Khmer" = "ขอม";
+
+"Korean" = "เกาหลี";
+
+"Korean (Korea)" = "เกาหลี (เกาหลี)";
+
+"Kurdish" = "เคิร์ด";
+
+"Kyrgyz" = "คีร์กีซ";
+
+"Language deleted" = "ภาษาถูกลบ";
+
+"Language downloaded" = "ภาษาที่ดาวน์โหลด";
+
+"Language selector" = "ตัวเลือกภาษา";
+
+"Lao" = "ลาว";
+
+"Latin" = "ละติน";
+
+"Latvian" = "ลัตเวีย";
+
+"Limited" = "ถูก จำกัด";
+
+"Lithuanian" = "ภาษาลิธัวเนีย";
+
+"Luxembourgish" = "ลักเซมเบิร์ก";
+
+"Macedonian" = "มาซิโดเนีย";
+
+"Malagasy" = "มาดากัสการ์";
+
+"Malay" = "ภาษามลายู";
+
+"Malay (Malaysia)" = "มาเลย์ (มาเลเซีย)";
+
+"Malayalam" = "มาลายาลัม";
+
+"Maltese" = "มอลตา";
+
+"Maori" = "ชาวเมารี";
+
+"Marathi" = "ฐี";
+
+"Microphone access not allowed" = "ไม่อนุญาตการเข้าถึงไมโครโฟน";
+
+"Mongolian" = "มองโกเลีย";
+
+"Monthly plan" = "แผนรายเดือน";
+
+"Most popular" = "นิยมที่สุด";
+
+"Multiple ways to translate with high accuracy!" = "การแปลหลายวิธีด้วยความแม่นยำสูง!";
+
+"Myanmar (Burmese)" = "เมียนมาร์ (พม่า)";
+
+"Nepali" = "เนปาล";
+
+"No Limit" = "ไม่ จำกัด";
+
+"No camera" = "ไม่มีกล้อง";
+
+"No item" = "ไม่มีรายการ";
+
+"No photo" = "ไม่มีรูปภาพ";
+
+"No purchase restored." = "ไม่มีการซื้อคืน";
+
+"No text" = "ไม่มีข้อความ";
+
+"Norwegian" = "นอร์เวย์";
+
+"Norwegian (Norway)" = "นอร์เวย์ (นอร์เวย์)";
+
+"Not now" = "ไม่ใช่ตอนนี้";
+
+"Nyanja (Chichewa)" = "Nyanja (Chichewa)";
+
+"Offline languages" = "ภาษาออฟไลน์";
+
+"Offline translate faster with no network access. Offline translate can save your packet communication fee." = "ออฟไลน์แปลเร็วขึ้นโดยไม่ต้องเข้าถึงเครือข่ายการแปลออฟไลน์สามารถประหยัดค่าธรรมเนียมการสื่อสารแพ็คเก็ต";
+
+"Offline translate languages" = "แปลภาษาออฟไลน์";
+
+"Offline translation modules" = "โมดูลการแปลออฟไลน์";
+
+"Pashto" = "Pashto";
+
+"Persian" = "เปอร์เซีย";
+
+"Photo access not allowed" = "ไม่อนุญาตให้เข้าถึงภาพถ่าย";
+
+"Photo library is not supported on this device" = "อุปกรณ์นี้ไม่รองรับคลังภาพ";
+
+"Please allow microphone and speech recognizer" = "โปรดอนุญาตไมโครโฟนและตัวจำแนกเสียง";
+
+"Please try again." = "กรุณาลองใหม่อีกครั้ง";
+
+"Polish" = "โปแลนด์";
+
+"Polish (Poland)" = "โปแลนด์ (โปแลนด์)";
+
+"Portuguese" = "โปรตุเกส";
+
+"Portuguese (Brazil)" = "โปรตุเกส (บราซิล)";
+
+"Portuguese (Portugal)" = "โปรตุเกส (โปรตุเกส)";
+
+"Privacy policy" = "นโยบายความเป็นส่วนตัว";
+
+"Punjabi" = "ปัญจาบ";
+
+"Purchase failed." = "การซื้อล้มเหลว";
+
+"Purchase successfully." = "ซื้อสำเร็จ";
+
+"Records cannot be recovered once deleted." = "ไม่สามารถกู้คืนบันทึกได้เมื่อถูกลบ";
+
+"Records cleared" = "ล้างข้อมูลแล้ว";
+
+"Removed" = "ลบออก";
+
+"Restarting AR session..." = "กำลังเริ่มเซสชัน AR ใหม่ ...";
+
+"Restore" = "ฟื้นฟู";
+
+"Restore purchase failed." = "กู้คืนการซื้อล้มเหลว";
+
+"Restored purchase successfully." = "เรียกคืนการซื้อสำเร็จแล้ว";
+
+"Romanian" = "โรมาเนีย";
+
+"Romanian (Romania)" = "โรมาเนีย (โรมาเนีย)";
+
+"Russian" = "รัสเซีย";
+
+"Russian (Russia)" = "รัสเซีย (รัสเซีย)";
+
+"START" = "เริ่มต้น";
+
+"Samoan" = "ซามัว";
+
+"Saved Translations" = "การแปลที่บันทึกไว้";
+
+"Scan document and detect words in document." = "สแกนเอกสารและตรวจจับคำในเอกสาร";
+
+"Scots Gaelic" = "สก็อตเกลิค";
+
+"See more plans" = "ดูแผนเพิ่มเติม";
+
+"Select a photo to detect words" = "เลือกภาพถ่ายเพื่อตรวจจับคำศัพท์";
+
+"Serbian" = "เซอร์เบีย";
+
+"Sesotho" = "Sesotho";
+
+"Setting" = "การตั้งค่า";
+
+"Shona" = "โชนา";
+
+"Sindhi" = "สินธุ";
+
+"Sinhala (Sinhalese)" = "สิงหล (สิงหล)";
+
+"Slovak" = "สโลวาเกีย";
+
+"Slovak (Slovakia)" = "สโลวาเกีย (สโลวะเกีย)";
+
+"Slovenian" = "ภาษาสโลเวเนีย";
+
+"Somali" = "โซมาลี";
+
+"Source" = "แหล่ง";
+
+"Spanish" = "สเปน";
+
+"Spanish (Chile)" = "สเปน (ชิลี)";
+
+"Spanish (Colombia)" = "สเปน (โคลัมเบีย)";
+
+"Spanish (Latin America & Caribbean)" = "สเปน (ละตินอเมริกาและแคริบเบียน)";
+
+"Spanish (Mexico)" = "สเปน (เม็กซิโก)";
+
+"Spanish (Spain)" = "สเปน (สเปน)";
+
+"Spanish (United States)" = "สเปน (สหรัฐอเมริกา)";
+
+"Speech recognizer" = "ตัวรู้จำเสียง";
+
+"Speech translate" = "แปลคำพูด";
+
+"Subscribe Monthly" = "สมัครสมาชิกรายเดือน";
+
+"Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period. " = "การชำระเงินค่าสมัครจะถูกเรียกเก็บไปยังบัญชี iTunes ของคุณที่ยืนยันการสั่งซื้อของคุณและเมื่อเริ่มเงื่อนไขการต่ออายุแต่ละครั้ง \n การสมัครสมาชิกที่มีระยะเวลาทดลองใช้ฟรีจะต่ออายุโดยอัตโนมัติสำหรับการสมัครสมาชิกแบบชำระเงินคุณสามารถยกเลิกการสมัครสมาชิกหรือทดลองใช้ฟรีในการตั้งค่า iTunes อย่างน้อย 24 ชั่วโมงก่อนสิ้นสุดระยะเวลาการสมัครสมาชิกปัจจุบันการยกเลิกจะมีผลในวันถัดไป วันของระยะเวลาการสมัครสมาชิกปัจจุบันและคุณจะถูกลดระดับเป็นบริการฟรีส่วนที่ไม่ได้ใช้งานของช่วงทดลองใช้ฟรี (ถ้ามีให้) จะถูกริบเมื่อคุณซื้อการสมัครสมาชิกพรีเมียมในช่วงทดลองใช้ฟรี";
+
+"Sundanese" = "ซุนดา";
+
+"Supporting 104 languages. \n Offline translate is also available for FREE." = "รองรับ 104 ภาษา \n การแปลแบบออฟไลน์ยังสามารถใช้ได้ฟรี";
+
+"Swahili" = "ภาษาสวาฮิลี";
+
+"Swedish" = "สวีเดน";
+
+"Swedish (Sweden)" = "สวีเดน (สวีเดน)";
+
+"Tagalog (Filipino)" = "ตากาล็อก (ฟิลิปปินส์)";
+
+"Tajik" = "ทาจิกิสถาน";
+
+"Tamil" = "มิลักขะ";
+
+"Target" = "เป้า";
+
+"Telugu" = "กู";
+
+"Terms of use" = "เงื่อนไขการใช้งาน";
+
+"Text" = "ข้อความ";
+
+"Text translate" = "แปลข้อความ";
+
+"Text translate languages" = "ข้อความแปลภาษา";
+
+"Thai" = "ไทย";
+
+"Thai (Thailand)" = "ไทย (ประเทศไทย)";
+
+"The records cannot be recovered once deleted" = "บันทึกไม่สามารถกู้คืนได้เมื่อถูกลบ";
+
+"Translate" = "แปลความ";
+
+"Translate character has reach the limit" = "อักขระแปลได้ถึงขีด จำกัด แล้ว";
+
+"Translate conversation smoothly." = "แปลบทสนทนาได้อย่างราบรื่น";
+
+"Translation deleted" = "ลบคำแปลแล้ว";
+
+"Translation saved" = "บันทึกคำแปลแล้ว";
+
+"Try 14 Days for FREE!" = "ลองฟรี 14 วัน!";
+
+"Try again" = "ลองใหม่อีกครั้ง";
+
+"Try again." = "ลองใหม่อีกครั้ง";
+
+"Turkish" = "ตุรกี";
+
+"Turkish (Turkey)" = "ตุรกี (ตุรกี)";
+
+"Ukrainian" = "ยูเครน";
+
+"Ukrainian (Ukraine)" = "ยูเครน (ยูเครน)";
+
+"Undownloaded languages" = "ภาษาที่ไม่ได้ดาวน์โหลด";
+
+"Urdu" = "ภาษาอูรดู";
+
+"Use camera to detect words" = "ใช้กล้องเพื่อตรวจจับคำศัพท์";
+
+"Use microphone to record voice" = "ใช้ไมโครโฟนเพื่อบันทึกเสียง";
+
+"Uzbek" = "อุซเบก";
+
+"Vietnamese" = "เวียตนาม";
+
+"Vietnamese (Vietnam)" = "เวียตนาม (เวียดนาม)";
+
+"Voice" = "เสียงพูด";
+
+"Voice recorder error occurred." = "เกิดข้อผิดพลาดในการบันทึกเสียง";
+
+"Voice translate languages" = "แปลภาษาด้วยเสียง";
+
+"Welsh" = "เวลส์";
+
+"Xhosa" = "โซซา";
+
+"Yearly plan" = "แผนรายปี";
+
+"Yiddish" = "ยิดดิช";
+
+"Yoruba" = "โยรูบา";
+
+"You can change your plan and get more characters" = "คุณสามารถเปลี่ยนแผนของคุณและรับตัวละครมากขึ้น";
+
+"You cannot translate %@ to %@" = "คุณไม่สามารถแปล %@ เป็น %@";
+
+"Zulu" = "พวกสูลู";
+
+"save %@ / year" = "ประหยัด %@ / ปี";
+
+"skip" = "กระโดด";
+
+"then %@ / year" = "ตามด้วย %@ / ปี";

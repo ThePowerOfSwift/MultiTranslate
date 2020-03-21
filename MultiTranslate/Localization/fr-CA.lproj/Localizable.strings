@@ -5,3 +5,571 @@
   Created by Keishin CHOU on 2020/03/16.
   Copyright © 2020 Keishin CHOU. All rights reserved.
 */
+
+"/month" = "/ mois";
+
+"/year" = "/ an";
+
+"10K characters/month" = "10 000 caractères / mois";
+
+"50K characters/month" = "50 000 caractères / mois";
+
+"AR object translate" = "Objet AR traduire";
+
+"AR translate languages" = "AR traduire des langues";
+
+"About subscription" = "À propos de l'abonnement";
+
+"Afrikaans" = "Afrikaans";
+
+"Albanian" = "Albanais";
+
+"Amharic" = "Amharique";
+
+"Arabic" = "Arabe";
+
+"Arabic (Saudi Arabia)" = "Arabe (Arabie saoudite)";
+
+"Armenian" = "Arménien";
+
+"Augmented Reality" = "Réalité augmentée";
+
+"Automatically recognize and translate words in images." = "Reconnaître et traduire automatiquement les mots dans les images.";
+
+"Automatically recognize and translate words in speech." = "Reconnaître et traduire automatiquement les mots dans le discours.";
+
+"Automatically recognize objects in camera images. \n Display the names of the objects using AR." = "Reconnaître automatiquement les objets dans les images de l'appareil photo. \n Affichez les noms des objets à l'aide de AR.";
+
+"Automatically recognize words in conversations and translate smoothly." = "Reconnaître automatiquement les mots dans les conversations et traduire en douceur.";
+
+"Automatically scan documents and recognize characters." = "Numérisez automatiquement les documents et reconnaissez les caractères.";
+
+"Azerbaijani" = "Azerbaïdjanais";
+
+"Basque" = "Basque";
+
+"Belarusian" = "Biélorusse";
+
+"Bengali" = "Bengali";
+
+"Bosnian" = "Bosniaque";
+
+"Bulgarian" = "Bulgare";
+
+"Camera" = "Appareil photo";
+
+"Camera access not allowed" = "Accès à la caméra non autorisé";
+
+"Camera is not supported on this device" = "La caméra n'est pas prise en charge sur cet appareil";
+
+"Camera translate" = "Traduire la caméra";
+
+"Camera translate languages" = "Langues de traduction de la caméra";
+
+"Cancel" = "Annuler";
+
+"Cannot download language, please try again." = "Impossible de télécharger la langue, veuillez réessayer.";
+
+"Cannot extract any text from the speech, please try again." = "Impossible d'extraire du texte du discours, veuillez réessayer.";
+
+"Cannot recognize text in this photo." = "Impossible de reconnaître le texte sur cette photo.";
+
+"Cannot recognize text in this photo. %@" = "Impossible de reconnaître le texte de cette photo. %@";
+
+"Cannot recognize text in this photo. Please try again." = "Impossible de reconnaître le texte sur cette photo. Veuillez réessayer.";
+
+"Catalan" = "Catalan";
+
+"Catalan (Spain)" = "Catalan (Espagne)";
+
+"Cebuano" = "Cebuano";
+
+"Change language" = "Changer de langue";
+
+"Chech app setting" = "Paramètre d'application Chech";
+
+"Chinese (China)" = "Chinois (Chine)";
+
+"Chinese (HK)" = "Chinois (HK)";
+
+"Chinese (Hongkong)" = "Chinois (Hongkong)";
+
+"Chinese (Mandarin)" = "Chinois (mandarin)";
+
+"Clear records?" = "Effacer les enregistrements?";
+
+"Conversation" = "Conversation";
+
+"Conversation translate" = "Conversation traduire";
+
+"Conversation translate languages" = "Conversation traduire des langues";
+
+"Copied to clipboard" = "Copié dans le presse-papiers";
+
+"Corsican" = "Corse";
+
+"Croatian" = "Croate";
+
+"Croatian (Croatia)" = "Croate (Croatie)";
+
+"Czech" = "Tchèque";
+
+"Czech (Czech)" = "Tchèque (tchèque)";
+
+"Danish" = "Danois";
+
+"Delete" = "Effacer";
+
+"Delete all records?" = "Supprimer tous les enregistrements?";
+
+"Detect objects in reality and translate." = "Détectez les objets dans la réalité et traduisez.";
+
+"Detect word in speech" = "Détecter le mot dans le discours";
+
+"Detect words in photos and translate." = "Détectez les mots sur les photos et traduisez.";
+
+"Detect words in speech and translate." = "Détectez les mots dans le discours et traduisez.";
+
+"Detecting object. Please wait a miniute..." = "Détection d'un objet. Veuillez patienter une minute ...";
+
+"Dismiss" = "Rejeter";
+
+"Document Scan" = "Numérisation de documents";
+
+"Document translate" = "Traduire le document";
+
+"Documnet translate languages" = "Documnet traduire des langues";
+
+"Download failed" = "Échec du téléchargement";
+
+"Download offline language" = "Télécharger la langue hors ligne";
+
+"Downloaded languages" = "Langues téléchargées";
+
+"Dutch" = "Néerlandais";
+
+"Dutch (Belgium)" = "Néerlandais (Belgique)";
+
+"Dutch (Netherlands)" = "Néerlandais (Pays-Bas)";
+
+"Empty text" = "Texte vide";
+
+"English" = "Anglais";
+
+"English (Australia)" = "Anglais (Australie)";
+
+"English (Canada)" = "Anglais (Canada)";
+
+"English (India)" = "Anglais (Inde)";
+
+"English (Ireland)" = "Anglais (Irlande)";
+
+"English (New Zealand)" = "Anglais (Nouvelle-Zélande)";
+
+"English (Philippines)" = "Anglais (Philippines)";
+
+"English (Saudi Arabia)" = "Anglais (Arabie saoudite)";
+
+"English (Singapore)" = "Anglais (Singapour)";
+
+"English (South Africa)" = "Anglais (Afrique du Sud)";
+
+"English (United Kingdom)" = "Anglais (Royaume-Uni)";
+
+"English (United States)" = "Anglais (États-Unis)";
+
+"English language cannot be deleted." = "La langue anglaise ne peut pas être supprimée.";
+
+"Error" = "Erreur";
+
+"Esperanto" = "Espéranto";
+
+"Estonian" = "Estonien";
+
+"Finnish" = "Finnois";
+
+"Finnish (Finland)" = "Finnois (Finlande)";
+
+"For a pro translater" = "Pour un traducteur professionnel";
+
+"French" = "Le français";
+
+"French (Belgium)" = "Français (Belgique)";
+
+"French (Canada)" = "Français (Canada)";
+
+"French (France)" = "Français (France)";
+
+"French (Switzerland)" = "Français (Suisse)";
+
+"Frisian" = "Frison";
+
+"Galician" = "Galicien";
+
+"Georgian" = "Géorgien";
+
+"German" = "Allemand";
+
+"German (Austria)" = "Allemand (Autriche)";
+
+"German (Germany)" = "Allemand (Allemagne)";
+
+"German (Switzerland)" = "Allemand (Suisse)";
+
+"Get Multi-Translate PRO" = "Obtenez Multi-Translate PRO";
+
+"Got it" = "J'ai compris";
+
+"Greek" = "Grec";
+
+"Gujarati" = "Gujarati";
+
+"Haitian Creole" = "Créole haïtien";
+
+"Hausa" = "Haoussa";
+
+"Hawaiian" = "Hawaïen";
+
+"Hebrew" = "Hébreu";
+
+"Hebrew (Israel)" = "Hébreu (Israël)";
+
+"Hindi" = "Hindi";
+
+"Hindi (India)" = "Hindi (Inde)";
+
+"Hmong" = "Hmong";
+
+"Hungarian" = "Hongrois";
+
+"Hungarian (Hungary)" = "Hongrois (Hongrie)";
+
+"Icelandic" = "Islandais";
+
+"Igbo" = "Igbo";
+
+"Image" = "Image";
+
+"Image translate" = "Traduire l'image";
+
+"Image translate languages" = "Image traduire des langues";
+
+"Indonesian" = "Indonésien";
+
+"Indonesian (Indonesia)" = "Indonésien (Indonésie)";
+
+"Input source text" = "Saisie du texte source";
+
+"Irish" = "Irlandais";
+
+"Italian" = "Italien";
+
+"Italian (Italy)" = "Italien (Italie)";
+
+"Italian (Switzerland)" = "Italien (Suisse)";
+
+"Japanese" = "Japonais";
+
+"Japanese (Japan)" = "Japonais (Japon)";
+
+"Javanese" = "Javanais";
+
+"Kannada" = "Kannada";
+
+"Kazakh" = "Kazakh";
+
+"Khmer" = "Khmer";
+
+"Korean" = "Coréen";
+
+"Korean (Korea)" = "Coréen (Corée)";
+
+"Kurdish" = "Kurde";
+
+"Kyrgyz" = "Kirghize";
+
+"Language deleted" = "Langue supprimée";
+
+"Language downloaded" = "Langue téléchargée";
+
+"Language selector" = "Sélecteur de langue";
+
+"Lao" = "Lao";
+
+"Latin" = "Latin";
+
+"Latvian" = "Letton";
+
+"Limited" = "Limité";
+
+"Lithuanian" = "Lituanien";
+
+"Luxembourgish" = "Luxembourgeois";
+
+"Macedonian" = "Macédonien";
+
+"Malagasy" = "Malgache";
+
+"Malay" = "Malais";
+
+"Malay (Malaysia)" = "Malais (Malaisie)";
+
+"Malayalam" = "Malayalam";
+
+"Maltese" = "Maltais";
+
+"Maori" = "Maori";
+
+"Marathi" = "Marathi";
+
+"Microphone access not allowed" = "Accès au microphone non autorisé";
+
+"Mongolian" = "Mongole";
+
+"Monthly plan" = "Forfait mensuel";
+
+"Most popular" = "Le plus populaire";
+
+"Multiple ways to translate with high accuracy!" = "Plusieurs façons de traduire avec une grande précision!";
+
+"Myanmar (Burmese)" = "Myanmar (birman)";
+
+"Nepali" = "Népalais";
+
+"No Limit" = "Aucune limite";
+
+"No camera" = "Pas de caméra";
+
+"No item" = "Aucun article";
+
+"No photo" = "Pas de photo";
+
+"No purchase restored." = "Aucun achat restauré.";
+
+"No text" = "Pas de texte";
+
+"Norwegian" = "Norvégien";
+
+"Norwegian (Norway)" = "Norvégien (Norvège)";
+
+"Not now" = "Pas maintenant";
+
+"Nyanja (Chichewa)" = "Nyanja (Chichewa)";
+
+"Offline languages" = "Langues hors ligne";
+
+"Offline translate faster with no network access. Offline translate can save your packet communication fee." = "La traduction hors ligne plus rapide sans accès au réseau La traduction hors ligne peut vous permettre d'économiser vos frais de communication par paquets.";
+
+"Offline translate languages" = "Traduire des langues hors ligne";
+
+"Offline translation modules" = "Modules de traduction hors ligne";
+
+"Pashto" = "Pachto";
+
+"Persian" = "Persan";
+
+"Photo access not allowed" = "Accès photo non autorisé";
+
+"Photo library is not supported on this device" = "La photothèque n'est pas prise en charge sur cet appareil";
+
+"Please allow microphone and speech recognizer" = "Veuillez autoriser le microphone et la reconnaissance vocale";
+
+"Please try again." = "Veuillez réessayer.";
+
+"Polish" = "Polonais";
+
+"Polish (Poland)" = "Polonais (Pologne)";
+
+"Portuguese" = "Portugais";
+
+"Portuguese (Brazil)" = "Portugais (Brésil)";
+
+"Portuguese (Portugal)" = "Portugais (Portugal)";
+
+"Privacy policy" = "Politique de confidentialité";
+
+"Punjabi" = "Punjabi";
+
+"Purchase failed." = "L'achat a échoué.";
+
+"Purchase successfully." = "Achetez avec succès.";
+
+"Records cannot be recovered once deleted." = "Les enregistrements ne peuvent pas être récupérés une fois supprimés.";
+
+"Records cleared" = "Enregistrements effacés";
+
+"Removed" = "Supprimé";
+
+"Restarting AR session..." = "Redémarrage de la session AR ...";
+
+"Restore" = "Restaurer";
+
+"Restore purchase failed." = "Échec de la restauration.";
+
+"Restored purchase successfully." = "Achat restauré avec succès.";
+
+"Romanian" = "Roumain";
+
+"Romanian (Romania)" = "Roumain (Roumanie)";
+
+"Russian" = "Russe";
+
+"Russian (Russia)" = "Russe (Russie)";
+
+"START" = "COMMENCER";
+
+"Samoan" = "Samoan";
+
+"Saved Translations" = "Traductions enregistrées";
+
+"Scan document and detect words in document." = "Scannez le document et détectez les mots dans le document.";
+
+"Scots Gaelic" = "Gaélique écossais";
+
+"See more plans" = "Voir plus de plans";
+
+"Select a photo to detect words" = "Sélectionnez une photo pour détecter les mots";
+
+"Serbian" = "Serbe";
+
+"Sesotho" = "Sesotho";
+
+"Setting" = "Réglage";
+
+"Shona" = "Shona";
+
+"Sindhi" = "Sindhi";
+
+"Sinhala (Sinhalese)" = "Cinghalais (cinghalais)";
+
+"Slovak" = "Slovaque";
+
+"Slovak (Slovakia)" = "Slovaque (Slovaquie)";
+
+"Slovenian" = "Slovène";
+
+"Somali" = "Somalien";
+
+"Source" = "Source";
+
+"Spanish" = "Espagnol";
+
+"Spanish (Chile)" = "Espagnol (Chili)";
+
+"Spanish (Colombia)" = "Espagnol (Colombie)";
+
+"Spanish (Latin America & Caribbean)" = "Espagnol (Amérique latine et Caraïbes)";
+
+"Spanish (Mexico)" = "Espagnol (Mexique)";
+
+"Spanish (Spain)" = "Espagnol (Espagne)";
+
+"Spanish (United States)" = "Espagnol (États-Unis)";
+
+"Speech recognizer" = "Reconnaissance vocale";
+
+"Speech translate" = "Discours traduire";
+
+"Subscribe Monthly" = "Abonnez-vous mensuellement";
+
+"Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period. " = "Les paiements d'abonnement seront débités de votre compte iTunes lors de la confirmation de votre achat et au début de chaque période de renouvellement. \n L'abonnement avec une période d'essai gratuite sera automatiquement renouvelé en abonnement payant. Vous pouvez annuler votre abonnement ou essai gratuit dans les paramètres iTunes au moins 24 heures avant la fin de chaque période d'abonnement en cours. L'annulation prendra effet le lendemain de la dernière jour de la période d'abonnement en cours et vous serez rétrogradé au service gratuit. Toute portion inutilisée d'une période d'essai gratuite (si elle est offerte) sera perdue lorsque vous achetez un abonnement premium pendant la période d'essai gratuite.";
+
+"Sundanese" = "Sundanais";
+
+"Supporting 104 languages. \n Offline translate is also available for FREE." = "Prise en charge 104 langues. \n La traduction hors ligne est également disponible GRATUITEMENT.";
+
+"Swahili" = "Swahili";
+
+"Swedish" = "Suédois";
+
+"Swedish (Sweden)" = "Suédois (Suède)";
+
+"Tagalog (Filipino)" = "Tagalog (philippin)";
+
+"Tajik" = "Tadjik";
+
+"Tamil" = "Tamoul";
+
+"Target" = "Cible";
+
+"Telugu" = "Telugu";
+
+"Terms of use" = "Conditions d'utilisation";
+
+"Text" = "Texte";
+
+"Text translate" = "Traduction de texte";
+
+"Text translate languages" = "Texte traduire des langues";
+
+"Thai" = "thaïlandais";
+
+"Thai (Thailand)" = "Thaï (Thaïlande)";
+
+"The records cannot be recovered once deleted" = "Les enregistrements ne peuvent pas être récupérés une fois supprimés";
+
+"Translate" = "Traduire";
+
+"Translate character has reach the limit" = "Traduire le personnage a atteint la limite";
+
+"Translate conversation smoothly." = "Traduisez la conversation en douceur.";
+
+"Translation deleted" = "Traduction supprimée";
+
+"Translation saved" = "Traduction enregistrée";
+
+"Try 14 Days for FREE!" = "Essayez 14 jours GRATUITEMENT!";
+
+"Try again" = "Réessayer";
+
+"Try again." = "Réessayer.";
+
+"Turkish" = "turc";
+
+"Turkish (Turkey)" = "Turc (Turquie)";
+
+"Ukrainian" = "ukrainien";
+
+"Ukrainian (Ukraine)" = "Ukrainien (Ukraine)";
+
+"Undownloaded languages" = "Langues non téléchargées";
+
+"Urdu" = "Ourdou";
+
+"Use camera to detect words" = "Utilisez l'appareil photo pour détecter les mots";
+
+"Use microphone to record voice" = "Utiliser un microphone pour enregistrer la voix";
+
+"Uzbek" = "Ouzbek";
+
+"Vietnamese" = "vietnamien";
+
+"Vietnamese (Vietnam)" = "Vietnamien (Vietnam)";
+
+"Voice" = "Voix";
+
+"Voice recorder error occurred." = "Une erreur d'enregistrement vocal s'est produite.";
+
+"Voice translate languages" = "Langues de traduction vocale";
+
+"Welsh" = "gallois";
+
+"Xhosa" = "Xhosa";
+
+"Yearly plan" = "Plan annuel";
+
+"Yiddish" = "yiddish";
+
+"Yoruba" = "Yoruba";
+
+"You can change your plan and get more characters" = "Vous pouvez changer votre plan et obtenir plus de personnages";
+
+"You cannot translate %@ to %@" = "Vous ne pouvez pas traduire %@ en %@";
+
+"Zulu" = "zoulou";
+
+"save %@ / year" = "économiser %@ / an";
+
+"skip" = "sauter";
+
+"then %@ / year" = "puis %@ / an";

@@ -5,3 +5,571 @@
   Created by Keishin CHOU on 2020/03/16.
   Copyright © 2020 Keishin CHOU. All rights reserved.
 */
+
+"/month" = "/ kuukausi";
+
+"/year" = "/ vuosi";
+
+"10K characters/month" = "10 kt merkkiä / kk";
+
+"50K characters/month" = "50 kt merkkiä / kk";
+
+"AR object translate" = "AR-objektin käännös";
+
+"AR translate languages" = "AR kääntää kieliä";
+
+"About subscription" = "Tietoja tilauksesta";
+
+"Afrikaans" = "afrikaans";
+
+"Albanian" = "albanialainen";
+
+"Amharic" = "amhara";
+
+"Arabic" = "arabialainen";
+
+"Arabic (Saudi Arabia)" = "Arabia (Saudi-Arabia)";
+
+"Armenian" = "armenian";
+
+"Augmented Reality" = "Lisätty todellisuus";
+
+"Automatically recognize and translate words in images." = "Tunnistaa ja kääntää sanat automaattisesti kuvissa.";
+
+"Automatically recognize and translate words in speech." = "Tunnista ja käännä sanat automaattisesti puheessa.";
+
+"Automatically recognize objects in camera images. \n Display the names of the objects using AR." = "Tunnista kameran kuvien objektit automaattisesti. \n Näytä objektien nimet AR: n avulla.";
+
+"Automatically recognize words in conversations and translate smoothly." = "Tunnista sanat automaattisesti keskusteluissa ja käännä sujuvasti.";
+
+"Automatically scan documents and recognize characters." = "Skannaa asiakirjat automaattisesti ja tunnistaa merkit.";
+
+"Azerbaijani" = "Azerbaidžanin";
+
+"Basque" = "baski";
+
+"Belarusian" = "Valko";
+
+"Bengali" = "Bengali";
+
+"Bosnian" = "Bosnia";
+
+"Bulgarian" = "bulgarialainen";
+
+"Camera" = "kamera";
+
+"Camera access not allowed" = "Kameraan pääsy ei ole sallittua";
+
+"Camera is not supported on this device" = "Kamera ei tue tätä laitetta";
+
+"Camera translate" = "Kamera kääntää";
+
+"Camera translate languages" = "Kamera kääntää kielet";
+
+"Cancel" = "peruuttaa";
+
+"Cannot download language, please try again." = "Kieltä ei voi ladata, yritä uudelleen.";
+
+"Cannot extract any text from the speech, please try again." = "Tekstiä ei voi poimia puheesta, yritä uudelleen.";
+
+"Cannot recognize text in this photo." = "Tämän kuvan tekstiä ei tunnisteta.";
+
+"Cannot recognize text in this photo. %@" = "Tämän kuvan tekstiä ei tunnisteta. %@";
+
+"Cannot recognize text in this photo. Please try again." = "Tämän kuvan tekstiä ei tunnisteta. Yritä uudelleen.";
+
+"Catalan" = "katalaani";
+
+"Catalan (Spain)" = "Katalaani (Espanja)";
+
+"Cebuano" = "cebuano";
+
+"Change language" = "Vaihda kieli";
+
+"Chech app setting" = "Chech-sovelluksen asetus";
+
+"Chinese (China)" = "Kiina (Kiina)";
+
+"Chinese (HK)" = "Kiina (HK)";
+
+"Chinese (Hongkong)" = "Kiina (Hongkong)";
+
+"Chinese (Mandarin)" = "Kiina (mandariini)";
+
+"Clear records?" = "Tyhjennä tietueet?";
+
+"Conversation" = "keskustelu";
+
+"Conversation translate" = "Keskustelu kääntää";
+
+"Conversation translate languages" = "Keskustelu kääntää kielet";
+
+"Copied to clipboard" = "Kopioitiin leikepöydälle";
+
+"Corsican" = "korsikalainen";
+
+"Croatian" = "kroaatti";
+
+"Croatian (Croatia)" = "Kroatia (Kroatia)";
+
+"Czech" = "czech";
+
+"Czech (Czech)" = "Tšekki (tšekki)";
+
+"Danish" = "tanskalainen";
+
+"Delete" = "Poista";
+
+"Delete all records?" = "Poistetaanko kaikki tietueet?";
+
+"Detect objects in reality and translate." = "Tunnista esineet todellisuudessa ja käännä.";
+
+"Detect word in speech" = "Tunnista sana puheessa";
+
+"Detect words in photos and translate." = "Tunnista sanat valokuvissa ja käännä.";
+
+"Detect words in speech and translate." = "Tunnista sanat puheessa ja käännä.";
+
+"Detecting object. Please wait a miniute..." = "Objektin havaitseminen. Odota pieni minuutti ...";
+
+"Dismiss" = "erottaa";
+
+"Document Scan" = "Asiakirjan skannaus";
+
+"Document translate" = "Asiakirjan kääntäminen";
+
+"Documnet translate languages" = "Documnet kääntää kielet";
+
+"Download failed" = "Lataus epäonnistui";
+
+"Download offline language" = "Lataa offline-kieli";
+
+"Downloaded languages" = "Ladatut kielet";
+
+"Dutch" = "hollantilainen";
+
+"Dutch (Belgium)" = "Hollanti (Belgia)";
+
+"Dutch (Netherlands)" = "Hollanti (Alankomaat)";
+
+"Empty text" = "Tyhjä teksti";
+
+"English" = "englanti";
+
+"English (Australia)" = "Englanti (Australia)";
+
+"English (Canada)" = "Englanti (Kanada)";
+
+"English (India)" = "Englanti (Intia)";
+
+"English (Ireland)" = "Englanti (Irlanti)";
+
+"English (New Zealand)" = "Englanti (Uusi-Seelanti)";
+
+"English (Philippines)" = "Englanti (Filippiinit)";
+
+"English (Saudi Arabia)" = "Englanti (Saudi-Arabia)";
+
+"English (Singapore)" = "Englanti (Singapore)";
+
+"English (South Africa)" = "Englanti (Etelä-Afrikka)";
+
+"English (United Kingdom)" = "Englanti (Yhdistynyt kuningaskunta)";
+
+"English (United States)" = "Englanti (Yhdysvallat)";
+
+"English language cannot be deleted." = "Englannin kieltä ei voi poistaa.";
+
+"Error" = "virhe";
+
+"Esperanto" = "Esperanto";
+
+"Estonian" = "virolainen";
+
+"Finnish" = "suomalainen";
+
+"Finnish (Finland)" = "Suomi (Suomi)";
+
+"For a pro translater" = "Pro-kääntäjälle";
+
+"French" = "ranskalainen";
+
+"French (Belgium)" = "Ranska (Belgia)";
+
+"French (Canada)" = "Ranska (Kanada)";
+
+"French (France)" = "Ranska (Ranska)";
+
+"French (Switzerland)" = "Ranska (Sveitsi)";
+
+"Frisian" = "friisi";
+
+"Galician" = "galician";
+
+"Georgian" = "georgialainen";
+
+"German" = "saksa";
+
+"German (Austria)" = "Saksa (Itävalta)";
+
+"German (Germany)" = "Saksa (Saksa)";
+
+"German (Switzerland)" = "Saksa (Sveitsi)";
+
+"Get Multi-Translate PRO" = "Hanki monikääntäjä PRO";
+
+"Got it" = "Sain sen";
+
+"Greek" = "kreikkalainen";
+
+"Gujarati" = "gujarati";
+
+"Haitian Creole" = "Haitin kreoli";
+
+"Hausa" = "hausa";
+
+"Hawaiian" = "havaijilainen";
+
+"Hebrew" = "heprea";
+
+"Hebrew (Israel)" = "Heprea (Israel)";
+
+"Hindi" = "hindi";
+
+"Hindi (India)" = "Hindi (Intia)";
+
+"Hmong" = "hmong";
+
+"Hungarian" = "unkari";
+
+"Hungarian (Hungary)" = "Unkari (Unkari)";
+
+"Icelandic" = "islantilainen";
+
+"Igbo" = "Igbo";
+
+"Image" = "kuva";
+
+"Image translate" = "Kuvan kääntäminen";
+
+"Image translate languages" = "Kuvien kääntämiskielet";
+
+"Indonesian" = "indonesialainen";
+
+"Indonesian (Indonesia)" = "Indonesian (Indonesia)";
+
+"Input source text" = "Syötä lähdeteksti";
+
+"Irish" = "irlantilainen";
+
+"Italian" = "italialainen";
+
+"Italian (Italy)" = "Italia (Italia)";
+
+"Italian (Switzerland)" = "Italia (Sveitsi)";
+
+"Japanese" = "japanilainen";
+
+"Japanese (Japan)" = "Japani (Japani)";
+
+"Javanese" = "jaavalainen";
+
+"Kannada" = "kannada";
+
+"Kazakh" = "Kazakstanin";
+
+"Khmer" = "Khmer";
+
+"Korean" = "korealainen";
+
+"Korean (Korea)" = "Korea (Korea)";
+
+"Kurdish" = "kurdien";
+
+"Kyrgyz" = "Kirgisian";
+
+"Language deleted" = "Kieli poistettu";
+
+"Language downloaded" = "Kieli ladattu";
+
+"Language selector" = "Kielen valitsin";
+
+"Lao" = "Lao";
+
+"Latin" = "latinalainen";
+
+"Latvian" = "latvialainen";
+
+"Limited" = "rajallinen";
+
+"Lithuanian" = "liettualainen";
+
+"Luxembourgish" = "luxemburg";
+
+"Macedonian" = "Makedonia";
+
+"Malagasy" = "Madagaskarin";
+
+"Malay" = "Malaiji";
+
+"Malay (Malaysia)" = "Malaiji (Malesia)";
+
+"Malayalam" = "malajalam";
+
+"Maltese" = "maltalainen";
+
+"Maori" = "maori";
+
+"Marathi" = "marathi";
+
+"Microphone access not allowed" = "Mikrofoniin pääsy ei ole sallittua";
+
+"Mongolian" = "mongolialainen";
+
+"Monthly plan" = "Kuukausittainen suunnitelma";
+
+"Most popular" = "Suosituin";
+
+"Multiple ways to translate with high accuracy!" = "Useita tapoja kääntää erittäin tarkasti!";
+
+"Myanmar (Burmese)" = "Myanmar (burmalainen)";
+
+"Nepali" = "nepali";
+
+"No Limit" = "Ei rajoitusta";
+
+"No camera" = "Ei kameraa";
+
+"No item" = "Ei kohdetta";
+
+"No photo" = "Ei kuvaa";
+
+"No purchase restored." = "Ei ostoa palautettu.";
+
+"No text" = "Ei tekstiä";
+
+"Norwegian" = "norja";
+
+"Norwegian (Norway)" = "Norja (norja)";
+
+"Not now" = "Ei nyt";
+
+"Nyanja (Chichewa)" = "Nyanja (Chichewa)";
+
+"Offline languages" = "Offline-kielet";
+
+"Offline translate faster with no network access. Offline translate can save your packet communication fee." = "Kääntäminen offline-tilassa nopeammin ilman verkkoyhteyttä. Offline-käännös voi säästää pakettiviestintämaksusi.";
+
+"Offline translate languages" = "Kielet offline-tilassa";
+
+"Offline translation modules" = "Offline-käännösmoduulit";
+
+"Pashto" = "paštu";
+
+"Persian" = "persialainen";
+
+"Photo access not allowed" = "Valokuvien käyttö ei ole sallittua";
+
+"Photo library is not supported on this device" = "Tässä laitteessa ei tueta valokuvakirjastoa";
+
+"Please allow microphone and speech recognizer" = "Salli mikrofoni ja puheentunnistin";
+
+"Please try again." = "Yritä uudelleen.";
+
+"Polish" = "puola";
+
+"Polish (Poland)" = "Puola (Puola)";
+
+"Portuguese" = "portugali";
+
+"Portuguese (Brazil)" = "Portugali (Brasilia)";
+
+"Portuguese (Portugal)" = "Portugali (Portugali)";
+
+"Privacy policy" = "Tietosuojakäytäntö";
+
+"Punjabi" = "Punjabi";
+
+"Purchase failed." = "Osto epäonnistui.";
+
+"Purchase successfully." = "Osta onnistuneesti.";
+
+"Records cannot be recovered once deleted." = "Tietueita ei voi palauttaa, kun ne on poistettu.";
+
+"Records cleared" = "Tietueet on poistettu";
+
+"Removed" = "poistettu";
+
+"Restarting AR session..." = "Käynnistetään AR-istunto uudelleen ...";
+
+"Restore" = "palauttaa";
+
+"Restore purchase failed." = "Palauttaminen epäonnistui.";
+
+"Restored purchase successfully." = "Osto palautettu onnistuneesti.";
+
+"Romanian" = "romanialainen";
+
+"Romanian (Romania)" = "Romania (Romania)";
+
+"Russian" = "venäläinen";
+
+"Russian (Russia)" = "Venäjä (Venäjä)";
+
+"START" = "START";
+
+"Samoan" = "samoa";
+
+"Saved Translations" = "Tallennetut käännökset";
+
+"Scan document and detect words in document." = "Skannaa asiakirja ja tunnistaa sanat asiakirjassa.";
+
+"Scots Gaelic" = "Skottilainen gaelilainen";
+
+"See more plans" = "Katso lisää suunnitelmia";
+
+"Select a photo to detect words" = "Valitse valokuva havaitaksesi sanoja";
+
+"Serbian" = "serbialainen";
+
+"Sesotho" = "sesotho";
+
+"Setting" = "asetus";
+
+"Shona" = "Shona";
+
+"Sindhi" = "sindhi";
+
+"Sinhala (Sinhalese)" = "Sinhala";
+
+"Slovak" = "slovakki";
+
+"Slovak (Slovakia)" = "Slovakki (Slovakia)";
+
+"Slovenian" = "slovenian";
+
+"Somali" = "somali";
+
+"Source" = "lähde";
+
+"Spanish" = "espanjalainen";
+
+"Spanish (Chile)" = "Espanja (Chile)";
+
+"Spanish (Colombia)" = "Espanja (Kolumbia)";
+
+"Spanish (Latin America & Caribbean)" = "Espanja (Latinalainen Amerikka ja Karibia)";
+
+"Spanish (Mexico)" = "Espanja (Meksiko)";
+
+"Spanish (Spain)" = "Espanja (Espanja)";
+
+"Spanish (United States)" = "Espanja (Yhdysvallat)";
+
+"Speech recognizer" = "Puhetunnistin";
+
+"Speech translate" = "Puheen käännös";
+
+"Subscribe Monthly" = "Tilaa kuukausittain";
+
+"Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period. " = "Tilausmaksut veloitetaan iTunes-tililtäsi oston vahvistuksen yhteydessä ja jokaisen uusimiskauden alkaessa. \n Ilmaisen kokeilujakson tilaaminen uusiutuu automaattisesti maksulliseksi tilaukseksi. Voit peruuttaa tilauksen tai ilmaisen kokeilujakson iTunes-asetuksissa vähintään 24 tuntia ennen kunkin voimassa olevan tilausjakson päättymistä. Peruutus tulee voimaan seuraavana päivänä viimeisestä. Päivämäärä nykyisestä tilausjaksosta ja sinut alennetaan ilmaiseksi palveluksi. Ilmaisen kokeilujakson käyttämätön osa (jos tarjotaan) menetetään, kun ostat premium-tilauksen ilmaisen kokeilujakson aikana.";
+
+"Sundanese" = "sunda";
+
+"Supporting 104 languages. \n Offline translate is also available for FREE." = "Tukee 104 kieltä. \n Kääntäminen offline-tilassa on myös ILMAINEN.";
+
+"Swahili" = "Suahili";
+
+"Swedish" = "ruotsalainen";
+
+"Swedish (Sweden)" = "Ruotsi (Ruotsi)";
+
+"Tagalog (Filipino)" = "Tagalog (filippiiniläinen)";
+
+"Tajik" = "Tadzhikistanin";
+
+"Tamil" = "tamil";
+
+"Target" = "tavoite";
+
+"Telugu" = "telugu";
+
+"Terms of use" = "Käyttöehdot";
+
+"Text" = "teksti";
+
+"Text translate" = "Tekstin kääntäminen";
+
+"Text translate languages" = "Teksti käännä kieliä";
+
+"Thai" = "Thailand";
+
+"Thai (Thailand)" = "Thailand (Thailand)";
+
+"The records cannot be recovered once deleted" = "Catatan tidak dapat dipulihkan setelah dihapus";
+
+"Translate" = "Terjemahkan";
+
+"Translate character has reach the limit" = "Karakter terjemahan telah mencapai batasnya";
+
+"Translate conversation smoothly." = "Terjemahkan percakapan dengan lancar.";
+
+"Translation deleted" = "Terjemahan dihapus";
+
+"Translation saved" = "Terjemahan disimpan";
+
+"Try 14 Days for FREE!" = "Coba 14 Hari GRATIS!";
+
+"Try again" = "Coba lagi";
+
+"Try again." = "Coba lagi.";
+
+"Turkish" = "Turki";
+
+"Turkish (Turkey)" = "Turki (Turki)";
+
+"Ukrainian" = "Ukraina";
+
+"Ukrainian (Ukraine)" = "Ukraina (Ukraina)";
+
+"Undownloaded languages" = "Bahasa yang tidak diunduh";
+
+"Urdu" = "Bahasa Urdu";
+
+"Use camera to detect words" = "Gunakan kamera untuk mendeteksi kata-kata";
+
+"Use microphone to record voice" = "Gunakan mikrofon untuk merekam suara";
+
+"Uzbek" = "Uzbek";
+
+"Vietnamese" = "Orang Vietnam";
+
+"Vietnamese (Vietnam)" = "Vietnam (Vietnam)";
+
+"Voice" = "Suara";
+
+"Voice recorder error occurred." = "Kesalahan perekam suara terjadi.";
+
+"Voice translate languages" = "Bahasa terjemahan suara";
+
+"Welsh" = "Welsh";
+
+"Xhosa" = "Xhosa";
+
+"Yearly plan" = "Rencana tahunan";
+
+"Yiddish" = "Yiddish";
+
+"Yoruba" = "Yoruba";
+
+"You can change your plan and get more characters" = "Anda dapat mengubah paket dan mendapatkan lebih banyak karakter";
+
+"You cannot translate %@ to %@" = "Anda tidak dapat menerjemahkan %@ ke %@";
+
+"Zulu" = "Zulu";
+
+"save %@ / year" = "hemat %@ / tahun";
+
+"skip" = "lewati";
+
+"then %@ / year" = "lalu %@ / tahun";

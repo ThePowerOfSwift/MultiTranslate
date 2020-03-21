@@ -5,3 +5,571 @@
   Created by Keishin CHOU on 2020/03/16.
   Copyright © 2020 Keishin CHOU. All rights reserved.
 */
+
+"/month" = "/ 월";
+
+"/year" = "/ 년";
+
+"10K characters/month" = "10K 자 / 월";
+
+"50K characters/month" = "한달에 50K 문자";
+
+"AR object translate" = "AR 객체 번역";
+
+"AR translate languages" = "AR 번역 언어";
+
+"About subscription" = "가입 정보";
+
+"Afrikaans" = "아프리칸스어";
+
+"Albanian" = "알바니아";
+
+"Amharic" = "암하라 어";
+
+"Arabic" = "아랍어";
+
+"Arabic (Saudi Arabia)" = "아랍어 (사우디 아라비아)";
+
+"Armenian" = "아르메니아어";
+
+"Augmented Reality" = "증강 현실";
+
+"Automatically recognize and translate words in images." = "이미지의 단어를 자동으로 인식하고 번역합니다.";
+
+"Automatically recognize and translate words in speech." = "말로 된 단어를 자동으로 인식하고 번역합니다.";
+
+"Automatically recognize objects in camera images. \n Display the names of the objects using AR." = "카메라 이미지의 물체를 자동으로 인식합니다. \n AR을 사용하여 오브젝트의 이름을 표시하십시오.";
+
+"Automatically recognize words in conversations and translate smoothly." = "대화에서 단어를 자동으로 인식하고 부드럽게 번역합니다.";
+
+"Automatically scan documents and recognize characters." = "문서를 자동으로 스캔하고 문자를 인식합니다.";
+
+"Azerbaijani" = "아제르바이잔 어";
+
+"Basque" = "바스크어";
+
+"Belarusian" = "벨로루시 어";
+
+"Bengali" = "벵골어";
+
+"Bosnian" = "보스니아 어";
+
+"Bulgarian" = "불가리아어";
+
+"Camera" = "카메라";
+
+"Camera access not allowed" = "카메라 접근 불가";
+
+"Camera is not supported on this device" = "이 기기에서는 카메라가 지원되지 않습니다";
+
+"Camera translate" = "카메라 번역";
+
+"Camera translate languages" = "카메라 번역 언어";
+
+"Cancel" = "취소";
+
+"Cannot download language, please try again." = "언어를 다운로드 할 수 없습니다. 다시 시도하십시오.";
+
+"Cannot extract any text from the speech, please try again." = "음성에서 텍스트를 추출 할 수 없습니다. 다시 시도하십시오.";
+
+"Cannot recognize text in this photo." = "이 사진에서 텍스트를 인식 할 수 없습니다.";
+
+"Cannot recognize text in this photo. %@" = "이 사진에서 텍스트를 인식 할 수 없습니다. %@";
+
+"Cannot recognize text in this photo. Please try again." = "이 사진에서 텍스트를 인식 할 수 없습니다. 다시 시도하십시오.";
+
+"Catalan" = "카탈로니아 어";
+
+"Catalan (Spain)" = "카탈로니아 어 (스페인)";
+
+"Cebuano" = "세부 아노";
+
+"Change language" = "언어 변경";
+
+"Chech app setting" = "Chech 앱 설정";
+
+"Chinese (China)" = "중국어 (중국)";
+
+"Chinese (HK)" = "중국어 (홍콩)";
+
+"Chinese (Hongkong)" = "중국어 (홍콩)";
+
+"Chinese (Mandarin)" = "중국어 (북경어)";
+
+"Clear records?" = "기록을 지우시겠습니까?";
+
+"Conversation" = "대화";
+
+"Conversation translate" = "대화 번역";
+
+"Conversation translate languages" = "대화 번역 언어";
+
+"Copied to clipboard" = "클립 보드에 복사";
+
+"Corsican" = "코르시카 어";
+
+"Croatian" = "크로아티아어";
+
+"Croatian (Croatia)" = "크로아티아어 (크로아티아)";
+
+"Czech" = "체코 어";
+
+"Czech (Czech)" = "체코 어 (체코)";
+
+"Danish" = "덴마크어";
+
+"Delete" = "삭제";
+
+"Delete all records?" = "모든 기록을 삭제 하시겠습니까?";
+
+"Detect objects in reality and translate." = "실제로 물체를 감지하고 번역합니다.";
+
+"Detect word in speech" = "말로 단어를 감지";
+
+"Detect words in photos and translate." = "사진에서 단어를 감지하고 번역합니다.";
+
+"Detect words in speech and translate." = "말로 단어를 감지하고 번역하십시오.";
+
+"Detecting object. Please wait a miniute..." = "물체 감지 중 잠시 기다립니다 ...";
+
+"Dismiss" = "해산";
+
+"Document Scan" = "문서 스캔";
+
+"Document translate" = "문서 번역";
+
+"Documnet translate languages" = "Documnet 번역 언어";
+
+"Download failed" = "다운로드 실패";
+
+"Download offline language" = "오프라인 언어 다운로드";
+
+"Downloaded languages" = "다운로드 한 언어";
+
+"Dutch" = "네덜란드어";
+
+"Dutch (Belgium)" = "네덜란드어 (벨기에)";
+
+"Dutch (Netherlands)" = "네덜란드어 (네덜란드)";
+
+"Empty text" = "빈 텍스트";
+
+"English" = "영어";
+
+"English (Australia)" = "영어 (호주)";
+
+"English (Canada)" = "영어 (캐나다)";
+
+"English (India)" = "영어 (인도)";
+
+"English (Ireland)" = "영어 (아일랜드)";
+
+"English (New Zealand)" = "영어 (뉴질랜드)";
+
+"English (Philippines)" = "영어 (필리핀)";
+
+"English (Saudi Arabia)" = "영어 (사우디 아라비아)";
+
+"English (Singapore)" = "영어 (싱가포르)";
+
+"English (South Africa)" = "영어 (남아프리카)";
+
+"English (United Kingdom)" = "영어 (영국)";
+
+"English (United States)" = "영어 (미국)";
+
+"English language cannot be deleted." = "영어는 삭제할 수 없습니다.";
+
+"Error" = "오차";
+
+"Esperanto" = "에스페란토";
+
+"Estonian" = "에스토니아어";
+
+"Finnish" = "핀란드어";
+
+"Finnish (Finland)" = "핀란드어 (핀란드)";
+
+"For a pro translater" = "프로 통역사";
+
+"French" = "불어";
+
+"French (Belgium)" = "프랑스어 (벨기에)";
+
+"French (Canada)" = "프랑스어 (캐나다)";
+
+"French (France)" = "프랑스어 (프랑스)";
+
+"French (Switzerland)" = "프랑스어 (스위스)";
+
+"Frisian" = "프리지아 어";
+
+"Galician" = "갈리시아어";
+
+"Georgian" = "그루지야 어";
+
+"German" = "독일어";
+
+"German (Austria)" = "독일어 (오스트리아)";
+
+"German (Germany)" = "독일어 (독일)";
+
+"German (Switzerland)" = "독일어 (스위스)";
+
+"Get Multi-Translate PRO" = "멀티 번역 PRO 받기";
+
+"Got it" = "알았어";
+
+"Greek" = "그리스어";
+
+"Gujarati" = "구자라트";
+
+"Haitian Creole" = "아이티 크리올";
+
+"Hausa" = "하우사";
+
+"Hawaiian" = "하와이";
+
+"Hebrew" = "히브리어";
+
+"Hebrew (Israel)" = "히브리어 (이스라엘)";
+
+"Hindi" = "힌디어";
+
+"Hindi (India)" = "힌디어 (인도)";
+
+"Hmong" = "몽족";
+
+"Hungarian" = "헝가리어";
+
+"Hungarian (Hungary)" = "헝가리어 (헝가리)";
+
+"Icelandic" = "아이슬란드 어";
+
+"Igbo" = "이 그보";
+
+"Image" = "이미지";
+
+"Image translate" = "이미지 번역";
+
+"Image translate languages" = "이미지 번역 언어";
+
+"Indonesian" = "인도네시아어";
+
+"Indonesian (Indonesia)" = "인도네시아어 (인도네시아)";
+
+"Input source text" = "입력 소스 텍스트";
+
+"Irish" = "아일랜드";
+
+"Italian" = "이탈리아어";
+
+"Italian (Italy)" = "이탈리아어 (이탈리아)";
+
+"Italian (Switzerland)" = "이탈리아어 (스위스)";
+
+"Japanese" = "일본어";
+
+"Japanese (Japan)" = "일본어 (일본)";
+
+"Javanese" = "자바어";
+
+"Kannada" = "칸나다어";
+
+"Kazakh" = "카자흐어";
+
+"Khmer" = "크메르";
+
+"Korean" = "한국어";
+
+"Korean (Korea)" = "한국어 (한국)";
+
+"Kurdish" = "쿠르드어";
+
+"Kyrgyz" = "키르기스";
+
+"Language deleted" = "언어가 삭제되었습니다";
+
+"Language downloaded" = "언어 다운로드";
+
+"Language selector" = "언어 선택기";
+
+"Lao" = "라오 어";
+
+"Latin" = "라틴어";
+
+"Latvian" = "라트비아어";
+
+"Limited" = "한정";
+
+"Lithuanian" = "리투아니아어";
+
+"Luxembourgish" = "룩셈부르크 어";
+
+"Macedonian" = "마케도니아 어";
+
+"Malagasy" = "마다가스카르";
+
+"Malay" = "말레이";
+
+"Malay (Malaysia)" = "말레이어 (말레이시아)";
+
+"Malayalam" = "말라 얄 람어";
+
+"Maltese" = "몰타어";
+
+"Maori" = "마오리";
+
+"Marathi" = "마라 티어";
+
+"Microphone access not allowed" = "마이크 액세스가 허용되지 않습니다";
+
+"Mongolian" = "몽골어";
+
+"Monthly plan" = "월간 요금제";
+
+"Most popular" = "가장 인기있는";
+
+"Multiple ways to translate with high accuracy!" = "높은 정확도로 번역하는 여러 가지 방법!";
+
+"Myanmar (Burmese)" = "미얀마 (버마어)";
+
+"Nepali" = "네팔어";
+
+"No Limit" = "제한 없음";
+
+"No camera" = "카메라 없음";
+
+"No item" = "항목이 없습니다";
+
+"No photo" = "사진이 없습니다";
+
+"No purchase restored." = "구매가 복원되지 않았습니다.";
+
+"No text" = "텍스트가 없습니다";
+
+"Norwegian" = "노르웨이어";
+
+"Norwegian (Norway)" = "노르웨이어 (노르웨이)";
+
+"Not now" = "지금은 아닙니다";
+
+"Nyanja (Chichewa)" = "냐냐 (치체와)";
+
+"Offline languages" = "오프라인 언어";
+
+"Offline translate faster with no network access. Offline translate can save your packet communication fee." = "네트워크 액세스없이 오프라인 번역 속도가 빨라 오프라인 번역 기능으로 패킷 통신 요금을 절약 할 수 있습니다.";
+
+"Offline translate languages" = "오프라인 번역 언어";
+
+"Offline translation modules" = "오프라인 번역 모듈";
+
+"Pashto" = "파슈토";
+
+"Persian" = "페르시아어";
+
+"Photo access not allowed" = "사진 접근 불가";
+
+"Photo library is not supported on this device" = "이 기기에서 사진 라이브러리가 지원되지 않습니다";
+
+"Please allow microphone and speech recognizer" = "마이크 및 음성 인식기를 허용하십시오";
+
+"Please try again." = "다시 시도하십시오.";
+
+"Polish" = "폴란드어";
+
+"Polish (Poland)" = "폴란드어 (폴란드)";
+
+"Portuguese" = "포르투갈어";
+
+"Portuguese (Brazil)" = "포르투갈어 (브라질)";
+
+"Portuguese (Portugal)" = "포르투갈어 (포르투갈)";
+
+"Privacy policy" = "개인 정보 보호 정책";
+
+"Punjabi" = "펀 자브";
+
+"Purchase failed." = "구매하지 못했습니다.";
+
+"Purchase successfully." = "성공적으로 구매하십시오.";
+
+"Records cannot be recovered once deleted." = "삭제 된 레코드는 복구 할 수 없습니다.";
+
+"Records cleared" = "기록 지우기";
+
+"Removed" = "제거";
+
+"Restarting AR session..." = "AR 세션 재시작 ...";
+
+"Restore" = "복원";
+
+"Restore purchase failed." = "구매 복구에 실패했습니다.";
+
+"Restored purchase successfully." = "구매가 성공적으로 복원되었습니다.";
+
+"Romanian" = "루마니아어";
+
+"Romanian (Romania)" = "루마니아어 (루마니아)";
+
+"Russian" = "러시아어";
+
+"Russian (Russia)" = "러시아어 (러시아)";
+
+"START" = "시작";
+
+"Samoan" = "사모아";
+
+"Saved Translations" = "저장된 번역";
+
+"Scan document and detect words in document." = "문서를 스캔하고 문서에서 단어를 감지하십시오.";
+
+"Scots Gaelic" = "스코틀랜드 게 일어";
+
+"See more plans" = "더 많은 계획보기";
+
+"Select a photo to detect words" = "단어를 감지 할 사진을 선택하십시오";
+
+"Serbian" = "세르비아어";
+
+"Sesotho" = "세 소토";
+
+"Setting" = "설정";
+
+"Shona" = "쇼나";
+
+"Sindhi" = "신디";
+
+"Sinhala (Sinhalese)" = "신 할라 어 (신 할라 어)";
+
+"Slovak" = "슬로바키아어";
+
+"Slovak (Slovakia)" = "슬로바키아어 (슬로바키아)";
+
+"Slovenian" = "슬로베니아어";
+
+"Somali" = "소말리아";
+
+"Source" = "출처";
+
+"Spanish" = "스페인어";
+
+"Spanish (Chile)" = "스페인어 (칠레)";
+
+"Spanish (Colombia)" = "스페인어 (콜롬비아)";
+
+"Spanish (Latin America & Caribbean)" = "스페인어 (라틴 아메리카 및 카리브해)";
+
+"Spanish (Mexico)" = "스페인어 (멕시코)";
+
+"Spanish (Spain)" = "스페인어 (스페인)";
+
+"Spanish (United States)" = "스페인어 (미국)";
+
+"Speech recognizer" = "음성 인식기";
+
+"Speech translate" = "음성 번역";
+
+"Subscribe Monthly" = "월간 구독";
+
+"Subscription payments will be charged to your iTunes account at confirmation of your purchase and upon commencement of each renewal term. \n Subscription with a free trial period will automatically renew to a paid subscription. You can cancel your subscription or free trial in the iTunes settings at least 24-hours before the end of each current subscription period. The cancellation will take effect the day after the last day of the current subscription period and you will be downgraded to the free service. Any unused portion of a free trial period (if offered) will be forfeited when you purchase a premium subscription during the free trial period. " = "구독 확인은 구매 확인 및 갱신 기간이 시작될 때 iTunes 계정에 청구됩니다. \n 무료 평가판이있는 구독은 자동으로 유료 구독으로 갱신됩니다. 현재 구독 기간이 종료되기 최소 24 시간 전에 iTunes 설정에서 구독 또는 무료 평가판을 취소 할 수 있습니다. 무료 평가판 기간 동안 프리미엄 구독을 구매하면 무료 평가판 기간 중 제공되지 않은 부분 (제공된 경우)이 소멸됩니다.";
+
+"Sundanese" = "순 다어";
+
+"Supporting 104 languages. \n Offline translate is also available for FREE." = "104 개 언어를 지원합니다. \n 오프라인 번역도 무료로 제공됩니다.";
+
+"Swahili" = "스와힐리어";
+
+"Swedish" = "스웨덴어";
+
+"Swedish (Sweden)" = "스웨덴어 (스웨덴)";
+
+"Tagalog (Filipino)" = "타갈로그어 (필리핀)";
+
+"Tajik" = "타직";
+
+"Tamil" = "타밀어";
+
+"Target" = "대상";
+
+"Telugu" = "텔루구 어";
+
+"Terms of use" = "이용 약관";
+
+"Text" = "문자";
+
+"Text translate" = "텍스트 번역";
+
+"Text translate languages" = "텍스트 번역 언어";
+
+"Thai" = "타이";
+
+"Thai (Thailand)" = "태국어 (태국)";
+
+"The records cannot be recovered once deleted" = "삭제 된 레코드는 복구 할 수 없습니다";
+
+"Translate" = "번역";
+
+"Translate character has reach the limit" = "번역 문자가 한도에 도달했습니다";
+
+"Translate conversation smoothly." = "대화를 부드럽게 번역하십시오.";
+
+"Translation deleted" = "번역이 삭제되었습니다.";
+
+"Translation saved" = "번역 저장";
+
+"Try 14 Days for FREE!" = "14 일 동안 무료로 사용해보십시오!";
+
+"Try again" = "다시 시도하십시오";
+
+"Try again." = "다시 시도하십시오.";
+
+"Turkish" = "터키어";
+
+"Turkish (Turkey)" = "터키어 (터키)";
+
+"Ukrainian" = "우크라이나어";
+
+"Ukrainian (Ukraine)" = "우크라이나어 (우크라이나)";
+
+"Undownloaded languages" = "다운로드되지 않은 언어";
+
+"Urdu" = "우르두어";
+
+"Use camera to detect words" = "카메라를 사용하여 단어 감지";
+
+"Use microphone to record voice" = "마이크를 사용하여 음성 녹음";
+
+"Uzbek" = "우즈벡";
+
+"Vietnamese" = "베트남어";
+
+"Vietnamese (Vietnam)" = "베트남어 (베트남)";
+
+"Voice" = "음성";
+
+"Voice recorder error occurred." = "음성 녹음기 오류가 발생했습니다.";
+
+"Voice translate languages" = "음성 번역 언어";
+
+"Welsh" = "웨일스 어";
+
+"Xhosa" = "코사";
+
+"Yearly plan" = "연간 계획";
+
+"Yiddish" = "이디시어";
+
+"Yoruba" = "요 루바";
+
+"You can change your plan and get more characters" = "당신은 당신의 계획을 변경하고 더 많은 캐릭터를 얻을 수 있습니다";
+
+"You cannot translate %@ to %@" = "%@ 을 %@ 로 번역 할 수 없습니다";
+
+"Zulu" = "줄 루어";
+
+"save %@ / year" = "연간 %@ 할인";
+
+"skip" = "건너 뛰기";
+
+"then %@ / year" = "그때 %@ / 년";

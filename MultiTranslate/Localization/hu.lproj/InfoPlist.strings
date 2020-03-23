@@ -7,3 +7,8 @@
 */
 "CFBundleDisplayName" = "Multi Translate";
 "NSHumanReadableCopyright" = "Copyright © 2020 Keishin CHOU. All rights reserved.";
+
+NSCameraUsageDescription = "A kamera használata a szavak felismerésére.";
+NSMicrophoneUsageDescription = "A mikrofon használata beszéd rögzítéséhez.";
+NSPhotoLibraryUsageDescription = "Szavak felismerése egy fotón.";
+NSSpeechRecognitionUsageDescription = "A szavak felismerése a beszédben.";

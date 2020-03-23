@@ -7,3 +7,8 @@
 */
 "CFBundleDisplayName" = "Multi Translate";
 "NSHumanReadableCopyright" = "Copyright © 2020 Keishin CHOU. All rights reserved.";
+
+NSCameraUsageDescription = "De camera gebruiken om woorden te detecteren.";
+NSMicrophoneUsageDescription = "De microfoon gebruiken om spraak op te nemen..";
+NSPhotoLibraryUsageDescription = "Detecteer woorden in een foto.";
+NSSpeechRecognitionUsageDescription = "Detecteer woorden in spraak.";

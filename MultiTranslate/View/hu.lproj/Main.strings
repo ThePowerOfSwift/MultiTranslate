@@ -1,12 +1,12 @@
 
 /* Class = "UITabBarItem"; title = "Translation"; ObjectID = "0hc-Ow-sXn"; */
-"0hc-Ow-sXn.title" = "Translation";
+"0hc-Ow-sXn.title" = "Fordítás";
 
 /* Class = "UITabBarItem"; title = "Saved"; ObjectID = "KD8-cT-Evn"; */
-"KD8-cT-Evn.title" = "Saved";
+"KD8-cT-Evn.title" = "Mentett";
 
 /* Class = "UITabBarItem"; title = "Account"; ObjectID = "aS4-7C-gAr"; */
-"aS4-7C-gAr.title" = "Account";
+"aS4-7C-gAr.title" = "számla";
 
 /* Class = "UITabBarItem"; title = "Setting"; ObjectID = "qhy-s2-8g3"; */
-"qhy-s2-8g3.title" = "Setting";
+"qhy-s2-8g3.title" = "Beállítás";

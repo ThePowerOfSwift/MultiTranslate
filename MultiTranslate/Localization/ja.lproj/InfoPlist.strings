@@ -7,3 +7,8 @@
 */
 "CFBundleDisplayName" = "Multi Translate";
 "NSHumanReadableCopyright" = "Copyright © 2020 Keishin CHOU. All rights reserved.";
+
+NSCameraUsageDescription = "カメラを利用して単語を検出します。";
+NSMicrophoneUsageDescription = "マイクを使用して音声を録音します。";
+NSPhotoLibraryUsageDescription = "写真内の単語を検出します。";
+NSSpeechRecognitionUsageDescription = "音声中の単語を検出します。";

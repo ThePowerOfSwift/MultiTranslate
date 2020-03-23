@@ -7,3 +7,9 @@
 */
 "CFBundleDisplayName" = "Multi Translate";
 "NSHumanReadableCopyright" = "Copyright © 2020 Keishin CHOU. All rights reserved.";
+
+//https://stackoverflow.com/questions/25736700/how-to-localise-a-string-inside-the-ios-info-plist-file
+NSCameraUsageDescription = "Using camera to detect words.";
+NSMicrophoneUsageDescription = "Using microphone to record speech.";
+NSPhotoLibraryUsageDescription = "Detect words in a photo.";
+NSSpeechRecognitionUsageDescription = "Detect words in speech.";

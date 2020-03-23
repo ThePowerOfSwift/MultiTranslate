@@ -330,8 +330,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
        }
     
     func performTranslate(for predictionResult: String) {
-        if isOfflineTranslateAvailable(from: "english", to: targetLanguage) {
-            performFBOfflineTranslate(from: "english", to: targetLanguage, for: predictionResult)
+        if isOfflineTranslateAvailable(from: "English".localized(), to: targetLanguage) {
+            performFBOfflineTranslate(from: "English".localized(), to: targetLanguage, for: predictionResult)
         } else {
             performGoogleCloudTranslate(from: "en", to: targetLanguageCode, for: predictionResult)
         }

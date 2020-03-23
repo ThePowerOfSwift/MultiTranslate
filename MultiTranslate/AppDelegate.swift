@@ -93,6 +93,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("translatedCharactersCount is \(userDefaults.integer(forKey: Constants.translatedCharactersCountKey))")
             translatedCharacterCountLocal = userDefaults.integer(forKey: Constants.translatedCharactersCountKey)
         }
+        
+        let isAppEverLaunched = UserDefaults.standard.bool(forKey: Constants.isAppEverLauchedKey)
+        if !isAppEverLaunched {
+            let englishTextIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: "English".localized())
+            let spanishTextIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: "Spanish".localized())
+            let chineseTextIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: "Chinese (Mandarin)".localized())
+            let japaneseTextIndex = SupportedLanguages.gcpLanguageList.firstIndex(of: "Japanese".localized())
+            let englishVisionIndex = SupportedLanguages.visionRecognizerSupportedLanguage.firstIndex(of: "English".localized())
+            let spanishSpeechIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: "Spanish".localized())
+            let englishSpeechIndex = SupportedLanguages.speechRecognizerSupportedLanguage.firstIndex(of: "English".localized())
+            
+            userDefaults.set(spanishTextIndex, forKey: Constants.textSourceLanguageIndexKey)
+            userDefaults.set(englishTextIndex, forKey: Constants.textTargetLanguageIndexKey)
+            
+            userDefaults.set(englishVisionIndex, forKey: Constants.cameraSourceLanguageIndexKey)
+            userDefaults.set(japaneseTextIndex, forKey: Constants.cameraTargetLanguageIndexKey)
+            
+            userDefaults.set(spanishSpeechIndex, forKey: Constants.voiceSourceLanguageIndexKey)
+            userDefaults.set(englishTextIndex, forKey: Constants.voiceTargetLanguageIndexKey)
+            
+            userDefaults.set(spanishSpeechIndex, forKey: Constants.conversationSourceLanguageIndexKey)
+            userDefaults.set(englishSpeechIndex, forKey: Constants.conversationTargetLanguageIndexKey)
+            
+            userDefaults.set(englishVisionIndex, forKey: Constants.imageSourceLanguageIndexKey)
+            userDefaults.set(chineseTextIndex, forKey: Constants.imageTargetLanguageIndexKey)
+            
+            userDefaults.set(englishVisionIndex, forKey: Constants.docSourceLanguageIndexKey)
+            userDefaults.set(japaneseTextIndex, forKey: Constants.docTargetLanguageIndexKey)
+            
+            userDefaults.set(englishVisionIndex, forKey: Constants.arSourceLanguageIndexKey)
+            userDefaults.set(englishTextIndex, forKey: Constants.arTargetLanguageIndexKey)
+        }
     }
     
     func initializeRealm() {

@@ -214,8 +214,8 @@ class TranslationViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(showDownloadLanguageModelPage))
         
-//        let isAppEverLaunched = UserDefaults.standard.bool(forKey: Constants.isAppEverLauchedKey)
-        let isAppEverLaunched = false // for test
+        let isAppEverLaunched = UserDefaults.standard.bool(forKey: Constants.isAppEverLauchedKey)
+//        let isAppEverLaunched = false // for test
         if !isAppEverLaunched {
             view.addSubview(onboardPage)
             onboardPage.edgeTo(view)

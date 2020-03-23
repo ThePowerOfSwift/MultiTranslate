@@ -330,33 +330,34 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
        }
     
     func performTranslate(for predictionResult: String) {
-        if isOfflineTranslateAvailable(from: "English".localized(), to: targetLanguage) {
-            performFBOfflineTranslate(from: "English".localized(), to: targetLanguage, for: predictionResult)
-        } else {
-            performGoogleCloudTranslate(from: "en", to: targetLanguageCode, for: predictionResult)
-        }
+//        if isOfflineTranslateAvailable(from: "English".localized(), to: targetLanguage) {
+//            performFBOfflineTranslate(from: "English".localized(), to: targetLanguage, for: predictionResult)
+//        } else {
+//            performGoogleCloudTranslate(from: "en", to: targetLanguageCode, for: predictionResult)
+//        }
+        performGoogleCloudTranslate(from: "en", to: targetLanguageCode, for: predictionResult)
     }
     
-    func isOfflineTranslateAvailable(from sourceLanguage: String, to targetLanguage: String) -> Bool {
-        return FBOfflineTranslate.isTranslationPairSupportedByFBOfflineTranslate(from: sourceLanguage, to: targetLanguage) &&
-            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: sourceLanguage) &&
-            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: targetLanguage)
-    }
-    
-    func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
-        guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
-        fbTranslator.translate(textToTranslate) { [weak self] (translatedText, error) in
-            if let result = translatedText {
-                self?.addNodeToScene(using: result)
-                print("the FB translation is \(result)")
-            } else {
-                print(error!.localizedDescription)
-                SPAlert.present(title: "Error".localized(),
-                                message: error?.localizedDescription,
-                                image: UIImage(systemName: "exclamationmark.triangle")!)
-            }
-        }
-    }
+//    func isOfflineTranslateAvailable(from sourceLanguage: String, to targetLanguage: String) -> Bool {
+//        return FBOfflineTranslate.isTranslationPairSupportedByFBOfflineTranslate(from: sourceLanguage, to: targetLanguage) &&
+//            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: sourceLanguage) &&
+//            FBOfflineTranslate.isTranslateLanguageModelDownloaded(for: targetLanguage)
+//    }
+//
+//    func performFBOfflineTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
+//        guard let fbTranslator = FBOfflineTranslate.generateFBTranslator(from: sourceLanguage, to: targetLanguage) else { return }
+//        fbTranslator.translate(textToTranslate) { [weak self] (translatedText, error) in
+//            if let result = translatedText {
+//                self?.addNodeToScene(using: result)
+//                print("the FB translation is \(result)")
+//            } else {
+//                print(error!.localizedDescription)
+//                SPAlert.present(title: "Error".localized(),
+//                                message: error?.localizedDescription,
+//                                image: UIImage(systemName: "exclamationmark.triangle")!)
+//            }
+//        }
+//    }
     
     func performGoogleCloudTranslate(from sourceLanguage: String, to targetLanguage: String, for textToTranslate: String) {
         GoogleCloudTranslate.textTranslate(sourceLanguage: sourceLanguage,

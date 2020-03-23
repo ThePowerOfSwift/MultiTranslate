@@ -316,6 +316,18 @@ struct SupportedLanguages {
     
     static let speechRecognizerSupportedLanguage = [
         // Use for display in VoiceTranslationViewController
+        "Arabic".localized(), "Catalan".localized(), "Czech".localized(), "Danish".localized(), "German".localized(), "German".localized(), "German".localized(), "Greek".localized(), "English".localized(),
+        "English".localized(), "English".localized(), "English".localized(), "English".localized(), "English".localized(), "English".localized(),
+        "English".localized(), "English".localized(), "English".localized(), "English".localized(), "Spanish".localized(), "Spanish".localized(), "Spanish".localized(),
+        "Spanish".localized(), "Spanish".localized(), "Spanish".localized(), "Finnish".localized(), "French".localized(), "French".localized(), "French".localized(),
+        "French".localized(), "Hebrew".localized(), "Hindi".localized(), "Croatian".localized(), "Hungarian".localized(), "Indonesian".localized(), "Italian".localized(),
+        "Italian".localized(), "Japanese".localized(), "Korean".localized(), "Malay".localized(), "Norwegian".localized(), "Dutch".localized(), "Dutch".localized(), "Polish".localized(),
+        "Portuguese".localized(), "Portuguese".localized(), "Romanian".localized(), "Russian".localized(), "Slovak".localized(), "Swedish".localized(), "Thai".localized(),
+        "Turkish".localized(), "Ukrainian".localized(), "Vietnamese".localized(), "Chinese (Mandarin)".localized(), "Chinese (HK)".localized()
+    ]
+    
+    static let speechRecognizerSupportedLanguageOrigine = [
+        // Use for display in VoiceTranslationViewController
         "Arabic", "Catalan", "Czech", "Danish", "German", "German", "German", "Greek", "English",
         "English", "English", "English", "English", "English", "English",
         "English", "English", "English", "English", "Spanish", "Spanish", "Spanish",
@@ -347,11 +359,17 @@ struct SupportedLanguages {
         "German", "English", "Spanish", "Finnish", "French", "Italian"
     ]
     
-    static let fbSupportedLanguage = ["Afrikaans", "Arabic", "Belarusian", "Bulgarian", "Bengali", "Catalan", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto",
-                                      "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian Creole",
-                                      "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian",
-                                      "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian",
-                                      "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog (Filipino)", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese (Mandarin)"]
+    static let fbSupportedLanguage = ["Afrikaans".localized(), "Arabic".localized(), "Belarusian".localized(), "Bulgarian".localized(), "Bengali".localized(), "Catalan".localized(), "Czech".localized(), "Welsh".localized(), "Danish".localized(), "German".localized(), "Greek".localized(), "English".localized(), "Esperanto".localized(),
+    "Spanish".localized(), "Estonian".localized(), "Persian".localized(), "Finnish".localized(), "French".localized(), "Irish".localized(), "Galician".localized(), "Gujarati".localized(), "Hebrew".localized(), "Hindi".localized(), "Croatian".localized(), "Haitian Creole".localized(),
+    "Hungarian".localized(), "Indonesian".localized(), "Icelandic".localized(), "Italian".localized(), "Japanese".localized(), "Georgian".localized(), "Kannada".localized(), "Korean".localized(), "Lithuanian".localized(), "Latvian".localized(), "Macedonian".localized(),
+    "Marathi".localized(), "Malay".localized(), "Maltese".localized(), "Dutch".localized(), "Norwegian".localized(), "Polish".localized(), "Portuguese".localized(), "Romanian".localized(), "Russian".localized(), "Slovak".localized(), "Slovenian".localized(), "Albanian".localized(),
+    "Swedish".localized(), "Swahili".localized(), "Tamil".localized(), "Telugu".localized(), "Thai".localized(), "Tagalog (Filipino)".localized(), "Turkish".localized(), "Ukrainian".localized(), "Urdu".localized(), "Vietnamese".localized(), "Chinese (Mandarin)".localized()]
+    
+    static let fbSupportedLanguageOrigine = ["Afrikaans", "Arabic", "Belarusian", "Bulgarian", "Bengali", "Catalan", "Czech", "Welsh", "Danish", "German", "Greek", "English", "Esperanto",
+                                             "Spanish", "Estonian", "Persian", "Finnish", "French", "Irish", "Galician", "Gujarati", "Hebrew", "Hindi", "Croatian", "Haitian Creole",
+                                             "Hungarian", "Indonesian", "Icelandic", "Italian", "Japanese", "Georgian", "Kannada", "Korean", "Lithuanian", "Latvian", "Macedonian",
+                                             "Marathi", "Malay", "Maltese", "Dutch", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Slovenian", "Albanian",
+                                             "Swedish", "Swahili", "Tamil", "Telugu", "Thai", "Tagalog (Filipino)", "Turkish", "Ukrainian", "Urdu", "Vietnamese", "Chinese (Mandarin)"]
     
     static let fbSupportedLanguageCode = ["af", "ar", "be", "bg", "bn", "ca", "cs", "cy", "da", "de", "el", "en", "eo", "es", "et", "fa", "fi", "fr", "ga", "gl", "gu", "he", "hi",
                                           "hr", "ht", "hu", "id", "is", "it", "ja", "ka", "kn", "ko", "lt", "lv", "mk", "mr", "ms", "mt", "nl", "no", "pl", "pt", "ro", "ru", "sk",

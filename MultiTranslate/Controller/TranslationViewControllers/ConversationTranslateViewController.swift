@@ -449,7 +449,7 @@ class ConversationTranslateViewController: UIViewController {
             //Show alert
             if AVCaptureDevice.authorizationStatus(for: .audio) !=  .authorized ||
                 SFSpeechRecognizer.authorizationStatus() != .authorized {
-                let alert = PMAlertController(title: "Chech app setting".localized(),
+                let alert = PMAlertController(title: "Check the app setting".localized(),
                                               description: "Please allow microphone and speech recognizer".localized(),
                                               image: UIImage(named: "color_microphone"),
                                               style: .alert)

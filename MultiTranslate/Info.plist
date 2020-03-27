@@ -23,13 +23,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Please allow the camera.</string>
+	<string>Using camera to detect words.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Please allow the microphone.</string>
+	<string>Using microphone to record speech.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please allow the photo library.</string>
+	<string>Detect words in a photo.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Please allow to transcripte from voice to text.</string>
+	<string>Detect words in speech.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
